@@ -31,5 +31,5 @@ server.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
   console.error(err);
   res.status(status).send(message);
 });
-
+//prueba de Diego
 module.exports = server;
