@@ -15,7 +15,7 @@ module.exports = (sequelize) => {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    ispayed: {
+    is_payed: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
     }
