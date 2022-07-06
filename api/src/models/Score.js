@@ -6,7 +6,7 @@ module.exports = (sequelize) => {
   sequelize.define(
     "score",
     {
-      id_Score: {
+      id_score: {
         type: DataTypes.INTEGER,
         allowNull: false,
         primaryKey: true,
