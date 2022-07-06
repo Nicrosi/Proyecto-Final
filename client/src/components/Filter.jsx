@@ -6,6 +6,7 @@ import { orderUsersByName } from "../redux/actions";
 const initialFilter = {
   sort: "name",
   order: "ascendent",
+  gender: "all",
 };
 
 export default function Filter() {
@@ -13,7 +14,9 @@ export default function Filter() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (filterOpt.sort === "name") dispatch(orderUsersByName(filterOpt));
+    if (filterOpt.sort === "name") {
+      dispatch(orderUsersByName(filterOpt));
+    }
   }, [dispatch, filterOpt]);
 
   const handleChange = (e) => {
@@ -42,5 +45,33 @@ export default function Filter() {
         onChange={handleChange}
       />
       <label htmlFor="descendent">descendent</label>
+
+      <h4>Gender</h4>
+      <input
+        type="radio"
+        name="gender"
+        value="all"
+        id="all"
+        onChange={handleChange}
+        defaultChecked={true}
+      />
+      <label htmlFor="all">all</label>
+      <input
+        type="radio"
+        name="gender"
+        value="male"
+        id="male"
+        onChange={handleChange}
+      />
+      <label htmlFor="male">male</label>
+      <input
+        type="radio"
+        name="gender"
+        value="female"
+        id="female"
+        onChange={handleChange}
+      />
+      <label htmlFor="female">female</label>
+    </>
   );
 }
