@@ -7,6 +7,7 @@ module.exports = (sequelize) => {
       dni: {
         type: DataTypes.INTEGER,
         allowNull: false,
+        autoIncrement: true,
         primaryKey: true,
         unique: true,
       },
@@ -18,10 +19,11 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      is_admin: {
+      isAdmin: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
       },
+      // sequelize no me permite colocarlo e-mail solo guion bajo o camel case
       e_mail: {
         type: DataTypes.STRING,
         allowNull: false,

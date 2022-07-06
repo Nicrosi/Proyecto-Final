@@ -4,7 +4,7 @@ const { DataTypes } = require('sequelize');
 module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define('inscription', {
-    id_inscription: {
+    id_Inscription: {
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
@@ -15,7 +15,7 @@ module.exports = (sequelize) => {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    is_payed: {
+    isPayed: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
     }

@@ -4,34 +4,34 @@ const { DataTypes } = require('sequelize');
 module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define('score', {
-    id_score: {
+    id_Score: {
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
       autoIncrement: true,
       unique: true
     },
-    torneos_previos: {
+    previous_tournaments: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    conoc_golpes: {
+    hit_knowledge: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    otros_golpes: {
+    other_strokes: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    golpes_especiales: {
+    special_hits: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    control_saque: {
+    kick_serve_control: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    tecnica_estrategia: {
+    game_strategy: {
       type: DataTypes.INTEGER,
       allowNull: false,
     }
