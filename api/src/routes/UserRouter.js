@@ -3,6 +3,20 @@ const router = Router();
 const {get_Userdb} = require('../utils/User_Controllers');
 const {User} = require('../db');
 
+
+router.get('/', async (req,res) => {
+    let {name}= req.query
+    const allUsers = await get_Userdb()
+    
+    if(name){
+        user_name = await allUsers.filter( e => e.name.includes(name))
+        user_name.length > 0 ? res.status(200).send(user_name) : res.status(404).send("User not found!")
+    }else{
+        res.status(200).send({allUsers})
+    }
+})
+
+
 router.post('/', async (req, res) => {
     let{
         dni,
@@ -17,7 +31,7 @@ router.post('/', async (req, res) => {
     } = req.body;
 
     try{
-        let findUser = await User.findall({
+        let findUser = await User.findAll({
             where:{
                 dni: dni
             }
@@ -42,3 +56,5 @@ router.post('/', async (req, res) => {
         console.log(err)
     }
 })
+
+module.exports = router;
