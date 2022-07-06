@@ -4,7 +4,7 @@ module.exports = (sequelize) => {
     // defino el modelo
     sequelize.define('match', {
         id_match: {
-            type: DataTypes.INTENGER,
+            type: DataTypes.INTEGER,
             allowNull: false,
             unique: true,
             primaryKey: true,
@@ -12,7 +12,7 @@ module.exports = (sequelize) => {
         
         },
         results: {
-            type: DataTypes.INTENGER,
+            type: DataTypes.INTEGER,
             allowNull: false
         },
         winner: {
@@ -24,7 +24,7 @@ module.exports = (sequelize) => {
             allowNull: false,
         },
         b_number: {
-            type: DataTypes.INTENGER,
+            type: DataTypes.INTEGER,
             allowNull: false
         }
     },
