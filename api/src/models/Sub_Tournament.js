@@ -1,38 +1,36 @@
 const { DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
-  sequelize.define('Sub-Tournament', {
-    ID_subt: {
+  sequelize.define('sub-tournament', {
+    id_subt: {
       type: DataTypes.INTEGER,
       autoIncrement: true, 
       primaryKey: true, 
       allowNull: false,
     },
-    Elimination_type: {
+    elimination_type: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    Match_type: {
+    match_type: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    Name: {
+    name: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    Num_players: {
+    num_players: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    Gender: {
+    gender: {
       type: DataTypes.STRING,
       allowNull: false,
     },
   },
     {
-      timestamps: false,
-      createdAt: false,
-      updatedAt: false
+      timestamps: false
     }
   );
 };

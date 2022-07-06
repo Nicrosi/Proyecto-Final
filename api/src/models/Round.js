@@ -1,22 +1,20 @@
 const { DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
-  sequelize.define('Round', {
-    ID_Round: {
+  sequelize.define('round', {
+    id_round: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
       allowNull: false,
       primaryKey: true
     },
-    Is_Finished: {
+    is_finished: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
     },
   },
     {
-      timestamps: false,
-      createdAt: false,
-      updatedAt: false
+      timestamps: false
     }
   );
 };
