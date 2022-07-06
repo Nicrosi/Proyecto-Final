@@ -1,23 +1,15 @@
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { Route } from 'react-router-dom';
 import './App.css';
-import { getAllPlayers } from './redux/actions';
+import { Players } from './components/Players/Players';
+
 
 function App() {
-
-  const players = useSelector((state)=>state.players)
-  const dispatch = useDispatch();
-  useEffect(()=>{
-    dispatch(getAllPlayers())
-  },[dispatch])
-
-  console.log(players);
   return (
     <div className="App">
-      <h1>Henry PF</h1>
-      {players.map((p)=>{
-        return <p>{p.name}</p>
-      })}
+      {/* <Route exact path={"/"} component={LandingPage} /> */}
+      <Route exact path={"/players"} component={Players} />
+      {/* <Route exact path={"/admin"} component={Admin}/>
+      <Route exact path={"/players/:playerId"} component={PlayerDetails} /> */}
     </div>
   );
 }
