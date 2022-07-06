@@ -5,7 +5,7 @@ module.exports = (sequelize) => {
   sequelize.define(
     "category",
     {
-      id_Category: {
+      id_category: {
         type: DataTypes.INTEGER,
         allowNull: false,
         primaryKey: true,
