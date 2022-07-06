@@ -1,4 +1,4 @@
-import axios from "axios";
+/* import axios from "axios"; */
 import players from "../../players.json";
 
 export const GET_ALL_PLAYERS = "GET_ALL_PLAYERS";
@@ -11,9 +11,9 @@ export const getAllPlayers = () => {
   };
 };
 
-export const orderUsersByName = ({ order }) => {
+export const orderUsersByName = ({ order, gender }) => {
   return {
     type: ORDER_USERS_BY_NAME,
-    payload: order,
+    payload: { order, gender },
   };
 };
