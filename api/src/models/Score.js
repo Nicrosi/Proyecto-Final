@@ -1,41 +1,45 @@
-const { DataTypes } = require('sequelize');
+const { DataTypes } = require("sequelize");
 // Exportamos una funcion que define el modelo
 // Luego le injectamos la conexion a sequelize.
 module.exports = (sequelize) => {
   // defino el modelo
-  sequelize.define('score', {
-    id_score: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      primaryKey: true,
-      autoIncrement: true,
-      unique: true
+  sequelize.define(
+    "score",
+    {
+      id_Score: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        primaryKey: true,
+        autoIncrement: true,
+        unique: true,
+      },
+      previous_tournaments: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      hit_knowledge: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      other_strokes: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      special_hits: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      kick_serve_control: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      game_strategy: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
     },
-    torneos_previos: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-    conoc_golpes: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-    otros_golpes: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-    golpes_especiales: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-    control_saque: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-    tecnica_estrategia: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
+    {
+      timestamps: false,
     }
-  }, {
-    timestamps: false
-  });
+  );
 };
