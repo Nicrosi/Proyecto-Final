@@ -1,19 +1,24 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { getAllPlayers } from "../../redux/actions";
 
 const DetailsPlayer = (props) => {
-    const params = props.match.params.dni;
+    const params = props.match.params.playerId;
     const dispatch = useDispatch();
+    console.log(params)
 
     useEffect(() => {
         dispatch(
-            //insertar aqui una action(params)
-            //crear la action y reducer que modifique player en el initialState
+            //insertar aqui una action que traiga el detalle a mostrar desde el back --> action(params)
+            //crear la action 
+            getAllPlayers() //provisorio 
         )
-    },[dispatch, params])
+    },[dispatch])
 
-//crear estado player: {} en el initialState
-    const player = useSelector(state => state.player)
+    // crear estado player: {} en el initialState luego de que el back esté creado 
+    // y crear reducer que modifique player del initialState
+    let player = useSelector(state => state.players) //luego cambiar por state.player
+     player = player[params] //provisorio 
 
     return (
         <React.Fragment>
@@ -35,19 +40,19 @@ const DetailsPlayer = (props) => {
                             <h2>Emergency contact: {player.num_contact}</h2>
                         </div>
                         <div>
-                            <h2>{player.id_Category.type}</h2>
+                            <h2>{player.category.type}</h2>
                             <h2>Category</h2>
                             <button>Modify</button>
                         </div>
                         <div>
-                            <h2>Score</h2>
-                            <div>
-                                <h2>Previous Tournaments: {player.id_Score.previous_tournaments}</h2>
-                                <h2>Hit knowledge: {player.id_Score.hit_knowledge}</h2>
-                                <h2>Other strokes: {player.id_Score.other_strokes}</h2>
-                                <h2>Special hits: {player.id_Score.special_hits}</h2>
-                                <h2>Kick serve control: {player.id_Score.kick_serve_control}</h2>
-                                <h2>Game strategy: {player.id_Score.game_strategy}</h2>
+                           <h2>Score</h2>
+                             <div>
+                                <h2>Previous Tournaments: {player.score.previous_tournaments}</h2>
+                                <h2>Hit knowledge: {player.score.hit_knowledge}</h2>
+                                <h2>Other strokes: {player.score.other_strokes}</h2>
+                                <h2>Special hits: {player.score.special_hits}</h2>
+                                <h2>Kick serve control: {player.score.kick_serve_control}</h2>
+                                <h2>Game strategy: {player.score.game_strategy}</h2>
                             </div>
                         </div>
                     </div>
