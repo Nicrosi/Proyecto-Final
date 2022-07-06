@@ -4,7 +4,7 @@ module.exports = (sequelize) => {
     // defino el modelo
     sequelize.define('tournament', {
         id_tournament: {
-            type: DataTypes.INTENGER,
+            type: DataTypes.INTEGER,
             allowNull: false,
             primaryKey: true,
             unique: true,

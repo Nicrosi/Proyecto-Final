@@ -4,7 +4,7 @@ module.exports = (sequelize) => {
   sequelize.define(
     "team",
     {
-      id: {
+      id_team: {
         type: DataTypes.INTEGER,
         allowNull: false,
         primaryKey: true,
