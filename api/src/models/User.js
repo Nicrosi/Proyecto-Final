@@ -19,7 +19,7 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
       is_admin: {
-        type: DataTypes.STRING,
+        type: DataTypes.BOOLEAN,
         allowNull: false,
       },
       e_mail: {
