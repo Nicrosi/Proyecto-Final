@@ -7,7 +7,6 @@ module.exports = (sequelize) => {
       dni: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        autoIncrement: true,
         primaryKey: true,
         unique: true,
       },
@@ -44,6 +43,7 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
+      
     },
     { timestamps: false }
   );

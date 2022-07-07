@@ -1,11 +1,7 @@
 const { Router } = require('express');
-<<<<<<< HEAD
-const { Sequelize, Op } = require('sequelize');
+// const { Sequelize, Op } = require('sequelize');
 const { User, Inscription, Score, Category } = require('../db.js');
 // const users = require('../../players.json')
-=======
-const RouteUser = require('../routes/UserRouter')
->>>>>>> 2d275bf4837595a2f92d43ccefaa83af40ff601b
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
 
@@ -69,7 +65,7 @@ const Users = [
     }
   },
   {
-    dni: 0,
+    dni: 2,
     name: "Denise",
     last_name: "Cardozo",
     isAdmin: true,
@@ -98,7 +94,7 @@ const Users = [
     }
   },
   {
-    dni: 1,
+    dni: 3,
     name: "Sebastian",
     last_name: "Conte",
     isAdmin: false,
@@ -134,12 +130,13 @@ const router = Router();
 
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
-router.use('/user', RouteUser)
+
 
 router.get('/users', async (req, res) => {
 
   for (let i = 0; i < Users.length; i++) {
     const user = await User.create({
+      // dni: Users[i].dni,
       name: Users[i].name,
       last_name: Users[i].last_name,
       isAdmin: Users[i].isAdmin,
@@ -178,33 +175,51 @@ router.get('/users', async (req, res) => {
   
 })
 
-router.put('/users/:id', async (req, res) => {
-  const { id } = req.params;
-  const { category } = req.body;
-  const user = await User.findByPk(parseInt(id))
+router.put('/users/:dni', async (req, res) => {
+  const { dni } = req.params;
+  const { category } = req.body; 
 
-  const [categoryFromDb] = await Category.findOrCreate({
-    where : {
-      type: category
-    },
-    default: {
-      type: category
+  try {
+
+    const find_user_by_pk = await User.findByPk(parseInt(dni))
+
+    if(find_user_by_pk) {
+
+      if( category && category.type === "a" || category && category.type === "b" || category && category.type === "c" || category && category.type === "e" ) {
+        
+        const userCategory = await User.findByPk(parseInt(dni));
+      
+        const [categoryFromDb] = category && await Category.findOrCreate({
+          where : {
+            type: category.type
+          },
+          default: {
+            type: category.type
+          }
+        })
+        
+        category && await categoryFromDb.addUser(userCategory)
+      }
+      else if (category && category.type !== "a" || category && category.type !== "b" || category && category.type !== "c" || category && category.type !== "e" ){
+        return res.send({msg_error: 'Invalid category'})
+      }
+    
+      await User.update(
+        req.body,{
+        where :{
+          dni: parseInt(dni)
+        }
+      })
+
+      res.send({msg_mesage: 'User updated'})
+
+    }else{
+      res.send({msg_mesage: 'User not found'})
     }
-  })
-  
-  await categoryFromDb.addUser(user)
 
-  // const userCreated = await User.findOne( {where: {dni: parseInt(id)}, include: Category});
-  const userCreated = await User.findOne({
-    where: {
-      dni: parseInt(id)
-    },
-    include: {
-      Category,
-    }
-  })
-
-  res.json(userCreated)
+  } catch (error) {
+    console.log(error);
+  }
 
 })
 
