@@ -41,8 +41,8 @@ User.belongsTo(Score, {foreignKey: 'id_score'});
 Category.hasMany(User, {foreignKey: 'id_category'});
 User.belongsTo(Category, {foreignKey: 'id_category'});
 
-Inscription.hasOne(User, {foreignKey: 'id_inscription'});
-User.belongsTo(Inscription, {foreignKey: 'id_inscription'});
+User.hasMany(Inscription, {foreignKey: 'id_inscription'});
+Inscription.belongsTo(User, {foreignKey: 'id_inscription'});
 
 Team.hasMany(User, {foreignKey: 'id_team'});
 User.belongsTo(Team, {foreignKey: 'id_team'});
