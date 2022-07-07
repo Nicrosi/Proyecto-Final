@@ -6,7 +6,8 @@ const {
   DB_USER, DB_PASSWORD, DB_HOST,
 } = process.env;
                                                                                 //cambiar nombre de la DB
-const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/nombre_base_de_datos`, {
+const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/template1`, {
+// const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/nombre_base_de_datos`, {
   logging: false, // set to console.log to see the raw SQL queries
   native: false, // lets Sequelize know we can use pg-native for ~30% more speed
 });
@@ -37,7 +38,14 @@ const { User, Team, Match, Round, Inscription, Tournament, Sub_Tournament, Score
 
 Inscription.hasOne(User);
 Score.hasMany(User);
+///////
+User.belongsTo(Score);
+///////////////////////////////
+
 Category.hasMany(User);
+//
+User.belongsTo(Category);
+//
 User.belongsToMany(Team, {through: 'user_team'});
 Team.belongsToMany(User, {through: 'user_team'});
 Match.belongsToMany(Team, {through: 'match_team'});
@@ -48,9 +56,9 @@ Team.belongsToMany(Tournament, {through: 'tournament_team'});
 Tournament.belongsToMany(Sponsor, {through: 'tournament_sponsor'});
 Sponsor.belongsToMany(Tournament, {through: 'tournament_sponsor'});
 Tournament.hasMany(Inscription);
-Sub_Tournament.hasMany(Tournament);
-Round.hasMany(Sub_Tournament);
-Category.hasMany(Sub_Tournament);
+// Sub_Tournament.hasMany(Tournament);
+// Round.hasMany(Sub_Tournament);
+// Category.hasMany(Sub_Tournament);
 
 
 
