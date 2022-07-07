@@ -12,10 +12,10 @@ export const getAllPlayers = () => {
   };
 };
 
-export const orderUsersByName = ({ order, gender }) => {
+export const orderUsersByName = ({ order, gender, category }) => {
   return {
     type: ORDER_USERS_BY_NAME,
-    payload: { order, gender },
+    payload: { order, gender, category },
   };
 };
 
