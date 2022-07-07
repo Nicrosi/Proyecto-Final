@@ -3,10 +3,10 @@ const { Sequelize } = require('sequelize');
 const fs = require('fs');
 const path = require('path');
 const {
-  DB_USER, DB_PASSWORD, DB_HOST,
+  DB_USER, DB_PASSWORD, DB_HOST, DB_NAME
 } = process.env;
                                                                                 //cambiar nombre de la DB
-const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/nombre_base_de_datos`, {
+const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`, {
   logging: false, // set to console.log to see the raw SQL queries
   native: false, // lets Sequelize know we can use pg-native for ~30% more speed
 });
@@ -30,10 +30,46 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
-const { Usuario } = sequelize.models;
+const { User, Team, Match, Round, Inscription, Tournament, Subtournament, Score, Category, Sponsor } = sequelize.models;
 
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
+
+Score.hasOne(User, {foreignKey: 'id_score'});
+User.belongsTo(Score, {foreignKey: 'id_score'});
+
+Category.hasMany(User, {foreignKey: 'id_category'});
+User.belongsTo(Category, {foreignKey: 'id_category'});
+
+User.hasMany(Inscription, {foreignKey: 'id_inscription'});
+Inscription.belongsTo(User, {foreignKey: 'id_inscription'});
+
+Team.hasMany(User, {foreignKey: 'id_team'});
+User.belongsTo(Team, {foreignKey: 'id_team'});
+
+Tournament.belongsToMany(Sponsor, {through: 'sponsor_tournament'});
+Sponsor.belongsToMany(Tournament, {through: 'sponsor_tournament'});
+
+Tournament.hasMany(Inscription, {foreignKey: 'id_tournament'});
+Inscription.belongsTo(Tournament, {foreignKey: 'id_tournament'});
+
+Tournament.hasMany(Subtournament, {foreignKey: 'id_tournament'});
+Subtournament.belongsTo(Tournament, {foreignKey: 'id_tournament'});
+
+Category.hasMany(Subtournament, {foreignKey: 'id_category'});
+Subtournament.belongsTo(Category, {foreignKey: 'id_category'});
+
+Subtournament.hasMany(Round, {foreignKey: 'id_subt'});
+Round.belongsTo(Subtournament, {foreignKey: 'id_subt'});
+
+Match.hasMany(Round, {foreignKey: 'id_match'});
+Round.belongsTo(Match, {foreignKey: 'id_match'});
+
+Match.hasMany(Team, {foreignKey: 'id_match'});
+Team.belongsTo(Match, {foreignKey: 'id_match'});
+
+
+
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
