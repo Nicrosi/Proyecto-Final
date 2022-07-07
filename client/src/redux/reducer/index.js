@@ -3,7 +3,7 @@ import{
 } from "../actions"
 
 const initialState={
-    players:[]
+    players:[],
 }
 
 const rootReducer = (state = initialState, action) => {
@@ -14,6 +14,7 @@ const rootReducer = (state = initialState, action) => {
           players: action.payload.players, //devuelve el arreglo de players del json
         };
 
+          
       default:
         return { ...state };
     }
