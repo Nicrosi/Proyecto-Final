@@ -6,7 +6,7 @@ const get_Userdb = async () => {
         const User_db = await User.findAll({
             include: {
                 model: Inscription,
-                attributes: ['amount', 'is_payed'],
+                attributes: ['amount', 'is_payed', 'chau'],
                 through: {
                     attriutes: [],
                 }
