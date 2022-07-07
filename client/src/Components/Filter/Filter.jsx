@@ -7,6 +7,7 @@ const initialFilter = {
   sort: "name",
   order: "ascendent",
   gender: "all",
+  category: "all",
 };
 
 export default function Filter() {
@@ -72,6 +73,53 @@ export default function Filter() {
         onChange={handleChange}
       />
       <label htmlFor="female">female</label>
+
+      <h4>Category</h4>
+      <input
+        type="radio"
+        name="category"
+        value="all"
+        id="allCategory"
+        onChange={handleChange}
+        defaultChecked={true}
+      />
+      <label htmlFor="allCategory">all</label>
+
+      <input
+        type="radio"
+        name="category"
+        value="A"
+        id="A"
+        onChange={handleChange}
+      />
+      <label htmlFor="A">A</label>
+
+      <input
+        type="radio"
+        name="category"
+        value="B"
+        id="B"
+        onChange={handleChange}
+      />
+      <label htmlFor="B">B</label>
+
+      <input
+        type="radio"
+        name="category"
+        value="C"
+        id="C"
+        onChange={handleChange}
+      />
+      <label htmlFor="C">C</label>
+
+      <input
+        type="radio"
+        name="category"
+        value="E"
+        id="E"
+        onChange={handleChange}
+      />
+      <label htmlFor="E">E</label>
     </>
   );
 }
