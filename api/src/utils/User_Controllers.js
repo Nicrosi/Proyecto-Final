@@ -7,6 +7,7 @@ const get_Userdb = async () => {
             include: {
                 model: Inscription,
                 attributes: ['amount', 'is_payed',"hola papa"],
+
                 through: {
                     attriutes: [],
                 }
