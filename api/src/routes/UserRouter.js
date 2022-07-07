@@ -9,10 +9,10 @@ router.get('/', async (req,res) => {
     const allUsers = await get_Userdb()
     
     if(name){
-        user_name = await allUsers.filter( e => e.name.includes(name))
+        user_name = await get_Userdb(name)
         user_name.length > 0 ? res.status(200).send(user_name) : res.status(404).send("User not found!")
     }else{
-        res.status(200).send({allUsers})
+        allUsers.length > 0? res.status(200).send({allUsers}) : res.status(404).send("Users doesn't exist!")
     }
 })
 
