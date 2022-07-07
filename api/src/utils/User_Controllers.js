@@ -3,16 +3,7 @@ const { User, Inscription, Category, Score } = require("../db")
 const get_Userdb = async () => {
 
     try {
-        const User_db = await User.findAll({
-            include: {
-                model: Inscription,
-                attributes: ['amount', 'is_payed',"hola papa"],
-
-                through: {
-                    attriutes: [],
-                }
-            }
-        })
+        const User_db = await User.findAll()
         return User_db
     } catch (err) {
         console.log(err)
