@@ -1,7 +1,11 @@
 const { Router } = require('express');
+<<<<<<< HEAD
 const { Sequelize, Op } = require('sequelize');
 const { User, Inscription, Score, Category } = require('../db.js');
 // const users = require('../../players.json')
+=======
+const RouteUser = require('../routes/UserRouter')
+>>>>>>> 2d275bf4837595a2f92d43ccefaa83af40ff601b
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
 
@@ -130,7 +134,7 @@ const router = Router();
 
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
-
+router.use('/user', RouteUser)
 
 router.get('/users', async (req, res) => {
 
