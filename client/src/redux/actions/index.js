@@ -4,6 +4,7 @@ import players from "../../players.json";
 export const GET_ALL_PLAYERS = "GET_ALL_PLAYERS";
 export const ORDER_USERS_BY_NAME = "ORDER_USERS_BY_NAME";
 
+
 export const getAllPlayers = () => {
   return {
     type: GET_ALL_PLAYERS,
@@ -17,3 +18,4 @@ export const orderUsersByName = ({ order, gender }) => {
     payload: { order, gender },
   };
 };
+

@@ -1,6 +1,8 @@
+
 import { ORDER_USERS_BY_NAME, GET_ALL_PLAYERS } from "../actions";
 import { filterByGender } from "../helpers/filters";
 import { sortByName } from "../helpers/sorts";
+
 
 const initialState = {
   players: [],
@@ -26,5 +28,12 @@ const rootReducer = (state = initialState, action) => {
       return { ...state };
   }
 };
+          
+      default:
+        return { ...state };
+    }
+  };
+  
+  export default rootReducer;
+  
 
-export default rootReducer;

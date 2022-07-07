@@ -5,7 +5,7 @@
         "name": "Axel",
         "last_name": "Castillo",
         "isAdmin": true,
-        "e-mail": "aCastillo@gmail.com",
+        "e_mail": "aCastillo@gmail.com",
         "phone": 84216484,
         "num_contact": 0,
         "picture": "https://i.stack.imgur.com/dr5qp.jpg",
