@@ -2,7 +2,6 @@ const { Score, Category } = require("../db");
 
 const category = async () => {
   const dbScore = await Score.findAll();
-
   const score = dbScore.forEach((el) => {
     if (el.previous_tournaments > 1) {
       //A,B,C
