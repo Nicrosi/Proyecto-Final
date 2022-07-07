@@ -4,13 +4,14 @@
         "dni": 0,
         "name": "Axel",
         "last_name": "Castillo",
-        "isAdmin": true,
-        "e-mail": "aCastillo@gmail.com",
+        "is_admin": true,
+        "e_mail": "aCastillo@gmail.com",
         "phone": 84216484,
         "num_contact": 0,
         "picture": "https://i.stack.imgur.com/dr5qp.jpg",
         "gender": "",
-        "id_Inscription": {
+        "inscription": {
+          "id_inscription": 0,
           "amount": 0,
           "isPayed": false,
           "tournament": 0
@@ -33,13 +34,14 @@
         "dni": 1,
         "name": "Sebastian",
         "last_name": "Conte",
-        "isAdmin": false,
-        "e-mail": "sebaconte@gmail.com",
+        "is_admin": false,
+        "e_mail": "sebaconte@gmail.com",
         "phone": 3648564,
         "num_contact": 5186318,
         "picture": "https://i.stack.imgur.com/dr5qp.jpg",
         "gender": "male",
-        "id_Inscription": {
+        "inscription": {
+          "id_inscription": 1,
           "amount": 100,
           "isPayed": true,
           "tournament": 2
@@ -62,13 +64,14 @@
         "dni": 2,
         "name": "Denise",
         "last_name": "Cardozo",
-        "isAdmin": false,
-        "e-mail": "denise@gmail.com",
+        "is_admin": false,
+        "e_mail": "denise@gmail.com",
         "phone": 544843152,
         "num_contact": 418315841,
         "picture": "https://i.stack.imgur.com/dr5qp.jpg",
         "gender": "female",
-        "id_Inscription": {
+        "inscription": {
+          "id_inscription": 2,
           "amount": 100,
           "isPayed": false,
           "tournament": 0
@@ -91,13 +94,14 @@
         "dni": 3,
         "name": "Nahuel",
         "last_name": "Toloza",
-        "isAdmin": false,
-        "e-mail": "tolozanh@gmail.com",
+        "is_admin": false,
+        "e_mail": "tolozanh@gmail.com",
         "phone": 54264862,
         "num_contact": 848315842,
         "picture": "https://i.stack.imgur.com/dr5qp.jpg",
         "gender": "male",
-        "id_Inscription": {
+        "inscription": {
+          "id_inscription": 3,
           "amount": 100,
           "isPayed": true,
           "tournament": 1
@@ -120,13 +124,14 @@
         "dni": 4,
         "name": "Carlos",
         "last_name": "Pereira",
-        "isAdmin": false,
-        "e-mail": "pereira@gmail.com",
+        "is_admin": false,
+        "e_mail": "pereira@gmail.com",
         "phone": 41518441,
         "num_contact": 748423185,
         "picture": "https://i.stack.imgur.com/dr5qp.jpg",
         "gender": "male",
-        "id_Inscription": {
+        "inscription": {
+          "id_inscription": 4,
           "amount": 100,
           "isPayed": true,
           "tournament": 1
@@ -149,13 +154,14 @@
         "dni": 5,
         "name": "Maria",
         "last_name": "Villalobos",
-        "isAdmin": false,
-        "e-mail": "maria@gmail.com",
+        "is_admin": false,
+        "e_mail": "maria@gmail.com",
         "phone": 54843185,
         "num_contact": 45541238,
         "picture": "https://i.stack.imgur.com/dr5qp.jpg",
         "gender": "female",
-        "id_Inscription": {
+        "inscription": {
+          "id_inscription": 5,
           "amount": 100,
           "isPayed": false,
           "tournament": 0
@@ -178,13 +184,14 @@
         "dni": 6,
         "name": "Alejandra",
         "last_name": "Guzman",
-        "isAdmin": false,
-        "e-mail": "aleg@gmail.com",
+        "is_admin": false,
+        "e_mail": "aleg@gmail.com",
         "phone": 548431851,
         "num_contact": 45581238,
         "picture": "https://i.stack.imgur.com/dr5qp.jpg",
         "gender": "female",
-        "id_Inscription": {
+        "inscription": {
+          "id_inscription": 6,
           "amount": 100,
           "isPayed": false,
           "tournament": 0
@@ -207,13 +214,14 @@
         "dni": 7,
         "name": "Daniel",
         "last_name": "Mora",
-        "isAdmin": false,
-        "e-mail": "daniM@gmail.com",
+        "is_admin": false,
+        "e_mail": "daniM@gmail.com",
         "phone": 454215154,
         "num_contact": 215448421,
         "picture": "https://i.stack.imgur.com/dr5qp.jpg",
         "gender": "male",
-        "id_Inscription": {
+        "inscription": {
+          "id_inscription": 7,
           "amount": 100,
           "isPayed": true,
           "tournament": 2
@@ -236,13 +244,14 @@
         "dni": 8,
         "name": "Diego",
         "last_name": "Apuy",
-        "isAdmin": false,
-        "e-mail": "jdapuy@gmail.com",
+        "is_admin": false,
+        "e_mail": "jdapuy@gmail.com",
         "phone": 87168035,
         "num_contact": 22696232,
         "picture": "https://i.stack.imgur.com/dr5qp.jpg",
         "gender": "male",
-        "id_Inscription": {
+        "inscription": {
+          "id_inscription": 8,
           "amount": 100,
           "isPayed": false,
           "tournament": 0
