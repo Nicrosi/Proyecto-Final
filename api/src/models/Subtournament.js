@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
-  sequelize.define('subtournament', {
+  sequelize.define('subTournament', {
     id_subt: {
       type: DataTypes.INTEGER,
       autoIncrement: true, 
