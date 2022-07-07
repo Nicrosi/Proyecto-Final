@@ -8,14 +8,15 @@
         "e_mail": "aCastillo@gmail.com",
         "phone": 84216484,
         "num_contact": 0,
-        "picture": "https:https://isobarscience.com/wp-content/uploads/2020/09/default-profile-picture1.jpg",
+        "picture": "https://i.stack.imgur.com/dr5qp.jpg",
         "gender": "",
         "id_Inscription": {
           "amount": 0,
           "isPayed": false,
           "tournament": 0
         },
-        "id_Score": {
+        "score": {
+          "id_Score":0,
           "previous_tournaments": 0,
           "hit_knowledge": 0,
           "other_strokes": 0,
@@ -23,7 +24,8 @@
           "kick_serve_control": 0,
           "game_strategy": 0
         },
-        "id_Category": {
+        "category": {
+          "id_Category": 0,
           "type": ""
         }
       },
@@ -35,14 +37,15 @@
         "e-mail": "sebaconte@gmail.com",
         "phone": 3648564,
         "num_contact": 5186318,
-        "picture": "https:https://isobarscience.com/wp-content/uploads/2020/09/default-profile-picture1.jpg",
+        "picture": "https://i.stack.imgur.com/dr5qp.jpg",
         "gender": "male",
         "id_Inscription": {
           "amount": 100,
           "isPayed": true,
           "tournament": 2
         },
-        "id_Score": {
+        "score": {
+          "id_Score":1,
           "previous_tournaments": 3,
           "hit_knowledge": 2,
           "other_strokes": 5,
@@ -50,7 +53,8 @@
           "kick_serve_control": 4,
           "game_strategy": 3
         },
-        "id_Category": {
+        "category": {
+          "id_Category": 1,
           "type": "a"
         }
       },
@@ -62,14 +66,15 @@
         "e-mail": "denise@gmail.com",
         "phone": 544843152,
         "num_contact": 418315841,
-        "picture": "https:https://isobarscience.com/wp-content/uploads/2020/09/default-profile-picture1.jpg",
+        "picture": "https://i.stack.imgur.com/dr5qp.jpg",
         "gender": "female",
         "id_Inscription": {
           "amount": 100,
           "isPayed": false,
           "tournament": 0
         },
-        "id_Score": {
+        "score": {
+          "id_Score":2,
           "previous_tournaments": 2,
           "hit_knowledge": 2,
           "other_strokes": 4,
@@ -77,7 +82,8 @@
           "kick_serve_control": 3,
           "game_strategy": 1
         },
-        "id_Category": {
+        "category": {
+          "id_Category": 2,
           "type": "b"
         }
       },
@@ -89,14 +95,15 @@
         "e-mail": "tolozanh@gmail.com",
         "phone": 54264862,
         "num_contact": 848315842,
-        "picture": "https:https://isobarscience.com/wp-content/uploads/2020/09/default-profile-picture1.jpg",
+        "picture": "https://i.stack.imgur.com/dr5qp.jpg",
         "gender": "male",
         "id_Inscription": {
           "amount": 100,
           "isPayed": true,
           "tournament": 1
         },
-        "id_Score": {
+        "score": {
+          "id_Score":3,
           "previous_tournaments": 3,
           "hit_knowledge": 3,
           "other_strokes": 3,
@@ -104,7 +111,8 @@
           "kick_serve_control": 4,
           "game_strategy": 5
         },
-        "id_Category": {
+        "category": {
+          "id_Category": 3,
           "type": "a"
         }
       },
@@ -116,14 +124,15 @@
         "e-mail": "pereira@gmail.com",
         "phone": 41518441,
         "num_contact": 748423185,
-        "picture": "https:https://isobarscience.com/wp-content/uploads/2020/09/default-profile-picture1.jpg",
+        "picture": "https://i.stack.imgur.com/dr5qp.jpg",
         "gender": "male",
         "id_Inscription": {
           "amount": 100,
           "isPayed": true,
           "tournament": 1
         },
-        "id_Score": {
+        "score": {
+          "id_Score":4,
           "previous_tournaments": 2,
           "hit_knowledge": 3,
           "other_strokes": 2,
@@ -131,7 +140,8 @@
           "kick_serve_control": 3,
           "game_strategy": 4
         },
-        "id_Category": {
+        "category": {
+          "id_Category": 4,
           "type": "b"
         }
       },
@@ -143,14 +153,15 @@
         "e-mail": "maria@gmail.com",
         "phone": 54843185,
         "num_contact": 45541238,
-        "picture": "https:https://isobarscience.com/wp-content/uploads/2020/09/default-profile-picture1.jpg",
+        "picture": "https://i.stack.imgur.com/dr5qp.jpg",
         "gender": "female",
         "id_Inscription": {
           "amount": 100,
           "isPayed": false,
           "tournament": 0
         },
-        "id_Score": {
+        "score": {
+          "id_Score":5,
           "previous_tournaments": 3,
           "hit_knowledge": 3,
           "other_strokes": 4,
@@ -158,7 +169,8 @@
           "kick_serve_control": 2,
           "game_strategy": 1
         },
-        "id_Category": {
+        "category": {
+          "id_Category": 5,
           "type": "c"
         }
       },
@@ -170,14 +182,15 @@
         "e-mail": "aleg@gmail.com",
         "phone": 548431851,
         "num_contact": 45581238,
-        "picture": "https:https://isobarscience.com/wp-content/uploads/2020/09/default-profile-picture1.jpg",
+        "picture": "https://i.stack.imgur.com/dr5qp.jpg",
         "gender": "female",
         "id_Inscription": {
           "amount": 100,
           "isPayed": false,
           "tournament": 0
         },
-        "id_Score": {
+        "score": {
+          "id_Score":6,
           "previous_tournaments": 3,
           "hit_knowledge": 3,
           "other_strokes": 4,
@@ -185,7 +198,8 @@
           "kick_serve_control": 2,
           "game_strategy": 1
         },
-        "id_Category": {
+        "category": {
+          "id_Category": 6,
           "type": "c"
         }
       },
@@ -197,14 +211,15 @@
         "e-mail": "daniM@gmail.com",
         "phone": 454215154,
         "num_contact": 215448421,
-        "picture": "https:https://isobarscience.com/wp-content/uploads/2020/09/default-profile-picture1.jpg",
+        "picture": "https://i.stack.imgur.com/dr5qp.jpg",
         "gender": "male",
         "id_Inscription": {
           "amount": 100,
           "isPayed": true,
           "tournament": 2
         },
-        "id_Score": {
+        "score": {
+          "id_Score":7,
           "previous_tournaments": 5,
           "hit_knowledge": 2,
           "other_strokes": 1,
@@ -212,7 +227,8 @@
           "kick_serve_control": 3,
           "game_strategy": 4
         },
-        "id_Category": {
+        "category": {
+          "id_Category": 7,
           "type": "e"
         }
       },
@@ -224,14 +240,15 @@
         "e-mail": "jdapuy@gmail.com",
         "phone": 87168035,
         "num_contact": 22696232,
-        "picture": "https:https://isobarscience.com/wp-content/uploads/2020/09/default-profile-picture1.jpg",
+        "picture": "https://i.stack.imgur.com/dr5qp.jpg",
         "gender": "male",
         "id_Inscription": {
           "amount": 100,
           "isPayed": false,
           "tournament": 0
         },
-        "id_Score": {
+        "score": {
+          "id_Score":8,
           "previous_tournaments": 2,
           "hit_knowledge": 1,
           "other_strokes": 3,
@@ -239,7 +256,8 @@
           "kick_serve_control": 4,
           "game_strategy": 2
         },
-        "id_Category": {
+        "category": {
+          "id_Category": 8,
           "type": "b"
         }
       }

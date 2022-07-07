@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Route, Routes} from 'react-router-dom';
 import { useEffect } from 'react';
@@ -8,19 +9,12 @@ import { getAllPlayers } from './redux/actions';
 import NavBar from './Components/NavBar/NavBar';
 
 
-
 function App() {
 
-  const players = useSelector((state)=>state.players)
-  const dispatch = useDispatch();
-  useEffect(()=>{
-    dispatch(getAllPlayers())
-  },[dispatch])
-
-  
   return (
    
     <div className="App">
+
       <NavBar/>
       {/* <Route exact path={"/"} component={LandingPage} /> */}
       {/* <Route exact path={"/players"} component={Players} /> */}
