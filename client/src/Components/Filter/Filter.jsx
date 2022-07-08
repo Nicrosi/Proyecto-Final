@@ -27,6 +27,7 @@ export default function Filter() {
 
   return (
     <>
+    <div className="container-fluid">
       <h4>Name</h4>
       <input
         type="radio"
@@ -36,7 +37,7 @@ export default function Filter() {
         onChange={handleChange}
         defaultChecked={true}
       />
-      <label htmlFor="ascendent">ascendent</label>
+      <label className="card-subtitle mb-3 text-muted mx-2" htmlFor="ascendent">ascendent</label>
       <input
         type="radio"
         name="order"
@@ -44,7 +45,7 @@ export default function Filter() {
         id="descendent"
         onChange={handleChange}
       />
-      <label htmlFor="descendent">descendent</label>
+      <label className="card-subtitle mb-3 text-muted mx-2" htmlFor="descendent">descendent</label>
 
       <h4>Gender</h4>
       <input
@@ -55,7 +56,7 @@ export default function Filter() {
         onChange={handleChange}
         defaultChecked={true}
       />
-      <label htmlFor="all">all</label>
+      <label className="card-subtitle mb-3 text-muted mx-2" htmlFor="all">all</label>
       <input
         type="radio"
         name="gender"
@@ -63,7 +64,7 @@ export default function Filter() {
         id="male"
         onChange={handleChange}
       />
-      <label htmlFor="male">male</label>
+      <label className="card-subtitle mb-3 text-muted mx-2" htmlFor="male">male</label>
       <input
         type="radio"
         name="gender"
@@ -71,7 +72,8 @@ export default function Filter() {
         id="female"
         onChange={handleChange}
       />
-      <label htmlFor="female">female</label>
+      <label className="card-subtitle mb-3 text-muted mx-2" htmlFor="female">female</label>
+      </div>
     </>
   );
 }
