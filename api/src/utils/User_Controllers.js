@@ -1,18 +1,20 @@
 const { User, Inscription, Category, Score } = require("../db")
-
-const get_Userdb = async () => {
-
+const sequelize = require ('sequelize')
+const get_Userdb = async (name) => {
     try {
-        const User_db = await User.findAll({
-            include: {
-                model: Inscription,
-                attributes: ['amount', 'is_payed', 'chau'],
-                through: {
-                    attriutes: [],
+
+        if(name){
+            const Username_db = await User.findAll({
+                where : { 
+                    name: sequelize.where(sequelize.fn('LOWER', sequelize.col('name')), 'LIKE', '%' + name.toLowerCase() + '%')
                 }
-            }
-        })
-        return User_db
+            })
+            return Username_db
+        }else{
+            const User_db = await User.findAll()
+            return User_db
+        }
+    
     } catch (err) {
         console.log(err)
     }

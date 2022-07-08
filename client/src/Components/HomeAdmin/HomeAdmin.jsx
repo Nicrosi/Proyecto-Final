@@ -1,27 +1,27 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { getAllPlayers } from '../../redux/actions';
+import { getAllUsers } from '../../redux/actions';
 
 
 function HomeAdmin() {
 
-  const players = useSelector((state) => state.players)
+  const users = useSelector((state) => state.users)
 
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getAllPlayers())
+    dispatch(getAllUsers())
   }, [dispatch])
 
   return (
     <div className="App">
       <h3>HOME ADMINISTRATOR</h3>
 
-      <button><Link to={'/Players'}>Players</Link></button>
+      <button><Link to={'/Users'}>Users</Link></button>
       <button>Create Tournament</button>
       <button>Create Sub-Tournament</button>
       {
-        players.map((p) => {
+        users.map((p) => {
           return (
             <div>
               {p.is_admin &&
