@@ -43,8 +43,8 @@ export default function NavBar() {
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to={"/Players"}>
-                Players
+              <Link className="nav-link" to={"/Users"}>
+                Users
               </Link>
             </li>
           </ul>
