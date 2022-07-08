@@ -1,7 +1,7 @@
 const {Router} = require('express');
 const router = Router();
 const {get_Userdb} = require('../utils/User_Controllers');
-const {User} = require('../db');
+const { User, Category } = require('../db');
 
 
 router.get('/', async (req,res) => {
@@ -60,15 +60,26 @@ router.post('/', async (req, res) => {
 
 router.put('/:dni', async (req, res) => {
     const { dni } = req.params;
-    const { category } = req.body; 
-  
+    const { category, e_mail } = req.body; 
+
     try {
   
       const find_user_by_pk = await User.findByPk(parseInt(dni))
+
+      const AllUsers = await User.findAll();
+      let comparison = false;
+
+      AllUsers.length && AllUsers.map((user) => {
+        if( e_mail && e_mail === user.e_mail) {
+          comparison = true;
+        }
+        console.log(user.e_mail);
+      })
   
       if(find_user_by_pk) {
   
-        if( category && category.type === "a" || category && category.type === "b" || category && category.type === "c" || category && category.type === "e" ) {
+        if( category && category.type === "A" || category && category.type === "B" || category && category.type === "C" || category && category.type === "E" ) {
+          
           
           const userCategory = await User.findByPk(parseInt(dni));
         
@@ -76,25 +87,30 @@ router.put('/:dni', async (req, res) => {
             where : {
               type: category.type
             },
-            default: {
-              type: category.type
-            }
+            // default: {
+            //   type: category.type
+            // }
           })
           
-          category && await categoryFromDb.addUser(userCategory)
+          await categoryFromDb.addUser(userCategory)
         }
-        else if (category && category.type !== "a" || category && category.type !== "b" || category && category.type !== "c" || category && category.type !== "e" ){
+        else if (category && category.type !== "A" || category && category.type !== "B" || category && category.type !== "C" || category && category.type !== "E" ){
           return res.send({msg_error: 'Invalid category'})
         }
       
-        await User.update(
-          req.body,{
-          where :{
-            dni: parseInt(dni)
-          }
-        })
+        if(!comparison) {
+
+          await User.update(
+            req.body,{
+            where :{
+              dni: parseInt(dni)
+            }
+          })
+          res.send({msg_mesage: 'User updated'})
+        }else{
+          res.status(400).send({msg_mesage: 'User email already exist'})
+        }
   
-        res.send({msg_mesage: 'User updated'})
   
       }else{
         res.send({msg_mesage: 'User not found'})
