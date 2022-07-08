@@ -47,4 +47,45 @@ router.get('/', async (req, res) => {
 
 })
 
+
+router.put('/:id_sponsor', async (req, res) => {
+  const { id_sponsor } = req.params;
+  const { company, link } = req.body;
+
+  const AllSponsor = await Sponsor.findAll();
+
+  if(AllSponsor.length) {
+
+    let comparison = false
+
+    AllSponsor.map((sponsor) => {
+      if( company === sponsor.company || link === sponsor.link ){
+        comparison = true
+      }
+    })
+
+    console.log(comparison)
+    
+    if(!comparison) {
+      const SponsorUpated = await Sponsor.update(req.body, {
+        where: {
+          id_sponsor: parseInt(id_sponsor)
+        }
+      })
+      
+      if(SponsorUpated[0] === 1) {
+        res.status(200).send({msg_measge: 'Sponsor updated'});
+      }else{
+        res.status(400).send({msg_measge: 'Sponsor not found'});
+      }
+    }else{
+      return res.status(400).send({msg_error: 'Sponsor already exists'})
+    }
+
+  }else{
+    res.status(400).send({msg_measge: 'No sponsor to update'});
+  }
+
+})
+
 module.exports = router;
