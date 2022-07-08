@@ -60,7 +60,6 @@ router.post("/", async (req, res, next) => {
         logo,
         link,
       });
-
       res.send("Sponsor created!");
     }
   } catch (error) {
