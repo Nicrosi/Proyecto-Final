@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllUsers } from "../../redux/actions";
 import Filter from "../Filter/Filter";
+import SearchBar from "../SearchBar/SearchBar";
 import { UserCard } from "../UserCard/UserCard";
 
 export const Users = () => {
@@ -14,6 +15,7 @@ export const Users = () => {
   console.log(users)
   return (
     <div>
+      <SearchBar/>
       <Filter />
       {users.map((p) => {
         return (
