@@ -30,7 +30,7 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
-const { User, Team, Match, Round, Inscription, Tournament, SubTournament, Score, Category, Sponsor } = sequelize.models;
+const { User, Team, Match, Round, Inscription, Tournament, Subtournament, Score, Category, Sponsor } = sequelize.models;
 
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
@@ -53,14 +53,14 @@ Sponsor.belongsToMany(Tournament, {through: 'sponsor_tournament'});
 Tournament.hasMany(Inscription, {foreignKey: 'id_tournament'});
 Inscription.belongsTo(Tournament, {foreignKey: 'id_tournament'});
 
-Tournament.hasMany(SubTournament, {foreignKey: 'id_tournament'});
-SubTournament.belongsTo(Tournament, {foreignKey: 'id_tournament'});
+Tournament.hasMany(Subtournament, {foreignKey: 'id_tournament'});
+Subtournament.belongsTo(Tournament, {foreignKey: 'id_tournament'});
 
-Category.hasMany(SubTournament, {foreignKey: 'id_category'});
-SubTournament.belongsTo(Category, {foreignKey: 'id_category'});
+Category.hasMany(Subtournament, {foreignKey: 'id_category'});
+Subtournament.belongsTo(Category, {foreignKey: 'id_category'});
 
-SubTournament.hasMany(Round, {foreignKey: 'id_subt'});
-Round.belongsTo(SubTournament, {foreignKey: 'id_subt'});
+Subtournament.hasMany(Round, {foreignKey: 'id_subt'});
+Round.belongsTo(Subtournament, {foreignKey: 'id_subt'});
 
 Match.hasMany(Round, {foreignKey: 'id_match'});
 Round.belongsTo(Match, {foreignKey: 'id_match'});
