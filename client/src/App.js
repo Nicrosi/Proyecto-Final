@@ -7,10 +7,11 @@ import NavBar from './components/NavBar/NavBar';
 import { Users } from './components/Users/Users.jsx';
 
 
+
 function App() {
 
   return (
-   
+  
     <div className="App">
       {/* <Route exact path={"/"} component={LandingPage} /> */}
       <Route path={"/"} component={NavBar} />
