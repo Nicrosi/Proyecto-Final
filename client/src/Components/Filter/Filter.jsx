@@ -74,7 +74,7 @@ export default function Filter() {
       />
       <label htmlFor="female">female</label>
 
-      <h4>Category</h4>
+      {/* <h4>Category</h4>
       <input
         type="radio"
         name="category"
@@ -119,7 +119,7 @@ export default function Filter() {
         id="E"
         onChange={handleChange}
       />
-      <label htmlFor="E">E</label>
+      <label htmlFor="E">E</label> */}
     </>
   );
 }
