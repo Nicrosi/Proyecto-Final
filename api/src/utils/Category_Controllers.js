@@ -1,9 +1,11 @@
-const { Score, Category } = require("../db");
+const { Score, Category, User } = require("../db");
 
 const category = async () => {
   const dbScore = await Score.findAll();
 
-  const score = dbScore.forEach((el) => {
+
+  const score = dbScore.forEach(async (el) => {
+
     if (el.previous_tournaments > 1) {
       //A,B,C
       //A
@@ -12,7 +14,23 @@ const category = async () => {
           if (el.special_hits >= 2 && el.special_hits >= 2) {
             if (el.kick_serve_control >= 3 && el.kick_serve_control >= 3) {
               if (el.game_strategy > 3) {
-                Category.findOrCreate({ where: { type: "A" } });
+                await Category.findOrCreate({ where: { type: "A" } });
+                const db_category = await Category.findAll({
+                  where: {
+                    type: "A",
+                  },
+                });
+                const id = db_category[0].dataValues.id_category;
+                const db_user = await User.update(
+                  {
+                    id_category: id,
+                  },
+                  {
+                    where: {
+                      id_score: el.id_score,
+                    },
+                  }
+                );
               }
             }
           }
@@ -24,7 +42,23 @@ const category = async () => {
           if (el.special_hits >= 1 && el.special_hits >= 1) {
             if (el.kick_serve_control >= 2 && el.kick_serve_control >= 2) {
               if (el.game_strategy > 1) {
-                Category.findOrCreate({ where: { type: "B" } });
+                await Category.findOrCreate({ where: { type: "B" } });
+                const db_category = await Category.findAll({
+                  where: {
+                    type: "B",
+                  },
+                });
+                const id = db_category[0].dataValues.id_category;
+                const db_user = await User.update(
+                  {
+                    id_category: id,
+                  },
+                  {
+                    where: {
+                      id_score: el.id_score,
+                    },
+                  }
+                );
               }
             }
           }
@@ -36,7 +70,23 @@ const category = async () => {
           if (el.special_hits >= 0 && el.special_hits >= 0) {
             if (el.kick_serve_control >= 1 && el.kick_serve_control >= 1) {
               if (el.game_strategy === 0) {
-                Category.findOrCreate({ where: { type: "C" } });
+                await Category.findOrCreate({ where: { type: "C" } });
+                const db_category = await Category.findAll({
+                  where: {
+                    type: "C",
+                  },
+                });
+                const id = db_category[0].dataValues.id_category;
+                const db_user = await User.update(
+                  {
+                    id_category: id,
+                  },
+                  {
+                    where: {
+                      id_score: el.id_score,
+                    },
+                  }
+                );
               }
             }
           }
@@ -46,7 +96,23 @@ const category = async () => {
 
     if (el.previous_tournaments === 0) {
       //E
-      Category.findOrCreate({ where: { type: "E" } });
+      await Category.findOrCreate({ where: { type: "E" } });
+      const db_category = await Category.findAll({
+        where: {
+          type: "E",
+        },
+      });
+      const id = db_category[0].dataValues.id_category;
+      const db_user = await User.update(
+        {
+          id_category: id,
+        },
+        {
+          where: {
+            id_score: el.id_score,
+          },
+        }
+      );
     }
   });
 
