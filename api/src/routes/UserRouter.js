@@ -57,4 +57,52 @@ router.post('/', async (req, res) => {
     }
 })
 
+
+router.put('/:dni', async (req, res) => {
+    const { dni } = req.params;
+    const { category } = req.body; 
+  
+    try {
+  
+      const find_user_by_pk = await User.findByPk(parseInt(dni))
+  
+      if(find_user_by_pk) {
+  
+        if( category && category.type === "a" || category && category.type === "b" || category && category.type === "c" || category && category.type === "e" ) {
+          
+          const userCategory = await User.findByPk(parseInt(dni));
+        
+          const [categoryFromDb] = category && await Category.findOrCreate({
+            where : {
+              type: category.type
+            },
+            default: {
+              type: category.type
+            }
+          })
+          
+          category && await categoryFromDb.addUser(userCategory)
+        }
+        else if (category && category.type !== "a" || category && category.type !== "b" || category && category.type !== "c" || category && category.type !== "e" ){
+          return res.send({msg_error: 'Invalid category'})
+        }
+      
+        await User.update(
+          req.body,{
+          where :{
+            dni: parseInt(dni)
+          }
+        })
+  
+        res.send({msg_mesage: 'User updated'})
+  
+      }else{
+        res.send({msg_mesage: 'User not found'})
+      }
+  
+    } catch (error) {
+      console.log(error);
+    }
+  
+  })
 module.exports = router;
