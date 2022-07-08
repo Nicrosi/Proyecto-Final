@@ -1,10 +1,10 @@
 
 import React from 'react';
 import { Route} from 'react-router-dom';
-import DetailsPlayer from './components/DetailsPLayer/DetailsPlayer.jsx';
-import HomeAdmin from './components/HomeAdmin/HomeAdmin.jsx';
-import NavBar from './components/NavBar/NavBar';
-import { Players } from './components/Players/Players.jsx';
+import DetailsPlayer from './Components/DetailsPLayer/DetailsPlayer';
+import HomeAdmin from './Components/HomeAdmin/HomeAdmin.jsx';
+import NavBar from './Components/NavBar/NavBar';
+import { Players } from './Components/Players/Players.jsx';
 
 
 function App() {
