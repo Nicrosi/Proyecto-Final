@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -12,6 +13,22 @@ function HomeAdmin() {
   useEffect(() => {
     dispatch(getAllPlayers());
   }, [dispatch]);
+=======
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { getAllUsers } from '../../redux/actions';
+
+
+function HomeAdmin() {
+
+  const users = useSelector((state) => state.users)
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getAllUsers())
+  }, [dispatch])
+>>>>>>> 10c522f9e31b4a6a1c95fc50e7c8afd32399d546
 
   return (
     <div className="App">
@@ -27,6 +44,7 @@ function HomeAdmin() {
         Create Sub-Tournament
       </button>
 
+<<<<<<< HEAD
       {players.map((p) => {
         return (
           <div className="container my-4">
@@ -54,6 +72,22 @@ function HomeAdmin() {
                       Phone: {p.phone}
                     </h3>
                   </div>
+=======
+      <button><Link to={'/Users'}>Users</Link></button>
+      <button>Create Tournament</button>
+      <button>Create Sub-Tournament</button>
+      {
+        users.map((p) => {
+          return (
+            <div>
+              {p.is_admin &&
+                <div>
+                  <img src={p.picture} alt="pictureAdm"/>
+                  <h3 key={p.dni}> {p.name}</h3>
+                  <h3>{p.last_name}</h3>
+                  <h3>{p.e_mail}</h3>
+                  <h3>{p.phone}</h3>
+>>>>>>> 10c522f9e31b4a6a1c95fc50e7c8afd32399d546
                 </div>
               )}
             </div>
