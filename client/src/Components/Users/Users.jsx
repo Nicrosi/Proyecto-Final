@@ -1,29 +1,32 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllPlayers } from "../../redux/actions";
+import { getAllUsers } from "../../redux/actions";
 import Filter from "../Filter/Filter";
-import { PlayerCard } from "../PlayerCard/PlayerCard";
+import SearchBar from "../SearchBar/SearchBar";
+import { UserCard } from "../UserCard/UserCard";
 
-export const Players = () => {
-  const players = useSelector((state) => state.filteredPlayers);
+export const Users = () => {
+  const users = useSelector((state) => state.filteredUsers);
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getAllPlayers());
+    dispatch(getAllUsers());
   }, [dispatch]);
 
+  console.log(users)
   return (
     <div>
+      <SearchBar/>
       <Filter />
-      {players.map((p) => {
+      {users.map((p) => {
         return (
-          <PlayerCard
+          <UserCard
             key={p.dni}
             dni={p.dni}
             name={p.name}
             last_name={p.last_name}
             picture={p.picture}
             gender={p.gender}
-            category={p.category}
+           // category={p.category} falta traer la categoria del back
           />
         );
       })}

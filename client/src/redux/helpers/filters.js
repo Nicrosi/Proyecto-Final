@@ -1,11 +1,11 @@
-export const filterPlayers = (arr = [], gender = "all", category = "all") => {
+export const filterUsers = (arr = [], gender = "all", category = "all") => {
   if (gender !== "all") {
-    arr = arr.filter((player) => player.gender === gender);
+    arr = arr.filter((user) => user.gender === gender);
   }
-  if (category !== "all") {
-    arr = arr.filter(
-      (player) => player.category.type === category.toLowerCase()
-    );
-  }
+  // if (category !== "all") { //aun no me trae categorias del back
+  //   arr = arr.filter(
+  //     (user) => user.category.type === category.toLowerCase()
+  //   );
+  // }
   return arr;
 };

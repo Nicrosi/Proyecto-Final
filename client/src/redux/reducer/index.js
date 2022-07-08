@@ -1,18 +1,36 @@
-import { ORDER_USERS_BY_NAME, GET_ALL_PLAYERS } from "../actions";
-import { filterPlayers } from "../helpers/filters";
+import {
+  ORDER_USERS_BY_NAME,
+  GET_ALL_USERS,
+  GET_ALL_USERS_NAME,
+} from "../actions";
+import { filterUsers } from "../helpers/filters";
 import { sortByName } from "../helpers/sorts";
 
 const initialState = {
-  players: [],
-  filteredPlayers: [],
+  // players: [], JSON
+  // filteredPlayers: [],
+  users: [],
+  filteredUsers: [],
 };
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
-    case GET_ALL_PLAYERS:
+    // case GET_ALL_PLAYERS: JSON
+    //   return {
+    //     ...state,
+    //     players: action.payload.players,
+    //     filteredPlayers: sortByName(action.payload.players),
+    //   };
+    case GET_ALL_USERS:
       return {
         ...state,
-        players: action.payload.players,
-        filteredPlayers: sortByName(action.payload.players),
+        users: action.payload,
+        filteredUsers: sortByName(action.payload),
+      };
+    case GET_ALL_USERS_NAME:
+      return {
+        ...state,
+        users: action.payload,
+        filteredUsers: sortByName(action.payload),
       };
     case ORDER_USERS_BY_NAME:
       const gender = action.payload.gender,
@@ -20,8 +38,8 @@ const rootReducer = (state = initialState, action) => {
         order = action.payload.order;
       return {
         ...state,
-        filteredPlayers: sortByName(
-          filterPlayers(state.players, gender, category),
+        filteredUsers: sortByName(
+          filterUsers(state.users, gender, category),
           order
         ),
       };
