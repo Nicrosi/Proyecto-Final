@@ -64,8 +64,6 @@ router.put('/:id_sponsor', async (req, res) => {
       }
     })
 
-    console.log(comparison)
-    
     if(!comparison) {
       const SponsorUpated = await Sponsor.update(req.body, {
         where: {
