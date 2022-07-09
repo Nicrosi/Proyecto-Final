@@ -19,7 +19,7 @@ export default function NavBar() {
     //     </div>
     // </>
 
-    <nav className="navbar navbar-expand-lg bg-light">
+    <nav className="navbar navbar-expand-lg bg-light position-fixed nav ">
       <div className="container-fluid">
         <Link className="navbar-brand" to={"/"}>
           Tennis APP
@@ -38,7 +38,11 @@ export default function NavBar() {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
-              <Link className="nav-link active" aria-current="page" to={"/HomeAdmin"}>
+              <Link
+                className="nav-link active"
+                aria-current="page"
+                to={"/HomeAdmin"}
+              >
                 Admin
               </Link>
             </li>
