@@ -12,7 +12,7 @@ function HomeAdmin() {
   useEffect(() => {
     dispatch(getAllUsers())
   }, [dispatch])
-
+//comentario
   return (
     <div className="App">
       <h3 className="text-lg-start fs-4 mx-4 my-3 text-secondary ">HOME ADMINISTRATOR</h3>
