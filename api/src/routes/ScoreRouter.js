@@ -14,41 +14,6 @@ router.get("/", async (req, res) => {
   }
 });
 
-<<<<<<< HEAD
-router.post('/:dni', async (req, res) => {
-    let {dni} = req.params;
-    let{
-        previous_tournaments,
-        hit_knowledge,
-        other_strokes,
-        special_hits,
-        kick_serve_control,
-        game_strategy
-    } = req.body;
-    try{
-        let newScore = await Score.create({
-            previous_tournaments,
-            hit_knowledge,
-            other_strokes,
-            special_hits,
-            kick_serve_control,
-            game_strategy
-        });
-        let user = await User.findAll({
-            where : {
-                dni: dni
-            }
-        });
-        await user.createScore(newScore)
-        res.status(200).send('Sent!');
-    }catch(err){
-        console.log(err);
-    }
-});
-
-module.exports = router;
-
-=======
 router.post("/:dni", async (req, res) => {
   let { dni } = req.params;
   let {
@@ -93,4 +58,3 @@ router.post("/:dni", async (req, res) => {
 });
 
 module.exports = router;
->>>>>>> da6b0ccf200b2d1f03128463ec1ee61a60193e78
