@@ -34,7 +34,7 @@ const DetailsUser = (props) => {
                     <div className="accordion" id="accordionExample">
                     <div className="accordion-item">
                       <h2 className="accordion-header" id="headingOne">
-                        <button className="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        <button className="accordion-button text-bg-dark" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                         Personal Information
                         </button>
                       </h2>
@@ -53,7 +53,7 @@ const DetailsUser = (props) => {
                     </div>
                     <div className="accordion-item">
                       <h2 className="accordion-header" id="headingTwo">
-                        <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        <button className="accordion-button collapsed text-bg-dark" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                           Category
                         </button>
                       </h2>
@@ -72,7 +72,7 @@ const DetailsUser = (props) => {
                     </div>
                     <div className="accordion-item">
                       <h2 className="accordion-header" id="headingThree">
-                        <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        <button className="accordion-button collapsed text-bg-dark" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                         Score
                         </button>
                       </h2>
