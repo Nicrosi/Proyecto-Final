@@ -2,6 +2,7 @@ const { Router } = require("express");
 const router = Router();
 const { Score, User } = require("../db");
 const { get_ScoreUser } = require("../utils/Score_Controller");
+const { category } = require("../utils/Category_Controllers.js");
 
 router.get("/", async (req, res) => {
   let { id_score } = req.query;
@@ -49,7 +50,7 @@ router.post("/:dni", async (req, res) => {
         );
       }
     });
-
+    category();
     res.status(200).send("Sent!");
   } catch (err) {
     console.log(err);
