@@ -1,20 +1,19 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { getAllUsers } from "../../redux/actions";
+import { getUserById } from "../../redux/actions";
 
 const DetailsUser = (props) => {
   const params = Number(props.match.params.userId);
   const dispatch = useDispatch();
-
+  
   useEffect(() => {
     dispatch(
-      getAllUsers()
+      getUserById(params)
     );
-  }, [dispatch]);
+  }, [dispatch, params]);
 
-  let user = useSelector((state) => state.users); 
-  user = user.find( u => u.dni === params); 
+  let user = useSelector((state) => state.user); 
 
   return (
     <React.Fragment>

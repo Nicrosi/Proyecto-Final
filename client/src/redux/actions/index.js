@@ -6,6 +6,7 @@ import axios from "axios";
 export const ORDER_USERS_BY_NAME = "ORDER_USERS_BY_NAME";
 export const GET_ALL_USERS = "GET_ALL_USERS";
 export const GET_ALL_USERS_NAME = "GET_ALL_USERS_NAME";
+export const GET_USER_BY_ID = "GET_USER_BY_ID";
 // export const getAllPlayers = () => { JSON
 //   return {
 //     type: GET_ALL_PLAYERS,
@@ -39,4 +40,14 @@ export const orderUsersByName = ({ order, gender, category }) => {
     payload: { order, gender, category },
   };
 };
+
+export const getUserById = (dni) => (dispatch) => {
+  return axios.get(`${urlUser}/${dni}`).then((response) =>
+    dispatch({
+      type: GET_USER_BY_ID,
+      payload: response.data,
+    })
+  );
+};
+
 
