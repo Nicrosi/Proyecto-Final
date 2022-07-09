@@ -9,13 +9,13 @@ export default function LandingPage() {
       <section>
         <Carousel />
       </section>
-      {/* <section
+      <section
         className="d-flex flex-column align-items-center"
         style={{ minHeight: "75vh" }}
       >
         <h1 className="mt-4 ">How to take part?</h1>
         <Steps />
-      </section> */}
+      </section>
       <section
         className="d-flex flex-column align-items-center bg-secondary"
         style={{ minHeight: "100vh" }}
