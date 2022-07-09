@@ -4,10 +4,15 @@ module.exports = (sequelize) => {
   sequelize.define(
     "user",
     {
+      ///////////////////////////////
+      id_user: {
+        type: DataTypes.INTEGER,
+        autoIncrement: true,
+        primaryKey: true,
+      },
       dni: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        primaryKey: true,
         unique: true,
       },
       name: {
