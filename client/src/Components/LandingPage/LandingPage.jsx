@@ -6,7 +6,9 @@ import Steps from "../Steps/Steps";
 export default function LandingPage() {
   return (
     <>
-      <section></section>
+      <section>
+        <Carousel />
+      </section>
     </>
   );
 }
