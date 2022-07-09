@@ -37,10 +37,12 @@ router.post('/:dni', async (req, res) => {
                 dni: dni
             }
         });
-        newScore.addScore(user);
+        await user.createScore(newScore)
         res.status(200).send('Sent!');
     }catch(err){
         console.log(err);
     }
 });
+
+module.exports = router;
 
