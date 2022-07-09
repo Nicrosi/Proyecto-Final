@@ -1,23 +1,20 @@
-const { Router } = require('express');
+const { Router } = require("express");
 const router = Router();
-const {Sponsor, Tournament} = require('../db');
+const { Sponsor, Tournament } = require("../db");
 
-router.get('/', async (req, res) => {
+router.get("/", async (req, res) => {
   const { id_tournament } = req.query;
 
-  if( id_tournament ) {
-    const tournament = await Tournament.findOne(
-      {
-        where : {
-          id_tournament: parseInt(id_tournament)
-        },
-        include: Sponsor
-      }
-    )
+  if (id_tournament) {
+    const tournament = await Tournament.findOne({
+      where: {
+        id_tournament: parseInt(id_tournament),
+      },
+      include: Sponsor,
+    });
 
-    if(tournament) {
-
-      const Sponsors = []
+    if (tournament) {
+      const Sponsors = [];
 
       tournament.sponsors.map((sponsor) => {
         const Sponsor = {
@@ -26,27 +23,37 @@ router.get('/', async (req, res) => {
           message: sponsor.message,
           logo: sponsor.logo,
           link: sponsor.link,
-        }
-        Sponsors.push(Sponsor)
-      })
+        };
+        Sponsors.push(Sponsor);
+      });
 
-      return res.status(200).json(Sponsors)
-    }else{
-      res.status(400).json({msg: 'No sponsors found'});
-    }
-  }else{
-
-    const Sponsors = await Sponsor.findAll();
-  
-    if(Sponsors.length) {
       return res.status(200).json(Sponsors);
-    }else{
-      res.status(400).json({msg: 'No sponsors found'});
+    } else {
+      res.status(400).json({ msg: "No sponsors found" });
+    }
+  } else {
+    const Sponsors = await Sponsor.findAll();
+
+    if (Sponsors.length) {
+      return res.status(200).json(Sponsors);
+    } else {
+      res.status(400).json({ msg: "No sponsors found" });
     }
   }
+});
 
-})
+router.post("/", async (req, res, next) => {
+  const { company, message, logo, link } = req.body;
+  try {
+    const findSponsor = await Sponsor.findAll({
+      where: {
+        company: company,
+      },
 
+      
+    });
+  }
+});
 
 router.put('/:id_sponsor', async (req, res) => {
   const { id_sponsor } = req.params;
@@ -64,6 +71,8 @@ router.put('/:id_sponsor', async (req, res) => {
       }
     })
 
+    console.log(comparison)
+    
     if(!comparison) {
       const SponsorUpated = await Sponsor.update(req.body, {
         where: {
