@@ -49,9 +49,21 @@ router.post("/", async (req, res, next) => {
       where: {
         company: company,
       },
-
-      
     });
+
+    if (findSponsor.length !== 0) {
+      res.status(403).send("This sponsor already exists");
+    } else {
+      await Sponsor.create({
+        company,
+        message,
+        logo,
+        link,
+      });
+      res.send("Sponsor created!");
+    }
+  } catch (error) {
+    next(error.message);
   }
 });
 
