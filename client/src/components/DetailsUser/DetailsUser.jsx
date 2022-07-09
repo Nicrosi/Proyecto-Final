@@ -3,31 +3,24 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllUsers } from "../../redux/actions";
 
 const DetailsUser = (props) => {
-  const params = props.match.params.userId;
+  const params = Number(props.match.params.userId);
   const dispatch = useDispatch();
-  console.log(params);
 
   useEffect(() => {
     dispatch(
-      //insertar aqui una action que traiga el detalle a mostrar desde el back --> action(params)
-      //crear la action
-      getAllUsers() //provisorio
+      getAllUsers()
     );
   }, [dispatch]);
 
-  // crear estado user: {} en el initialState luego de que el back estÃ© creado
-  // y crear reducer que modifique user del initialState
-  let user = useSelector((state) => state.users); //luego cambiar por state.user
-  user = user[params]; //provisorio
-
-  ////comentario de prueba, arreglos finales!!
+  let user = useSelector((state) => state.users); 
+  user = user.find( u => u.dni === params); 
 
   return (
     <React.Fragment>
  {user && (
-            <div className="mb-3 mt-5 mx-auto hstack justify-content-center" style={{width: "85%"}}>
+            <div className="mb-3 mx-auto hstack justify-content-center" style={{width: "85%", marginTop: "100px"}}>
               <div className="hstack justify-content-around"  style={{width: "100%"}}>
-                <div className="col-md-4 vstack " style={{width: "40%"}}>
+                <div className="col-md-4 vstack" style={{width: "40%"}}>
                 <img src={user.picture} className="mx-auto rounded-circle" style={{width: "250px"}} alt="..." />
                             <h1 className="text-center">{user.name + " " + user.last_name}</h1> 
                 </div>
@@ -35,7 +28,7 @@ const DetailsUser = (props) => {
                     <div className="accordion" id="accordionExample">
                     <div className="accordion-item">
                       <h2 className="accordion-header" id="headingOne">
-                        <button className="accordion-button text-bg-warning" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        <button className="accordion-button text-bg-dark" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                         Personal Information
                         </button>
                       </h2>
