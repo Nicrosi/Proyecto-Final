@@ -1,7 +1,7 @@
 const {Router} = require('express');
 const router = Router();
 const {get_Userdb} = require('../utils/User_Controllers');
-const { User, Category } = require('../db');
+const { User, Category, Inscription, Score } = require('../db');
 
 
 router.get('/', async (req,res) => {
@@ -14,6 +14,30 @@ router.get('/', async (req,res) => {
     }else{
         allUsers.length > 0? res.status(200).send(allUsers) : res.status(404).send("Users doesn't exist!")
     }
+})
+
+
+router.get('/:dni', async (req,res) => {
+  const { dni } = req.params;
+
+  const UsersFoundById = await User.findOne(
+    {
+      where: {
+        dni: parseInt(dni)
+      },
+      include: [
+        Inscription,
+        Score,
+        Category
+      ]
+    }
+  )
+
+  if(UsersFoundById) {
+    res.status(200).json(UsersFoundById);
+  }else{
+    res.status(400).json({msg_error: 'User not found'});
+  }
 })
 
 
@@ -83,13 +107,10 @@ router.put('/:dni', async (req, res) => {
           
           const userCategory = await User.findByPk(parseInt(dni));
         
-          const [categoryFromDb] = category && await Category.findOrCreate({
+          const [categoryFromDb] = await Category.findOrCreate({
             where : {
               type: category.type
             },
-            // default: {
-            //   type: category.type
-            // }
           })
           
           await categoryFromDb.addUser(userCategory)

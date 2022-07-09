@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { getAllUsers } from "../../redux/actions";
 
 const DetailsUser = (props) => {
@@ -57,7 +58,7 @@ const DetailsUser = (props) => {
                       <div className="card mx-auto" style={{width: "200px"}}>
                         <div className="card-body text-center">
                           {/* <h1 className="card-title">{user.category.type.toUpperCase()}</h1> */}
-                          <button>Modify</button>
+                          <button type="button" className="btn btn-primary">Modify</button>
                         </div>
                       </div>
                     </div>
@@ -66,13 +67,16 @@ const DetailsUser = (props) => {
                     </div>
                     <div className="accordion-item">
                       <h2 className="accordion-header" id="headingThree">
+                        <Link to={`/CreateScore/${params}`}> {/*params es el dni */}
                         <button className="accordion-button collapsed text-bg-dark" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                         Score
                         </button>
+                        </Link>
                       </h2>
                       <div id="collapseThree" className="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
                         <div className="accordion-body">
                         <div >
+                        <button type="button" className="btn btn-primary">Create</button>
                     {/* <ul className="list-group">
                       <li className="list-group-item"><h5>Previous Tournaments: {user.score.previous_tournaments}</h5></li>
                       <li className="list-group-item"><h5>Hit knowledge: {user.score.hit_knowledge}</h5></li>
