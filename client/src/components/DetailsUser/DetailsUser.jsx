@@ -20,6 +20,7 @@ const DetailsUser = (props) => {
   let user = useSelector((state) => state.users); //luego cambiar por state.user
   user = user[params]; //provisorio
 
+  ////comentario de prueba, arreglos finales!!
 
   return (
     <React.Fragment>
@@ -34,7 +35,7 @@ const DetailsUser = (props) => {
                     <div className="accordion" id="accordionExample">
                     <div className="accordion-item">
                       <h2 className="accordion-header" id="headingOne">
-                        <button className="accordion-button text-bg-dark" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        <button className="accordion-button text-bg-warning" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                         Personal Information
                         </button>
                       </h2>
