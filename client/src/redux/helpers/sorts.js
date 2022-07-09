@@ -1,4 +1,4 @@
-export const sortByName = (arr=[], order = "ascendent") => {
+export const sortByName = (arr, order = "ascendent") => {
   const newArr = [...arr];
   if (order === "ascendent") {
     return newArr.sort((a, b) => (a.name > b.name ? 1 : -1));

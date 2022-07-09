@@ -1,4 +1,3 @@
-
 const { Router } = require('express');
 const RouteUser = require('../routes/UserRouter')
 const category = require("../routes/CategoryRouter.js");
@@ -16,6 +15,5 @@ router.use("/category", category);
 router.use('/user', RouteUser);
 router.use('/sponsor', Sponsor);
 router.use('/score', Score);
-
 
 module.exports = router;
