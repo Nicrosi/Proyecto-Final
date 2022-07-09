@@ -15,6 +15,7 @@ code {
 .nav{
   z-index: 3;
   width: 100%;
+  top:0;
 }
 
 .carouselItem h1{
