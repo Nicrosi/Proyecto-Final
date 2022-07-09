@@ -2,6 +2,7 @@ import {
   ORDER_USERS_BY_NAME,
   GET_ALL_USERS,
   GET_ALL_USERS_NAME,
+  GET_USER_BY_ID,
 } from "../actions";
 import { filterUsers } from "../helpers/filters";
 import { sortByName } from "../helpers/sorts";
@@ -10,6 +11,7 @@ const initialState = {
   // players: [], JSON
   // filteredPlayers: [],
   users: [],
+  user: {},
   filteredUsers: [],
 };
 const rootReducer = (state = initialState, action) => {
@@ -42,6 +44,11 @@ const rootReducer = (state = initialState, action) => {
           filterUsers(state.users, gender, category),
           order
         ),
+      };
+    case GET_USER_BY_ID:
+      return {
+        ...state,
+        user: action.payload,
       };
     default:
       return { ...state };
