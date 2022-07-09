@@ -1,8 +1,8 @@
 const {Router} = require('express');
 const router = Router();
 const {get_Userdb} = require('../utils/User_Controllers');
-const { User, Category, Score } = require('../db');
-//////////////////////////////
+const { User, Category } = require('../db');
+
 
 router.get('/', async (req,res) => {
     let {name}= req.query
@@ -18,7 +18,7 @@ router.get('/', async (req,res) => {
 
 
 router.post('/', async (req, res) => {
-    const {
+    let{
         dni,
         name,
         last_name,
@@ -27,52 +27,34 @@ router.post('/', async (req, res) => {
         phone,
         num_contact,
         picture,
-        gender,
+        gender
     } = req.body;
 
-    const {
-      previous_tournaments,
-      hit_knowledge,
-      other_strokes,
-      special_hits,
-      kick_serve_control,
-      game_strategy
-    } = req.body.score;
-
-    const sco = await Score.create(
-      {
-        previous_tournaments,
-        hit_knowledge,
-        other_strokes,
-        special_hits,
-        kick_serve_control,
-        game_strategy
-      }
-    )
-
-    const user = await User.create(
-      {
-        dni,
-        name,
-        last_name,
-        is_admin,
-        e_mail,
-        phone,
-        num_contact,
-        picture,
-        gender,
-        id_score: sco.id_score
-      }
-    )
-
-    const userCreated = await User.findOne({
-      where: {
-        dni: dni
-      },
-      include: Score
-    })
-
-    res.json(userCreated)
+    try{
+        let findUser = await User.findAll({
+            where:{
+                dni: dni
+            }
+        })
+        if(findUser.length > 0){
+            res.status(403).send("User could not be created, DNI already in use");
+        }else{
+            await User.create({
+                dni,
+                name,
+                last_name,
+                is_admin,
+                e_mail,
+                phone,
+                num_contact,
+                picture,
+                gender
+            });
+            res.send('Created!');
+        }
+    }catch(err){
+        console.log(err)
+    }
 })
 
 
