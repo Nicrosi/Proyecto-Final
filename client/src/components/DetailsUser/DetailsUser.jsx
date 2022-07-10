@@ -6,7 +6,7 @@ import { getUserById } from "../../redux/actions";
 const DetailsUser = (props) => {
   const params = Number(props.match.params.userId);
   const dispatch = useDispatch();
-  
+
   useEffect(() => {
     dispatch(
       getUserById(params)
@@ -18,13 +18,13 @@ const DetailsUser = (props) => {
   return (
     <React.Fragment>
  {user && (
-            <div className="mb-3 mx-auto hstack justify-content-center" style={{width: "85%", marginTop: "100px"}}>
-              <div className="hstack justify-content-around"  style={{width: "100%"}}>
-                <div className="col-md-4 vstack" style={{width: "40%"}}>
-                <img src={user.picture} className="mx-auto rounded-circle" style={{width: "250px"}} alt="..." />
-                            <h1 className="text-center">{user.name + " " + user.last_name}</h1> 
+            <div className="mx-auto hstack justify-content-center" style={{width: "100%", minHeight: "100vh"}}>
+              <div className="mx-5 hstack justify-content-around" style={{width: "100%"}}>
+                <div className="col-md-4 align-self-center vstack" >
+                  <img src={user.picture} className="mx-auto rounded-circle" style={{width: "250px"}} alt="..." />
+                  <h1 className="text-center">{user.name + " " + user.last_name}</h1> 
                 </div>
-                <div className="col-md-8" style={{width: "55%"}}>
+                <div className="col-md-8" style={{width: "60%"}}>
                     <div className="accordion" id="accordionExample">
                     <div className="accordion-item">
                       <h2 className="accordion-header" id="headingOne">
