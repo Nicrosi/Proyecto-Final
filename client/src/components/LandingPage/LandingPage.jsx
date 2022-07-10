@@ -2,6 +2,7 @@ import React from "react";
 import Carousel from "../ControlledCarousel/ControlledCarousel";
 import { FAQ } from "../FAQ/FAQ";
 import Gallery from "../Gallery/Gallery";
+import Sponsors from "../Sponsors/Sponsors";
 import Steps from "../Steps/Steps";
 
 export default function LandingPage() {
@@ -28,14 +29,13 @@ export default function LandingPage() {
         style={{ minHeight: "100vh", border: "solid 1px black" }}
       >
         <h1 className="mt-4 mb-5">Frequent questions</h1>
-        <FAQ/>
+        <FAQ />
       </section>
       <section
-        className="d-flex flex-column align-items-center"
-        style={{ minHeight: "100vh", border: "solid 1px black" }}
+        className="d-flex align-items-center justify-content-center"
+        style={{ minHeight: "30vh" }}
       >
-        <h1 className="mt-4 mb-5">Sponsors</h1>
-       
+        <Sponsors />
       </section>
     </>
   );
