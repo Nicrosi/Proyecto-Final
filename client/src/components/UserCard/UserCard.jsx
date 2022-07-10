@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 export const UserCard = ({ dni,name, last_name, picture, gender }) => {
   return (
     <div className="mx-4 my-4">
-      
       <div className='card mx-4 my-3 shadow-lg'  style={{width:'50rem'}}>
         <div className="row">
         <div className="col">
