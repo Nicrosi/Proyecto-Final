@@ -169,54 +169,63 @@ router.post('/', async (req, res) => {
 
 router.put('/:dni', async (req, res) => {
     const { dni } = req.params;
-    const { category, e_mail } = req.body; 
-
+    const { name, last_name, is_admin, e_mail, phone, num_contact, picture, gender, category } = req.body; 
+///////////////////////////////////////////////////////////
     try {
   
-      const find_user_by_pk = await User.findByPk(parseInt(dni))
+      const find_user_by_pk = await User.findOne({where: { dni: parseInt(dni) }});
 
       const AllUsers = await User.findAll();
       let comparison = false;
 
       AllUsers.length && AllUsers.map((user) => {
-        if( e_mail && e_mail === user.e_mail) {
+        if( e_mail && e_mail === user.e_mail ) {
           comparison = true;
         }
-        console.log(user.e_mail);
       })
   
       if(find_user_by_pk) {
   
-        if( category && category.type === "A" || category && category.type === "B" || category && category.type === "C" || category && category.type === "E" ) {
-          
-          
-          const userCategory = await User.findByPk(parseInt(dni));
-        
-          const [categoryFromDb] = await Category.findOrCreate({
-            where : {
-              type: category.type
-            },
-          })
-          
-          await categoryFromDb.addUser(userCategory)
-        }
-        else if (category && category.type !== "A" || category && category.type !== "B" || category && category.type !== "C" || category && category.type !== "E" ){
-          return res.send({msg_error: 'Invalid category'})
-        }
-      
         if(!comparison) {
 
+          let CategoryToUpdate = find_user_by_pk.id_category;
+
+          if( category && category === "A" || category && category === "B" || category && category === "C" || category && category === "E" ) {
+          
+            const categoryFromDb = category && await Category.findOne({
+              where: {
+                type: category
+              }
+            })
+
+            CategoryToUpdate = categoryFromDb.id_category;
+            
+          }
+
+          console.log(CategoryToUpdate);
+
           await User.update(
-            req.body,{
-            where :{
-              dni: parseInt(dni)
+            {
+              name: name && name, 
+              last_name: last_name && last_name, 
+              is_admin: is_admin && is_admin , 
+              e_mail: e_mail && e_mail , 
+              phone: phone && phone , 
+              num_contact: num_contact && num_contact , 
+              picture: picture && picture , 
+              gender: gender && gender , 
+              id_category: CategoryToUpdate 
+            },
+            {
+              where :{
+                dni: parseInt(dni)
+              }
             }
-          })
+          )
           res.send({msg_mesage: 'User updated'})
         }else{
           res.status(400).send({msg_mesage: 'User email already exist'})
         }
-  
   
       }else{
         res.send({msg_mesage: 'User not found'})
