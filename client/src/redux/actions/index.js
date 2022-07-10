@@ -6,6 +6,8 @@ import axios from "axios";
 export const ORDER_USERS_BY_NAME = "ORDER_USERS_BY_NAME";
 export const GET_ALL_USERS = "GET_ALL_USERS";
 export const GET_ALL_USERS_NAME = "GET_ALL_USERS_NAME";
+export const GET_USER_BY_ID = "GET_USER_BY_ID";
+export const ADD_SPONSOR = "ADD_SPONSOR";
 // export const getAllPlayers = () => { JSON
 //   return {
 //     type: GET_ALL_PLAYERS,
@@ -39,4 +41,49 @@ export const orderUsersByName = ({ order, gender, category }) => {
     payload: { order, gender, category },
   };
 };
+
+export const getUserById = (dni) => (dispatch) => {
+  return axios.get(`${urlUser}/${dni}`).then((response) =>
+    dispatch({
+      type: GET_USER_BY_ID,
+      payload: response.data,
+    })
+  );
+};
+
+export function postSponsor(input) {
+
+  return async (dispatch) => {
+
+    try {
+      await axios.post('http://localhost:3001/sponsor', input)
+
+      return dispatch({
+        type: ADD_SPONSOR,
+        payload: input
+      })
+    }
+    catch (error) {
+      alert('Add Sponsor error, try again later')
+    }
+  }
+}
+
+export const postNewUser = (valuesInput) => {
+  return async () => {
+    const input = {
+      dni: valuesInput.dni,
+      name: valuesInput.name,
+      last_name: valuesInput.last_name,
+      is_admin: valuesInput.is_admin,
+      e_mail: valuesInput.e_mail,
+      phone: valuesInput.phone,
+      num_contact: valuesInput.num_contact,
+      picture: valuesInput.picture, 
+      gender: valuesInput.gender
+    }
+    return await axios.post(urlUser, input);
+  }
+};
+
 

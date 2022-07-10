@@ -2,6 +2,8 @@ import {
   ORDER_USERS_BY_NAME,
   GET_ALL_USERS,
   GET_ALL_USERS_NAME,
+  GET_USER_BY_ID,
+  ADD_SPONSOR,
 } from "../actions";
 import { filterUsers } from "../helpers/filters";
 import { sortByName } from "../helpers/sorts";
@@ -10,7 +12,9 @@ const initialState = {
   // players: [], JSON
   // filteredPlayers: [],
   users: [],
+  user: {},
   filteredUsers: [],
+  sponsor: [],
 };
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -43,6 +47,21 @@ const rootReducer = (state = initialState, action) => {
           order
         ),
       };
+    case GET_USER_BY_ID:
+      return {
+        ...state,
+        user: action.payload,
+      };
+
+    case ADD_SPONSOR:
+      console.log('action', action.payload)
+      return {
+        ...state,
+        sponsor: [...state.sponsor, action.payload]
+      }
+
+
+
     default:
       return { ...state };
   }

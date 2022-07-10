@@ -7,7 +7,7 @@ export const UserCard = ({ dni,name, last_name, picture, gender }) => {
       <div className='card mx-4 my-3 shadow-lg'  style={{width:'50rem'}}>
         <div className="row">
         <div className="col">
-          <Link to={`/users/${dni}`}>
+          <Link to={`/Users/${dni}`}>
     
             <img
               className="col"
