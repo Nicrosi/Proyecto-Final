@@ -2,8 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { postSponsor } from "../../redux/actions";
-import styles from './FormSponsor.module.css'
-
+import styles from "./FormSponsor.module.css";
 
 export const FormSponsor = () => {
   const dispatch = useDispatch();
@@ -36,9 +35,8 @@ export const FormSponsor = () => {
     <>
       <div className={styles.mainContainerCreation}>
         Sponsor Creation
-        <form onSubmit={((e) => handleOnSubmit(e))}>
+        <form onSubmit={(e) => handleOnSubmit(e)}>
           <div className={styles.formContainer}>
-            
             <div className={styles.Section}>
               <label>Company</label>
               <input
@@ -78,8 +76,10 @@ export const FormSponsor = () => {
                 value={input.link}
               />
               <div>
-               
-                <button className={styles.button} type="submit"> Add Sponsor </button>
+                <button className={styles.button} type="submit">
+                  {" "}
+                  Add Sponsor{" "}
+                </button>
               </div>
             </div>
           </div>
