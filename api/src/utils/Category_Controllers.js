@@ -1,11 +1,9 @@
 const { Score, Category, User } = require("../db");
 
-const category = async () => {
+const category = async (id) => {
   const dbScore = await Score.findAll();
 
-
   const score = dbScore.forEach(async (el) => {
-
     if (el.previous_tournaments > 1) {
       //A,B,C
       //A
@@ -116,9 +114,18 @@ const category = async () => {
     }
   });
 
-  const dbCategory = await Category.findAll();
-
-  return dbCategory;
+  if (id) {
+    const category_id = await Category.findAll({
+      where: {
+        id_category: id,
+      },
+    });
+    console.log(category_id);
+    return category_id;
+  } else {
+    const dbCategory = await Category.findAll();
+    return dbCategory;
+  }
 };
 
 module.exports = {

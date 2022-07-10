@@ -11,3 +11,25 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.nav{
+  z-index: 3;
+  width: 100%;
+  top:0;
+}
+
+.carouselItem h1{
+  z-index: 3;
+  font-family: cursive;
+}
+.carouselItem:before{
+  content: "";
+  background-color: #000;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
+  opacity: 0.5;
+  position: absolute;
+  z-index: 2;
+}

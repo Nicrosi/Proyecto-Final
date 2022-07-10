@@ -11,8 +11,8 @@ const get_Userdb = async (name) => {
             })
             return Username_db
         }else{
-            const User_db = await User.findAll()
-            return User_db
+            const User_db = await User.findAll();
+            return User_db;
         }
     
     } catch (err) {

@@ -1,10 +1,10 @@
-
 const { Router } = require('express');
 const RouteUser = require('../routes/UserRouter')
-const router = Router();
 const category = require("../routes/CategoryRouter.js");
 const Sponsor = require("../routes/SponsorRouter.js");
-
+const Score = require("../routes/ScoreRouter.js");
+const router = Router();
+ 
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
 
@@ -14,7 +14,6 @@ const Sponsor = require("../routes/SponsorRouter.js");
 router.use("/category", category);
 router.use('/user', RouteUser);
 router.use('/sponsor', Sponsor);
-
-
+router.use('/score', Score);
 
 module.exports = router;

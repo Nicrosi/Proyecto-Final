@@ -1,32 +1,26 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllUsers } from "../../redux/actions";
+import { Link } from "react-router-dom";
+import { getUserById } from "../../redux/actions";
 
 const DetailsUser = (props) => {
-  const params = props.match.params.userId;
+  const params = Number(props.match.params.userId);
   const dispatch = useDispatch();
-  console.log(params);
-
+  
   useEffect(() => {
     dispatch(
-      //insertar aqui una action que traiga el detalle a mostrar desde el back --> action(params)
-      //crear la action
-      getAllUsers() //provisorio
+      getUserById(params)
     );
-  }, [dispatch]);
+  }, [dispatch, params]);
 
-  // crear estado user: {} en el initialState luego de que el back estÃ© creado
-  // y crear reducer que modifique user del initialState
-  let user = useSelector((state) => state.users); //luego cambiar por state.user
-  user = user[params]; //provisorio
-
+  let user = useSelector((state) => state.user); 
 
   return (
     <React.Fragment>
  {user && (
-            <div className="mb-3 mt-5 mx-auto hstack justify-content-center" style={{width: "85%"}}>
+            <div className="mb-3 mx-auto hstack justify-content-center" style={{width: "85%", marginTop: "100px"}}>
               <div className="hstack justify-content-around"  style={{width: "100%"}}>
-                <div className="col-md-4 vstack " style={{width: "40%"}}>
+                <div className="col-md-4 vstack" style={{width: "40%"}}>
                 <img src={user.picture} className="mx-auto rounded-circle" style={{width: "250px"}} alt="..." />
                             <h1 className="text-center">{user.name + " " + user.last_name}</h1> 
                 </div>
@@ -34,7 +28,7 @@ const DetailsUser = (props) => {
                     <div className="accordion" id="accordionExample">
                     <div className="accordion-item">
                       <h2 className="accordion-header" id="headingOne">
-                        <button className="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        <button className="accordion-button text-bg-dark" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                         Personal Information
                         </button>
                       </h2>
@@ -53,7 +47,7 @@ const DetailsUser = (props) => {
                     </div>
                     <div className="accordion-item">
                       <h2 className="accordion-header" id="headingTwo">
-                        <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        <button className="accordion-button collapsed text-bg-dark" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                           Category
                         </button>
                       </h2>
@@ -63,7 +57,7 @@ const DetailsUser = (props) => {
                       <div className="card mx-auto" style={{width: "200px"}}>
                         <div className="card-body text-center">
                           {/* <h1 className="card-title">{user.category.type.toUpperCase()}</h1> */}
-                          <button>Modify</button>
+                          <button type="button" className="btn btn-primary">Modify</button>
                         </div>
                       </div>
                     </div>
@@ -72,13 +66,16 @@ const DetailsUser = (props) => {
                     </div>
                     <div className="accordion-item">
                       <h2 className="accordion-header" id="headingThree">
-                        <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        <Link to={`/CreateScore/${params}`}> {/*params es el dni */}
+                        <button className="accordion-button collapsed text-bg-dark" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                         Score
                         </button>
+                        </Link>
                       </h2>
                       <div id="collapseThree" className="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
                         <div className="accordion-body">
                         <div >
+                        <button type="button" className="btn btn-primary">Create</button>
                     {/* <ul className="list-group">
                       <li className="list-group-item"><h5>Previous Tournaments: {user.score.previous_tournaments}</h5></li>
                       <li className="list-group-item"><h5>Hit knowledge: {user.score.hit_knowledge}</h5></li>

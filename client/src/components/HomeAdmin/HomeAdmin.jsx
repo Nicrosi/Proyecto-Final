@@ -12,7 +12,7 @@ function HomeAdmin() {
   useEffect(() => {
     dispatch(getAllUsers())
   }, [dispatch])
-
+  
   return (
     <div className="App">
       <h3 className="text-lg-start fs-4 mx-4 my-3 text-secondary ">HOME ADMINISTRATOR</h3>
@@ -26,7 +26,9 @@ function HomeAdmin() {
       <button type="button" className="btn btn-outline-primary my-2 mx-2">
         Create Sub-Tournament
       </button>
-
+      <button type="button" className="btn btn-outline-secondary  my-2 mx-4">
+        <Link to={"/sponsor"}>Create New Sponsor</Link>
+      </button>
       {users.map((p) => {
         return (
           <div className="container my-4">
