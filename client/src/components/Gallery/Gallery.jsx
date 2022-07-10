@@ -10,7 +10,7 @@ export default function Gallery() {
   return (
     <Container fluid>
       <Row>
-        <Col md={4} sm={1}>
+        <Col md={4} sm={4}>
           <img
             src={img6}
             className="w-100 shadow-1-strong rounded mb-4"
@@ -23,7 +23,7 @@ export default function Gallery() {
           />
         </Col>
 
-        <Col md={4} sm={1}>
+        <Col md={4} sm={4}>
           <img
             src={img1}
             className="w-100 shadow-1-strong rounded mb-4"
@@ -36,7 +36,7 @@ export default function Gallery() {
           />
         </Col>
 
-        <Col md={4} sm={1}>
+        <Col md={4} sm={4}>
           <img
             src={img3}
             className="w-100 shadow-1-strong rounded mb-4"
