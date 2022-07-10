@@ -12,22 +12,15 @@ export default function LandingPage() {
       </section>
       <section
         className="d-flex flex-column align-items-center"
-        style={{ minHeight: "75vh" }}
+        style={{ minHeight: "60vh" }}
       >
         <h1 className="mt-4 ">How to take part?</h1>
         <Steps />
       </section>
       <section
-        className="d-flex flex-column align-items-center bg-secondary"
-        style={{ minHeight: "100vh" }}
+        className="d-flex flex-column align-items-center pt-4"
+        style={{ minHeight: "100vh", backgroundColor: "#232323" }}
       >
-        <h1 className="mt-4 mb-5">Participants</h1>
-      </section>
-      <section
-        className="d-flex flex-column align-items-center"
-        style={{ minHeight: "100vh", border: "solid 1px black" }}
-      >
-        <h1 className="mt-4 mb-5">Galery</h1>
         <Gallery />
       </section>
       <section
