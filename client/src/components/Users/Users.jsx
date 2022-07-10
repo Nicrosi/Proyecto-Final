@@ -14,22 +14,27 @@ export const Users = () => {
 
   console.log(users)
   return (
-    <div>
+    <div >
       <SearchBar/>
       <Filter />
+      <div className='row'>
       {users.map((p) => {
         return (
-          <UserCard
-            key={p.dni}
+          <div key={p.dni} className="col-sm-3">
+            <UserCard
+            
             dni={p.dni}
             name={p.name}
             last_name={p.last_name}
             picture={p.picture}
             gender={p.gender}
-           // category={p.category} falta traer la categoria del back
+           category={p.category}
           />
+          </div>
+          
         );
       })}
+      </div>
     </div>
   );
 };
