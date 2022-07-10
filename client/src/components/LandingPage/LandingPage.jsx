@@ -26,14 +26,14 @@ export default function LandingPage() {
       </section>
       <section
         className="d-flex flex-column align-items-center"
-        style={{ minHeight: "100vh", border: "solid 1px black" }}
+        style={{ minHeight: "80vh" }}
       >
         <h1 className="mt-4 mb-5">Frequent questions</h1>
         <FAQ />
       </section>
       <section
         className="d-flex align-items-center justify-content-center"
-        style={{ minHeight: "30vh" }}
+        style={{ minHeight: "30vh", backgroundColor: "#232323" }}
       >
         <Sponsors />
       </section>
