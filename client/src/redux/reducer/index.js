@@ -54,7 +54,7 @@ const rootReducer = (state = initialState, action) => {
       };
 
     case ADD_SPONSOR:
-      console.log('action',action.payload)
+      console.log('action', action.payload)
       return {
         ...state,
         sponsor: [...state.sponsor, action.payload]

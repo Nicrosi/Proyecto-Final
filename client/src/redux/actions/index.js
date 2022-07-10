@@ -54,10 +54,10 @@ export const getUserById = (dni) => (dispatch) => {
 export function postSponsor(input) {
 
   return async (dispatch) => {
-  
+
     try {
       await axios.post('http://localhost:3001/sponsor', input)
-    
+
       return dispatch({
         type: ADD_SPONSOR,
         payload: input
