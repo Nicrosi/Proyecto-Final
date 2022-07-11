@@ -205,7 +205,7 @@ router.put('/:dni', async (req, res) => {
           console.log(CategoryToUpdate);
 
           await User.update(
-            {
+            { 
               name: name && name, 
               last_name: last_name && last_name, 
               is_admin: is_admin && is_admin , 

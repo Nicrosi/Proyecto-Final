@@ -33,7 +33,9 @@ router.post("/:dni", async (req, res) => {
       kick_serve_control,
       game_strategy,
     });
+
     let id = newScore.dataValues.id_score;
+    
 
     let user = await User.findAll();
     user.forEach(async (el) => {
