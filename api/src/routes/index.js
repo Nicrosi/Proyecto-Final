@@ -4,7 +4,7 @@ const category = require("../routes/CategoryRouter.js");
 const Sponsor = require("../routes/SponsorRouter.js");
 const Score = require("../routes/ScoreRouter.js");
 const router = Router();
- 
+
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
 
