@@ -3,6 +3,7 @@ const RouteUser = require('../routes/UserRouter')
 const category = require("../routes/CategoryRouter.js");
 const Sponsor = require("../routes/SponsorRouter.js");
 const Score = require("../routes/ScoreRouter.js");
+const Subtournament = require("../routes/SubtRouter.js");
 const router = Router();
  
 // Importar todos los routers;
@@ -15,5 +16,6 @@ router.use("/category", category);
 router.use('/user', RouteUser);
 router.use('/sponsor', Sponsor);
 router.use('/score', Score);
+router.use('/subtournament', Subtournament);
 
 module.exports = router;
