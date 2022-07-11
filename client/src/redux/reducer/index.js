@@ -4,6 +4,7 @@ import {
   GET_ALL_USERS_NAME,
   GET_USER_BY_ID,
   ADD_SPONSOR,
+  GET_ALL_SPONSORS,
 } from "../actions";
 import { filterUsers } from "../helpers/filters";
 import { sortByName } from "../helpers/sorts";
@@ -14,7 +15,7 @@ const initialState = {
   users: [],
   user: {},
   filteredUsers: [],
-  sponsor: [],
+  sponsors: [],
 };
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -30,12 +31,14 @@ const rootReducer = (state = initialState, action) => {
         users: action.payload,
         filteredUsers: sortByName(action.payload),
       };
+
     case GET_ALL_USERS_NAME:
       return {
         ...state,
         users: action.payload,
         filteredUsers: sortByName(action.payload),
       };
+
     case ORDER_USERS_BY_NAME:
       const gender = action.payload.gender,
         category = action.payload.category,
@@ -47,6 +50,7 @@ const rootReducer = (state = initialState, action) => {
           order
         ),
       };
+
     case GET_USER_BY_ID:
       return {
         ...state,
@@ -54,13 +58,17 @@ const rootReducer = (state = initialState, action) => {
       };
 
     case ADD_SPONSOR:
-      console.log('action', action.payload)
+      console.log("action", action.payload);
       return {
         ...state,
-        sponsor: [...state.sponsor, action.payload]
-      }
+        sponsors: [...state.sponsors, action.payload],
+      };
 
-
+    case GET_ALL_SPONSORS:
+      return {
+        ...state,
+        sponsors: action.payload,
+      };
 
     default:
       return { ...state };
