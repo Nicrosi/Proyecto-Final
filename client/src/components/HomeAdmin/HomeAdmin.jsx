@@ -86,7 +86,7 @@ function HomeAdmin() {
                       src={p.picture}
                       alt="pictureAdm"
                     />
-                    <div class="shadow-lg p-3 mb-3 bg-body rounded my-4 mx-5 px-1">
+                    <div className="shadow-lg p-3 mb-3 bg-body rounded my-4 mx-5 px-1">
                       <h3 key={p.dni} className="card-title text-green mb-3">
                         {" "}
                         Name:{p.name}

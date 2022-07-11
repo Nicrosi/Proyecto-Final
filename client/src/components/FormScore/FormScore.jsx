@@ -19,50 +19,91 @@ export const FormScore = (props) => {
     await axios.post(`http://localhost:3001/score/${userId}`, 
       score,
     );
-    alert("successfully created videogame");
+    alert("successfully created user");
   };
 
   return (
-    <form onSubmit={(e) => handleSubmit(e)}>
-      <label>previous_tournaments</label>
-      <StarsRating
-        score={score}
-        setScore={setScore}
-        scoreName={"previous_tournaments"}
-      />
-      <label>hit_knowledge</label>
-      <StarsRating
-        score={score}
-        setScore={setScore}
-        scoreName={"hit_knowledge"}
-      />
-      <label>other_strokes</label>
-      <StarsRating
-        score={score}
-        setScore={setScore}
-        scoreName={"other_strokes"}
-      />
-      <label>special_hits</label>
-      <StarsRating
-        score={score}
-        setScore={setScore}
-        scoreName={"special_hits"}
-      />
-      <label>kick_serve_control</label>
-      <StarsRating
-        score={score}
-        setScore={setScore}
-        scoreName={"kick_serve_control"}
-      />
-      <label>game_strategy</label>
-      <StarsRating
-        score={score}
-        setScore={setScore}
-        scoreName={"game_strategy"}
-      />
-      <button className="btn btn-success" type="submit">
-        Create
-      </button>
+    <div className="mb-3 mx-auto hstack justify-content-center" style={{ minHeight: "100vh", width: "85%"}}>
+  
+    <div className="mx-auto hstack justify-content-around" style={{ width: "100%" }}>
+      
+      <form onSubmit={(e) => handleSubmit(e)}>
+      <div className="hstack mb-3">
+          <ul className="list-group list-group-horizontal mx-auto" style={{width:"100%"}}>
+            <li className="list-group-item" style={{width:"30%"}}>
+              <div >
+                <h5 className="card-text">Previous tournaments</h5>
+                <StarsRating
+                  score={score}
+                  setScore={setScore}
+                  scoreName={"previous_tournaments"}
+                />
+              </div>
+            </li>
+            <li className="list-group-item" style={{width:"30%"}}>
+              <div>
+                <h5 className="card-text">Hit knowledge</h5>
+                <StarsRating
+                  score={score}
+                  setScore={setScore}
+                  scoreName={"hit_knowledge"}
+                />
+              </div>
+            </li>
+            <li className="list-group-item" style={{width:"30%"}}>
+              <div >
+                <h5 className="card-text">Other strokes</h5>
+                <StarsRating
+                  score={score}
+                  setScore={setScore}
+                  scoreName={"other_strokes"}
+                />
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div className="hstack mb-3" >
+          <ul className="list-group list-group-horizontal mx-auto" style={{width:"100%"}}>
+            <li className="list-group-item" style={{width:"30%"}}>
+              <div>
+                <h5 className="card-text">Special hits</h5>
+                <StarsRating
+                  score={score}
+                  setScore={setScore}
+                  scoreName={"special_hits"}
+                />
+              </div>
+            </li>
+            <li className="list-group-item" style={{width:"30%"}}>
+              <div>
+                <h5 className="card-text">Kick serve control</h5>
+                <StarsRating
+                  score={score}
+                  setScore={setScore}
+                  scoreName={"kick_serve_control"}
+                />
+              </div>
+            </li>
+            <li className="list-group-item" style={{width:"30%"}}>
+              <div>
+                <h5 className="card-text">Game strategy</h5>
+                <StarsRating
+                  score={score}
+                  setScore={setScore}
+                  scoreName={"game_strategy"}
+                />
+              </div>
+            </li>
+          </ul>
+          </div>    
+          <div className="d-grid gap-2 mb-3" style={{width:"90%"}}>
+            <button className="btn btn-success" type="submit">
+              Create
+            </button>
+          </div>
     </form>
+    
+    </div>
+    </div>
   );
 };
