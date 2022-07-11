@@ -1,8 +1,8 @@
-
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { orderUsersByName } from "../../redux/actions";
+import "./Filter.css";
 
 const initialFilter = {
   sort: "name",
@@ -28,99 +28,135 @@ export default function Filter() {
   };
 
   return (
-    <>
+    <aside className="aside bg-dark">
       <h4>Name</h4>
-      <input
-        type="radio"
-        name="order"
-        value="ascendent"
-        id="ascendent"
-        onChange={handleChange}
-        defaultChecked={true}
-      />
-      <label className="card-subtitle mb-3 text-muted mx-2" htmlFor="ascendent">ascendent</label>
-      <input
-        type="radio"
-        name="order"
-        value="descendent"
-        id="descendent"
-        onChange={handleChange}
-      />
-      <label className="card-subtitle mb-3 text-muted mx-2" htmlFor="descendent">descendent</label>
+      <div className="form-check form-check-inline">
+        <input
+          type="radio"
+          name="order"
+          value="ascendent"
+          id="ascendent"
+          className="form-check-input"
+          onChange={handleChange}
+          defaultChecked={true}
+        />
+        <label className="" htmlFor="ascendent">
+          Ascendent
+        </label>
+      </div>
+      <div className="form-check form-check-inline">
+        <input
+          type="radio"
+          name="order"
+          className="form-check-input"
+          value="descendent"
+          id="descendent"
+          onChange={handleChange}
+        />
+        <label className="" htmlFor="descendent">
+          Descendent
+        </label>
+      </div>
 
       <h4>Gender</h4>
-      <input
-        type="radio"
-        name="gender"
-        value="all"
-        id="all"
-        onChange={handleChange}
-        defaultChecked={true}
-      />
-      <label className="card-subtitle mb-3 text-muted mx-2" htmlFor="all">all</label>
-      <input
-        type="radio"
-        name="gender"
-        value="male"
-        id="male"
-        onChange={handleChange}
-      />
-      <label className="card-subtitle mb-3 text-muted mx-2" htmlFor="male">male</label>
-      <input
-        type="radio"
-        name="gender"
-        value="female"
-        id="female"
-        onChange={handleChange}
-      />
-      <label className="card-subtitle mb-3 text-muted mx-2" htmlFor="female">female</label>
+      <div className="form-check form-check-inline">
+        <input
+          type="radio"
+          name="gender"
+          className="form-check-input"
+          value="all"
+          id="all"
+          onChange={handleChange}
+          defaultChecked={true}
+        />
+        <label className="" htmlFor="all">
+          All
+        </label>
+      </div>
+      <div className="form-check form-check-inline">
+        <input
+          type="radio"
+          name="gender"
+          className="form-check-input"
+          value="male"
+          id="male"
+          onChange={handleChange}
+        />
+        <label className="" htmlFor="male">
+          Male
+        </label>
+      </div>
+      <div className="form-check form-check-inline">
+        <input
+          type="radio"
+          name="gender"
+          value="female"
+          className="form-check-input"
+          id="female"
+          onChange={handleChange}
+        />
+        <label className="" htmlFor="female">
+          Female
+        </label>
+      </div>
 
-      {/* <h4>Category</h4>
-      <input
-        type="radio"
-        name="category"
-        value="all"
-        id="allCategory"
-        onChange={handleChange}
-        defaultChecked={true}
-      />
-      <label htmlFor="allCategory">all</label>
-
-      <input
-        type="radio"
-        name="category"
-        value="A"
-        id="A"
-        onChange={handleChange}
-      />
-      <label htmlFor="A">A</label>
-
-      <input
-        type="radio"
-        name="category"
-        value="B"
-        id="B"
-        onChange={handleChange}
-      />
-      <label htmlFor="B">B</label>
-
-      <input
-        type="radio"
-        name="category"
-        value="C"
-        id="C"
-        onChange={handleChange}
-      />
-      <label htmlFor="C">C</label>
-
-      <input
-        type="radio"
-        name="category"
-        value="E"
-        id="E"
-        onChange={handleChange}
-      />
-      <label htmlFor="E">E</label> */}
-    </>
+      <h4>Category</h4>
+      <div className="form-check form-check-inline">
+        <input
+          type="radio"
+          name="category"
+          value="all"
+          className="form-check-input"
+          id="allCategory"
+          onChange={handleChange}
+          defaultChecked={true}
+        />
+        <label htmlFor="allCategory">All</label>
+      </div>
+      <div className="form-check form-check-inline">
+        <input
+          type="radio"
+          name="category"
+          value="A"
+          className="form-check-input"
+          id="A"
+          onChange={handleChange}
+        />
+        <label htmlFor="A">A</label>
+      </div>
+      <div className="form-check form-check-inline">
+        <input
+          type="radio"
+          name="category"
+          className="form-check-input"
+          value="B"
+          id="B"
+          onChange={handleChange}
+        />
+        <label htmlFor="B">B</label>
+      </div>
+      <div className="form-check form-check-inline">
+        <input
+          type="radio"
+          name="category"
+          className="form-check-input"
+          value="C"
+          id="C"
+          onChange={handleChange}
+        />
+        <label htmlFor="C">C</label>
+      </div>
+      <div className="form-check form-check-inline">
+        <input
+          type="radio"
+          name="category"
+          className="form-check-input"
+          value="E"
+          id="E"
+          onChange={handleChange}
+        />
+        <label htmlFor="E">E</label>
+      </div>
+    </aside>
   );
 }

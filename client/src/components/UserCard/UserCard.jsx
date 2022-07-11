@@ -32,17 +32,17 @@ export const UserCard = ({
     //     </div>
     //   </div>
     // </div>
-    <div class="card mb-3 mx-4 my-3 shadow-lg" style={{width: "auto"}}>
-      <div class="row g-0">
-        <div class="col-md-4">
+    <div className="card mb-3 mx-4 my-3 shadow-lg" style={{ width: "auto" }}>
+      <div className="row g-0">
+        <div className="col-md-4">
           <Link to={`/Users/${dni}`}>
             <img className="img-fluid rounded-start" src={picture} alt="img" />
           </Link>
         </div>
-        <div class="col-md-8">
-          <div class="card-body">
-            <h5 class="card-title">User: {`${name} ${last_name}`}</h5>
-            <h5 class="card-text">Gender: {gender}</h5>
+        <div className="col-md-8">
+          <div className="card-body">
+            <h5 className="card-title">User: {`${name} ${last_name}`}</h5>
+            <h5 className="card-text">Gender: {gender}</h5>
             {category ? (
               <h5 className="col ">Category: {category.type}</h5>
             ) : (

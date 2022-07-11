@@ -7,9 +7,7 @@ let Gender = "";
 export default function TournamentsToShowAllAgainst() {
   const array = [1, 2, 3, 4];
   console.log("array", array);
-
   const tournaments = generateRandomDraw(array);
   console.log("tournaments", tournaments);
-
   return console.log(tournaments);
 }

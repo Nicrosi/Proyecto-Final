@@ -29,6 +29,7 @@ export const FormSponsor = () => {
       logo: "",
       link: "",
     });
+    return (alert('Sponsor created successfully'))
   }
 
   return (
