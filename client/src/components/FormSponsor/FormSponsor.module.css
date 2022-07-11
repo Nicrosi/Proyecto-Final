@@ -5,7 +5,6 @@
       padding: 10%;
       display: flex;
       flex-direction: column;
-    
       justify-content: space-around;
       align-items: center;
       box-shadow: 6px 7px 8px -6px rgba(69, 69, 69, 0.7);
@@ -18,7 +17,7 @@
     .formContainer {
       
       width: 100%;
-      min-width: 700px;
+      min-width: 800px;
       display: flex;
       flex-direction: row;
       flex-wrap: wrap;
@@ -28,7 +27,7 @@
     }
     form{
     
-        width: 1700px;
+        width: 900px;
     }
     .button {
       cursor: pointer;
@@ -48,6 +47,11 @@
       border: 1px solid rgb(72, 27, 27);
       border-radius: 15px;
       gap: 5px;
-      width: 400px;
+      width: 800px;
       box-shadow: 6px 7px 8px -6px rgba(69, 69, 69, 0.7);
+    }
+    input {
+      width: 90%;
+      line-height: 2.5;
+      color:rgb(7, 8, 41)
     }
