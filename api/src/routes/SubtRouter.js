@@ -21,7 +21,7 @@ router.post('/', async (req, res) => {
         name,
         numb_players,
         gender
-    } = req.query
+    } = req.body
     try{
         await Subtournament.create({
             elimination_type,
@@ -44,7 +44,7 @@ router.put('/:id', async (req, res) => {
         name,
         numb_players,
         gender
-    } = req.query
+    } = req.body
     try{
         await Subtournament.update({
             elimination_type,
