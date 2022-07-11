@@ -28,20 +28,15 @@ function generate2NMatrix(array) {
 function rotateAroundPivot(matrix) {
   const rows = matrix.length;
   const height = rows;
-
   if (rows < 2) {
     return matrix;
   }
-
   const neededRotationCount = rows * 2 - 1;
-
   let tmp;
-
   let currentIndex = {
     row: 0,
     column: 1,
   };
-
   for (let i = 0; i < neededRotationCount; i++) {
     const nIndex = nextIndex(currentIndex.row, currentIndex.column, height);
 
