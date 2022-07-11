@@ -24,7 +24,7 @@ export default function Sponsors() {
               className="d-flex justify-content-center"
               style={{ width: "fit-content" }}
             >
-              <a href={spn.link} target="_blank">
+              <a href={spn.link} target="_blank" rel="noreferrer">
                 <img
                   src={spn.logo}
                   alt={`${i}`}
