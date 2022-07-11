@@ -7,6 +7,7 @@ import NavBar from "./components/NavBar/NavBar";
 import { Users } from "./components/Users/Users.jsx";
 import { FormScore } from "./components/FormScore/FormScore.jsx";
 import { FormSponsor } from "./components/FormSponsor/FormSponsor.jsx";
+import { FormUser } from "./components/FormUser/FormUser.jsx";
 
 
 function App() {
@@ -19,6 +20,8 @@ function App() {
       <Route exact path={"/Users/:userId"} component={DetailsUser} />
       <Route exact path={"/CreateScore/:userId"} component={FormScore} />
       <Route exact path={"/sponsor"} component={FormSponsor}/>
+      <Route exact path={"/CreateUsers"} component={FormUser}/>
+      
     </div>
   );
 }

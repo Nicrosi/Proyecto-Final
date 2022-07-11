@@ -54,10 +54,10 @@ export const FormUser = () => {
 
     return (
         <React.Fragment>
-
-            <div className="mx-5" style={{margin: "100px auto", }}>
+            <div style={{ minHeight: "100vh", width:"100%"}}>            
+            <div className="mx-auto" style={{marginTop: "100px", width:"85%"}}>
                 <h1>User registration</h1>
-                <form onSubmit={(e) => handleSubmit(e)}>
+                <form style={{width:"100%"}} onSubmit={(e) => handleSubmit(e)}>
                     <div className="row g-2 mb-3">
                         <div className="form-floating col-md">
                             <input type="text" value={input.name} name="name" placeholder="Write a name..." class="form-control" id="floatingInput" onChange={(e) => handleInputChange(e)} />
@@ -102,14 +102,14 @@ export const FormUser = () => {
                             <label for="floatingInput">Paste an image link...</label>
                         </div>
                     </div>
-                    <div class="d-grid gap-2">
+                    <div className="d-grid gap-2">
                         <button className="btn btn-dark" type="submit" >CREATE!</button>
                     </div>
                     
                 </form>
             </div>
             
-
+            </div>
         </React.Fragment>
     )
 };
