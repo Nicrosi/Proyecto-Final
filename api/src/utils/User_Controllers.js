@@ -7,11 +7,22 @@ const get_Userdb = async (name) => {
             const Username_db = await User.findAll({
                 where : { 
                     name: sequelize.where(sequelize.fn('LOWER', sequelize.col('name')), 'LIKE', '%' + name.toLowerCase() + '%')
-                }
+                },
+                include: [
+                  Inscription,
+                  Score,
+                  Category
+                ]
             })
             return Username_db
         }else{
-            const User_db = await User.findAll();
+            const User_db = await User.findAll({
+      include: [
+        Inscription,
+        Score,
+        Category
+      ]
+            });
             return User_db;
         }
     

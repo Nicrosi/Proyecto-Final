@@ -7,6 +7,7 @@ export const ORDER_USERS_BY_NAME = "ORDER_USERS_BY_NAME";
 export const GET_ALL_USERS = "GET_ALL_USERS";
 export const GET_ALL_USERS_NAME = "GET_ALL_USERS_NAME";
 export const GET_USER_BY_ID = "GET_USER_BY_ID";
+export const GET_ALL_SPONSORS = "GET_ALL_SPONSORS";
 export const ADD_SPONSOR = "ADD_SPONSOR";
 // export const getAllPlayers = () => { JSON
 //   return {
@@ -16,6 +17,7 @@ export const ADD_SPONSOR = "ADD_SPONSOR";
 // };
 
 const urlUser = "http://localhost:3001/user";
+const urlSponsors = "http://localhost:3001/sponsor";
 
 export const getAllUsers = () => (dispatch) => {
   return axios.get(urlUser).then((response) =>
@@ -26,13 +28,24 @@ export const getAllUsers = () => (dispatch) => {
   );
 };
 
-export const getAllUsersName = (name) => (dispatch) => {
-  return axios.get(`${urlUser}${name ? "?name=" + name : ""}`).then((response) =>
+export const getAllSponsors = () => (dispatch) => {
+  return axios.get(urlSponsors).then((response) =>
     dispatch({
-      type: GET_ALL_USERS_NAME,
+      type: GET_ALL_SPONSORS,
       payload: response.data,
     })
   );
+};
+
+export const getAllUsersName = (name) => (dispatch) => {
+  return axios
+    .get(`${urlUser}${name ? "?name=" + name : ""}`)
+    .then((response) =>
+      dispatch({
+        type: GET_ALL_USERS_NAME,
+        payload: response.data,
+      })
+    );
 };
 
 export const orderUsersByName = ({ order, gender, category }) => {
@@ -52,21 +65,18 @@ export const getUserById = (dni) => (dispatch) => {
 };
 
 export function postSponsor(input) {
-
   return async (dispatch) => {
-
     try {
-      await axios.post('http://localhost:3001/sponsor', input)
+      await axios.post("http://localhost:3001/sponsor", input);
 
       return dispatch({
         type: ADD_SPONSOR,
-        payload: input
-      })
+        payload: input,
+      });
+    } catch (error) {
+      alert("Add Sponsor error, try again later");
     }
-    catch (error) {
-      alert('Add Sponsor error, try again later')
-    }
-  }
+  };
 }
 
 export const postNewUser = (valuesInput) => {
@@ -79,11 +89,9 @@ export const postNewUser = (valuesInput) => {
       e_mail: valuesInput.e_mail,
       phone: valuesInput.phone,
       num_contact: valuesInput.num_contact,
-      picture: valuesInput.picture, 
-      gender: valuesInput.gender
-    }
+      picture: valuesInput.picture,
+      gender: valuesInput.gender,
+    };
     return await axios.post(urlUser, input);
-  }
+  };
 };
-
-
