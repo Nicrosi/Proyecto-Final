@@ -20,17 +20,17 @@ router.get("/", async (req, res, next) => {
   }
 });
 
-router.post("/:dni", async (req, res, next) => {
-  const { dni } = req.params;
-  const { amount, is_payed } = req.body;
+router.post("/:id", async (req, res, next) => {
+  const { id } = req.params;
+  const { amount } = req.query;
+  const is_payed = true;
   try {
-    const inscription = await Inscription.create({
+    await Inscription.create({
       amount,
-      is_payed,
-      is_user: dni,
+      is_payed : is_payed,
+      id_user: id,
     });
-
-    res.send("Inscription created!");
+    res.status(200).send("Inscription created!");    
   } catch (error) {
     next(error);
   }
