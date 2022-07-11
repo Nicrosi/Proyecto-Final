@@ -14,30 +14,38 @@ function HomeAdmin() {
   }, [dispatch])
   
   return (
-    <div className="App">
-      <h3 className="text-lg-start fs-4 mx-4 my-3 text-secondary ">HOME ADMINISTRATOR</h3>
+    <div className="mx-auto hstack justify-content-center" style={{width: "100%", minHeight: "100vh"}}>
+      <div className="mx-5 hstack justify-content-around" style={{width: "20%"}}>
+        <div className="col-md-4 align-self-center vstack" >
+        <h3 className="text-lg-start fs-4 mx-4 my-3 text-secondary ">HOME ADMINISTRATOR</h3>
+        <button type="button" className="btn btn-outline-secondary btn-dark my-2 mx-2">
+          <Link to={"/Users"}>Users</Link>
+        </button>
+        <button type="button" className="btn btn-outline-secondary btn-dark my-2 mx-2">
+          <Link to={"/CreateUsers"}>User registration</Link>
+        </button>
+        <button type="button" className="btn btn-outline-secondary btn-dark my-2 mx-2">
+          Create Tournament
+        </button>
+        <button type="button" className="btn btn-outline-secondary btn-dark my-2 mx-2">
+          Create Sub-Tournament
+        </button>
+        <button type="button" className="btn btn-outline-secondary btn-dark my-2 mx-2">
+          <Link to={"/sponsor"}>Create New Sponsor</Link>
+        </button>
+      </div>
+      </div>
 
-      <button type="button" className="btn btn-outline-secondary  my-2 mx-4">
-        <Link to={"/Users"}>Users</Link>
-      </button>
-      <button type="button" className="btn btn-outline-primary my-2 mx-2">
-        Create Tournament
-      </button>
-      <button type="button" className="btn btn-outline-primary my-2 mx-2">
-        Create Sub-Tournament
-      </button>
-      <button type="button" className="btn btn-outline-secondary  my-2 mx-4">
-        <Link to={"/sponsor"}>Create New Sponsor</Link>
-      </button>
+        <div className="col-md-8 align-self-center vstack" style={{width: "60%"}}>
       {users.map((p) => {
         return (
-          <div className="container my-4">
+          <div className="container">
             <div className="row">
               {p.is_admin && (
                 <div className="col-xs-3">
                   <img
                     className="rounded float-start img-thumbnail mx-2"
-                    src={"https://picsum.photos/200"}
+                    src={p.picture}
                     alt="pictureAdm"
                   />
                   <div class="shadow-lg p-3 mb-3 bg-body rounded my-4 mx-5 px-1">
@@ -62,7 +70,14 @@ function HomeAdmin() {
           </div>
         );
       })}
-    </div>
+      </div>
+
+      </div>
+
+
+    
+      
+   
   );
 }
 
