@@ -175,8 +175,22 @@ router.put('/:dni', async (req, res) => {
   
       const find_user_by_pk = await User.findOne({where: { dni: parseInt(dni) }});
 
+      const AllUsers = await User.findAll();
+      let comparison = false;
+
+      if(find_user_by_pk.e_mail !== e_mail) {
+
+        AllUsers.length && AllUsers.map((user) => {
+          if( e_mail && e_mail === user.e_mail ) {
+            comparison = true;
+          }
+        })
+        
+      }
+  
       if(find_user_by_pk) {
   
+        if(!comparison) {
 
           let CategoryToUpdate = find_user_by_pk.id_category;
 
@@ -191,6 +205,8 @@ router.put('/:dni', async (req, res) => {
             CategoryToUpdate = categoryFromDb.id_category;
             
           }
+
+          console.log(CategoryToUpdate);
 
           await User.update(
             { 
@@ -211,7 +227,9 @@ router.put('/:dni', async (req, res) => {
             }
           )
           res.send({msg_mesage: 'User updated'})
-          // res.status(400).send({msg_mesage: 'User email already exist'})
+        }else{
+          res.status(400).send({msg_mesage: 'User email already exist'})
+        }
   
       }else{
         res.send({msg_mesage: 'User not found'})
