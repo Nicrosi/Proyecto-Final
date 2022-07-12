@@ -17,7 +17,7 @@ export const FormSponsor = () => {
       ...input,
       [e.target.name]: e.target.value,
     });
-  }
+  } 
 
   async function handleOnSubmit(e) {
     e.preventDefault();

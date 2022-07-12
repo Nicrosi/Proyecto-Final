@@ -43,14 +43,16 @@ function HomeAdmin() {
               User registration
             </button>
           </Link>
+          <Link to={"/tournament"}>
           <button
             type="button"
             className="btn btn-outline-secondary btn-dark my-2 mx-2 px-5 "
             style={{ width: "270px" }}
-            disabled
+           
           >
             Create Tournament
           </button>
+          </Link>
           <button
             type="button"
             className="btn btn-outline-secondary btn-dark my-2 mx-2 px-5 "
@@ -59,6 +61,7 @@ function HomeAdmin() {
           >
             Create Sub-Tournament
           </button>
+       
           <Link to={"/sponsor"}>
             <button
               type="button"
