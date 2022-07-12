@@ -19,8 +19,8 @@ export default function LandingPage() {
         <Steps />
       </section>
       <section
-        className="d-flex flex-column align-items-center pt-4"
-        style={{ minHeight: "100vh", backgroundColor: "#232323" }}
+        className="d-flex flex-column align-items-center pt-4 bg-dark"
+        style={{ minHeight: "100vh" }}
       >
         <Gallery />
       </section>
@@ -32,8 +32,8 @@ export default function LandingPage() {
         <FAQ />
       </section>
       <section
-        className="d-flex align-items-center justify-content-center"
-        style={{ minHeight: "30vh", backgroundColor: "#232323" }}
+        className="d-flex align-items-center justify-content-center bg-dark"
+        style={{ minHeight: "30vh" }}
       >
         <Sponsors />
       </section>
