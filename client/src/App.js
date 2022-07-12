@@ -8,6 +8,7 @@ import { Users } from "./components/Users/Users.jsx";
 import { FormScore } from "./components/FormScore/FormScore.jsx";
 import { FormSponsor } from "./components/FormSponsor/FormSponsor.jsx";
 import { FormUser } from "./components/FormUser/FormUser.jsx";
+import { FormTournament } from "./components/Tournament/FormTournament.jsx";
 
 
 function App() {
@@ -21,7 +22,7 @@ function App() {
       <Route exact path={"/CreateScore/:userId"} component={FormScore} />
       <Route exact path={"/sponsor"} component={FormSponsor}/>
       <Route exact path={"/CreateUsers"} component={FormUser}/>
-      
+      <Route exact path={"/tournament"} component={FormTournament} />
     </div>
   );
 }
