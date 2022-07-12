@@ -4,17 +4,17 @@ import { getAllUsersName } from "../../redux/actions";
 import { useLocation } from "react-router-dom";
 
 export default function SearchBar() {
-  const [inputVg, setInputVg] = useState("");
+  const [input, setInput] = useState("");
   const dispatch = useDispatch();
 
   const handleSubmit = function (e) {
     e.preventDefault();
 
-    dispatch(getAllUsersName(inputVg));
+    dispatch(getAllUsersName(input));
   };
 
   const handleOnChange = function (e) {
-    setInputVg(e.target.value);
+    setInput(e.target.value);
   };
 
   const location = useLocation();
@@ -33,7 +33,7 @@ export default function SearchBar() {
             className="inputForm"
             type="text"
             placeholder="User"
-            value={inputVg}
+            value={input}
             onChange={(e) => handleOnChange(e)}
           />
           <input className="buttonForm" type="submit" value="Search" />
