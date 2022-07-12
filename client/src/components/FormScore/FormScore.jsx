@@ -114,11 +114,11 @@ export const FormScore = (props) => {
           </div>    
           <div className="d-grid gap-2 mb-3" style={{width:"90%"}}>
           {Object.keys(error).length > 0 ? (
-              <button className="btn btn-secondary" type="submit" disabled>
+              <button className="btn btn-secondary" style={{ backgroundColor: "#A7D129" }} type="submit" disabled>
                 Create
               </button>
             ) : (
-              <button className="btn btn-success" type="submit">Create</button>
+              <button className="btn btn-success" style={{ backgroundColor: "#A7D129" }} type="submit">Create</button>
             )}
           </div>
     </form>
