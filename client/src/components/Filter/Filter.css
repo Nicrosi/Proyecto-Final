@@ -1,5 +1,18 @@
 .aside{
   color: white;
-  height: 100%;
-  padding-left: 35px;
+  height: inherit;
+  width: 20%;
+  padding: 15px 36px 20px 36px;
+}
+
+@media only screen and (max-width: 767px) {
+  .aside {
+    width: 100%;
+    height: auto;
+  }
+}
+
+.aside hr {
+  border-color: #9AD129;
+  border-width: 2px;
 }

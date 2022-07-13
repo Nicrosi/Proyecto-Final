@@ -1,0 +1,42 @@
+.step{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 280px;
+  width: 240px;
+  color: white;
+  background-color: #212529;
+  border-radius: 5px;
+}
+.step img {
+  width: 100px;
+  filter: invert(1);
+  padding-top: 20px;
+}
+
+.step:hover{
+  background-color: #A7D129;
+}
+
+.step:hover img{
+  filter: invert(0);
+}
+
+.step:hover h4{
+  color: black;
+}
+
+.step:hover p{
+  color: black;
+}
+
+.info{
+  padding: 10px 20px;
+}
+
+.step button {
+  border: none;
+  background-color: #212529;
+  color: white;
+  border: 1px solid white;
+}

@@ -1,0 +1,59 @@
+.conteiner{
+  width: 100%;
+  text-align: center;
+}
+
+.conteiner ul{
+  padding: 0px;
+  display: inline-block;
+  margin-top: 20px;
+}
+
+.conteiner ul li{
+  display: inline;
+}
+
+.conteiner ul button {
+  background-color: transparent;
+  border: none;
+  padding-left: 10px;
+  padding-right: 10px;
+  font-size: 15px;
+  font-family: sans-serif;
+  cursor: pointer;
+}
+
+.conteiner ul button:hover{
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.conteiner .activeButton{
+  background-color: rgba(0, 0, 0, 0.2);
+  pointer-events: none;
+  cursor: default;
+  font-weight: 600;
+}
+
+.conteiner .ellipsis{
+  cursor: default;
+  pointer-events: none;
+}
+
+.conteiner .prev{
+  margin-right: 5px;
+}
+
+.conteiner .prev img {
+  height: 10px;
+  filter: brightness(0);
+}
+
+.conteiner .next {
+  margin-left: 5px;
+
+}
+
+.conteiner .next img {
+  height: 11px;
+  filter: brightness(0);
+}
