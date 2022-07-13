@@ -26,7 +26,7 @@ export function validate(input) {
 
 export const StarsRating = ({ score, setScore, scoreName, setError }) => {
   const handleRadioChangeStar = function (e) {
-    e.preventDefault();
+   
     setScore({ ...score, [scoreName]: e.target.value });
 
     let objError = validate({ ...score, [scoreName]: e.target.value });
@@ -36,70 +36,61 @@ export const StarsRating = ({ score, setScore, scoreName, setError }) => {
   return (
     <div className="container">
       <div className="stars">
-        <div className="">
-          <label className="StarLabel">
-            <input
-              className="StarInput"
-              type="radio"
-              value={1}
-              checked={score[scoreName] === 1}
-              onChange={(e) => handleRadioChangeStar(e)}
-            />
-            ★
-          </label>
-        </div>
-
-        <div className="">
-          <label className="StarLabel">
-            <input
-              className="StarInput"
-              type="radio"
-              value={2}
-              checked={score[scoreName] === 2}
-              onChange={(e) => handleRadioChangeStar(e)}
-            />
-            ★
-          </label>
-        </div>
-
-        <div className="">
-          <label className="StarLabel">
-            <input
-              className="StarInput"
-              type="radio"
-              value={3}
-              checked={score[scoreName] === 3}
-              onChange={(e) => handleRadioChangeStar(e)}
-            />
-            ★
-          </label>
-        </div>
-
-        <div className="">
-          <label className="StarLabel">
-            <input
-              className="StarInput"
-              type="radio"
-              value={4}
-              checked={score[scoreName] === 4}
-              onChange={(e) => handleRadioChangeStar(e)}
-            />
-            ★
-          </label>
-        </div>
-
-        <div className="">
-          <label className="StarLabel">
-            <input
-              className="StarInput"
-              type="radio"
-              value={5}
-              checked={score[scoreName] === 5}
-              onChange={(e) => handleRadioChangeStar(e)}
-            />
-            ★
-          </label>
-        </div>
+        <input
+          id={`radio5${scoreName}`}
+          className="StarInput"
+          type="radio"
+          name={scoreName}
+          value={5}
+          onChange={(e) => handleRadioChangeStar(e)}
+        />
+        <label htmlFor={`radio5${scoreName}`} className="StarLabel">
+          ★
+        </label>
+        <input
+          id={`radio4${scoreName}`}
+          className="StarInput"
+          type="radio"
+          name={scoreName}
+          value={4}
+          onChange={(e) => handleRadioChangeStar(e)}
+        />
+        <label htmlFor={`radio4${scoreName}`} className="StarLabel">
+          ★
+        </label>
+        <input
+          id={`radio3${scoreName}`}
+          className="StarInput"
+          type="radio"
+          name={scoreName}
+          value={3}
+          onChange={(e) => handleRadioChangeStar(e)}
+        />
+        <label htmlFor={`radio3${scoreName}`} className="StarLabel">
+          ★
+        </label>
+        <input
+          id={`radio2${scoreName}`}
+          className="StarInput"
+          type="radio"
+          name={scoreName}
+          value={2}
+          onChange={(e) => handleRadioChangeStar(e)}
+        />
+        <label htmlFor={`radio2${scoreName}`} className="StarLabel">
+          ★
+        </label>
+        <input
+          id={`radio1${scoreName}`}
+          className="StarInput"
+          type="radio"
+          name={scoreName}
+          value={1}
+          onChange={(e) => handleRadioChangeStar(e)}
+        />
+        <label htmlFor={`radio1${scoreName}`} className="StarLabel">
+          ★
+        </label>
       </div>
       <div>{`Score ${[scoreName]}: ${score[scoreName]}`}</div>
     </div>
