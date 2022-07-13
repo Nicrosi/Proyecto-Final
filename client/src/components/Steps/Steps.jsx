@@ -1,10 +1,11 @@
 import React from "react";
 import { Row, Col } from "react-bootstrap";
-import ball1 from "../../img/ball1.png";
-import ball2 from "../../img/ball2.png";
-import ball3 from "../../img/ball3.png";
-import ball4 from "../../img/ball4.png";
-import ball5 from "../../img/ball5.png";
+import "./Steps.css";
+import step1 from "../../img/step1.png";
+import step2 from "../../img/step2.png";
+import step3 from "../../img/step3.png";
+import step4 from "../../img/step4.png";
+import step5 from "../../img/step5.png";
 
 export default function Steps() {
   return (
@@ -12,25 +13,70 @@ export default function Steps() {
       className="d-flex align-items-center justify-content-center pb-5"
       style={{ width: "100%", minHeight: "inherit" }}
     >
-      <Col sm className="d-flex flex-column align-items-center">
-        <img src={ball1} width={100} alt="ball1" />
-        <p>Sign in</p>
+      <Col lg={3} className="d-flex flex-column align-items-center mt-5">
+        <div className="step">
+          <img src={step1} alt="step1" />
+          <h4>Sign in</h4>
+          <div className="info">
+            <p>
+              The first step is the register, you can click on the button below
+              to start.
+            </p>
+          </div>
+          <button>Join Now</button>
+        </div>
       </Col>
-      <Col sm className="d-flex flex-column align-items-center">
-        <img src={ball2} width={100} alt="ball2" />
-        <p>Inscription</p>
+      <Col lg={3} className="d-flex flex-column align-items-center mt-5">
+        <div className="step ">
+          <img src={step2} alt="step1" />
+          <h4>Inscription</h4>
+          <div className="info">
+            <p>
+              The second step is the register, you can click on the button below
+              to start.
+            </p>
+          </div>
+          <button>Join Now</button>
+        </div>
       </Col>
-      <Col sm className="d-flex flex-column align-items-center">
-        <img src={ball3} width={100} alt="ball3" />
-        <p>Tell us about your skills</p>
+      <Col lg={3} className="d-flex flex-column align-items-center mt-5">
+        <div className="step ">
+          <img src={step3} alt="step1" />
+          <h4>Fill your skills</h4>
+          <div className="info">
+            <p>
+              The third step is the register, you can click on the button below
+              to start.
+            </p>
+          </div>
+          <button>Join Now</button>
+        </div>
       </Col>
-      <Col sm className="d-flex flex-column align-items-center">
-        <img src={ball4} width={100} alt="ball4" />
-        <p>Choose a subtournament</p>
+      <Col lg={3} className="d-flex flex-column align-items-center mt-5">
+        <div className="step ">
+          <img src={step4} alt="step1" />
+          <h4>Subtournaments</h4>
+          <div className="info">
+            <p>
+              The fourth step is the register, you can click on the button below
+              to start.
+            </p>
+          </div>
+          <button>Join Now</button>
+        </div>
       </Col>
-      <Col sm className="d-flex flex-column align-items-center">
-        <img src={ball5} width={100} alt="ball5" />
-        <p>WIN!</p>
+      <Col lg={3} className="d-flex flex-column align-items-center mt-5">
+        <div className="step ">
+          <img src={step5} alt="step1" />
+          <h4>Win!</h4>
+          <div className="info">
+            <p>
+              The fifth step is the register, you can click on the button below
+              to start.
+            </p>
+          </div>
+          <button>Join Now</button>
+        </div>
       </Col>
     </Row>
   );
