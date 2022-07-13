@@ -177,11 +177,15 @@ router.put('/:dni', async (req, res) => {
       const AllUsers = await User.findAll();
       let comparison = false;
 
-      AllUsers.length && AllUsers.map((user) => {
-        if( e_mail && e_mail === user.e_mail ) {
-          comparison = true;
-        }
-      })
+      if(find_user_by_pk.e_mail !== e_mail) {
+
+        AllUsers.length && AllUsers.map((user) => {
+          if( e_mail && e_mail === user.e_mail ) {
+            comparison = true;
+          }
+        })
+        
+      }
   
       if(find_user_by_pk) {
   
