@@ -9,10 +9,10 @@ import ball5 from "../../img/ball5.png";
 export default function Steps() {
   return (
     <Row
-      className="d-flex align-items-center justify-content-center pb-5"
+      className="d-flex align-items-center justify-content-center pb-5 "
       style={{ width: "100%", minHeight: "inherit" }}
     >
-      <Col sm className="d-flex flex-column align-items-center">
+      <Col sm className="d-flex flex-column align-items-center" >
         <img src={ball1} width={100} alt="ball1" />
         <p>Sign in</p>
       </Col>
