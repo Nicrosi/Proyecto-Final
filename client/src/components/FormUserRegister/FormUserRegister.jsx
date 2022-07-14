@@ -65,6 +65,8 @@ export function validate(input) {
 
   if (!input.password) {
     error.password = "Password is required";
+  }else if (!/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/i.test(input.password) && input.password) {
+    error.password = "Minimum eight characters, at least one letter and one number";
   }
 
   if (!input.password2) {
