@@ -24,6 +24,7 @@ const urlUser = "http://localhost:3001/user";
 const urlSponsors = "http://localhost:3001/sponsor";
 const urlTournament = "http://localhost:3001/tournament";
 const urlSponsor = "http://localhost:3001/sponsor"
+const urlAuth = "http://localhost:3001/auth"
 
 export const getAllUsers = () => (dispatch) => {
   return axios
@@ -104,12 +105,13 @@ export const postNewUser = (valuesInput) => {
         last_name: valuesInput.last_name,
         is_admin: valuesInput.is_admin,
         e_mail: valuesInput.e_mail,
+        password: valuesInput.password,
         phone: valuesInput.phone,
         num_contact: valuesInput.num_contact,
         picture: valuesInput.picture,
         gender: valuesInput.gender,
       };
-      return await axios.post(urlUser, input);
+      return await axios.post(`${urlAuth}/register`, input);
     } catch (err) {
       alert("Add user error, try again later");
     }
@@ -172,3 +174,17 @@ export const putSponsor = (id_sponsor, val) => {
     return await axios.put(`${urlSponsor}/${id_sponsor}`, putval);
   }
 }
+
+export const postLogin = (valuesInput) => {
+  return async () => {
+    try {
+      const input = {
+        e_mail: valuesInput.e_mail,
+        password: valuesInput.password,
+      };
+      return await axios.post(`${urlAuth}/login`, input);
+    } catch (err) {
+      alert("Add user error, try again later");
+    }
+  };
+};

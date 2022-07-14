@@ -76,7 +76,7 @@ export function validate(input) {
   return error;
 }
 
-export const FormUser = () => {
+export const FormUserRegister = ()=>{
   const dispatch = useDispatch();
   const history = useHistory();
   const noError = "Looks good";
@@ -119,17 +119,16 @@ export const FormUser = () => {
       }));
     }
     setInput({ ...input, [e.target.name]: e.target.value });
-    console.log(e.target.value);
+ 
 
     let objError = validate({ ...input, [e.target.name]: e.target.value });
     setError(objError);
   }
-  console.log(input);
+
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log(input);
-    
+
     dispatch(postNewUser(input));//auth register
     setInput({
       dni: "",
