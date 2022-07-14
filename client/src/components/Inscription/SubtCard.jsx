@@ -32,7 +32,7 @@ export default function SubtCard({id_subt, name, price, id_tournament}) {
           <Stripecheckout 
             stripeKey="pk_test_51LLBogC5JnQCZsvqgXxqWC00Ui3tQXiMSljwFGFv28WhZ69g54hmBGjb9XKE1mjZTsipyzW49f7CQ8G1qS6lWL9H00MY1ocH5Z"
             token={makePayment}          
-            name={`Buy${product.name}`}
+            name={`Buy ${product.name}`}
             amount={product.price * 100}>
             <button className='btn btn-primary'>Buy</button>
           </Stripecheckout>                   
