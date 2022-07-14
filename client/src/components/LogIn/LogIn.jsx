@@ -1,8 +1,12 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import img1 from "../../img/backGround-img-logIn.jpg";
+import { postLogin } from "../../redux/actions";
 
 
 function validateError(input) {
+  
   let error = {};
   if(!input.e_mail){
     error.e_mail = 'Email is required'
@@ -37,8 +41,8 @@ function validateSucces(input) {
 }
 
 
-const SingIn = () => {
-
+export default function LogIn() {
+  const dispatch = useDispatch();
   const [ Errors, setErrors ] = useState([]);
   const [ Success, setSuccess ] = useState([]);
   const [ input, setInput ] = useState({
@@ -75,13 +79,14 @@ const SingIn = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(input);
+    dispatch(postLogin(input));//auth login
     setInput(
       {
         e_mail: '',
         password: ''
       }
     );
+    alert("logIn user");
     setSuccess([]);
   }
 
@@ -112,7 +117,7 @@ const SingIn = () => {
               color: "#A7D129",
             }}
           >
-            Sing In
+            LogIn
           </h1>
 
         <div
@@ -203,8 +208,13 @@ const SingIn = () => {
                 Log in
               </button>
             ) : (
-              <button className="btn btn-success" style={{ backgroundColor: "#A7D129" }} >Create</button>
+              <button className="btn btn-success" style={{ backgroundColor: "#A7D129" }} >Log in</button>
             )} 
+            </div>
+            <div>
+              <Link to={"/SignIn"}>
+              <button className="btn btn-success" style={{ backgroundColor: "#A7D129" }} >SignIn</button>
+              </Link>
             </div>
           </form>
         </div>
@@ -212,5 +222,3 @@ const SingIn = () => {
     </div>
   )
 }
-
-export default SingIn;

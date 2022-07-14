@@ -6,7 +6,18 @@ const bcrypt = require('bcrypt');
 
 router.post("/register", async (req, res, next) => {
     try {
-        const {e_mail, password} = req.body;
+        let{
+            dni,
+            name,
+            last_name,
+            is_admin,
+            e_mail,
+            password,
+            phone,
+            num_contact,
+            picture,
+            gender
+        } = req.body;
     
     const user = await User.findOne({where: {
         e_mail: e_mail,
@@ -22,9 +33,17 @@ router.post("/register", async (req, res, next) => {
     )
 
     await User.create({
+        dni,
+        name,
+        last_name,
+        is_admin,
         e_mail,
         password:hashedPassword,
-    })
+        phone,
+        num_contact,
+        picture,
+        gender
+    });
 
     return res.status(201).json({ok: "User created!"})
       
