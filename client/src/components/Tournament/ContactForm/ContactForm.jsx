@@ -5,20 +5,16 @@ import emailjs from "@emailjs/browser";
 
 
 export const ContactForm = () => {
-  
   const users = useSelector((state) => state.users);
-  
 
-
-  console.log('users',users);
-  const email = users.map((el) => el.e_mail);
-  const allEmail = [...new Set(email)];
-  console.log("email", email);
+  console.log("users", users);
+  const emails = users.map((el) => el.e_mail);
+  const allEmail = [...new Set(emails)];
+  console.log("email", emails);
   console.log("allemail", allEmail);
   const [input, setInput] = useState({
     name: "",
-    email: "",
-    my_file: "",
+    email: emails.join(", "),
     message: "",
   });
   console.log("Input", input);
@@ -34,22 +30,27 @@ export const ContactForm = () => {
     if (status === "SUCCESS") {
       setTimeout(() => {
         setStatus("");
-      }, 3000);
+      }, 10000);
     }
   }, [status]);
 
   function handleSubmit(e) {
     e.preventDefault();
+    console.log(input);
+  
     emailjs
       .send("service_7mimo0g", "template_2ah1aoj", input, "cYHyGctWLF2I5zGsl")
       .then(
         (response) => {
           console.log("success", response);
-
+          setInput((prevInput) => ({
+            name: "",
+            email: prevInput.email,
+            message: "",
+          }));
           setInput({
             name: "",
             email: "",
-            my_file: "",
             message: "",
           });
           setStatus("SUCCESS");
@@ -62,66 +63,56 @@ export const ContactForm = () => {
 
   return (
     <>
-      <div className="lg:mt-48 lg:mr-48 pt-6 pb-8 bg-white shadow-xl rounded p-5">
+   
+      <div className="" style={{ minHeight: "10vh", width: "100%" }}>
+
         {status && renderAlert}
+        <div
+        className="mx-auto hstack justify-content-around"
+        style={{ width: "100%" }}
+      >
         <form onSubmit={(e) => handleSubmit(e)}>
-          <h3 className="text-gray-700 mb-7 text-xl font-semibold">
+          <h3 className="text-gray-700 mb-7 text-xl font-semibold text-center">
             Send a Message to Players
           </h3>
+          <ul
+              className="list-group list-group-horizontal mx-auto"
+              style={{ width: "100%" }}
+            >
+              <li className="list-group-item" style={{ width: "90%" }}>
+                <div>
+                  <h5 className="card-text">Email</h5>
           <input
             onChange={(e) => handleChange(e)}
-            label="Full Name"
+            label="Subject"
             name="name"
             type="text"
-            placeholder="Sebas"
+            placeholder="Subject"
             value={input.name}
           />
-          <input
-            onChange={(e) => handleChange(e)}
-            label="E-mail"
-            name="email"
-            type="email"
-            placeholder="Gaby@gmail.com"
-            value={input.email}
-          />
-          <input
-            onChange={(e) => handleChange(e)}
-            label="Attachment"
-            name="my_file"
-            type="file"
-            placeholder=""
-            value={input.my_file}
-          />
 
-          {/* <select onChange={(e) => handleChange(e)}>
-            <option value={input.email} label="Email" name="email" placeholder="gaby@gmail.com" type="email">All emails</option>
-            {allEmail.map((email) => {
-              return email ? (
-                <option value={email} key={email}>
-                  {email}
-                </option>
-              ) : (
-                ""
-              );
-            })}
-          </select> */}
-
-          <input
+          <br />
+          <li className="list-group-item" style={{ width: "90%",  }}>
+          <textarea
+          className="form-control" id="exampleFormControlTextarea1" rows="10"
             onChange={(e) => handleChange(e)}
             label="Message"
             name="message"
-            type="text"
             placeholder="Message"
             value={input.message}
           />
-
+          </li>
+</div>
+</li>
+</ul>
           <button
             type="submit"
-            className="mt-4 bg-gray-900 text-gray-200 rounded hover:bg-gray-700 px-4 py-2 focus:outline-none"
+            className="mt-4 bg-gray-900 text-gray-200 rounded hover:bg-gray-700 px-4 py-1 mb-2 focus:outline-none"
           >
             Send <MailIcon className="w-6 ml-2 float-right" />
           </button>
         </form>
+        </div>
       </div>
     </>
   );

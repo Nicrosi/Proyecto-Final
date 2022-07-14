@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { ContactForm } from "./ContactForm";
-import img1 from '../../assets/fototorneo.jpg'
-
+import { ContactForm } from "../ContactForm/ContactForm";
+import img1 from "../../../img/imgForm1.webp"
 
 export function validate(input) {
   let error = {};
-  
+
   if (!input.date) {
     error.company = "Name is required";
   } else if (
@@ -26,7 +25,7 @@ export function validate(input) {
 }
 
 export const FormTournament = () => {
-  const noError = "Looks good"
+  const noError = "Looks good";
   const [input, setInput] = useState({
     date: "",
     location: "",
@@ -47,21 +46,28 @@ export const FormTournament = () => {
     setInput({
       ...input,
       [e.target.name]: e.target.value,
-    });    
+    });
     let objError = validate({ ...input, [e.target.name]: e.target.value });
     setError(objError);
   }
 
   return (
     <div className="" style={{ minHeight: "10vh", width: "100%" }}>
-      {/* <img
-          className="d-block w-100"
-          src={img1}
-          alt=""
-          style={{ objectFit: "cover", height: "100vh" }}/> */}
+       <div style={{ position: "absolute", top: "0", width: "100%" }}>
+          <img
+            src={img1}
+            alt="imgNotFound"
+            style={{
+              width: "100%",
+              filter: "contrast(175%) grayscale(100%) brightness(20%)",
+              objectFit: "cover",
+              height: "300px",
+            }}
+          />
+        </div>
       <div
-        className=" display-7 hstack justify-content-center"
-        style={{ minHeight: "10vh", width: "100%" }}
+        className=" display-6 hstack justify-content-center"
+        style={{ position:"relative", minHeight: "40vh", width: "100% ", color:"greenyellow" }}
       >
         TOURNAMENT CREATION
       </div>
@@ -87,15 +93,27 @@ export const FormTournament = () => {
                     name="date"
                     value={input.name}
                     required
-                    className={error.date?"form-control is-invalid":"form-control is-valid"}
-                  />{error.date ?
-                    <div id="validationServerUsernameFeedback" className="invalid-feedback">
-                    {error.date}
-                    </div>:
-                    <div id="validationServerUsernameFeedback" className="valid-feedback">
-                    {noError}
+                    className={
+                      error.date
+                        ? "form-control is-invalid"
+                        : "form-control is-valid"
+                    }
+                  />
+                  {error.date ? (
+                    <div
+                      id="validationServerUsernameFeedback"
+                      className="invalid-feedback"
+                    >
+                      {error.date}
                     </div>
-                  }
+                  ) : (
+                    <div
+                      id="validationServerUsernameFeedback"
+                      className="valid-feedback"
+                    >
+                      {noError}
+                    </div>
+                  )}
                 </div>
               </li>
 
@@ -109,40 +127,60 @@ export const FormTournament = () => {
                     placeholder="Tournaments Location..."
                     name="location"
                     value={input.location}
-                    className={error.location?"form-control is-invalid":"form-control is-valid"}
-                  />{error.location ?
-                    <div id="validationServerUsernameFeedback" className="invalid-feedback">
-                    {error.location}
-                    </div>:
-                    <div id="validationServerUsernameFeedback" className="valid-feedback">
-                    {noError}
+                    className={
+                      error.location
+                        ? "form-control is-invalid"
+                        : "form-control is-valid"
+                    }
+                  />
+                  {error.location ? (
+                    <div
+                      id="validationServerUsernameFeedback"
+                      className="invalid-feedback"
+                    >
+                      {error.location}
                     </div>
-                  }
+                  ) : (
+                    <div
+                      id="validationServerUsernameFeedback"
+                      className="valid-feedback"
+                    >
+                      {noError}
+                    </div>
+                  )}
                 </div>
               </li>
             </ul>
           </div>
 
           <div className="d-grid gap-2 mb-3" style={{ width: "90%" }}>
-          {Object.keys(error).length > 0 ? (
-              <button className="btn btn-secondary" style={{ backgroundColor: "#A7D129" }} type="submit" disabled>
+            {Object.keys(error).length > 0 ? (
+              <button
+                className="btn btn-secondary"
+                style={{ backgroundColor: "#A7D129" }}
+                type="submit"
+                disabled
+              >
                 Create
               </button>
             ) : (
-              <button className="btn btn-success" style={{ backgroundColor: "#A7D129" }} type="submit">Create</button>
+              <button
+                className="btn btn-success"
+                style={{ backgroundColor: "#A7D129" }}
+                type="submit"
+              >
+                Create
+              </button>
             )}
           </div>
         </form>
-      </div>
-      <div className="h-screen">
-        <div className="lg:grid-cols-2  lg:gap-6 bg-blue-300 lg:h2/3">
-          <div className="flex flex-col justify-center text-center lg:p-40 md:text-left">
-            <p className="uppercase font-medium opacity-40 text-gray-500">
-              Tournament
-            </p>
-            <ContactForm />
+        
+          <div className="hstack mb-3">
+            <div>
+              <ContactForm />
+            </div>
           </div>
-        </div>
+        
       </div>
     </div>
   );
