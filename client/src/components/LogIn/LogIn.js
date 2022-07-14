@@ -37,7 +37,7 @@ function validateSucces(input) {
 }
 
 
-const SingIn = () => {
+const LogIn = () => {
 
   const [ Errors, setErrors ] = useState([]);
   const [ Success, setSuccess ] = useState([]);
@@ -112,7 +112,7 @@ const SingIn = () => {
               color: "#A7D129",
             }}
           >
-            Sing In
+            Log In
           </h1>
 
         <div
@@ -203,7 +203,7 @@ const SingIn = () => {
                 Log in
               </button>
             ) : (
-              <button className="btn btn-success" style={{ backgroundColor: "#A7D129" }} >Create</button>
+              <button className="btn btn-success" style={{ backgroundColor: "#A7D129" }} >Log in</button>
             )} 
             </div>
           </form>
@@ -213,4 +213,4 @@ const SingIn = () => {
   )
 }
 
-export default SingIn;
+export default LogIn;

@@ -61,6 +61,7 @@ router.get('/prueba', async (req, res) => {
           last_name: ArrayUsers[i].last_name,
           is_admin: ArrayUsers[i].is_admin,
           e_mail: ArrayUsers[i].e_mail,
+          password: ArrayUsers[i].password,
           phone: ArrayUsers[i].phone,
           num_contact: ArrayUsers[i].num_contact,
           picture: ArrayUsers[i].picture,
