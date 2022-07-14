@@ -11,6 +11,10 @@ module.exports = (sequelize) => {
       autoIncrement: true,
       unique: true
     },
+    description: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
     amount: {
       type: DataTypes.INTEGER,
       allowNull: false,

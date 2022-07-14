@@ -14,13 +14,26 @@ router.get('/:id', async (req, res) => {
     subt_id.length > 0 ? res.status(200).send(subt_id) : res.status(404).send('No sub tournament found');
 })
 
-router.post('/', async (req, res) => {
+router.get('/prueba/:id_tournament', async (req, res) => {
+    let {id_tournament} = req.params;
+    let filter_subt = await Subtournament.findAll({
+        where: {
+            id_tournament: id_tournament
+        }
+    })
+    filter_subt.length > 0 ? res.status(200).send(filter_subt) : res.status(400).json({msg_error: 'Subtournament not found'});
+})
+
+router.post('/:id_tournament', async (req, res) => {
     let {
         elimination_type,
         match_type,
         name,
         numb_players,
-        gender
+        gender,
+        price,
+        id_tournament,
+        id_category
     } = req.body
     try{
         await Subtournament.create({
@@ -28,7 +41,10 @@ router.post('/', async (req, res) => {
             match_type,
             name,
             numb_players,
-            gender
+            gender,
+            price,
+            id_tournament,
+            id_category
         });
         res.status(200).send('Sub tournament created!');
     }catch(err){
