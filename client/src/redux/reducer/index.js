@@ -5,6 +5,7 @@ import {
   GET_USER_BY_ID,
   ADD_SPONSOR,
   GET_ALL_SPONSORS,
+ 
 } from "../actions";
 import { filterUsers } from "../helpers/filters";
 import { sortByName } from "../helpers/sorts";
@@ -69,6 +70,9 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         sponsors: action.payload,
       };
+    
+   
+
 
     default:
       return { ...state };
