@@ -26,21 +26,27 @@ const urlTournament = "http://localhost:3001/tournament";
 const urlSponsor = "http://localhost:3001/sponsor"
 
 export const getAllUsers = () => (dispatch) => {
-  return axios.get(urlUser).then((response) =>
-    dispatch({
-      type: GET_ALL_USERS,
-      payload: response.data,
-    })
-  );
+  return axios
+    .get(urlUser)
+    .then((response) =>
+      dispatch({
+        type: GET_ALL_USERS,
+        payload: response.data,
+      })
+    )
+    .catch((err) => console.log(err));
 };
 
 export const getAllSponsors = () => (dispatch) => {
-  return axios.get(urlSponsors).then((response) =>
-    dispatch({
-      type: GET_ALL_SPONSORS,
-      payload: response.data,
-    })
-  );
+  return axios
+    .get(urlSponsors)
+    .then((response) =>
+      dispatch({
+        type: GET_ALL_SPONSORS,
+        payload: response.data,
+      })
+    )
+    .catch(() => console.log("No sponsors found"));
 };
 
 export const getAllUsersName = (name) => (dispatch) => {
@@ -51,7 +57,8 @@ export const getAllUsersName = (name) => (dispatch) => {
         type: GET_ALL_USERS_NAME,
         payload: response.data,
       })
-    );
+    )
+    .catch(() => alert("User not found"));
 };
 
 export const orderUsersByName = ({ order, gender, category }) => {
@@ -62,12 +69,15 @@ export const orderUsersByName = ({ order, gender, category }) => {
 };
 
 export const getUserById = (dni) => (dispatch) => {
-  return axios.get(`${urlUser}/${dni}`).then((response) =>
-    dispatch({
-      type: GET_USER_BY_ID,
-      payload: response.data,
-    })
-  );
+  return axios
+    .get(`${urlUser}/${dni}`)
+    .then((response) =>
+      dispatch({
+        type: GET_USER_BY_ID,
+        payload: response.data,
+      })
+    )
+    .catch((err) => console.log(err));
 };
 
 export function postSponsor(input) {
@@ -87,18 +97,22 @@ export function postSponsor(input) {
 
 export const postNewUser = (valuesInput) => {
   return async () => {
-    const input = {
-      dni: valuesInput.dni,
-      name: valuesInput.name,
-      last_name: valuesInput.last_name,
-      is_admin: valuesInput.is_admin,
-      e_mail: valuesInput.e_mail,
-      phone: valuesInput.phone,
-      num_contact: valuesInput.num_contact,
-      picture: valuesInput.picture,
-      gender: valuesInput.gender,
-    };
-    return await axios.post(urlUser, input);
+    try {
+      const input = {
+        dni: valuesInput.dni,
+        name: valuesInput.name,
+        last_name: valuesInput.last_name,
+        is_admin: valuesInput.is_admin,
+        e_mail: valuesInput.e_mail,
+        phone: valuesInput.phone,
+        num_contact: valuesInput.num_contact,
+        picture: valuesInput.picture,
+        gender: valuesInput.gender,
+      };
+      return await axios.post(urlUser, input);
+    } catch (err) {
+      alert("Add user error, try again later");
+    }
   };
 };
 

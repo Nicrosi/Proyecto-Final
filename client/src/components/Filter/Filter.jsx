@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { orderUsersByName } from "../../redux/actions";
+import SearchBar from "../SearchBar/SearchBar";
 import "./Filter.css";
 
 const initialFilter = {
@@ -11,7 +12,7 @@ const initialFilter = {
   category: "all",
 };
 
-export default function Filter() {
+export default function Filter({ setCurrentPage }) {
   const [filterOpt, setFilterOpt] = useState(initialFilter);
   const dispatch = useDispatch();
 
@@ -25,12 +26,15 @@ export default function Filter() {
     const name = e.target.name,
       value = e.target.value;
     setFilterOpt({ ...filterOpt, [name]: value });
+    setCurrentPage(0);
   };
 
   return (
     <aside className="aside bg-dark">
-      <h4>Name</h4>
-      <div className="form-check form-check-inline">
+      <SearchBar />
+      <br />
+      <h5>Name</h5>
+      <div className="form-check ">
         <input
           type="radio"
           name="order"
@@ -44,7 +48,7 @@ export default function Filter() {
           Ascendent
         </label>
       </div>
-      <div className="form-check form-check-inline">
+      <div className="form-check ">
         <input
           type="radio"
           name="order"
@@ -57,9 +61,9 @@ export default function Filter() {
           Descendent
         </label>
       </div>
-
-      <h4>Gender</h4>
-      <div className="form-check form-check-inline">
+      <hr />
+      <h5>Gender</h5>
+      <div className="form-check ">
         <input
           type="radio"
           name="gender"
@@ -73,7 +77,7 @@ export default function Filter() {
           All
         </label>
       </div>
-      <div className="form-check form-check-inline">
+      <div className="form-check ">
         <input
           type="radio"
           name="gender"
@@ -86,7 +90,7 @@ export default function Filter() {
           Male
         </label>
       </div>
-      <div className="form-check form-check-inline">
+      <div className="form-check ">
         <input
           type="radio"
           name="gender"
@@ -99,9 +103,9 @@ export default function Filter() {
           Female
         </label>
       </div>
-
-      <h4>Category</h4>
-      <div className="form-check form-check-inline">
+      <hr />
+      <h5>Category</h5>
+      <div className="form-check ">
         <input
           type="radio"
           name="category"
@@ -113,7 +117,7 @@ export default function Filter() {
         />
         <label htmlFor="allCategory">All</label>
       </div>
-      <div className="form-check form-check-inline">
+      <div className="form-check ">
         <input
           type="radio"
           name="category"
@@ -124,7 +128,7 @@ export default function Filter() {
         />
         <label htmlFor="A">A</label>
       </div>
-      <div className="form-check form-check-inline">
+      <div className="form-check ">
         <input
           type="radio"
           name="category"
@@ -135,7 +139,7 @@ export default function Filter() {
         />
         <label htmlFor="B">B</label>
       </div>
-      <div className="form-check form-check-inline">
+      <div className="form-check ">
         <input
           type="radio"
           name="category"
@@ -146,7 +150,7 @@ export default function Filter() {
         />
         <label htmlFor="C">C</label>
       </div>
-      <div className="form-check form-check-inline">
+      <div className="form-check ">
         <input
           type="radio"
           name="category"
@@ -156,6 +160,17 @@ export default function Filter() {
           onChange={handleChange}
         />
         <label htmlFor="E">E</label>
+      </div>
+      <div className="form-check ">
+        <input
+          type="radio"
+          name="category"
+          className="form-check-input"
+          value="none"
+          id="none"
+          onChange={handleChange}
+        />
+        <label htmlFor="none">None</label>
       </div>
     </aside>
   );
