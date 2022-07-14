@@ -1,8 +1,12 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import img1 from "../../img/backGround-img-logIn.jpg";
+import { postLogin } from "../../redux/actions";
 
 
 function validateError(input) {
+  
   let error = {};
   if(!input.e_mail){
     error.e_mail = 'Email is required'
@@ -37,8 +41,13 @@ function validateSucces(input) {
 }
 
 
+<<<<<<< HEAD:client/src/components/LogIn/LogIn.js
 const LogIn = () => {
 
+=======
+export default function LogIn() {
+  const dispatch = useDispatch();
+>>>>>>> d39f13c397a0691d6ec0194ba9424d460f0426bd:client/src/components/LogIn/LogIn.jsx
   const [ Errors, setErrors ] = useState([]);
   const [ Success, setSuccess ] = useState([]);
   const [ input, setInput ] = useState({
@@ -75,13 +84,14 @@ const LogIn = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(input);
+    dispatch(postLogin(input));//auth login
     setInput(
       {
         e_mail: '',
         password: ''
       }
     );
+    alert("logIn user");
     setSuccess([]);
   }
 
@@ -112,7 +122,11 @@ const LogIn = () => {
               color: "#A7D129",
             }}
           >
+<<<<<<< HEAD:client/src/components/LogIn/LogIn.js
             Log In
+=======
+            LogIn
+>>>>>>> d39f13c397a0691d6ec0194ba9424d460f0426bd:client/src/components/LogIn/LogIn.jsx
           </h1>
 
         <div
@@ -206,11 +220,19 @@ const LogIn = () => {
               <button className="btn btn-success" style={{ backgroundColor: "#A7D129" }} >Log in</button>
             )} 
             </div>
+            <div>
+              <Link to={"/SignIn"}>
+              <button className="btn btn-success" style={{ backgroundColor: "#A7D129" }} >SignIn</button>
+              </Link>
+            </div>
           </form>
         </div>
       </div>
     </div>
   )
 }
+<<<<<<< HEAD:client/src/components/LogIn/LogIn.js
 
 export default LogIn;
+=======
+>>>>>>> d39f13c397a0691d6ec0194ba9424d460f0426bd:client/src/components/LogIn/LogIn.jsx
