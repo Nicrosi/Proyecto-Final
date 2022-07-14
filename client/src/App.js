@@ -9,6 +9,7 @@ import { FormScore } from "./components/FormScore/FormScore.jsx";
 import { FormSponsor } from "./components/FormSponsor/FormSponsor.jsx";
 import { FormUser } from "./components/FormUser/FormUser.jsx";
 import { FormTournament } from "./components/Tournament/FormTournament.jsx";
+import controlPanel from "./controlPanel/ControlPanel.jsx";
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
       <Route exact path={"/sponsor"} component={FormSponsor}/>
       <Route exact path={"/CreateUsers"} component={FormUser}/>
       <Route exact path={"/tournament"} component={FormTournament} />
+      <Route exact path={"/cpanel"} component={controlPanel}/>
     </div>
   );
 }
