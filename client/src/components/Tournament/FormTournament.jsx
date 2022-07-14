@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { ContactForm } from "./ContactForm";
 import img1 from '../../assets/fototorneo.jpg'
 
 
@@ -40,33 +41,31 @@ export const FormTournament = () => {
     e.preventDefault();
     await axios.post(`http://localhost:3001/tournament`, input);
     alert("successfully created Tournament");
-  };
+  }
 
   function handleOnChange(e) {
     setInput({
       ...input,
       [e.target.name]: e.target.value,
-    });
-    
+    });    
     let objError = validate({ ...input, [e.target.name]: e.target.value });
     setError(objError);
   }
 
   return (
-    <div
-      className="mb-4 mx-auto hstack justify-content-center"
-      style={{ minHeight: "100vh", width: "100%" }}
-    >
-        <img
+    <div className="" style={{ minHeight: "10vh", width: "100%" }}>
+      {/* <img
           className="d-block w-100"
           src={img1}
           alt=""
-          style={{ objectFit: "cover", height: "100vh" }}/>
-         <div
-      className=" display-7 hstack justify-content-center"
-      style={{ minHeight: "100vh", width: "100%" }}
-    >TOURNAMENT CREATION</div>
-        
+          style={{ objectFit: "cover", height: "100vh" }}/> */}
+      <div
+        className=" display-7 hstack justify-content-center"
+        style={{ minHeight: "10vh", width: "100%" }}
+      >
+        TOURNAMENT CREATION
+      </div>
+
       <div
         className="mx-auto hstack justify-content-around"
         style={{ width: "100%" }}
@@ -135,7 +134,16 @@ export const FormTournament = () => {
           </div>
         </form>
       </div>
-      
+      <div className="h-screen">
+        <div className="lg:grid-cols-2  lg:gap-6 bg-blue-300 lg:h2/3">
+          <div className="flex flex-col justify-center text-center lg:p-40 md:text-left">
+            <p className="uppercase font-medium opacity-40 text-gray-500">
+              Tournament
+            </p>
+            <ContactForm />
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
