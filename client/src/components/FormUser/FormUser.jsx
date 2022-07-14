@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import styles from "./FormUser.module.css"
+
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { postNewUser } from "../../redux/actions";
