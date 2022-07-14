@@ -34,15 +34,6 @@ function HomeAdmin() {
               Users
             </button>
           </Link>
-          <Link to={"/CreateUsers"}>
-            <button
-              type="button"
-              className="btn btn-outline-secondary btn-dark my-2 mx-2 px-5 "
-              style={{ width: "270px" }}
-            >
-              User registration
-            </button>
-          </Link>
           <Link to={"/tournament"}>
           <button
             type="button"
