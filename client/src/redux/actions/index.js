@@ -1,4 +1,7 @@
 import axios from "axios";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 //import players from "../../players.json";
 
 // export const GET_ALL_PLAYERS = "GET_ALL_PLAYERS"; JSON
@@ -29,6 +32,8 @@ const urlInscription = "http://localhost:3001/inscription"
 const urlTournament = "http://localhost:3001/tournament";
 const urlSponsor = "http://localhost:3001/sponsor"
 
+
+toast.configure();
 
 export const getAllUsers = () => (dispatch) => {
   return axios
@@ -140,9 +145,10 @@ export const postInscription = (body) => {
   return async () => {
     try {
       const data_user = body.id_user
-      return await axios.post(`${urlInscription}/${data_user}`, body);
+       await axios.post(`${urlInscription}/${data_user}`, body);
+       toast("Se completo el pago.", {type: "success"});
     } catch (err) {
-      alert("Add a error, try again later");
+      toast(err.response.data.Message, {type: "error"});
     }
   };
 };

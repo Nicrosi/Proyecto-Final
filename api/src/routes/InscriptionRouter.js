@@ -26,22 +26,27 @@ router.post('/:id', async (req, res) => {
     const { id } = req.params;
     const {product, token} = req.body;    
     const charge = await createPayment([product, token]); 
-    let is_payed = false;
-    if(charge){      
-      is_payed = true;
+    console.log(charge)
+    if(typeof charge === 'string'){
+      res.status(404).send({Message: charge})
+    }else{
+      try {
+        await Inscription.create({
+           description: product.name,
+           amount: product.price,
+           is_payed : true,
+           id_user: id,
+           id_tournament: product.id_tournament
+         });
+         res.status(200).send("Inscription created!");    
+       } catch (error) {
+         console.log(error);
+       }
     }
-    try {
-      await Inscription.create({
-        description: product.name,
-        amount: product.price,
-        is_payed : is_payed,
-        id_user: id,
-        id_tournament: product.id_tournament
-      });
-      res.status(200).send("Inscription created!");    
-    } catch (error) {
-      console.log(error);
-    }
+     
+     
+  
+    
 })
 
 module.exports = router;

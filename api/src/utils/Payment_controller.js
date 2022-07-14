@@ -4,17 +4,20 @@ const {
   const stripe = require('stripe')(SK_KEY);
 
 const createPayment = async ([product, token]) => {
-
-    
-   
-        const charges = await stripe.charges.create({
+  try{
+ let charges = await stripe.charges.create({
           source: token.id,
           amount: product.price * 100,
           currency: 'usd',
           receipt_email: token.email,
           description: product.name,
       })
-    return charges     
+    return charges   
+  }catch(error){
+    return charges = error.code.charAt(0).toUpperCase() + error.code.slice(1).replace('_', ' ');
+  }       
+
+        
 }
 
 
