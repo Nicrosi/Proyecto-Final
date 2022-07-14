@@ -3,11 +3,12 @@ const router = Router();
 const {get_Userdb} = require('../utils/User_Controllers');
 const { User, Category, Inscription, Score, Op } = require('../db');
 const  ArrayUsers  = require('../ArrayUserEjemplo.js')
+const authjwt = require('../middlewares/authjwt.js');
 
 // console.log(ArrayUsers);
 
 
-router.get('/', async (req,res) => {
+router.get('/',  async (req,res) => {
     let {name}= req.query
     const allUsers = await get_Userdb()
     

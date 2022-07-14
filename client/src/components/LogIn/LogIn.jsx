@@ -41,13 +41,8 @@ function validateSucces(input) {
 }
 
 
-<<<<<<< HEAD:client/src/components/LogIn/LogIn.js
-const LogIn = () => {
-
-=======
 export default function LogIn() {
   const dispatch = useDispatch();
->>>>>>> d39f13c397a0691d6ec0194ba9424d460f0426bd:client/src/components/LogIn/LogIn.jsx
   const [ Errors, setErrors ] = useState([]);
   const [ Success, setSuccess ] = useState([]);
   const [ input, setInput ] = useState({
@@ -122,11 +117,7 @@ export default function LogIn() {
               color: "#A7D129",
             }}
           >
-<<<<<<< HEAD:client/src/components/LogIn/LogIn.js
-            Log In
-=======
             LogIn
->>>>>>> d39f13c397a0691d6ec0194ba9424d460f0426bd:client/src/components/LogIn/LogIn.jsx
           </h1>
 
         <div
@@ -231,8 +222,3 @@ export default function LogIn() {
     </div>
   )
 }
-<<<<<<< HEAD:client/src/components/LogIn/LogIn.js
-
-export default LogIn;
-=======
->>>>>>> d39f13c397a0691d6ec0194ba9424d460f0426bd:client/src/components/LogIn/LogIn.jsx

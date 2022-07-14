@@ -9,15 +9,9 @@ import { FormScore } from "./components/FormScore/FormScore.jsx";
 import { FormSponsor } from "./components/FormSponsor/FormSponsor.jsx";
 import { FormUser } from "./components/FormUser/FormUser.jsx";
 import { FormTournament } from "./components/Tournament/FormTournament.jsx";
-<<<<<<< HEAD
-import LogIn from "./components/LogIn/LogIn.js";
-import controlPanel from "./controlPanel/ControlPanel.jsx";
-
-=======
 import  LogIn  from "./components/LogIn/LogIn.jsx";
 import {FormUserRegister} from "./components/FormUser copy/FormUserRegister.jsx"
 import ControlPanel from "./controlPanel/ControlPanel.jsx";
->>>>>>> d39f13c397a0691d6ec0194ba9424d460f0426bd
 
 function App() {
   return (
