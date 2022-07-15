@@ -5,7 +5,7 @@ import arrowRight from "../../img/arrow-right-filter.png";
 import "./Navigator.css";
 
 export default function Navigator({ currentPage, setCurrentPage }) {
-  const users = useSelector((state) => state.filteredUsers);
+  const users = useSelector((state) => state.rootReducer.filteredUsers);
 
   const cantPages = Math.ceil(users.length / 11),
     arrPages = arrPageCreator(currentPage, cantPages);

@@ -25,8 +25,8 @@ router.get('/:id_tournament', async (req, res) => {
 })
 
 router.post('/', async (req, res) => {
-  const { date, location } = req.body;
-  if(!date || !location) return res.send({msg_error: 'Error'})
+  const { name, date, location } = req.body;
+  if(!name || !date || !location) return res.send({msg_error: 'Error'})
 
   // Date format "AAAA-MM-DD"
   let Date = date.split('-')
@@ -35,8 +35,10 @@ router.post('/', async (req, res) => {
 
   await Tournament.create(
     {
+      name,
       date,
-      location
+      location,
+      earnings: 0
     }
   )
 

@@ -1,0 +1,38 @@
+.containerBox {
+    min-height: 100vh;
+    width: 100% 
+}
+.titleBox {
+    margin-top: 0;
+    display: flex;
+    flex-wrap: wrap;
+    padding-left: 30px;
+    justify-content: flex-start;
+}
+.buttonBack {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    background-color: transparent;    filter:  opacity(0.6) drop-shadow(0 0 0 rgb(43, 43, 44))
+}
+.buttonBack:hover {
+    background-color: rgb(151, 151, 151);
+    transition: 0.5s;
+}
+.title {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 3rem;
+    margin: 0 0 0 30px;
+    color: #A7D129
+}
+.editBox {
+    position: relative;
+    margin: 5px auto 0 auto;
+    width: 80%;
+    background-color: rgb(43, 43, 44);
+    border-radius: 10px;
+    padding: 20px
+}
+.form {
+    width: 100%
+}

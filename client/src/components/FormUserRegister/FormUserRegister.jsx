@@ -2,7 +2,7 @@ import React, { useState } from "react";
 //import styles from "./FormUser.module.css"
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { postNewUser } from "../../redux/actions";
+import { postNewUser } from "../../redux/actions/authorization";
 import img1 from "../../img/imgForm1.webp";
 
 export function validate(input) {
@@ -65,6 +65,8 @@ export function validate(input) {
 
   if (!input.password) {
     error.password = "Password is required";
+  }else if (!/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/i.test(input.password) && input.password) {
+    error.password = "Minimum eight characters, at least one letter and one number";
   }
 
   if (!input.password2) {
@@ -76,7 +78,7 @@ export function validate(input) {
   return error;
 }
 
-export const FormUserRegister = ()=>{
+export const FormUserRegister = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const noError = "Looks good";
@@ -104,7 +106,7 @@ export const FormUserRegister = ()=>{
     picture: "Picture is required",
     gender: "Gender is required",
     password: "Password is required",
-    password2: "Repeat password is required"
+    password2: "Repeat password is required",
   });
 
   function handleInputChange(e) {
@@ -119,17 +121,15 @@ export const FormUserRegister = ()=>{
       }));
     }
     setInput({ ...input, [e.target.name]: e.target.value });
- 
 
     let objError = validate({ ...input, [e.target.name]: e.target.value });
     setError(objError);
   }
 
-
   function handleSubmit(e) {
     e.preventDefault();
 
-    dispatch(postNewUser(input));//auth register
+    dispatch(postNewUser(input)); //auth register
     setInput({
       dni: "",
       name: "",
@@ -141,7 +141,7 @@ export const FormUserRegister = ()=>{
       picture: "",
       gender: "",
       password: "",
-      password2: ""
+      password2: "",
     });
     alert("Created user");
     history.push("/HomeAdmin");

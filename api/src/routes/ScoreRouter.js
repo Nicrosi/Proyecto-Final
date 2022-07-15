@@ -15,6 +15,7 @@ router.get("/", async (req, res) => {
 });
 
 router.post("/:dni", async (req, res) => {
+<<<<<<< HEAD
 
     let { dni } = req.params;
     let {
@@ -58,6 +59,42 @@ router.post("/:dni", async (req, res) => {
     } catch (err) {
         console.log(err);
     }
+=======
+  const { dni } = req.params;
+  const {
+    previous_tournaments,
+    hit_knowledge,
+    other_strokes,
+    special_hits,
+    kick_serve_control,
+    game_strategy,
+  } = req.body;
+  try {
+    const newScore = await Score.create({
+      previous_tournaments,
+      hit_knowledge,
+      other_strokes,
+      special_hits,
+      kick_serve_control,
+      game_strategy,
+    });
+    const id = newScore.dataValues.id_score;
+    await User.update(
+      {
+        id_score: id,
+      },
+      {
+        where: {
+          dni: dni,
+        },
+      }
+    );
+    category(id);
+    res.status(200).send("Sent!");
+  } catch (err) {
+    console.log(err);
+  }
+>>>>>>> d41fdfb490ff8962559dc9b07fe2a1232a64f8f9
 });
 
 module.exports = router;
