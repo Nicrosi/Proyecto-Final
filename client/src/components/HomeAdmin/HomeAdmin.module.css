@@ -6,7 +6,7 @@
     flex-direction:row;
 }
 .PanelBox {
-    width: 35%;
+    width: 50%;
     min-height: 100vh;
     display: flex;
     background: url("../../img/imgProfileUser1.webp") no-repeat center center;
@@ -16,12 +16,21 @@
     flex-direction: column;
     align-items: center;
 }
-.nameUser {
+.data1 {
     font-family: 'Bebas Neue', cursive;
     font-size: 2.5rem;
     color: hsl(0, 0%, 100%);
     margin: 0 auto;
     line-height: 1;
+    text-align: center;
+}
+.data2 {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 1.8rem;
+    color: hsl(0, 0%, 75%);
+    margin: 0 auto;
+    line-height: 1;
+
 }
 .pictureUser {
     margin: 150px auto 15px auto;
@@ -30,37 +39,22 @@
     height: 250px;
 }
 .principalBox {
-    width: 65%;
+    width: 50%;
     padding: 80px 30px 0 30px;
 }
-.secondaryBox {
-    border: solid #929292 0.2ch;
-    border-radius: 10px;
+.title {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 4rem;
+    margin: 0 0 0 30px;
+    color: #A7D129
 }
-.navBar {
+.buttonBox {
+    margin: 5px auto 0 auto;
     display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    height: 40px;
-    justify-content: flex-start;
-    padding-left: 30px;
+    flex-wrap:wrap;
+    flex-direction:column;
+    justify-content: center;
+    align-items: center;
+
 }
-.navBarItems {
-    width: auto;
-    margin-right: 10px;
-    padding: 0 20px;
-    border-radius: 10px 10px 0 0;
-    background-color: #A7D129;
-    text-align: center;
-    display: flex;
-    align-items: flex-end;
-    border: none;
-}
-.navBarItems:hover {
-    background-color: rgb(151, 151, 151);
-    transition: 0.5s;
-}
-.item {
-    font-size: 1rem;
-    border: #929292;
-}
+

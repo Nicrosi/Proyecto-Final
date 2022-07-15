@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import styles from "./FormUser.module.css"
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { getUserById, putUsers } from "../../redux/actions";
-import back from "../../img/back.png"
+import { getUserById, putUsers } from "../../../redux/actions";
+import back from "../../../img/back.png"
 
 export function validate(input) {
   let error = {};
