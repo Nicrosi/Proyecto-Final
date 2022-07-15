@@ -18,7 +18,7 @@ function App() {
   return (
     <div className="App">
       <Route path={"/"} component={NavBar} />
-      <RouteGuard exact path={"/Users"} component={Users} admin={false} />
+      <RouteGuard exact path={"/Users"} component={Users} admin={true} />
       <RouteGuard
         exact
         path={"/HomeAdmin"}
@@ -27,14 +27,14 @@ function App() {
       />
       {/* <Route exact path={"/HomeAdmin"} component={HomeAdmin} /> */}
       <Route exact path={"/"} component={LandingPage} />
-      <Route exact path={"/Users/:userId"} component={DetailsUser} />
+      <Route exact path={"/Users/:userId"} component={DetailsUser}/>
       <Route exact path={"/CreateScore/:userId"} component={FormScore} />
       <Route exact path={"/sponsor"} component={FormSponsor} />
       <Route exact path={"/tournament"} component={FormTournament} />
       <Route exact path={"/login"} component={LogIn} />
       <Route exact path={"/cpanel"} component={ControlPanel} />
       <Route exact path={"/SignIn"} component={FormUserRegister} />
-      <Route exact path={"/Profile/:userId"} component={ProfileUser} />
+      <RouteGuard exact path={"/Profile/:userId"} component={ProfileUser} admin={false} />
     </div>
   );
 }

@@ -8,9 +8,9 @@ import ControlCardSponsor from "./ControlCardSponsor";
 
 
 export default function ControlPanel() {
-  const users = useSelector((state) => state.users);
+  const users = useSelector((state) => state.rootReducer.users);
 
-  const sponsors = useSelector((state) => state.sponsors);
+  const sponsors = useSelector((state) => state.rootReducer.sponsors);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getAllUsers());
