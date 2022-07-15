@@ -3,14 +3,10 @@ import { useSelector } from "react-redux";
 import { MailIcon } from "@heroicons/react/solid";
 import emailjs from "@emailjs/browser";
 
-
 export const ContactForm = () => {
-  
-  const users = useSelector((state) => state.users);
-  
+  const users = useSelector((state) => state.rootReducer.users);
 
-
-  console.log('users',users);
+  console.log("users", users);
   const email = users.map((el) => el.e_mail);
   const allEmail = [...new Set(email)];
   console.log("email", email);

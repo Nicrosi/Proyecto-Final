@@ -5,7 +5,7 @@ import { getAllSponsors } from "../../redux/actions";
 
 export default function Sponsors() {
   const dispatch = useDispatch(),
-    sponsors = useSelector((state) => state.sponsors);
+    sponsors = useSelector((state) => state.rootReducer.sponsors);
 
   useEffect(() => {
     dispatch(getAllSponsors());
