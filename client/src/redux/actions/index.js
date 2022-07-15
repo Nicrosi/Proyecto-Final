@@ -11,8 +11,8 @@ export const GET_ALL_SPONSORS = "GET_ALL_SPONSORS";
 export const ADD_SPONSOR = "ADD_SPONSOR";
 export const PUT_USERS = "PUT_USERS";
 export const GET_TOURNAMENT = "GET_TOURNAMENT";
-export const PUT_TOURNAMENT = "PUT_TOURNAMENT"
-export const CLEAR_USER = "CLEAR_USER"
+export const PUT_TOURNAMENT = "PUT_TOURNAMENT";
+export const CLEAR_USER = "CLEAR_USER";
 
 // export const getAllPlayers = () => { JSON
 //   return {
@@ -24,8 +24,7 @@ export const CLEAR_USER = "CLEAR_USER"
 const urlUser = "http://localhost:3001/user";
 const urlSponsors = "http://localhost:3001/sponsor";
 const urlTournament = "http://localhost:3001/tournament";
-const urlSponsor = "http://localhost:3001/sponsor"
-const urlAuth = "http://localhost:3001/auth"
+const urlSponsor = "http://localhost:3001/sponsor";
 
 export const getAllUsers = () => (dispatch) => {
   return axios
@@ -97,32 +96,9 @@ export function postSponsor(input) {
   };
 }
 
-export const postNewUser = (valuesInput) => {
-  return async () => {
-    try {
-      const input = {
-        dni: valuesInput.dni,
-        name: valuesInput.name,
-        last_name: valuesInput.last_name,
-        is_admin: valuesInput.is_admin,
-        e_mail: valuesInput.e_mail,
-        password: valuesInput.password,
-        phone: valuesInput.phone,
-        num_contact: valuesInput.num_contact,
-        picture: valuesInput.picture,
-        gender: valuesInput.gender,
-      };
-      return await axios.post(`${urlAuth}/register`, input);
-    } catch (err) {
-      alert("Add user error, try again later");
-    }
-  };
-};
-
 export const putUsers = (dni, valuesChange) => {
   return async () => {
     const putValues = {
-
       name: valuesChange.name,
       last_name: valuesChange.last_name,
       is_admin: valuesChange.is_admin,
@@ -134,8 +110,8 @@ export const putUsers = (dni, valuesChange) => {
       // category: valuesChange.category.type
     };
     return await axios.put(`${urlUser}/${dni}`, putValues);
-  }
-}
+  };
+};
 
 export function getTournaments(id_tournament) {
   return async (dispatch) => {
@@ -154,44 +130,26 @@ export function getTournaments(id_tournament) {
 export const putTournament = (id_tournament, input) => {
   return async () => {
     const putValues = {
-
       date: input.date,
       location: input.location,
-
     };
     return await axios.put(`${urlTournament}/${id_tournament}`, putValues);
-  }
-}
+  };
+};
 export const putSponsor = (id_sponsor, val) => {
   return async () => {
     const putval = {
-
       company: val.company,
       message: val.message,
       logo: val.logo,
       link: val.link,
-      
     };
     return await axios.put(`${urlSponsor}/${id_sponsor}`, putval);
-  }
-}
-
-export const postLogin = (valuesInput) => {
-  return async () => {
-    try {
-      const input = {
-        e_mail: valuesInput.e_mail,
-        password: valuesInput.password,
-      };
-      return await axios.post(`${urlAuth}/login`, input);
-    } catch (err) {
-      alert("Add user error, try again later");
-    }
   };
 };
 
 export const clearUser = () => {
-    return {
-      type: CLEAR_USER,
-    };
-  }
+  return {
+    type: CLEAR_USER,
+  };
+};
