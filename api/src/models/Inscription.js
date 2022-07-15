@@ -5,11 +5,15 @@ module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define('inscription', {
     id_inscription: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.BIGINT,
       allowNull: false,
       primaryKey: true,
       autoIncrement: true,
       unique: true
+    },
+    description: {
+      type: DataTypes.STRING,
+      allowNull: false
     },
     amount: {
       type: DataTypes.INTEGER,

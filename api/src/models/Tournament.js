@@ -4,11 +4,15 @@ module.exports = (sequelize) => {
     // defino el modelo
     sequelize.define('tournament', {
         id_tournament: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.BIGINT,
             allowNull: false,
             primaryKey: true,
             unique: true,
             autoIncrement: true,
+        },
+        name: {
+            type: DataTypes.STRING,
+            allowNull: false
         },
         date: {
             type: DataTypes.DATE,
@@ -18,6 +22,9 @@ module.exports = (sequelize) => {
             type: DataTypes.STRING,
             allowNull: false,
         },
+        earnings: {
+            type: DataTypes.BIGINT
+        }
     },
     {
         timestamps: false,

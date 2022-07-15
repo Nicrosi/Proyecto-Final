@@ -5,6 +5,7 @@ import {
   GET_USER_BY_ID,
   ADD_SPONSOR,
   GET_ALL_SPONSORS,
+  GET_SUBT_BY_TOURNAMENT,
   CLEAR_USER,
 } from "../actions";
 import { filterUsers } from "../helpers/filters";
@@ -17,6 +18,7 @@ const initialState = {
   user: {},
   filteredUsers: [],
   sponsors: [],
+  filteredSubt: []
 };
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -70,13 +72,16 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         sponsors: action.payload,
       };
-    
+    case GET_SUBT_BY_TOURNAMENT:
+      return {
+        ...state,
+        filteredSubt: action.payload,
+      }    
     case CLEAR_USER:
       return {
         ...state,
         user: {},
       };
-   
     default:
       return { ...state };
   }
