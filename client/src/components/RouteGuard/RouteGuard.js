@@ -19,11 +19,7 @@ const RouteGuard = ({ component: Component, ...rest }) => {
         <Route
           {...rest}
           render={(props) =>
-            loggedIn && user.is_admin === rest.admin ? (
-              <Component {...props} />
-            ) : (
-              <Redirect to="/login" />
-            )
+            loggedIn ? <Component {...props} /> : <Redirect to="/login" />
           }
         />
       ) : null}

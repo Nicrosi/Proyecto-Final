@@ -18,8 +18,13 @@ function App() {
   return (
     <div className="App">
       <Route path={"/"} component={NavBar} />
-      <RouteGuard exact path={"/Users"} component={Users} />
-      <RouteGuard exact path={"/HomeAdmin"} component={HomeAdmin} admin />
+      <RouteGuard exact path={"/Users"} component={Users} admin={false} />
+      <RouteGuard
+        exact
+        path={"/HomeAdmin"}
+        component={HomeAdmin}
+        admin={true}
+      />
       {/* <Route exact path={"/HomeAdmin"} component={HomeAdmin} /> */}
       <Route exact path={"/"} component={LandingPage} />
       <Route exact path={"/Users/:userId"} component={DetailsUser} />
