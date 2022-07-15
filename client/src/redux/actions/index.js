@@ -163,7 +163,6 @@ export const clearUser = () => {
 };
 
 export const getSubtournament = (tournament_id) => async (dispatch) => {
-    console.log(tournament_id);
     try {
     const response = await axios
       .get(`${urlSubtByT}/${tournament_id}`);
@@ -180,7 +179,7 @@ export const getSubtournament = (tournament_id) => async (dispatch) => {
 export const postInscription = (body) => {
   return async () => {
     try {
-      const data_user = body.id_user
+      const data_user = body.user
        await axios.post(`${urlInscription}/${data_user}`, body);
        toast("Se completo el pago.", {type: "success"});
     } catch (err) {
