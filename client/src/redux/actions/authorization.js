@@ -38,7 +38,6 @@ export const postLogin = (valuesInput) => {
       const response = await axios.post(`${urlAuth}/login`, input);
       const token = response.data.token;
       setToken(token);
-      console.log(token);
       dispatch({ type: AUTHENTICATED, payload: response.data.user });
     } catch (err) {
       alert("Login error");
@@ -54,7 +53,6 @@ export const logoutUser = () => {
 export const verifyUser = () => {
   return async (dispatch) => {
     try {
-      console.log(getToken());
       const response = await axios.get(urlAuth + "/verifytoken", {
         headers: {
           Authorization: getToken(),
