@@ -48,7 +48,7 @@ router.post("/register", async (req, res, next) => {
     return res.status(201).json({ok: "User created!"})
       
     } catch (error) {
-        return res.status(403).json({error: "Username or Password invalid"})
+        return res.status(403).json({error: "error"})
     }
   });
   
