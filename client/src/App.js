@@ -12,6 +12,7 @@ import { FormTournament } from "./components/Tournament/FormTournament.jsx";
 import  LogIn  from "./components/LogIn/LogIn.jsx";
 import {FormUserRegister} from "./components/FormUser copy/FormUserRegister.jsx"
 import ControlPanel from "./controlPanel/ControlPanel.jsx";
+import ProfileUser from "./components/ProfileUser/ProfileUser.jsx";
 
 function App() {
   return (
@@ -23,12 +24,14 @@ function App() {
       <Route exact path={"/Users/:userId"} component={DetailsUser} />
       <Route exact path={"/CreateScore/:userId"} component={FormScore} />
       <Route exact path={"/sponsor"} component={FormSponsor}/>
-      <Route exact path={"/CreateUsers"} component={FormUser}/>
+      <Route exact path={"/EditProfile/:userId"} component={FormUser}/>
       <Route exact path={"/tournament"} component={FormTournament} />
       <Route exact path={"/login"} component={LogIn} />
       <Route exact path={"/cpanel"} component={ControlPanel}/>
       <Route exact path={"/SignIn"} component={FormUserRegister}/>
-      
+      <Route exact path={"/Profile/:userId"} component={ProfileUser}/>
+
+
     </div>
   );
 }

@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-//import styles from "./FormUser.module.css"
+import styles from "./FormUser.module.css"
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { postNewUser } from "../../redux/actions";
-import img1 from "../../img/imgForm1.webp";
+import { putUsers } from "../../redux/actions";
+import back from "../../img/back.png"
 
 export function validate(input) {
   let error = {};
@@ -20,13 +20,15 @@ export function validate(input) {
     error.name = "Name is required";
   } else if (input.name.length > 255) {
     error.name = "Enter less than 255 characters";
-  }
+  } else if (input.name.search("[0-9]") !== -1 ) {
+    error.name = "The name must not have numbers"};
 
   if (!input.last_name) {
     error.last_name = "Last name is required";
   } else if (input.last_name.length > 255) {
     error.last_name = "Enter less than 255 characters";
-  }
+  } else if (input.last_name.search("[0-9]") !== -1 ) {
+    error.name = "The last name must not have numbers"};
 
   if (!input.e_mail) {
     error.e_mail = "E-mail is required";
@@ -65,31 +67,32 @@ export function validate(input) {
   return error;
 }
 
-export const FormUser = () => {
+export const FormUser = ({dni, name, last_name, is_admin, e_mail, picture, gender, phone, num_contact, setShowEdit}) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const noError = "Looks good";
+
   const [input, setInput] = useState({
+    dni: dni,
+    name: name,
+    last_name: last_name,
+    is_admin: is_admin,
+    e_mail: e_mail,
+    phone: phone,
+    num_contact: num_contact,
+    picture: picture,
+    gender: gender,
+  });
+
+  const [error, setError] = useState({
     dni: "",
     name: "",
     last_name: "",
-    is_admin: false,
     e_mail: "",
     phone: "",
     num_contact: "",
     picture: "",
     gender: "",
-  });
-
-  const [error, setError] = useState({
-    dni: "DNI is required",
-    name: "Name is required",
-    last_name: "Last name is required",
-    e_mail: "E-mail is required",
-    phone: "Phone is required",
-    num_contact: "Emergency contact is required",
-    picture: "Picture is required",
-    gender: "Gender is required",
   });
 
   function handleInputChange(e) {
@@ -104,83 +107,41 @@ export const FormUser = () => {
       }));
     }
     setInput({ ...input, [e.target.name]: e.target.value });
-    console.log(e.target.value);
 
     let objError = validate({ ...input, [e.target.name]: e.target.value });
     setError(objError);
   }
-  console.log(input);
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log(input);
-    dispatch(postNewUser(input));
-    setInput({
-      dni: "",
-      name: "",
-      last_name: "",
-      is_admin: false,
-      e_mail: "",
-      phone: "",
-      num_contact: "",
-      picture: "",
-      gender: "",
-    });
-    alert("Created user");
-    history.push("/HomeAdmin");
+    dispatch(putUsers(dni, input));
+    alert("Changes saved!");
+    history.push(`/Profile/${dni}`);
+    setShowEdit(true)
+  }
+
+  function handleClick(e) {
+    e.preventDefault();
+    setShowEdit(true)
+
   }
 
   return (
     <React.Fragment>
-      {/* font-family: 'Bebas Neue', cursive;
-font-family: 'Gruppo', cursive; */}
-
-      <div style={{ minHeight: "100vh", width: "100%" }}>
-        <div style={{ position: "absolute", top: "0", width: "100%" }}>
-          <img
-            src={img1}
-            alt="imgNotFound"
-            style={{
-              width: "100%",
-              filter: "contrast(175%) grayscale(100%) brightness(20%)",
-              objectFit: "cover",
-              height: "500px",
-            }}
-          />
+      <div className={styles.containerBox}>
+        <div className={styles.titleBox}>
+        <img src={back} alt="buttonBack" className={styles.buttonBack} onClick={e => handleClick(e)} />
+        <h1 className={styles.title}>Edit your profile</h1>
         </div>
-
-        <h1
-          style={{
-            fontFamily: "'Bebas Neue', cursive",
-            fontSize: "7rem",
-            position: "absolute",
-            top: "150px",
-            marginLeft: "10%",
-            color: "#A7D129",
-          }}
-        >
-          Personal Information
-        </h1>
-
-        <div
-          className="mx-auto"
-          style={{
-            position: "relative",
-            marginTop: "300px",
-            width: "60%",
-            backgroundColor: "rgb(43, 43, 44)",
-            borderRadius: "10px",
-            padding: "20px",
-          }}
-        >
-          <form style={{ width: "100%" }} onSubmit={(e) => handleSubmit(e)}>
+        <div className={styles.editBox}>
+          <form className={styles.form} onSubmit={(e) => handleSubmit(e)}>
             <div className="row g-2 mb-3">
               <div className="form-floating col-md">
                 <input
                   type="text"
                   value={input.name}
                   name="name"
-                  placeholder="Write a name..."
+                  placeholder=""
                   id="floatingInput"
                   onChange={(e) => handleInputChange(e)}
                   className={
@@ -204,7 +165,7 @@ font-family: 'Gruppo', cursive; */}
                     {noError}
                   </div>
                 )}
-                <label htmlFor="floatingInput">Write a name...</label>
+                <label htmlFor="floatingInput">Name</label>
               </div>
               <div className="form-floating col-md">
                 <input
@@ -235,7 +196,7 @@ font-family: 'Gruppo', cursive; */}
                     {noError}
                   </div>
                 )}
-                <label htmlFor="floatingInput">Write a last name...</label>
+                <label htmlFor="floatingInput">Last Name</label>
               </div>
             </div>
             <div className="row g-2 mb-3">
@@ -438,10 +399,10 @@ font-family: 'Gruppo', cursive; */}
             <div className="d-grid gap-2">
             {Object.keys(error).length > 0 ? (
               <button className="btn btn-secondary" style={{ backgroundColor: "#A7D129" }} type="submit" disabled>
-                Create
+                Confirm changes
               </button>
             ) : (
-              <button className="btn btn-success" style={{ backgroundColor: "#A7D129" }} type="submit">Create</button>
+              <button className="btn btn-success" style={{ backgroundColor: "#A7D129" }} type="submit">Confirm changes</button>
             )}
             </div>
           </form>
