@@ -12,6 +12,7 @@ export const ADD_SPONSOR = "ADD_SPONSOR";
 export const PUT_USERS = "PUT_USERS";
 export const GET_TOURNAMENT = "GET_TOURNAMENT";
 export const PUT_TOURNAMENT = "PUT_TOURNAMENT"
+export const CLEAR_USER = "CLEAR_USER"
 
 // export const getAllPlayers = () => { JSON
 //   return {
@@ -188,3 +189,9 @@ export const postLogin = (valuesInput) => {
     }
   };
 };
+
+export const clearUser = () => {
+    return {
+      type: CLEAR_USER,
+    };
+  }
