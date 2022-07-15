@@ -8,6 +8,8 @@ export default function PRUEBA() {
   const [file, setFile ] = useState(null);
   const [ImagesList, setImagesList ] = useState([]);
 
+  console.log(file);
+
   useEffect(() => {
     fetch('http://localhost:3001/images/prueba',)
     .then(res => res.json())
@@ -21,9 +23,6 @@ export default function PRUEBA() {
       .catch(err => console.log(err))
     }
 
-    // return () => {
-    //   dispatch(ClearDogDetail())
-    // }
   },[])
 
 
@@ -64,6 +63,7 @@ export default function PRUEBA() {
       <button onClick={()=>HandlerCLick()} >Click!</button>
       <rd/>
       <div className='container_images' >
+      {/* <img src={file?.name} alt='image' /> */}
         {
           ImagesList.length && ImagesList.map((image) => (
             <img className='images_from_db' src={`http://localhost:3001/${image}`} />
