@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import styles from "./FormUser.module.css"
+import styles from "./FormUser.module.css";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { getUserById, putUsers } from "../../redux/actions";
-import back from "../../img/back.png"
+
+import { getUserById, putUsers } from "../../../redux/actions/index";
+import back from "../../../img/back.png";
 
 export function validate(input) {
   let error = {};
@@ -20,15 +21,17 @@ export function validate(input) {
     error.name = "Name is required";
   } else if (input.name.length > 255) {
     error.name = "Enter less than 255 characters";
-  } else if (input.name.search("[0-9]") !== -1 ) {
-    error.name = "The name must not have numbers"};
+  } else if (input.name.search("[0-9]") !== -1) {
+    error.name = "The name must not have numbers";
+  }
 
   if (!input.last_name) {
     error.last_name = "Last name is required";
   } else if (input.last_name.length > 255) {
     error.last_name = "Enter less than 255 characters";
-  } else if (input.last_name.search("[0-9]") !== -1 ) {
-    error.name = "The last name must not have numbers"};
+  } else if (input.last_name.search("[0-9]") !== -1) {
+    error.name = "The last name must not have numbers";
+  }
 
   if (!input.e_mail) {
     error.e_mail = "E-mail is required";
@@ -67,7 +70,18 @@ export function validate(input) {
   return error;
 }
 
-export const FormUser = ({dni, name, last_name, is_admin, e_mail, picture, gender, phone, num_contact, setShowEdit}) => {
+export const FormUser = ({
+  dni,
+  name,
+  last_name,
+  is_admin,
+  e_mail,
+  picture,
+  gender,
+  phone,
+  num_contact,
+  setShowEdit,
+}) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const noError = "Looks good";
@@ -118,21 +132,25 @@ export const FormUser = ({dni, name, last_name, is_admin, e_mail, picture, gende
     dispatch(getUserById(dni));
     alert("Changes saved!");
     history.push(`/Profile/${dni}`);
-    setShowEdit(true)
+    setShowEdit(true);
   }
 
   function handleClick(e) {
     e.preventDefault();
-    setShowEdit(true)
-
+    setShowEdit(true);
   }
 
   return (
     <React.Fragment>
       <div className={styles.containerBox}>
         <div className={styles.titleBox}>
-        <img src={back} alt="buttonBack" className={styles.buttonBack} onClick={e => handleClick(e)} />
-        <h1 className={styles.title}>Edit your profile</h1>
+          <img
+            src={back}
+            alt="buttonBack"
+            className={styles.buttonBack}
+            onClick={(e) => handleClick(e)}
+          />
+          <h1 className={styles.title}>Edit your profile</h1>
         </div>
         <div className={styles.editBox}>
           <form className={styles.form} onSubmit={(e) => handleSubmit(e)}>
@@ -245,9 +263,8 @@ export const FormUser = ({dni, name, last_name, is_admin, e_mail, picture, gende
                   aria-label="Floating label select example"
                   name="gender"
                   onChange={(e) => handleInputChange(e)}
-                ><option value="">
-                Choose a gender
-              </option>
+                >
+                  <option value="">Choose a gender</option>
                   <option value="female">Female</option>
                   <option value="male">Male</option>
                 </select>
@@ -398,13 +415,24 @@ export const FormUser = ({dni, name, last_name, is_admin, e_mail, picture, gende
               </div>
             </div>
             <div className="d-grid gap-2">
-            {Object.keys(error).length > 0 ? (
-              <button className="btn btn-secondary" style={{ backgroundColor: "#A7D129" }} type="submit" disabled>
-                Confirm changes
-              </button>
-            ) : (
-              <button className="btn btn-success" style={{ backgroundColor: "#A7D129" }} type="submit">Confirm changes</button>
-            )}
+              {Object.keys(error).length > 0 ? (
+                <button
+                  className="btn btn-secondary"
+                  style={{ backgroundColor: "#A7D129" }}
+                  type="submit"
+                  disabled
+                >
+                  Confirm changes
+                </button>
+              ) : (
+                <button
+                  className="btn btn-success"
+                  style={{ backgroundColor: "#A7D129" }}
+                  type="submit"
+                >
+                  Confirm changes
+                </button>
+              )}
             </div>
           </form>
         </div>

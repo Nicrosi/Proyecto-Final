@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { clearUser, getUserById } from "../../redux/actions";
+import { clearUser, getUserById } from "../../../redux/actions";
 import styles from "./ProfileUser.module.css"
 import PersonalInfoUser from "../PersonalInfoUser/PersonalInfoUser.jsx";
 import CategoryScoreUser from "../CategoryScoreUser/CategoryScoreUser.jsx";
