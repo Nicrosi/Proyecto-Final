@@ -11,7 +11,7 @@ import { FormUser } from "./components/FormUser/FormUser.jsx";
 import { FormTournament } from "./components/Tournament/FormTournament/FormTournament.jsx";
 import  LogIn  from "./components/LogIn/LogIn.jsx";
 import {FormUserRegister} from "./components/FormUserRegister/FormUserRegister.jsx"
-import ControlPanel from "./components/controlPanel/ControlPanel.jsx";
+import ControlPanel from "./components/controlPanel/ControlPanel/ControlPanel.jsx";
 
 function App() {
   return (
@@ -28,6 +28,7 @@ function App() {
       <Route exact path={"/login"} component={LogIn} />
       <Route exact path={"/cpanel"} component={ControlPanel}/>
       <Route exact path={"/SignIn"} component={FormUserRegister}/>
+      
       
     </div>
   );

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { getAllUsers, putUsers } from "../../redux/actions";
+import { getAllUsers, putUsers } from "../../../redux/actions";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
