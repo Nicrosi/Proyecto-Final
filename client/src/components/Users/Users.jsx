@@ -8,7 +8,7 @@ import Navigator from "../Navigator/Navigator";
 
 export const Users = () => {
   const [currentPage, setCurrentPage] = useState(0);
-  const users = useSelector((state) => state.filteredUsers);
+  const users = useSelector((state) => state.rootReducer.filteredUsers);
   const dispatch = useDispatch();
 
   useEffect(() => {
