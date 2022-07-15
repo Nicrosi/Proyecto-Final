@@ -5,7 +5,7 @@ import {
   GET_USER_BY_ID,
   ADD_SPONSOR,
   GET_ALL_SPONSORS,
- 
+  CLEAR_USER,
 } from "../actions";
 import { filterUsers } from "../helpers/filters";
 import { sortByName } from "../helpers/sorts";
@@ -71,9 +71,12 @@ const rootReducer = (state = initialState, action) => {
         sponsors: action.payload,
       };
     
+    case CLEAR_USER:
+      return {
+        ...state,
+        user: {},
+      };
    
-
-
     default:
       return { ...state };
   }

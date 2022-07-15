@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getUserById } from "../../redux/actions";
+import { clearUser, getUserById } from "../../redux/actions";
 import styles from "./ProfileUser.module.css"
 import PersonalInfoUser from "../PersonalInfoUser/PersonalInfoUser.jsx";
 import CategoryScoreUser from "../CategoryScoreUser/CategoryScoreUser.jsx";
@@ -14,6 +14,9 @@ export default function ProfileUser(props) {
 
     useEffect(() => {
         dispatch(getUserById(params));
+        return (
+          () => {dispatch(clearUser())}
+        )
     }, [dispatch, params]);
 
     let user = useSelector((state) => state.user);
@@ -35,7 +38,7 @@ export default function ProfileUser(props) {
                         <h1 className={styles.nameUser}>{user.name}</h1>
                         <h1 className={styles.nameUser}>{user.last_name}</h1>
                         {showEdit === true &&
-                        <button type="button" className="btn btn-outline-secondary btn-dark my-2" onClick={()=>handleClicShowEdit()} style={{ width: "150px" }}>Edit Profil</button>}
+                        <button type="button" className="btn btn-outline-secondary btn-dark my-2" onClick={()=>handleClicShowEdit()} style={{ width: "150px" }}>Edit Profile</button>}
                     </div>
                     <div className={styles.principalBox}>
                       {showEdit === false ? 

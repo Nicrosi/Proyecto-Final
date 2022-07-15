@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styles from "./FormUser.module.css"
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { putUsers } from "../../redux/actions";
+import { getUserById, putUsers } from "../../redux/actions";
 import back from "../../img/back.png"
 
 export function validate(input) {
@@ -115,6 +115,7 @@ export const FormUser = ({dni, name, last_name, is_admin, e_mail, picture, gende
   function handleSubmit(e) {
     e.preventDefault();
     dispatch(putUsers(dni, input));
+    dispatch(getUserById(dni));
     alert("Changes saved!");
     history.push(`/Profile/${dni}`);
     setShowEdit(true)
