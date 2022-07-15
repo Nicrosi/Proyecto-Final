@@ -14,6 +14,7 @@ import {FormUserRegister} from "./components/FormUser copy/FormUserRegister.jsx"
 import ControlPanel from "./controlPanel/ControlPanel.jsx";
 import ProfileUser from "./components/ProfileUser/ProfileUser.jsx";
 
+
 function App() {
   return (
     <div className="App">
