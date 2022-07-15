@@ -1,7 +1,11 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { logoutUser } from "../../redux/actions/authorization";
 
 export default function NavBar() {
+  const auth = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
   return (
     // <>
     //     <div>
@@ -41,16 +45,19 @@ export default function NavBar() {
         </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav mb-2 mb-lg-0 ms-auto pe-4 bg-morning">
-            <li className="nav-item">
-              <Link
-                className="nav-link active ms-auto"
-                style={{ fontWeight: "bold", color: "#e0e6e8" }}
-                aria-current="page"
-                to={"/HomeAdmin"}
-              >
-                Admin
-              </Link>
-            </li>
+            {auth.currentUser && auth.currentUser.is_admin ? (
+              <li className="nav-item">
+                <Link
+                  className="nav-link active ms-auto"
+                  style={{ fontWeight: "bold", color: "#e0e6e8" }}
+                  aria-current="page"
+                  to={"/HomeAdmin"}
+                >
+                  Admin
+                </Link>
+              </li>
+            ) : null}
+
             <li className="nav-item">
               <Link
                 className="nav-link ms-auto"
@@ -60,6 +67,17 @@ export default function NavBar() {
                 Users
               </Link>
             </li>
+            {auth.loggedIn ? (
+              <li className="nav-item">
+                <button
+                  onClick={() => {
+                    dispatch(logoutUser());
+                  }}
+                >
+                  Logout
+                </button>
+              </li>
+            ) : null}
           </ul>
         </div>
       </div>
