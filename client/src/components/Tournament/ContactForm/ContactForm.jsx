@@ -2,14 +2,12 @@ import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { MailIcon } from "@heroicons/react/solid";
 import emailjs from "@emailjs/browser";
-
+import styles from "./ContactForm.module.css";
 
 export const ContactForm = () => {
   
   const users = useSelector((state) => state.users);
   
-
-
   console.log('users',users);
   const email = users.map((el) => el.e_mail);
   const allEmail = [...new Set(email)];
@@ -62,37 +60,49 @@ export const ContactForm = () => {
 
   return (
     <>
-      <div className="lg:mt-48 lg:mr-48 pt-6 pb-8 bg-white shadow-xl rounded p-5">
+      <div className={styles.formBox}>
+      <h3 className={styles.subtitle}>Send a Message to Players</h3>
         {status && renderAlert}
-        <form onSubmit={(e) => handleSubmit(e)}>
-          <h3 className="text-gray-700 mb-7 text-xl font-semibold">
-            Send a Message to Players
-          </h3>
+        <form style={{ width: "100%" }} onSubmit={(e) => handleSubmit(e)}>
+        <div className="row g-2 mb-3">
+          <div className="form-floating col-md">
           <input
             onChange={(e) => handleChange(e)}
-            label="Full Name"
             name="name"
             type="text"
-            placeholder="Sebas"
+            placeholder="Write your name..."
+            id="floatingInput"
             value={input.name}
+            className="form-control"
           />
+          <label htmlFor="floatingInput">Full Name</label>      
+          </div>
+          <div className="form-floating col-md">
           <input
             onChange={(e) => handleChange(e)}
-            label="E-mail"
             name="email"
             type="email"
-            placeholder="Gaby@gmail.com"
+            placeholder="example: admin@gmail.com"
+            id="floatingInput"
             value={input.email}
+            className="form-control"
           />
+          <label htmlFor="floatingInput">E-mail</label>      
+          </div>
+        </div>
+        <div className="row g-2">
+          <div className="input-group mb-3">
           <input
             onChange={(e) => handleChange(e)}
-            label="Attachment"
             name="my_file"
             type="file"
             placeholder=""
             value={input.my_file}
-          />
-
+            class="form-control" 
+            id="inputGroupFile02"
+          />   
+          </div>
+        </div>
           {/* <select onChange={(e) => handleChange(e)}>
             <option value={input.email} label="Email" name="email" placeholder="gaby@gmail.com" type="email">All emails</option>
             {allEmail.map((email) => {
@@ -105,22 +115,30 @@ export const ContactForm = () => {
               );
             })}
           </select> */}
-
-          <input
-            onChange={(e) => handleChange(e)}
-            label="Message"
-            name="message"
-            type="text"
-            placeholder="Message"
-            value={input.message}
-          />
-
+        <div className={styles.messageBox}>
+        <div className="form-floating me-2" style={{width: "70%"}}>
+            <input
+              onChange={(e) => handleChange(e)}
+              name="message"
+              type="text"
+              placeholder="Write a message..."
+              value={input.message}
+              className="form-control"
+              style={{height: "200px"}}
+            />
+          <label htmlFor="floatingInput">Message</label>
+        </div>
+          <div>
           <button
-            type="submit"
-            className="mt-4 bg-gray-900 text-gray-200 rounded hover:bg-gray-700 px-4 py-2 focus:outline-none"
-          >
-            Send <MailIcon className="w-6 ml-2 float-right" />
+              type="submit"
+              className="btn btn-outline-white px-4 py-2"
+              style={{ backgroundColor: "#A7D129"
+            }}
+            >
+            Send <MailIcon />
           </button>
+          </div>
+        </div>
         </form>
       </div>
     </>

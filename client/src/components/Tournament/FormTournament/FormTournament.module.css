@@ -1,0 +1,29 @@
+.containerBox {
+  min-height: 100vh;
+  width: 100%;
+}
+.imageBox {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 400px;
+  display: flex;
+  background: url("../../../img/imgForm1.webp") no-repeat center center;
+  background-size: cover;
+}
+.title {
+  font-family: 'Bebas Neue', cursive;
+  font-size: 7rem;
+  position: absolute;
+  top: 150px;
+  margin-left: 10%;
+  color: #A7D129;
+}
+.formBox {
+  position: relative;
+  margin: 300px auto 0 auto;
+  width: 60%;
+  background-color: rgb(43, 43, 44);
+  border-radius: 10px;
+  padding: 20px;
+}

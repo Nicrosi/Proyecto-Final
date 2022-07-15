@@ -1,0 +1,18 @@
+.formBox {
+    position: relative;
+    margin: 15px auto 40px auto;
+    width: 60%;
+    background-color: rgb(43, 43, 44);
+    border-radius: 10px;
+    padding: 20px;
+  }
+.subtitle {
+    font-weight: bold;
+    color: #e0e6e8 
+}
+.messageBox {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+}

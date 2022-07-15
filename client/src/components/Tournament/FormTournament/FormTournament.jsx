@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { ContactForm } from "./ContactForm";
-import img1 from '../../assets/fototorneo.jpg'
-
+import { ContactForm } from "../ContactForm/ContactForm";
+import styles from "./FormTournament.module.css";
 
 export function validate(input) {
   let error = {};
@@ -17,7 +16,7 @@ export function validate(input) {
   }
 
   if (!input.location) {
-    error.location = "location is required";
+    error.location = "Location is required";
   } else if (input.location.length > 255) {
     error.location = "Enter less than 255 characters";
   }
@@ -33,14 +32,14 @@ export const FormTournament = () => {
   });
 
   const [error, setError] = useState({
-    date: "date is required",
-    location: "location is required",
+    date: "Date is required",
+    location: "Location is required",
   });
 
   async function handleOnSubmit(e) {
     e.preventDefault();
     await axios.post(`http://localhost:3001/tournament`, input);
-    alert("successfully created Tournament");
+    alert("Successfully created tournament");
   }
 
   function handleOnChange(e) {
@@ -53,30 +52,21 @@ export const FormTournament = () => {
   }
 
   return (
-    <div className="" style={{ minHeight: "10vh", width: "100%" }}>
-      {/* <img
-          className="d-block w-100"
-          src={img1}
-          alt=""
-          style={{ objectFit: "cover", height: "100vh" }}/> */}
-      <div
-        className=" display-7 hstack justify-content-center"
-        style={{ minHeight: "10vh", width: "100%" }}
-      >
-        TOURNAMENT CREATION
-      </div>
-
+    <div className={styles.containerBox}>
+      <div className={styles.imageBox}></div>
+      <h1 className={styles.title}>TOURNAMENT CREATION</h1>
+      <div className={styles.formBox}>
       <div
         className="mx-auto hstack justify-content-around"
         style={{ width: "100%" }}
       >
-        <form onSubmit={(e) => handleOnSubmit(e)}>
+        <form style={{ width: "100%" }} onSubmit={(e) => handleOnSubmit(e)}>
           <div className="hstack mb-3">
             <ul
               className="list-group list-group-horizontal mx-auto"
               style={{ width: "100%" }}
             >
-              <li className="list-group-item" style={{ width: "30%" }}>
+              <li className="list-group-item" style={{ width: "50%" }}>
                 <div>
                   <h5 className="card-text">Date</h5>
                   <input
@@ -99,14 +89,14 @@ export const FormTournament = () => {
                 </div>
               </li>
 
-              <li className="list-group-item" style={{ width: "30%" }}>
+              <li className="list-group-item" style={{ width: "50%" }}>
                 <div>
                   <h5 className="card-text">Location: </h5>
                   <input
                     key="Location"
                     type="text"
                     onChange={(e) => handleOnChange(e)}
-                    placeholder="Tournaments Location..."
+                    placeholder="Tournaments location..."
                     name="location"
                     value={input.location}
                     className={error.location?"form-control is-invalid":"form-control is-valid"}
@@ -122,28 +112,19 @@ export const FormTournament = () => {
               </li>
             </ul>
           </div>
-
-          <div className="d-grid gap-2 mb-3" style={{ width: "90%" }}>
+          <div className="d-grid gap-2" >
           {Object.keys(error).length > 0 ? (
-              <button className="btn btn-secondary" style={{ backgroundColor: "#A7D129" }} type="submit" disabled>
+              <button className="btn btn-secondary" style={{ backgroundColor: "#A7D129"}} type="submit" disabled>
                 Create
               </button>
             ) : (
-              <button className="btn btn-success" style={{ backgroundColor: "#A7D129" }} type="submit">Create</button>
+              <button className="btn btn-success" style={{ backgroundColor: "#A7D129"}} type="submit">Create</button>
             )}
           </div>
         </form>
       </div>
-      <div className="h-screen">
-        <div className="lg:grid-cols-2  lg:gap-6 bg-blue-300 lg:h2/3">
-          <div className="flex flex-col justify-center text-center lg:p-40 md:text-left">
-            <p className="uppercase font-medium opacity-40 text-gray-500">
-              Tournament
-            </p>
-            <ContactForm />
-          </div>
-        </div>
       </div>
+      <ContactForm />
     </div>
   );
 };

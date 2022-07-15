@@ -7,7 +7,7 @@ import NavBar from "./components/NavBar/NavBar";
 import { Users } from "./components/Users/Users.jsx";
 import { FormScore } from "./components/FormScore/FormScore.jsx";
 import { FormSponsor } from "./components/FormSponsor/FormSponsor.jsx";
-import { FormTournament } from "./components/Tournament/FormTournament.jsx";
+import { FormTournament } from "./components/Tournament/FormTournament/FormTournament.jsx";
 import  LogIn  from "./components/LogIn/LogIn.jsx";
 import {FormUserRegister} from "./components/FormUserRegister/FormUserRegister.jsx"
 import ControlPanel from "./components/controlPanel/ControlPanel.jsx";
