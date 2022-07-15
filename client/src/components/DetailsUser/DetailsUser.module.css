@@ -1,0 +1,66 @@
+.containerBox {
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction:row;
+}
+.PanelBox {
+    width: 35%;
+    min-height: 100vh;
+    display: flex;
+    background: url("../../img/imgProfileUser2.webp") no-repeat center center;
+    background-size: cover;
+    background-attachment:scroll;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+}
+.nameUser {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 2.5rem;
+    color: hsl(0, 0%, 100%);
+    margin: 0 auto;
+    line-height: 1;
+}
+.pictureUser {
+    margin: 150px auto 15px auto;
+    border-radius: 50%;
+    width: 250px;
+    height: 250px;
+}
+.principalBox {
+    width: 65%;
+    padding: 80px 30px 0 30px;
+}
+.secondaryBox {
+    border: solid #929292 0.2ch;
+    border-radius: 10px;
+}
+.navBar {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    height: 40px;
+    justify-content: flex-start;
+    padding-left: 30px;
+}
+.navBarItems {
+    width: auto;
+    margin-right: 10px;
+    padding: 0 20px;
+    border-radius: 10px 10px 0 0;
+    background-color: #A7D129;
+    text-align: center;
+    display: flex;
+    align-items: flex-end;
+    border: none;
+}
+.navBarItems:hover {
+    background-color: rgb(151, 151, 151);
+    transition: 0.5s;
+}
+.item {
+    font-size: 1rem;
+    border: #929292;
+}

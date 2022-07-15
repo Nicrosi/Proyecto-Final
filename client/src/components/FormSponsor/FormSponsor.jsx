@@ -13,19 +13,19 @@ export function validate(input) {
   }
 
   if (!input.message) {
-    error.message = "message is required";
+    error.message = "Message is required";
   } else if (input.message.length > 255) {
     error.message = "Enter less than 255 characters";
   }
 
   if (!input.logo) {
-    error.logo = "logo is required";
+    error.logo = "Logo is required";
   } else if (!/.(gif|jpeg|jpg|png)$/i.test(input.logo) && input.logo) {
     error.logo = "Enter a correct image format (gif,jpeg,jpg,png)";
   }
 
   if (!input.link) {
-    error.link = "link is required";
+    error.link = "Link is required";
   } else if (input.link.length > 255) {
     error.link = "Enter less than 255 characters";
   }
@@ -44,10 +44,10 @@ export const FormSponsor = () => {
   });
 
   const [error, setError] = useState({
-    company: "company is required",
-    message: "message is required",
-    logo: "logo is required",
-    link: "link is required",
+    company: "Company is required",
+    message: "Message is required",
+    logo: "Logo is required",
+    link: "Link is required",
   });
 
   function handleOnChange(e) {
@@ -75,100 +75,120 @@ export const FormSponsor = () => {
 
   return (
     <>
-      <div className={styles.mainContainerCreation}>
-        Sponsor Creation
-        <form onSubmit={(e) => handleOnSubmit(e)}>
-          <div className={styles.formContainer}>
-            <div className={styles.Section}>
-              <label>Company</label>
-              <input
-                key="company"
-                type="text"
-                onChange={(e) => handleOnChange(e)}
-                placeholder="Name is required"
-                name="company"
-                value={input.name}
-                className={error.company?"form-control is-invalid":"form-control is-valid"}
-                required
-              />
-              {error.company ?
-                <div id="validationServerUsernameFeedback" className="invalid-feedback">
-                {error.company}
-                </div>:
-                <div id="validationServerUsernameFeedback" className="valid-feedback">
-                {noError}
-                </div>
-              }      
-              <label>Message</label>
-              <input
-                key="message"
-                type="text"
-                onChange={(e) => handleOnChange(e)}
-                placeholder="Message is required"
-                name="message"
-                value={input.message}
-                className={error.message?"form-control is-invalid":"form-control is-valid"}
-                required
-              />
-              {error.message ?
-                <div id="validationServerUsernameFeedback" className="invalid-feedback">
-                {error.message}
-                </div>:
-                <div id="validationServerUsernameFeedback" className="valid-feedback">
-                {noError}
-                </div>
-              }
-              <label>Logo</label>
-              <input
-                key="logo"
-                type="url"
-                onChange={(e) => handleOnChange(e)}
-                placeholder="http://image.com required"
-                name="logo"
-                value={input.logo}
-                className={error.logo?"form-control is-invalid":"form-control is-valid"}
-                required
-              />
-              {error.logo ?
-                <div id="validationServerUsernameFeedback" className="invalid-feedback">
-                {error.logo}
-                </div>:
-                <div id="validationServerUsernameFeedback" className="valid-feedback">
-                {noError}
-                </div>
-              }
-              <label>link</label>
-              <input
-                key="link"
-                type="url"
-                onChange={(e) => handleOnChange(e)}
-                placeholder="http://company.com required"
-                name="link"
-                value={input.link}
-                className={error.link?"form-control is-invalid":"form-control is-valid"}
-                required
-              />
-              {error.link ?
-                <div id="validationServerUsernameFeedback" className="invalid-feedback">
-                {error.link}
-                </div>:
-                <div id="validationServerUsernameFeedback" className="valid-feedback">
-                {noError}
-                </div>
-              }
-              <div>
-
-              {Object.keys(error).length > 0 ? (
-              <button className="btn btn-secondary" style={{ backgroundColor: "#A7D129" }} type="submit" disabled>
-                Create
-              </button>
-            ) : (
-              <button className="btn btn-success" style={{ backgroundColor: "#A7D129" }} type="submit">Create</button>
-            )}
+      <div className={styles.containerBox}>
+        <div className={styles.imageBox}></div>
+        <h1 className={styles.title}>Sponsor Creation</h1>
+        <div className={styles.formBox}>
+          <form style={{ width: "100%" }} onSubmit={(e) => handleOnSubmit(e)}>
+            <div className="row g-2 mb-3">
+              <div className="form-floating col-md">
+                <input
+                  key="company"
+                  type="text"
+                  onChange={(e) => handleOnChange(e)}
+                  placeholder="Name is required"
+                  id="floatingInput"
+                  name="company"
+                  value={input.name}
+                  className={error.company?"form-control is-invalid":"form-control is-valid"}
+                  required
+                />
+                {error.company ?
+                  <div id="validationServerUsernameFeedback" className="invalid-feedback">
+                  {error.company}
+                  </div>:
+                  <div id="validationServerUsernameFeedback" className="valid-feedback">
+                  {noError}
+                  </div>
+                }
+                <label htmlFor="floatingInput">Company</label>      
+              </div>
+              <div className="form-floating col-md">
+                <input
+                  key="logo"
+                  type="url"
+                  onChange={(e) => handleOnChange(e)}
+                  placeholder="http://image.com required"
+                  id="floatingInput"
+                  name="logo"
+                  value={input.logo}
+                  className={error.logo?"form-control is-invalid":"form-control is-valid"}
+                  required
+                />
+                {error.logo ?
+                  <div id="validationServerUsernameFeedback" className="invalid-feedback">
+                  {error.logo}
+                  </div>:
+                  <div id="validationServerUsernameFeedback" className="valid-feedback">
+                  {noError}
+                  </div>
+                }
+                <label htmlFor="floatingInput">Logo</label>
               </div>
             </div>
-          </div>
-        </form>
+            <div className="row g-2 mb-3">
+              <div className="form-floating col-md">
+                <input
+                  key="link"
+                  type="url"
+                  onChange={(e) => handleOnChange(e)}
+                  placeholder="http://company.com required"
+                  id="floatingInput"
+                  name="link"
+                  value={input.link}
+                  className={error.link?"form-control is-invalid":"form-control is-valid"}
+                  required
+                />
+                {error.link ?
+                  <div id="validationServerUsernameFeedback" className="invalid-feedback">
+                  {error.link}
+                  </div>:
+                  <div id="validationServerUsernameFeedback" className="valid-feedback">
+                  {noError}
+                  </div>
+                }
+                <label>Link</label>
+              </div>
+            </div>
+            <div className="row g-2 mb-3">  
+              <div className="form-floating col-md">
+                <input
+                  key="message"
+                  type="text"
+                  onChange={(e) => handleOnChange(e)}
+                  placeholder="Message is required"
+                  id="floatingInput"
+                  name="message"
+                  value={input.message}
+                  style={{height: "100px"}} 
+                  className={error.message?"form-control is-invalid":"form-control is-valid"}
+                  required
+                />
+                {error.message ?
+                  <div id="validationServerUsernameFeedback" className="invalid-feedback">
+                  {error.message}
+                  </div>:
+                  <div id="validationServerUsernameFeedback" className="valid-feedback">
+                  {noError}
+                  </div>
+                }
+                <label htmlFor="floatingInput">Message</label>
+              </div>
+                <div>
+
+                {Object.keys(error).length > 0 ? (
+                <button className="btn btn-secondary" style={{ backgroundColor: "#A7D129", width: "100%" }} type="submit" disabled>
+                  Create
+                </button>
+              ) : (
+                <button className="btn btn-success" style={{ backgroundColor: "#A7D129", width: "100%" }} type="submit">Create</button>
+              )}
+                </div>
+
+            </div>
+          </form>
+        </div>
+
       </div>
     </>
   );
