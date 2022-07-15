@@ -178,15 +178,15 @@ router.put('/:dni', async (req, res) => {
       const AllUsers = await User.findAll();
       let comparison = false;
 
-      if(find_user_by_pk.e_mail !== e_mail) {
+      // if(find_user_by_pk.e_mail !== e_mail) {
 
-        AllUsers.length && AllUsers.map((user) => {
-          if( e_mail && e_mail === user.e_mail ) {
-            comparison = true;
-          }
-        })
+      //   AllUsers.length && AllUsers.map((user) => {
+      //     if( e_mail && e_mail === user.e_mail ) {
+      //       comparison = true;
+      //     }
+      //   })
         
-      }
+      // }
   
       if(find_user_by_pk) {
   
@@ -236,7 +236,7 @@ router.put('/:dni', async (req, res) => {
       }
   
     } catch (error) {
-      console.log(error);
+      console.log("error",error);
     }
   
   })

@@ -6,6 +6,7 @@ import step2 from "../../img/step2.png";
 import step3 from "../../img/step3.png";
 import step4 from "../../img/step4.png";
 import step5 from "../../img/step5.png";
+import { Link } from "react-router-dom";
 
 export default function Steps() {
   return (
@@ -23,7 +24,10 @@ export default function Steps() {
               to start.
             </p>
           </div>
+
+          <Link to={"/LogIn"}>
           <button>Join Now</button>
+          </Link>
         </div>
       </Col>
       <Col lg={3} className="d-flex flex-column align-items-center mt-5">
@@ -36,7 +40,9 @@ export default function Steps() {
               to start.
             </p>
           </div>
+          <Link to={"/LogIn"}>
           <button>Join Now</button>
+          </Link>
         </div>
       </Col>
       <Col lg={3} className="d-flex flex-column align-items-center mt-5">
@@ -49,7 +55,9 @@ export default function Steps() {
               to start.
             </p>
           </div>
+          <Link to={"/LogIn"}>
           <button>Join Now</button>
+          </Link>
         </div>
       </Col>
       <Col lg={3} className="d-flex flex-column align-items-center mt-5">
@@ -62,7 +70,9 @@ export default function Steps() {
               to start.
             </p>
           </div>
+          <Link to={"/LogIn"}>
           <button>Join Now</button>
+          </Link>
         </div>
       </Col>
       <Col lg={3} className="d-flex flex-column align-items-center mt-5">
@@ -75,7 +85,9 @@ export default function Steps() {
               to start.
             </p>
           </div>
+          <Link to={"/LogIn"}>
           <button>Join Now</button>
+          </Link>
         </div>
       </Col>
     </Row>

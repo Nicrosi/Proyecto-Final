@@ -1,0 +1,60 @@
+.containerBox {
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction:row;
+}
+.PanelBox {
+    width: 50%;
+    min-height: 100vh;
+    display: flex;
+    background: url("../../img/imgProfileUser1.webp") no-repeat center center;
+    background-size: cover;
+    background-attachment:scroll;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+}
+.data1 {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 2.5rem;
+    color: hsl(0, 0%, 100%);
+    margin: 0 auto;
+    line-height: 1;
+    text-align: center;
+}
+.data2 {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 1.8rem;
+    color: hsl(0, 0%, 75%);
+    margin: 0 auto;
+    line-height: 1;
+
+}
+.pictureUser {
+    margin: 150px auto 15px auto;
+    border-radius: 50%;
+    width: 250px;
+    height: 250px;
+}
+.principalBox {
+    width: 50%;
+    padding: 80px 30px 0 30px;
+}
+.title {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 4rem;
+    margin: 0 0 0 30px;
+    color: #A7D129
+}
+.buttonBox {
+    margin: 5px auto 0 auto;
+    display: flex;
+    flex-wrap:wrap;
+    flex-direction:column;
+    justify-content: center;
+    align-items: center;
+
+}
+
