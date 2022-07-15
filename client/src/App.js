@@ -10,9 +10,10 @@ import { FormSponsor } from "./components/FormSponsor/FormSponsor.jsx";
 import { FormUser } from "./components/FormUser/FormUser.jsx";
 import { FormTournament } from "./components/Tournament/FormTournament.jsx";
 import  LogIn  from "./components/LogIn/LogIn.jsx";
-import {FormUserRegister} from "./components/FormUser copy/FormUserRegister.jsx"
-import ControlPanel from "./controlPanel/ControlPanel.jsx";
+import {FormUserRegister} from "./components/FormUserRegister/FormUserRegister.jsx"
+import ControlPanel from "./components/controlPanel/ControlPanel.jsx";
 import ProfileUser from "./components/ProfileUser/ProfileUser.jsx";
+import PRUEBA from "./components/PRUEBA/PRUEBA.jsx";
 
 
 function App() {
@@ -31,6 +32,10 @@ function App() {
       <Route exact path={"/cpanel"} component={ControlPanel}/>
       <Route exact path={"/SignIn"} component={FormUserRegister}/>
       <Route exact path={"/Profile/:userId"} component={ProfileUser}/>
+      {/* ////////////////ImagesFromDataBase/////////// */}
+      <Route exact path={"/Prueba"} component={PRUEBA}/>
+      {/* ////////////////ImagesFromDataBase/////////// */}
+
     </div>
   );
 }
