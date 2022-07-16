@@ -58,13 +58,11 @@ export const verifyUser = () => {
           Authorization: getToken(),
         },
       });
-      if (response.statusText === "OK") { //cambiar por status === 200
-        response.data
-          ? dispatch({ type: AUTHENTICATED, payload: response.data })
-          : dispatch({ type: NOT_AUTHENTICATED });
-      }else{
-        dispatch({ type: NOT_AUTHENTICATED });
+      if (response.statusText === "OK") {
+        dispatch({ type: AUTHENTICATED, payload: response.data });
       }
-    } catch (err) {}
+    } catch (err) {
+      dispatch({ type: NOT_AUTHENTICATED });
+    }
   };
 };
