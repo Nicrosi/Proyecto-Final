@@ -1,10 +1,12 @@
-import { getAllSponsors, getAllUsers } from "../../redux/actions";
+import { getAllSponsors, getAllUsers } from "../../../redux/actions";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import ControlCardUsers from "./ControlCardUsers";
+import ControlCardUsers from "../ControlCardUsers/ControlCardUsers";
 
-import ControlCardSponsor from "./ControlCardSponsor";
+import ControlCardSponsor from "../ControlCardSponsor/ControlCardSponsor";
+
+
 
 
 export default function ControlPanel() {

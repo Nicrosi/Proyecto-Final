@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { getAllUsers, putUsers } from "../../redux/actions";
+import { getAllUsers, putUsers } from "../../../redux/actions";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -24,6 +24,7 @@ export default function ControlCardUsers({
     phone: phone,
     num_contact: num_contact,
   });
+
 
   const users = useSelector((state) => state.rootReducer.users);
   console.log(users);
