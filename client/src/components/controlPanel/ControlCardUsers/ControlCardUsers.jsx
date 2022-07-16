@@ -1,37 +1,25 @@
 import React, { useState } from "react";
-import { getAllUsers, putUsers } from "../../../redux/actions";
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { putUsers } from "../../../redux/actions";
+import { useDispatch } from "react-redux";
+import styles from "./ControlCardUsers.module.css"
 
 export default function ControlCardUsers({
-  dni,
-  name,
-  last_name,
-  is_admin,
-  e_mail,
-  picture,
-  gender,
-  phone,
-  num_contact,
-}) {
+  dni, name, last_name, is_admin, e_mail, password, picture, gender, phone, num_contact}) {
+  const dispatch = useDispatch();
+
   const [input, setInput] = useState({
+    dni: dni,
     name: name,
     last_name: last_name,
     is_admin: is_admin,
     e_mail: e_mail,
+    password: password,
     picture: picture,
     gender: gender,
     phone: phone,
-    num_contact: num_contact,
+    num_contact: num_contact
   });
-
-
-  const users = useSelector((state) => state.rootReducer.users);
-  console.log(users);
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getAllUsers());
-  }, [dispatch]);
+  console.log(input);
 
   function handleChange(e) {
     e.preventDefault();
@@ -50,26 +38,25 @@ export default function ControlCardUsers({
   function handleSubmit(e) {
     e.preventDefault();
     dispatch(putUsers(dni, input));
-    console.log(input);
-    console.log(dni);
   }
   return (
-    <div style={{ marginTop: "48px" }}>
-      <div className="row">
-        <form onSubmit={(e) => handleSubmit(e)}>
-          <div key={dni} className="col-sm-3" style={{ border: "solid black" }}>
+
+ ( <div className={styles.containerBox}>
+      
+        <form style={{ width: "100%" }} onSubmit={(e) => handleSubmit(e)}>
+
+          <div key={dni} className="card p-3">
             <div className="row g-2 mb-3">
               <div className="form-floating col-md">
                 <input
                   type="text"
                   onChange={(e) => handleChange(e)}
                   value={input.name}
-                  placeholder=""
                   name="name"
                   className="form-control  border-0"
                   id="floatingInput"
                 />
-                <label for="floatingInput">name</label>
+                <label for="floatingInput">Name</label>
               </div>
               <div className="form-floating col-md">
                 <input
@@ -83,21 +70,37 @@ export default function ControlCardUsers({
                 <label for="floatingInput">Last Name</label>
               </div>
             </div>
+
             <div className="row g-2 mb-3">
               <div className="form-floating col-md">
-                <select
-                  onChange={(e) => handleChange(e)}
-                  className="form-select border-0"
-                  id="floatingSelect"
-                  aria-label="Floating label select example"
-                  name="is_admin"
-                >
-                  <option value="">{input.is_admin}</option>
-                  <option value="true">True</option>
-                  <option value="false">False</option>
-                </select>
-                <label for="floatingInput">isAdmin</label>
-              </div>
+                  <input
+                    type="text"
+                    onChange={(e) => handleChange(e)}
+                    value={input.dni}
+                    name="dni"
+                    className="form-control border-0"
+                    id="floatingInput"
+                  />
+                  <label for="floatingInput">DNI</label>
+                </div>
+                <div className="form-floating col-md">
+                  <select
+                    onChange={(e) => handleChange(e)}
+                    className="form-select border-0"
+                    id="floatingSelect"
+                    aria-label="Floating label select example"
+                    name="is_admin"
+                  >
+                    <option value="">{input.is_admin}</option>
+                    <option value="true">True</option>
+                    <option value="false">False</option>
+                  </select>
+                  <label for="floatingInput">isAdmin</label>
+                </div>
+            </div>
+
+            <div className="row g-2 mb-3">
+
               <div className="form-floating col-md">
                 <input
                   type="email"
@@ -163,10 +166,12 @@ export default function ControlCardUsers({
             </div>
 
             {/* <h5 onClick={()=>handleOnClick()}>dni={p.category.type}</h5> */}
-            <button type="submit">Confirm changes</button>
+            <button className="btn btn-outline-secondary btn-dark my-2" type="submit">Confirm changes</button>
           </div>
+
         </form>
-      </div>
-    </div>
+
+    </div>)
+
   );
 }
