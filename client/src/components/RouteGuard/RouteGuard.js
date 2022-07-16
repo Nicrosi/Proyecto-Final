@@ -18,21 +18,17 @@ const RouteGuard = ({ component: Component, ...rest }) => {
       {authChecked ? (
         <Route
           {...rest}
-          render={(props) => {
-            if (loggedIn) {
-              
-              if (rest.admin === user.is_admin) {return <Component {...props} />;
-            }else if(rest.admin !== user.is_admin){;
-                return <Redirect to="/login" />;
-              }
-            }
-            return <Redirect to="/login" />;
-          }}
+          render={(props) =>
+            (loggedIn && !rest.admin) || rest.admin === user.is_admin ? (
+              <Component {...props} />
+            ) : (
+              <Redirect to="/login" />
+            )
+          }
         />
       ) : null}
     </>
   );
-
 
   // return (
   //   <>
