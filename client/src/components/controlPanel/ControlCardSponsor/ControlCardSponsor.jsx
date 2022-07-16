@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { getAllSponsors, putSponsor } from "../../../redux/actions";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
+import styles from "./ControlCardSponsor.module.css"
 
 export default function ControlCardSponsor({
   id_sponsor,
@@ -33,14 +34,9 @@ export default function ControlCardSponsor({
     console.log(input);
   }
   return (
-    <div style={{ marginTop: "48px" }}>
-      <div className="row">
-        <form onSubmit={(e) => handleSubmit(e)}>
-          <div
-            key={id_sponsor}
-            className="col-sm-3"
-            style={{ border: "solid black" }}
-          >
+    <div className={styles.containerBox}>
+        <form style={{ width: "100%" }} onSubmit={(e) => handleSubmit(e)}>
+          <div key={id_sponsor} className="card p-3">
             <div className="row g-2 mb-3">
               <div className="form-floating col-md">
                 <input
@@ -94,7 +90,6 @@ export default function ControlCardSponsor({
             <button type="submit">Confirm changes</button>
           </div>
         </form>
-      </div>
     </div>
   );
 }

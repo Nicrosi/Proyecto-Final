@@ -1,0 +1,14 @@
+.containerBox {
+    width: 45%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction:row;
+    margin: 10px;
+}
+
+.title {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 3rem;
+    margin-top: 80px;
+    color: #bebebe;
+}
