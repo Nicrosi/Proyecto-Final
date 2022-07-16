@@ -11,9 +11,10 @@ import { Link } from "react-router-dom";
 export default function Steps() {
   return (
     <Row
-      className="d-flex align-items-center justify-content-center pb-5"
+      className="d-flex align-items-center justify-content-center pb-5 "
       style={{ width: "100%", minHeight: "inherit" }}
     >
+
       <Col lg={3} className="d-flex flex-column align-items-center mt-5">
         <div className="step">
           <img src={step1} alt="step1" />
@@ -29,6 +30,7 @@ export default function Steps() {
           <button>Join Now</button>
           </Link>
         </div>
+
       </Col>
       <Col lg={3} className="d-flex flex-column align-items-center mt-5">
         <div className="step ">

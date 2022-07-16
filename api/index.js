@@ -3,6 +3,7 @@ const { conn } = require('./src/db.js');
 const axios = require ("axios");
 
 // Syncing all the models at once.
+
 conn.sync({ force: false }).then(async() => {
   server.listen(3001, () => {
     console.log('%s listening at 3001'); // eslint-disable-line no-console
@@ -21,7 +22,7 @@ conn.sync({ force: false }).then(async() => {
     gender: "NoGender",
 }
 try {
- await axios.post(`http://localhost:3001/auth/register`, admin);
+await axios.post(`http://localhost:3001/auth/register`, admin);
 } catch (error) {
 console.log("Admin Already Exist");
 }

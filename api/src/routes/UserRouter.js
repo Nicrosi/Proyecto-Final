@@ -31,7 +31,6 @@ router.get('/prueba', async (req, res) => {
       ]
     }
   );
-
   if(!users.length) {
     // ArrayUsers.map((user) => {
     for (let i = 0; i < ArrayUsers.length; i++) {
