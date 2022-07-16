@@ -84,18 +84,7 @@ export const ContactForm = () => {
           <label htmlFor="floatingInput">Full Name</label>      
           </div>
         </div>
-          {/* <select onChange={(e) => handleChange(e)}>
-            <option value={input.email} label="Email" name="email" placeholder="gaby@gmail.com" type="email">All emails</option>
-            {allEmail.map((email) => {
-              return email ? (
-                <option value={email} key={email}>
-                  {email}
-                </option>
-              ) : (
-                ""
-              );
-            })}
-          </select> */}
+          
         <div className={styles.messageBox}>
         <div className="form-floating me-2" style={{width: "70%"}}>
             <input
