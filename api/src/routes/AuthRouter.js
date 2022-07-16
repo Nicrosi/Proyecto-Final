@@ -94,6 +94,6 @@ router.get("/verifytoken", [verifyToken], async (req, res) => {
   const user = await User.findOne({
     where: { e_mail: req.e_mail },
   });
-  res.status(200).json({ ...user.dataValues, password: "Hackeame perro" });
+  res.status(200).json({ ...user?.dataValues, password: "Hackeame perro" });
 });
 module.exports = router;

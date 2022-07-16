@@ -25,24 +25,26 @@ router.get('/', async (req,res) => {
 
 router.get('/:dni', async (req,res) => {
   const { dni } = req.params;
-
-  const UsersFoundById = await User.findOne(
-    {
-      where: {
-        dni: parseInt(dni)
-      },
-      include: [
-        Inscription,
-        Score,
-        Category
-      ]
+  try{
+    const UsersFoundById = await User.findOne(
+      {
+        where: {
+          dni: parseInt(dni)
+        },
+        include: [
+          Inscription,
+          Score,
+          Category
+        ]
+      }
+    )
+    if(UsersFoundById) {
+      res.status(200).json(UsersFoundById);
+    }else{
+      res.status(400).json({msg_error: 'User not found'});
     }
-  )
-
-  if(UsersFoundById) {
-    res.status(200).json(UsersFoundById);
-  }else{
-    res.status(400).json({msg_error: 'User not found'});
+  }catch(err){
+    res.status(400).send(err)
   }
 })
 
