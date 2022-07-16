@@ -11,6 +11,7 @@ export const Inscription = () => {
   const dispatch = useDispatch();
   const {tournament_id} = useParams();
 
+
   useEffect(() => {
     dispatch(getSubtournament(tournament_id));
   }, [dispatch, tournament_id])
@@ -32,6 +33,7 @@ export const Inscription = () => {
                     id_tournament={tournament_id}
                     price={p.price}
                     id_user={user.id_user}
+                    email={user.e_mail}
                   />
                 </Col>
               );

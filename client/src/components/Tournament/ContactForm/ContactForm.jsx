@@ -84,7 +84,6 @@ export const ContactForm = () => {
           <label htmlFor="floatingInput">Full Name</label>      
           </div>
         </div>
-        </div>
           {/* <select onChange={(e) => handleChange(e)}>
             <option value={input.email} label="Email" name="email" placeholder="gaby@gmail.com" type="email">All emails</option>
             {allEmail.map((email) => {
