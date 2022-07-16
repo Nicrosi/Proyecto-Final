@@ -5,6 +5,7 @@ import styles from "./ProfileUser.module.css"
 import PersonalInfoUser from "../PersonalInfoUser/PersonalInfoUser.jsx";
 import CategoryScoreUser from "../CategoryScoreUser/CategoryScoreUser.jsx";
 import { FormUser } from "../FormUser/FormUser";
+import {  Redirect } from "react-router-dom";
 
 export default function ProfileUser(props) {
     const params = Number(props.match.params.userId);
@@ -19,8 +20,8 @@ export default function ProfileUser(props) {
         )
     }, [dispatch, params]);
 
-    let user = useSelector((state) => state.user);
-
+    let user = useSelector((state) => state.rootReducer.user);
+    const auth = useSelector((state) => state.auth);
     function handleClic(e){
       setShow(e.target.name)
     };
@@ -30,8 +31,9 @@ export default function ProfileUser(props) {
     }
 
     return (
+      
         <React.Fragment>   
-              {user && (
+              {auth.currentUser.dni === params ? (
                 <div className={styles.containerBox}>
                     <div className={styles.PanelBox}>
                         <img src={user.picture}className={styles.pictureUser} alt="..." />
@@ -67,7 +69,7 @@ export default function ProfileUser(props) {
                       )}
                     </div>
                 </div>
-            )}
+            ):<Redirect to={`/Profile/${auth.currentUser.dni}`} />}
         </React.Fragment>
     )
 }

@@ -4,8 +4,8 @@ import { postInscription } from "../../redux/actions";
 import Stripecheckout from 'react-stripe-checkout';
 import Card from 'react-bootstrap/Card'
 
-export default function SubtCard({id_subt, name, price, id_tournament}) {
-  const id_user = 1
+export default function SubtCard({id_subt, name, price, id_tournament, id_user}) {
+  const user = id_user
   const dispatch = useDispatch();
   // eslint-disable-next-line no-unused-vars
   const [product, setProduct] = useState({
@@ -18,7 +18,7 @@ export default function SubtCard({id_subt, name, price, id_tournament}) {
   const makePayment = token => {
     const body = {
       token,
-      id_user,
+      user,
       product
     }
     dispatch(postInscription(body));

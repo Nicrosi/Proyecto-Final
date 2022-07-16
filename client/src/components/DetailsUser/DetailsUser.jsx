@@ -2,6 +2,8 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { getUserById } from "../../redux/actions";
+import styles from "./DetailsUser.module.css"
+
 
 const DetailsUser = (props) => {
   const params = Number(props.match.params.userId);
@@ -18,26 +20,13 @@ const DetailsUser = (props) => {
   return (
     <React.Fragment>
       {user && (
-        <div
-          className="mb-3 mx-auto hstack justify-content-center"
-          style={{ width: "85%", marginTop: "100px" }}
-        >
-          <div
-            className="hstack justify-content-around"
-            style={{ width: "100%" }}
-          >
-            <div className="col-md-4 vstack" style={{ width: "40%" }}>
-              <img
-                src={user.picture}
-                className="mx-auto rounded-circle"
-                style={{ width: "250px" }}
-                alt="..."
-              />
-              <h1 className="text-center">
-                {user.name + " " + user.last_name}
-              </h1>
+        <div className={styles.containerBox}>
+          <div className={styles.PanelBox}>
+              <img src={user.picture} className={styles.pictureUser} alt="..." />
+              <h1 className={styles.nameUser}>{user.name}</h1>
+              <h1 className={styles.nameUser}>{user.last_name}</h1>
             </div>
-            <div className="col-md-8" style={{ width: "55%" }}>
+            <div className={styles.principalBox}>
               <div className="accordion" id="accordionExample">
                 <div className="accordion-item">
                   <h2 className="accordion-header" id="headingOne">
@@ -101,10 +90,10 @@ const DetailsUser = (props) => {
                     data-bs-parent="#accordionExample"
                   >
                     <div className="accordion-body">
-                      <div className="mx-auto" style={{ width: "50%" }}>
+                      <div className="mx-auto" style={{ width: "100%" }}>
                         <div
                           className="card mx-auto"
-                          style={{ width: "200px" }}
+                          style={{ width: "100%" }}
                         >
                           <div className="card-body text-center">
                             {user.category ? (
@@ -114,7 +103,7 @@ const DetailsUser = (props) => {
                                 </h1>
                                 <button
                                   type="button"
-                                  className="btn btn-primary"
+                                  className="btn btn-outline-secondary btn-dark my-2"
                                 >
                                   Modify
                                 </button>
@@ -122,11 +111,11 @@ const DetailsUser = (props) => {
                             ) : (
                               <div>
                                 <h3 className="card-title">
-                                  {`Sin Categoria,crea un score para ${user.name} ${user.last_name} para definir su categoria`}
+                                  {`${user.name} doesn't have a Category. Creation of a score is needed to define the category`}
                                 </h3>
                                 <button
                                   type="button"
-                                  className="btn btn-secondary"
+                                  className="btn btn-outline-secondary btn-dark my-2"
                                   disabled
                                 >
                                   Modify
@@ -159,32 +148,12 @@ const DetailsUser = (props) => {
                     data-bs-parent="#accordionExample"
                   >
                     <div className="accordion-body">
-                      <div className="mx-auto" style={{ width: "50%" }}>
+                      <div className="mx-auto" style={{ width: "100%" }}>
                         <div
                           className="card mx-auto"
-                          style={{ width: "200px" }}
+                          style={{ width: "100%" }}
                         >
                           <div className="card-body text-center">
-                            {" "}
-                            {/*params es el dni */}
-                            {user.score ? (
-                              <button
-                                type="button"
-                                className="btn btn-secondary"
-                                disabled
-                              >
-                                Create
-                              </button>
-                            ) : (
-                              <Link to={`/CreateScore/${params}`}>
-                                <button
-                                  type="button"
-                                  className="btn btn-primary"
-                                >
-                                  Create
-                                </button>
-                              </Link>
-                            )}
                             {user.score ? (
                               <ul className="list-group">
                                 <li className="list-group-item">
@@ -222,7 +191,7 @@ const DetailsUser = (props) => {
                               </ul>
                             ) : (
                               <h3>
-                                {`Sin Score,crea un score para ${user.name} ${user.last_name}`}
+                                {`${user.name} has no score`}
                               </h3>
                             )}
                           </div>
@@ -233,7 +202,7 @@ const DetailsUser = (props) => {
                 </div>
               </div>
             </div>
-          </div>
+
         </div>
       )}
     </React.Fragment>
