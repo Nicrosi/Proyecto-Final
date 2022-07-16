@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { ContactForm } from "../ContactForm/ContactForm";
 import styles from "./FormTournament.module.css";
-import img1 from "../../../img/imgForm1.webp"
+
 
 export function validate(input) {
   let error = {};
