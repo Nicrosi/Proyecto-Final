@@ -1,67 +1,33 @@
 import { getAllSponsors, getAllUsers } from "../../../redux/actions";
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-
-import ControlCardUsers from "../ControlCardUsers/ControlCardUsers";
-
-import ControlCardSponsor from "../ControlCardSponsor/ControlCardSponsor";
-
-
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import styles from "./ControlPanel.module.css"
+import ControlBar from "../ControlBar/ControlBar";
+import ControlUserList from "../ControlUserList/ControlUserList";
+import ControlSponsorsList from "../ControlSponsorsList/ControlSponsorsList";
 
 
 export default function ControlPanel() {
-  const users = useSelector((state) => state.rootReducer.users);
+  const [show, setShow] = useState("users");
 
-  const sponsors = useSelector((state) => state.rootReducer.sponsors);
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(getAllUsers());
 
     dispatch(getAllSponsors());
   }, [dispatch]);
-
+  
   return (
-    <>
-      <div style={{ marginTop: "48px" }}>
-        <div className="row">
-          {users &&
-            users.map((p) => {
-              return (
-                <div key={p.dni}>
-                  <ControlCardUsers
-                    dni={p.dni}
-                    name={p.name}
-                    last_name={p.last_name}
-                    is_admin={p.is_admin}
-                    e_mail={p.e_mail}
-                    picture={p.picture}
-                    gender={p.gender}
-                    phone={p.phone}
-                    num_contact={p.num_contact}
-                  />
-                </div>
-              );
-            })}
-        </div>
+    <div className={styles.containerBox}>
+      <ControlBar setShow={setShow}/>
+      <div className={styles.principalBox}>
+          {show === "users" && <ControlUserList />}
+          {show === "sponsors" && <ControlSponsorsList/>}
+          {/* {show === "tournaments" && <ControlTournamentsList />} */}
+          {/* {show === "subtournaments" && <ControlSubtournamentsList />} */}
+          
       </div>
-
-      <div style={{ marginTop: "48px" }}>
-        <div className="row">
-          {sponsors &&
-            sponsors.map((p) => {
-              return (
-                <div key={p.id_sponsor}>
-                  <ControlCardSponsor
-                    company={p.company}
-                    message={p.message}
-                    logo={p.logo}
-                    link={p.link}
-                  />
-                </div>
-              );
-            })}
-        </div>
-      </div>
-    </>
+    </div>
   );
 }

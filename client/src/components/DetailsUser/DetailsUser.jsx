@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 import { getUserById } from "../../redux/actions";
 import styles from "./DetailsUser.module.css"
 
@@ -101,25 +100,12 @@ const DetailsUser = (props) => {
                                 <h1 className="card-title">
                                   {user.category.type.toUpperCase()}
                                 </h1>
-                                <button
-                                  type="button"
-                                  className="btn btn-outline-secondary btn-dark my-2"
-                                >
-                                  Modify
-                                </button>
                               </div>
                             ) : (
                               <div>
-                                <h3 className="card-title">
+                                <h5 className="card-title">
                                   {`${user.name} doesn't have a Category. Creation of a score is needed to define the category`}
-                                </h3>
-                                <button
-                                  type="button"
-                                  className="btn btn-outline-secondary btn-dark my-2"
-                                  disabled
-                                >
-                                  Modify
-                                </button>
+                                </h5>
                               </div>
                             )}
                           </div>
@@ -190,9 +176,9 @@ const DetailsUser = (props) => {
                                 </li>
                               </ul>
                             ) : (
-                              <h3>
+                              <h5>
                                 {`${user.name} has no score`}
-                              </h3>
+                              </h5>
                             )}
                           </div>
                         </div>

@@ -86,6 +86,15 @@ function HomeAdmin() {
                 Create Gallery
               </button>
             </Link>
+            <Link to={"/cpanel"}>
+              <button
+                type="button"
+                className="btn btn-outline-secondary btn-ligth my-2"
+                style={{ width: "500px" }}
+              >
+                Control Panel
+              </button>
+            </Link>
           </div>
         </div>
       </div>

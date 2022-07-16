@@ -15,8 +15,8 @@ router.get("/", async (req, res) => {
 });
 
 router.post("/:dni", async (req, res) => {
-  const { dni } = req.params;
-  const {
+  let { dni } = req.params;
+  let {
     previous_tournaments,
     hit_knowledge,
     other_strokes,
@@ -25,7 +25,7 @@ router.post("/:dni", async (req, res) => {
     game_strategy,
   } = req.body;
   try {
-    const newScore = await Score.create({
+    let newScore = await Score.create({
       previous_tournaments,
       hit_knowledge,
       other_strokes,
@@ -33,22 +33,31 @@ router.post("/:dni", async (req, res) => {
       kick_serve_control,
       game_strategy,
     });
-    const id = newScore.dataValues.id_score;
-    await User.update(
-      {
-        id_score: id,
-      },
-      {
-        where: {
-          dni: dni,
-        },
+
+    let id = newScore.dataValues.id_score;
+
+
+    let user = await User.findAll();
+    user.forEach(async (el) => {
+      if (el.dataValues.dni == dni) {
+        await User.update(
+          {
+            id_score: id,
+          },
+          {
+            where: {
+              dni: el.dataValues.dni,
+            },
+          }
+        );
       }
-    );
-    category(id);
+    });
+    category();
     res.status(200).send("Sent!");
   } catch (err) {
     console.log(err);
   }
+
 });
 
 module.exports = router;
