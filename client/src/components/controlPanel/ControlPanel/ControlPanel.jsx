@@ -1,16 +1,18 @@
-import { getAllSponsors, getAllUsers } from "../../redux/actions";
+import { getAllSponsors, getAllUsers } from "../../../redux/actions";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import ControlCardUsers from "./ControlCardUsers";
+import ControlCardUsers from "../ControlCardUsers/ControlCardUsers";
 
-import ControlCardSponsor from "./ControlCardSponsor";
+import ControlCardSponsor from "../ControlCardSponsor/ControlCardSponsor";
+
+
 
 
 export default function ControlPanel() {
-  const users = useSelector((state) => state.users);
+  const users = useSelector((state) => state.rootReducer.users);
 
-  const sponsors = useSelector((state) => state.sponsors);
+  const sponsors = useSelector((state) => state.rootReducer.sponsors);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getAllUsers());

@@ -8,7 +8,7 @@
   width: 100%;
   height: 400px;
   display: flex;
-  background: url("../../img/imgForm1.webp") no-repeat center center;
+  background: url("../../../img/imgForm1.webp") no-repeat center center;
   background-size: cover;
 }
 .title {
