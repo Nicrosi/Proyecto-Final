@@ -8,7 +8,6 @@ import { Inscription }  from "./components/Inscription/Inscription.jsx";
 import { Users } from "./components/Users/Users.jsx";
 import { FormScore } from "./components/FormScore/FormScore.jsx";
 import { FormSponsor } from "./components/FormSponsor/FormSponsor.jsx";
-import { FormUser } from "./components/FormUser/FormUser.jsx";
 import { FormTournament } from "./components/Tournament/FormTournament/FormTournament.jsx";
 import  LogIn  from "./components/LogIn/LogIn.jsx";
 import {FormUserRegister} from "./components/FormUserRegister/FormUserRegister.jsx"
