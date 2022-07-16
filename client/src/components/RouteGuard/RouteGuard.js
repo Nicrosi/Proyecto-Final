@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Route, Redirect, useHistory } from "react-router-dom";
+import { Route, Redirect } from "react-router-dom";
 import { verifyUser } from "../../redux/actions/authorization";
 
 const RouteGuard = ({ component: Component, ...rest }) => {
