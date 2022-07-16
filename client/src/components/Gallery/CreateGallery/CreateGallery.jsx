@@ -12,7 +12,7 @@ export default function CreateGallery() {
 
 
   useEffect(() => {
-    fetch('http://localhost:3001/images/prueba',)
+    fetch('http://localhost:3001/images/get',)
     .then(res => res.json())
     .then(res => setImagesList(res))
     .catch(err => console.log(err))
@@ -24,13 +24,28 @@ export default function CreateGallery() {
       .catch(err => console.log(err))
     }
 
-  },[])
+  },[file])
 
 
   const HandlerSelect = (e) => {
     setFile(e.target.files[0]);
     Images.push(e.target.files[0])
     console.log(e.target.files[0]);
+  }
+
+  const HandleDelte = (image) => {
+    console.log(image);
+    fetch(`http://localhost:3001/images/delete/${image}`, {
+      method: 'DELETE'
+    })
+    .then(res => res.text())
+    .then(res => console.log(res))
+    .catch(err => console.log(err))
+
+    fetch('http://localhost:3001/images/get',)
+    .then(res => res.json())
+    .then(res => setImagesList(res))
+    .catch(err => console.log(err))
   }
 
   const HandlerCLick = () => {
@@ -41,7 +56,7 @@ export default function CreateGallery() {
     const formData = new FormData();
    
     formData.append('image', file)
-    fetch('http://localhost:3001/images/prueba', {
+    fetch('http://localhost:3001/images/post', {
       method: 'POST',
       body: formData
     })
@@ -49,11 +64,15 @@ export default function CreateGallery() {
     .then(res => console.log(res))
     .catch(err => console.log(err))
 
-
+    
+    
+    fetch('http://localhost:3001/images/get',)
+    .then(res => res.json())
+    .then(res => setImagesList(res))
+    .catch(err => console.log(err))
+    
     document.getElementById('fileInput').value = null;
-
     setFile(null)
-
   }
 
   return (
@@ -66,9 +85,12 @@ export default function CreateGallery() {
         <div className='contaier_img' >
           {
             ImagesList.length && ImagesList.map((image) => (
-              <img className='images_from_db' src={`http://localhost:3001/${image}`} />
-              ))
-            }
+              <div className='img_button_container' >
+                <img className='images_from_db' src={`http://localhost:3001/${image}`} />
+                <button onClick={()=>HandleDelte(image)} className='btn_delete_image' >X</button>
+              </div>
+            ))
+          }
         </div>
       </div>
 

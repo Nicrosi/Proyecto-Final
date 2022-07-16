@@ -3,7 +3,6 @@
   width: 95vw;
   margin: 1vw;
   display: flex;
-  /* grid-template-columns: repeat(3, 1fr); */
   flex-wrap: wrap;
   justify-content: center;
 }
@@ -11,6 +10,8 @@
 .gallery_image {
   width: 30vw;
   height: min-content;
+  /* height: 400px;
+  width: min-content; */
   margin: 10px;
   border-radius: 10px;
 }

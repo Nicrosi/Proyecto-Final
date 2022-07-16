@@ -28,7 +28,7 @@
 .contaier_img {
   display: flex;
   flex-wrap: wrap;
-  padding: 20px 20vw;
+  padding: 20px 1.5vw;
   background-color: rgb(0 0 0 / 70%);
   min-height: 80vh;
   justify-content: center;
@@ -37,7 +37,22 @@
 
 .images_from_db {
   height: min-content;
-  width: 200px;
+  width: 30vw;
   border-radius: 10px;
   padding: 10px;
+}
+
+.img_button_container {
+  height:  min-content;
+  min-width: 10px;
+  position: relative;
+}
+
+.btn_delete_image {
+  position: absolute;
+  height: 20px;
+  width: 20px;
+  border: none;
+  top: 10px;
+  right: 10px;
 }

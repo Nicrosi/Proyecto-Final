@@ -1,5 +1,4 @@
-
-const { Router } = require("express");
+const { Router } = require('express');
 const RouteUser = require("../routes/UserRouter");
 const category = require("../routes/CategoryRouter.js");
 const Sponsor = require("../routes/SponsorRouter.js");
@@ -8,15 +7,13 @@ const Subtournament = require("../routes/SubtRouter.js");
 const Tournament = require("../routes/TournamentRouter.js");
 const inscription = require("../routes/InscriptionRouter.js");
 const Team = require("../routes/TeamRouter.js");
-const auth = require("../routes/AuthRouter");
+const Auth = require("../routes/AuthRouter.js");
 const router = Router();
-
 ////////////////ImagesFromDataBase///////////
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
-const { Image } = require("../db");
-
+const { Image } = require('../db.js');
 ////////////////ImagesFromDataBase///////////
 
 
@@ -24,9 +21,10 @@ const { Image } = require("../db");
 // Ejemplo: const authRouter = require('./auth.js');
 
 // Configurar los routers
-
+// Ejemplo: router.use('/auth', authRouter);
 
 ////////////////ImagesFromDataBase///////////
+
 
 const diskStorege = multer.diskStorage({
   destination: path.join(__dirname, '../images'),
@@ -42,40 +40,30 @@ const fileUpload = multer({
 }).single('image')
 
 
-
-router.post('/images/prueba', fileUpload, async (req, res) => {
+router.post('/images/post', fileUpload, async (req, res) => {
   // console.log(req.file);
-
-  console.log(req.file);
   
   const type = req.file.mimetype;
   const name = req.file.originalname;
   const data = fs.readFileSync(path.join(__dirname, '../images/' + req.file.filename))
 
-  fs.writeFileSync(path.join(__dirname, `../CurrentImages/${name}`),data)
+  const imageFromDb = await Image.create({
+    type,
+    name,
+    data
+  })
 
+  imageFromDb ? res.send('image created') : res.send('error');
 
-  // const imageFromDb = await Image.create({
-  //   type,
-  //   name,
-  //   data
-  // })
-
-  // imageFromDb ? res.send('image created') : res.send('error');
-
-  // const images = fs.readdirSync(path.join(__dirname, '../images/'))
-  // images.map((img) => {
-  //   fs.unlinkSync(path.join(__dirname, `../images/${img}`));
-  // })
+  const images = fs.readdirSync(path.join(__dirname, '../images/'))
+  images.map((img) => {
+    fs.unlinkSync(path.join(__dirname, `../images/${img}`));
+  })
   
 })
 
-
-router.get('/images/prueba',  async (req, res) => {
+router.get('/images/get',  async (req, res) => {
   const imagenes = await Image.findAll();
-
-  // const dbImages = fs.readdirSync(path.join(__dirname, '../dbImages/'))
-  // const images = fs.readdirSync(path.join(__dirname, '../images/'))
 
   imagenes.map(image => {
     fs.writeFileSync(path.join(__dirname, `../dataBaseImages/${image.id}-${image.name}`),image.data)
@@ -87,6 +75,15 @@ router.get('/images/prueba',  async (req, res) => {
 
 })
 
+router.delete('/images/delete/:image', async (req, res) => {
+  const { image } = req.params;
+  const image_id = image.split('-')[0]
+  
+  fs.unlinkSync(path.join(__dirname, `../dataBaseImages/${image}`));
+  
+  const imageDeleted = await Image.destroy({ where: { id: parseInt(image_id) } })
+  imageDeleted === 1 ? res.status(200).send({msg: 'Image deleted successfully'}) : res.status(400).send({msg: 'Image does not exist'})
+})
 
 router.get('/images/prueba/delete', (req, res) => {
   const dbImages = fs.readdirSync(path.join(__dirname, '../dataBaseImages/'))
@@ -99,11 +96,12 @@ router.get('/images/prueba/delete', (req, res) => {
 
 })
 
+
 ////////////////ImagesFromDataBase///////////
 
 
 
-router.use('/auth', auth);
+
 router.use("/category", category);
 router.use("/user", RouteUser);
 router.use("/sponsor", Sponsor);
@@ -112,6 +110,7 @@ router.use("/subtournament", Subtournament);
 router.use("/inscription", inscription);
 router.use('/tournament', Tournament);
 router.use('/team', Team);
+router.use('/auth', Auth);
 
 
 module.exports = router;

@@ -13,7 +13,7 @@ export default function Gallery() {
   const [ImagesList, setImagesList ] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:3001/images/prueba',)
+    fetch('http://localhost:3001/images/get',)
     .then(res => res.json())
     .then(res => setImagesList(res))
     .catch(err => console.log(err))
