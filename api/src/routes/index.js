@@ -45,23 +45,28 @@ const fileUpload = multer({
 
 router.post('/images/prueba', fileUpload, async (req, res) => {
   // console.log(req.file);
+
+  console.log(req.file);
   
   const type = req.file.mimetype;
   const name = req.file.originalname;
   const data = fs.readFileSync(path.join(__dirname, '../images/' + req.file.filename))
 
-  const imageFromDb = await Image.create({
-    type,
-    name,
-    data
-  })
+  fs.writeFileSync(path.join(__dirname, `../CurrentImages/${name}`),data)
 
-  imageFromDb ? res.send('image created') : res.send('error');
 
-  const images = fs.readdirSync(path.join(__dirname, '../images/'))
-  images.map((img) => {
-    fs.unlinkSync(path.join(__dirname, `../images/${img}`));
-  })
+  // const imageFromDb = await Image.create({
+  //   type,
+  //   name,
+  //   data
+  // })
+
+  // imageFromDb ? res.send('image created') : res.send('error');
+
+  // const images = fs.readdirSync(path.join(__dirname, '../images/'))
+  // images.map((img) => {
+  //   fs.unlinkSync(path.join(__dirname, `../images/${img}`));
+  // })
   
 })
 
@@ -73,7 +78,7 @@ router.get('/images/prueba',  async (req, res) => {
   // const images = fs.readdirSync(path.join(__dirname, '../images/'))
 
   imagenes.map(image => {
-    fs.writeFileSync(path.join(__dirname, `../dataBaseImages/${image.id}-${image.name}.jpg`),image.data)
+    fs.writeFileSync(path.join(__dirname, `../dataBaseImages/${image.id}-${image.name}`),image.data)
   })
 
   const imagesdir = fs.readdirSync(path.join(__dirname, '../dataBaseImages/'))

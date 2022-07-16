@@ -9,20 +9,12 @@ import { Users } from "./components/Users/Users.jsx";
 import { FormScore } from "./components/FormScore/FormScore.jsx";
 import { FormSponsor } from "./components/FormSponsor/FormSponsor.jsx";
 import { FormTournament } from "./components/Tournament/FormTournament.jsx";
-<<<<<<< HEAD
 import  LogIn  from "./components/LogIn/LogIn.jsx";
 import {FormUserRegister} from "./components/FormUserRegister/FormUserRegister.jsx"
 import ControlPanel from "./components/controlPanel/ControlPanel.jsx";
-import ProfileUser from "./components/ProfileUser/ProfileUser.jsx";
-import PRUEBA from "./components/PRUEBA/PRUEBA.jsx";
-
-=======
-import LogIn from "./components/LogIn/LogIn.jsx";
-import { FormUserRegister } from "./components/FormUserRegister/FormUserRegister.jsx";
-import ControlPanel from "./components/controlPanel/ControlPanel.jsx";
 import ProfileUser from "./components/Profile/ProfileUser/ProfileUser.jsx";
 import RouteGuard from "./components/RouteGuard/RouteGuard.js";
->>>>>>> 3f875adc20d16fac55d855ad1aec637f9df47bd2
+import CreateGallery from "./components/Gallery/CreateGallery/CreateGallery.jsx";
 
 function App() {
   return (
@@ -43,19 +35,15 @@ function App() {
       <Route exact path={"/tournament"} component={FormTournament} />
       <Route exact path={"/inscription/:tournament_id"} component = {Inscription}/>
       <Route exact path={"/login"} component={LogIn} />
-<<<<<<< HEAD
       <Route exact path={"/cpanel"} component={ControlPanel}/>
       <Route exact path={"/SignIn"} component={FormUserRegister}/>
       <Route exact path={"/Profile/:userId"} component={ProfileUser}/>
       {/* ////////////////ImagesFromDataBase/////////// */}
-      <Route exact path={"/Prueba"} component={PRUEBA}/>
+      <Route exact path={"/CreateGallery"} component={CreateGallery}/>
       {/* ////////////////ImagesFromDataBase/////////// */}
-
-=======
       <Route exact path={"/cpanel"} component={ControlPanel} />
       <Route exact path={"/SignIn"} component={FormUserRegister} />
       <Route exact path={"/Profile/:userId"} component={ProfileUser} />
->>>>>>> 3f875adc20d16fac55d855ad1aec637f9df47bd2
     </div>
   );
 }

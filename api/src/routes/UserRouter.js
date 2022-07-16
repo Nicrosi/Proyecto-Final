@@ -14,7 +14,8 @@ router.get('/' , async (req,res) => {
     if(name){
         let user_name = await get_Userdb(name)
         user_name.length > 0 ? res.status(200).send(user_name) : res.status(404).send("User not found!")
-    }else{
+    }
+    else{
         allUsers.length > 0? res.status(200).send(allUsers) : res.status(404).send("Users doesn't exist!")
     }
 }) 
@@ -71,14 +72,14 @@ router.get('/prueba', async (req, res) => {
         }
       )
 
-      await Inscription.create(
-        {
-          amount: ArrayUsers[i].inscription.amount,
-          is_payed: ArrayUsers[i].inscription.isPayed,
-          tournament: ArrayUsers[i].inscription.tournament,
-          id_user: user.id_user
-        }
-      )
+      // await Inscription.create(
+      //   {
+      //     amount: ArrayUsers[i].inscription.amount,
+      //     is_payed: ArrayUsers[i].inscription.isPayed,
+      //     tournament: ArrayUsers[i].inscription.tournament,
+      //     id_user: user.id_user
+      //   }
+      // )
 
 
     }

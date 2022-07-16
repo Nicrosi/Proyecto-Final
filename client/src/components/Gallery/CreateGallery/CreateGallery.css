@@ -1,0 +1,43 @@
+.CONTAINER {
+  background-image: url('../../../img/imgCarousel1.webp');
+  background-position: contain;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.container_inputs {
+  position: relative;
+  display: flex;
+  margin-top: 55px;
+  padding: 10px;
+  background-color: rgb(0 0 0 / 70%);
+  justify-content: center;
+  align-items: center;
+  height: 70px;
+}
+
+.container_gallery_created {
+  display: flex;
+  position: relative;
+  justify-content:center;
+  align-items: flex-start;
+  min-height: 80vh;
+}
+
+.contaier_img {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 20px 20vw;
+  background-color: rgb(0 0 0 / 70%);
+  min-height: 80vh;
+  justify-content: center;
+  width: 100vw;
+}
+
+.images_from_db {
+  height: min-content;
+  width: 200px;
+  border-radius: 10px;
+  padding: 10px;
+}

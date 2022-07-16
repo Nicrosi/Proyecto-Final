@@ -77,6 +77,15 @@ function HomeAdmin() {
                 Create New Sponsor
               </button>
             </Link>
+            <Link to={"/CreateGallery"}>
+              <button
+                type="button"
+                className="btn btn-outline-secondary btn-dark my-2"
+                style={{ width: "500px" }}
+              >
+                Create Gallery
+              </button>
+            </Link>
           </div>
         </div>
       </div>

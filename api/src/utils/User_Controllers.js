@@ -20,11 +20,11 @@ const get_Userdb = async (name) => {
         }else{
             const User_db = await User.findAll({
                 attributes: {exclude: ['password']},
-      include: [
-        Inscription,
-        Score,
-        Category
-      ]
+                include: [
+                  Inscription,
+                  Score,
+                  Category
+                ]
             });
             return User_db;
         }

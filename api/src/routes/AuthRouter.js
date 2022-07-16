@@ -48,12 +48,6 @@ router.post("/register", async (req, res, next) => {
       gender,
     });
 
-<<<<<<< HEAD
-    return res.status(201).json({ok: "User created!"})
-      
-    } catch (error) {
-        return res.status(403).json({error: "error"})
-=======
     return res.status(201).json({ ok: "User created!" });
   } catch (error) {
     return res.status(403).json({ error: "Username or Password invalid" });
@@ -66,7 +60,6 @@ router.post("/login", async (req, res, next) => {
 
     if (!e_mail || !password) {
       return res.status(400).json({ error: "Email and Password are required" });
->>>>>>> 3f875adc20d16fac55d855ad1aec637f9df47bd2
     }
 
     const user = await User.findOne({
