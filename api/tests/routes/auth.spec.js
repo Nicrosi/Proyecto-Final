@@ -12,7 +12,7 @@ const users = [
     name: "example1",
     dni: 23442,
     last_name: "a",
-    is_admin: false,
+    is_admin: true,
     e_mail: "example1@gmail.com",
     password: "22345",
     phone: 1231,
@@ -114,7 +114,7 @@ const users = [
   },
   {
     name: "example9",
-    dni: 231111,
+    dni: 2311511,
     last_name: "a",
     is_admin: false,
     e_mail: "example9@gmail.com",
@@ -237,15 +237,17 @@ describe("Routes", () => {
       console.error("Unable to connect to the database:", err);
     })
   );
-  beforeEach(() => User.sync({ force: false }));
+  beforeEach(() => User.sync({ force: true }));
   describe("Register /auth", () => {
-    it("must add a new race and respond with 201 if valid data was sent", () =>
+    it("add users", (done) => {
       users.forEach((user) => {
         agent
           .post(`/auth/register`)
           .send(user)
-          .then((d) => console.log(d))
-          .catch((err) => console.log(err));
-      }));
+          .then()
+          .catch(() => done(new Error("not added")));
+      });
+      done();
+    });
   });
 });

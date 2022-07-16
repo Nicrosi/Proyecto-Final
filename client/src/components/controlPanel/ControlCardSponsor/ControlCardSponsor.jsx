@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { getAllSponsors, putSponsor } from "../../redux/actions";
+import { getAllSponsors, putSponsor } from "../../../redux/actions";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 

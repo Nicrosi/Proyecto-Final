@@ -13,7 +13,7 @@ const DetailsUser = (props) => {
     dispatch(getUserById(params));
   }, [dispatch, params]);
 
-  let user = useSelector((state) => state.user);
+  let user = useSelector((state) => state.rootReducer.user);
 
   console.log(user);
 

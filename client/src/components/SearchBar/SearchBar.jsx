@@ -16,13 +16,20 @@ export default function SearchBar() {
   const handleOnChange = function (e) {
     setInput(e.target.value);
   };
-
+  const handleReload = () => {
+    window.location.reload();
+  };
   //si esta en home renderiza el componente de busqueda
   return (
     <div
       className="d-flex justify-content-center"
       style={{ paddingTop: "10px" }}
     >
+      <div>
+        <button type="button" onClick={() => handleReload()}>
+          Refresh{" "}
+        </button>
+      </div>
       <form
         onSubmit={(e) => handleSubmit(e)}
         className="d-flex justify-content-center"

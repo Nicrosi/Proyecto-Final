@@ -7,7 +7,7 @@ module.exports = (sequelize) => {
     "score",
     {
       id_score: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.BIGINT,
         allowNull: false,
         primaryKey: true,
         autoIncrement: true,

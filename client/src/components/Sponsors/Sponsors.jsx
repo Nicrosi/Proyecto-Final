@@ -5,11 +5,14 @@ import { getAllSponsors } from "../../redux/actions";
 
 export default function Sponsors() {
   const dispatch = useDispatch(),
-    sponsors = useSelector((state) => state.sponsors);
+    sponsors = useSelector((state) => state.rootReducer.sponsors);
 
   useEffect(() => {
+    if(!sponsors){
+      return
+    }
     dispatch(getAllSponsors());
-  }, [dispatch]);
+  }, [dispatch,sponsors]);
 
   return (
     <Container fluid className="py-5">
@@ -36,7 +39,7 @@ export default function Sponsors() {
         </Row>
       ) : (
         <h1 className="text-white" style={{ textAlign: "center" }}>
-          No sponsors found
+          
         </h1>
       )}
     </Container>

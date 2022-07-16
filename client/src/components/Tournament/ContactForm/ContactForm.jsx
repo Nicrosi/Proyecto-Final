@@ -4,11 +4,12 @@ import { MailIcon } from "@heroicons/react/solid";
 import emailjs from "@emailjs/browser";
 import styles from "./ContactForm.module.css";
 
+
 export const ContactForm = () => {
-  
-  const users = useSelector((state) => state.users);
-  
-  console.log('users',users);
+
+  const users = useSelector((state) => state.rootReducer.users);
+
+  console.log("users", users);
   const email = users.map((el) => el.e_mail);
   const allEmail = [...new Set(email)];
   console.log("email", email);
@@ -32,22 +33,27 @@ export const ContactForm = () => {
     if (status === "SUCCESS") {
       setTimeout(() => {
         setStatus("");
-      }, 3000);
+      }, 10000);
     }
   }, [status]);
 
   function handleSubmit(e) {
     e.preventDefault();
+    console.log(input);
+
     emailjs
       .send("service_7mimo0g", "template_2ah1aoj", input, "cYHyGctWLF2I5zGsl")
       .then(
         (response) => {
           console.log("success", response);
-
+          setInput((prevInput) => ({
+            name: "",
+            email: prevInput.email,
+            message: "",
+          }));
           setInput({
             name: "",
             email: "",
-            my_file: "",
             message: "",
           });
           setStatus("SUCCESS");
@@ -77,31 +83,7 @@ export const ContactForm = () => {
           />
           <label htmlFor="floatingInput">Full Name</label>      
           </div>
-          <div className="form-floating col-md">
-          <input
-            onChange={(e) => handleChange(e)}
-            name="email"
-            type="email"
-            placeholder="example: admin@gmail.com"
-            id="floatingInput"
-            value={input.email}
-            className="form-control"
-          />
-          <label htmlFor="floatingInput">E-mail</label>      
-          </div>
         </div>
-        <div className="row g-2">
-          <div className="input-group mb-3">
-          <input
-            onChange={(e) => handleChange(e)}
-            name="my_file"
-            type="file"
-            placeholder=""
-            value={input.my_file}
-            class="form-control" 
-            id="inputGroupFile02"
-          />   
-          </div>
         </div>
           {/* <select onChange={(e) => handleChange(e)}>
             <option value={input.email} label="Email" name="email" placeholder="gaby@gmail.com" type="email">All emails</option>

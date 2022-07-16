@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import axios from "axios";
 import { ContactForm } from "../ContactForm/ContactForm";
 import styles from "./FormTournament.module.css";
+import img1 from "../../../img/imgForm1.webp"
 
 export function validate(input) {
   let error = {};
-  
   if (!input.date) {
     error.company = "Name is required";
   } else if (
@@ -25,7 +25,7 @@ export function validate(input) {
 }
 
 export const FormTournament = () => {
-  const noError = "Looks good"
+  const noError = "Looks good";
   const [input, setInput] = useState({
     date: "",
     location: "",
@@ -125,6 +125,7 @@ export const FormTournament = () => {
       </div>
       </div>
       <ContactForm />
+
     </div>
   );
 };

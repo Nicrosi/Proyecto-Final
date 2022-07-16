@@ -1,4 +1,4 @@
-import { generateRandomDraw } from "./Tournaments";
+import { generateRandomDraw } from "../Tournaments/Tournaments";
 
 let Category = "";
 let Gender = "";
