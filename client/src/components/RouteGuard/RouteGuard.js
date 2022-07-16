@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Route, Redirect, useHistory } from "react-router-dom";
+import { Route, Redirect } from "react-router-dom";
 import { verifyUser } from "../../redux/actions/authorization";
 
 const RouteGuard = ({ component: Component, ...rest }) => {
@@ -18,21 +18,17 @@ const RouteGuard = ({ component: Component, ...rest }) => {
       {authChecked ? (
         <Route
           {...rest}
-          render={(props) => {
-            if (loggedIn) {
-              
-              if (rest.admin === user.is_admin) {return <Component {...props} />;
-            }else if(rest.admin !== user.is_admin){;
-                return <Redirect to="/login" />;
-              }
-            }
-            return <Redirect to="/login" />;
-          }}
+          render={(props) =>
+            (loggedIn && !rest.admin) || rest.admin === user.is_admin ? (
+              <Component {...props} />
+            ) : (
+              <Redirect to="/login" />
+            )
+          }
         />
       ) : null}
     </>
   );
-
 
   // return (
   //   <>

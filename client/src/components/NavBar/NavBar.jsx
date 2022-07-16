@@ -57,19 +57,28 @@ export default function NavBar() {
                 </Link>
               </li>
             ) : null}
+            {auth.loggedIn ? (
+              <li className="nav-item">
+                <Link
+                  className="nav-link ms-auto"
+                  style={{ fontWeight: "bold", color: "#e0e6e8" }}
+                  to={"/Users"}
+                >
+                  Users
+                </Link>
+              </li>
+            ) : null}
 
-            <li className="nav-item">
-              <Link
-                className="nav-link ms-auto"
-                style={{ fontWeight: "bold", color: "#e0e6e8" }}
-                to={"/Users"}
-              >
-                Users
-              </Link>
-            </li>
             {auth.loggedIn ? (
               <li className="nav-item">
                 <button
+                  className="nav-link ms-auto"
+                  style={{
+                    fontWeight: "bold",
+                    color: "#e0e6e8",
+                    backgroundColor: "transparent",
+                    border: "none",
+                  }}
                   onClick={() => {
                     dispatch(logoutUser());
                   }}
@@ -77,7 +86,28 @@ export default function NavBar() {
                   Logout
                 </button>
               </li>
-            ) : null}
+            ) : (
+              <>
+                <li className="nav-item">
+                  <Link
+                    className="nav-link ms-auto"
+                    style={{ fontWeight: "bold", color: "#e0e6e8" }}
+                    to={"/login"}
+                  >
+                    Login
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link
+                    className="nav-link ms-auto"
+                    style={{ fontWeight: "bold", color: "#e0e6e8" }}
+                    to={"/SignIn"}
+                  >
+                    Signup
+                  </Link>
+                </li>
+              </>
+            )}
           </ul>
         </div>
       </div>
