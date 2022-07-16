@@ -2,96 +2,83 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import img1 from "../../img/backGround-img-logIn.jpg";
-import { postLogin } from "../../redux/actions";
-
+import { postLogin } from "../../redux/actions/authorization";
 
 function validateError(input) {
-  
   let error = {};
-  if(!input.e_mail){
-    error.e_mail = 'Email is required'
-  }else if(
+  if (!input.e_mail) {
+    error.e_mail = "Email is required";
+  } else if (
     !/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/i.test(input.e_mail) &&
-  input.e_mail
+    input.e_mail
   ) {
-    error.e_mail = 'Invalid e-mail format'
+    error.e_mail = "Invalid e-mail format";
   }
-  
-  if(!input.password){
-    error.password = 'Password is required'
+
+  if (!input.password) {
+    error.password = "Password is required";
   }
 
   return error;
-
 }
-
 
 function validateSucces(input) {
   let success = {};
-  if(input.e_mail && /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/i.test(input.e_mail)){
-    success.e_mail = 'Success'
+  if (input.e_mail && /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/i.test(input.e_mail)) {
+    success.e_mail = "Success";
   }
-  
-  if(input.password){
-    success.password = 'Success'
+
+  if (input.password) {
+    success.password = "Success";
   }
 
   return success;
-
 }
-
 
 export default function LogIn() {
   const dispatch = useDispatch();
-  const [ Errors, setErrors ] = useState([]);
-  const [ Success, setSuccess ] = useState([]);
-  const [ input, setInput ] = useState({
-    e_mail: '',
-    password: ''
+  const [Errors, setErrors] = useState([]);
+  const [Success, setSuccess] = useState([]);
+  const [input, setInput] = useState({
+    e_mail: "",
+    password: "",
   });
 
   const handleInputChange = (e) => {
     e.preventDefault();
     setInput({
       ...input,
-     [ e.target.name]: e.target.value
-    })
-    
-    setErrors(
-      validateError(
-        {
-           ...input,
-          [ e.target.name]: e.target.value
-        }
-      )
-    )
-    
-    setSuccess(
-      validateSucces(
-        {
-           ...input,
-          [ e.target.name]: e.target.value
-        }
-      )
-    )
+      [e.target.name]: e.target.value,
+    });
 
-  }
+    setErrors(
+      validateError({
+        ...input,
+        [e.target.name]: e.target.value,
+      })
+    );
+
+    setSuccess(
+      validateSucces({
+        ...input,
+        [e.target.name]: e.target.value,
+      })
+    );
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(postLogin(input));//auth login
-    setInput(
-      {
-        e_mail: '',
-        password: ''
-      }
-    );
+    dispatch(postLogin(input)); //auth login
+    setInput({
+      e_mail: "",
+      password: "",
+    });
     alert("logIn user");
     setSuccess([]);
-  }
+  };
 
   return (
-    <div style={{paddingTop: "150px", height: "100vh", width: "100vw"}} >
+    <div style={{ paddingTop: "150px", height: "100vh", width: "100vw" }}>
       <div style={{ minHeight: "80vh", width: "100%" }}>
         <div style={{ position: "absolute", top: "0", width: "100%" }}>
           <img
@@ -105,20 +92,20 @@ export default function LogIn() {
             }}
           />
         </div>
-        
-          <h1
-            style={{
-              fontFamily: "'Bebas Neue', cursive",
-              fontSize: "7rem",
-              position: "absolute",
-              top: "100px",
-              left: "420px",
-              marginLeft: "10%",
-              color: "#A7D129",
-            }}
-          >
-            LogIn
-          </h1>
+
+        <h1
+          style={{
+            fontFamily: "'Bebas Neue', cursive",
+            fontSize: "7rem",
+            position: "absolute",
+            top: "100px",
+            left: "420px",
+            marginLeft: "10%",
+            color: "#A7D129",
+          }}
+        >
+          LogIn
+        </h1>
 
         <div
           className="mx-auto"
@@ -131,9 +118,7 @@ export default function LogIn() {
             padding: "20px 30px",
           }}
         >
-
-
-          <form style={{ width: "100%" }} onSubmit={(e) => handleSubmit(e)} >
+          <form style={{ width: "100%" }} onSubmit={(e) => handleSubmit(e)}>
             <div className="row g-2 mb-3">
               <div className="form-floating col-md">
                 <input
@@ -141,14 +126,14 @@ export default function LogIn() {
                   value={input.e_mail}
                   name="e_mail"
                   placeholder="Write your Email..."
-                  id="floatingInput"
+                  id="floatingInput1"
                   onChange={(e) => handleInputChange(e)}
                   className={
-                    Errors.e_mail ?
-                    "form-control is-invalid" :
-                    Success.e_mail ?
-                      "form-control is-valid" :
-                      "form-control"
+                    Errors.e_mail
+                      ? "form-control is-invalid"
+                      : Success.e_mail
+                      ? "form-control is-valid"
+                      : "form-control"
                   }
                 />
                 {Errors.e_mail ? (
@@ -158,14 +143,13 @@ export default function LogIn() {
                   >
                     {Errors.e_mail}
                   </div>
-                ) : ( 
+                ) : (
                   <div
                     id="validationServerUsernameFeedback"
                     className="valid-feedback"
-                  >
-                  </div>
+                  ></div>
                 )}
-                <label htmlFor="floatingInput">Write your email...</label>
+                <label htmlFor="floatingInput1">Write your email...</label>
               </div>
             </div>
             <div className="row g-2 mb-3">
@@ -175,14 +159,14 @@ export default function LogIn() {
                   value={input.password}
                   name="password"
                   placeholder="Write your password..."
-                  id="floatingInput"
+                  id="floatingInput2"
                   onChange={(e) => handleInputChange(e)}
                   className={
-                    Errors.password ?
-                    "form-control is-invalid" :
-                    Success.password ?
-                      "form-control is-valid" :
-                      "form-control"
+                    Errors.password
+                      ? "form-control is-invalid"
+                      : Success.password
+                      ? "form-control is-valid"
+                      : "form-control"
                   }
                 />
                 {Errors.password ? (
@@ -192,33 +176,49 @@ export default function LogIn() {
                   >
                     {Errors.password}
                   </div>
-                ) : ( 
+                ) : (
                   <div
                     id="validationServerUsernameFeedback"
                     className="valid-feedback"
-                  >
-                  </div>
-                )} 
-                <label htmlFor="floatingInput">Write your password...</label>
+                  ></div>
+                )}
+                <label htmlFor="floatingInput2">Write your password...</label>
               </div>
             </div>
             <div className="d-grid gap-2">
-            {Errors.e_mail || Errors.password || !input.e_mail  || !input.password ? (
-              <button className="btn btn-secondary" style={{ backgroundColor: "#A7D129" }} disabled>
-                Log in
-              </button>
-            ) : (
-              <button className="btn btn-success" style={{ backgroundColor: "#A7D129" }} >Log in</button>
-            )} 
+              {Errors.e_mail ||
+              Errors.password ||
+              !input.e_mail ||
+              !input.password ? (
+                <button
+                  className="btn btn-secondary"
+                  style={{ backgroundColor: "#A7D129" }}
+                  disabled
+                >
+                  Log in
+                </button>
+              ) : (
+                <button
+                  className="btn btn-success"
+                  style={{ backgroundColor: "#A7D129" }}
+                >
+                  Log in
+                </button>
+              )}
             </div>
             <div>
               <Link to={"/SignIn"}>
-              <button className="btn btn-success" style={{ backgroundColor: "#A7D129" }} >SignIn</button>
+                <button
+                  className="btn btn-success"
+                  style={{ backgroundColor: "#A7D129" }}
+                >
+                  SignIn
+                </button>
               </Link>
             </div>
           </form>
         </div>
       </div>
     </div>
-  )
+  );
 }

@@ -4,17 +4,21 @@ import { MailIcon } from "@heroicons/react/solid";
 import emailjs from "@emailjs/browser";
 
 export const ContactForm = () => {
-  const users = useSelector((state) => state.users);
 
-  const emails = users.map((el) => el.e_mail);
-  const allEmail = [...new Set(emails)];
+  const users = useSelector((state) => state.rootReducer.users);
 
+  console.log("users", users);
+  const email = users.map((el) => el.e_mail);
+  const allEmail = [...new Set(email)];
+  console.log("email", email);
+  console.log("allemail", allEmail);
   const [input, setInput] = useState({
     name: "",
-    email: emails.join(", "),
+    email: "",
+    my_file: "",
     message: "",
   });
-
+  console.log("Input", input);
   const [status, setStatus] = useState("");
 
   const handleChange = (e) => {
@@ -28,6 +32,7 @@ export const ContactForm = () => {
       setTimeout(() => {
         setStatus("");
       }, 10000);
+
     }
   }, [status]);
 

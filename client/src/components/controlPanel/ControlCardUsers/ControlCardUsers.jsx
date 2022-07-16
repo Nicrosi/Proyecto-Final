@@ -25,7 +25,8 @@ export default function ControlCardUsers({
     num_contact: num_contact,
   });
 
-  const users = useSelector((state) => state.users);
+
+  const users = useSelector((state) => state.rootReducer.users);
   console.log(users);
   const dispatch = useDispatch();
   useEffect(() => {
