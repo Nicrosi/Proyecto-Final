@@ -59,7 +59,11 @@ export const verifyUser = () => {
         },
       });
       if (response.statusText === "OK") {
-        dispatch({ type: AUTHENTICATED, payload: response.data });
+        if (Object.keys(response.data).length > 1)
+          dispatch({ type: AUTHENTICATED, payload: response.data });
+        else {
+          dispatch({ type: NOT_AUTHENTICATED });
+        }
       }
     } catch (err) {
       dispatch({ type: NOT_AUTHENTICATED });
