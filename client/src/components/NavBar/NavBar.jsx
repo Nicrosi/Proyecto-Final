@@ -57,7 +57,7 @@ export default function NavBar() {
               </Link>
             </li>
           ) : null}
-          {auth.loggedIn ? (
+          {auth.loggedIn && auth.currentUser.is_admin === false? (
             <li className="nav-item">
               <Link
                 className="nav-link ms-auto"
@@ -111,7 +111,7 @@ export default function NavBar() {
                     <NavDropdown.Item href={`/profile/${auth.currentUser.dni}`}>
                       Profile
                     </NavDropdown.Item>
-                    <NavDropdown.Item href="#action/3.2">
+                    <NavDropdown.Item>
                       <button
                         style={{
                           backgroundColor: "transparent",
