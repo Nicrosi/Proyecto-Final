@@ -12,7 +12,7 @@ const users = [
     name: "example1",
     dni: 23442,
     last_name: "a",
-    is_admin: true,
+    is_admin: false,
     e_mail: "example1@gmail.com",
     password: "22345",
     phone: 1231,
