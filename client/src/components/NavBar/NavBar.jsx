@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { logoutUser } from "../../redux/actions/authorization";
 
+import NavDropdown from "react-bootstrap/NavDropdown";
+
 export default function NavBar() {
   const auth = useSelector((state) => state.auth);
   const dispatch = useDispatch();
@@ -43,49 +45,88 @@ export default function NavBar() {
         >
           <span className="navbar-toggler-icon text-white"></span>
         </button>
+        <ul className="navbar-nav mb-2 mb-lg-0 ms-auto pe-4 bg-morning">
+          {auth.loggedIn ? (
+            <li className="nav-item">
+              <Link
+                className="nav-link ms-auto"
+                style={{ fontWeight: "bold", color: "#e0e6e8" }}
+                to={"/Users"}
+              >
+                Users
+              </Link>
+            </li>
+          ) : null}
+          {auth.loggedIn ? (
+            <li className="nav-item">
+              <Link
+                className="nav-link ms-auto"
+                style={{ fontWeight: "bold", color: "#e0e6e8" }}
+                to={"/Users"}
+              >
+                Inscription
+              </Link>
+            </li>
+          ) : null}
+          <li className="nav-item">
+        
+            <a 
+              className="nav-link ms-auto"
+              style={{ fontWeight: "bold", color: "#e0e6e8" }}
+              href="/#multimediaLP"
+            >
+              Multimedia
+            </a>
+          </li>
+          <li className="nav-item">
+            <a
+              className="nav-link ms-auto"
+              style={{ fontWeight: "bold", color: "#e0e6e8" }}
+              href="/#sponsorLP"
+            >
+              Sponsor
+            </a>
+          </li>
+        </ul>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav mb-2 mb-lg-0 ms-auto pe-4 bg-morning">
-            {auth.currentUser && auth.currentUser.is_admin ? (
-              <li className="nav-item">
-                <Link
-                  className="nav-link active ms-auto"
-                  style={{ fontWeight: "bold", color: "#e0e6e8" }}
-                  aria-current="page"
-                  to={"/HomeAdmin"}
-                >
-                  Admin
-                </Link>
-              </li>
-            ) : null}
             {auth.loggedIn ? (
-              <li className="nav-item">
-                <Link
-                  className="nav-link ms-auto"
-                  style={{ fontWeight: "bold", color: "#e0e6e8" }}
-                  to={"/Users"}
-                >
-                  Users
-                </Link>
-              </li>
-            ) : null}
-
-            {auth.loggedIn ? (
-              <li className="nav-item">
-                <button
-                  className="nav-link ms-auto"
-                  style={{
-                    fontWeight: "bold",
-                    color: "#e0e6e8",
-                    backgroundColor: "transparent",
-                    border: "none",
-                  }}
-                  onClick={() => {
-                    dispatch(logoutUser());
-                  }}
-                >
-                  Logout
-                </button>
-              </li>
+              <>
+                <li>
+                  <img
+                    src={auth.currentUser.picture}
+                    width="30"
+                    height="30"
+                    className="rounded-circle"
+                    alt="profileImg"
+                  />
+                </li>
+                <li>
+                  <NavDropdown id="basic-nav-dropdown">
+                    {auth.currentUser.is_admin ? (
+                      <NavDropdown.Item href="/HomeAdmin">
+                        Admin
+                      </NavDropdown.Item>
+                    ) : null}
+                    <NavDropdown.Item href={`/profile/${auth.currentUser.dni}`}>
+                      Profile
+                    </NavDropdown.Item>
+                    <NavDropdown.Item href="#action/3.2">
+                      <button
+                        style={{
+                          backgroundColor: "transparent",
+                          border: "none",
+                        }}
+                        onClick={() => {
+                          dispatch(logoutUser());
+                        }}
+                      >
+                        Logout
+                      </button>
+                    </NavDropdown.Item>
+                  </NavDropdown>
+                </li>
+              </>
             ) : (
               <>
                 <li className="nav-item">

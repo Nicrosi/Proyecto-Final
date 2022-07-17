@@ -18,7 +18,8 @@ export default function LandingPage() {
         <h1 className="mt-4 ">How to take part?</h1>
         <Steps />
       </section>
-      <section
+      <section 
+        id="multimediaLP"
         className="d-flex flex-column align-items-center pt-4 bg-dark"
         style={{ minHeight: "100vh" }}
       >
@@ -32,6 +33,7 @@ export default function LandingPage() {
         <FAQ />
       </section>
       <section
+        id="sponsorLP"
         className="d-flex align-items-center justify-content-center bg-dark"
         style={{ minHeight: "30vh" }}
       >

@@ -37,8 +37,8 @@ function App() {
         <Route exact path={"/"} component={LandingPage} />
         <Route exact path={"/Users/:userId"} component={DetailsUser} />
         <Route exact path={"/CreateScore/:userId"} component={FormScore} />
-        <Route exact path={"/sponsor"} component={FormSponsor} />
-        <Route exact path={"/tournament"} component={FormTournament} />
+        <Route exact path={"/CreateSponsor"} component={FormSponsor} />
+        <Route exact path={"/CreateTournament"} component={FormTournament} />
         <Route
           exact
           path={"/inscription/:tournament_id"}
