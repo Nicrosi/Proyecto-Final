@@ -1,50 +1,57 @@
 import { useEffect, useState } from "react";
 import { Container, Col, Row } from "react-bootstrap";
+import axios from 'axios';
 import './Gallery.css';
-import img1 from "../../img/imgGallery1.webp";
-import img2 from "../../img/imgGallery2.webp";
-import img3 from "../../img/imgGallery3.webp";
-import img4 from "../../img/imgGallery4.webp";
-import img5 from "../../img/imgGallery5.webp";
-import img6 from "../../img/imgGallery6.webp";
+// import img1 from "../../img/imgGallery1.webp";
+// import img2 from "../../img/imgGallery2.webp";
+// import img3 from "../../img/imgGallery3.webp";
+// import img4 from "../../img/imgGallery4.webp";
+// import img5 from "../../img/imgGallery5.webp";
+// import img6 from "../../img/imgGallery6.webp";
 
 export default function Gallery() {
 
   const [ImagesList, setImagesList ] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:3001/images/get',)
-    .then(res => res.json())
-    .then(res => setImagesList(res))
+    axios.get('http://localhost:3001/gallery/get',)
+    .then(res => setImagesList(res.data))
     .catch(err => console.log(err))
-    
+
     return () => {
-      fetch('http://localhost:3001/images/prueba/delete')
-      .then(res => res.text())
-      .then(res => console.log(res))
+      axios.delete('http://localhost:3001/gallery/delete')
+      .then(res => console.log(res.data))
       .catch(err => console.log(err))
     }
+
   },[])
 
   return (
     <>
     {
       ImagesList.length ?
-      (<Container fluid>
-        <div className="container_galery_images" >
-          <>
-            {
-              ImagesList.length && ImagesList.map((image) => (
-                <img
-                  src={`http://localhost:3001/${image}`}
-                  className="gallery_image"
-                  alt="Boat on Calm Water"
-                />            
-              ))
-            }
-            </>
-        </div> 
-      </Container>)
+      (
+        <section
+          className="d-flex flex-column align-items-center pt-4 bg-dark"
+          style={{ minHeight: "100vh" }}
+        >
+          <Container fluid>
+            <div className="container_galery_images" >
+              <>
+                {
+                  ImagesList.length && ImagesList.map((image) => (
+                    <img
+                      src={`http://localhost:3001/${image}`}
+                      className="gallery_image"
+                      alt="Boat on Calm Water"
+                    />            
+                  ))
+                }
+                </>
+            </div> 
+          </Container>
+        </section>
+      )
       :
       (<div></div>)
     }
