@@ -28,7 +28,9 @@ export default function Filter({ setCurrentPage }) {
     setFilterOpt({ ...filterOpt, [name]: value });
     setCurrentPage(0);
   };
-
+  const handleReload = () => {
+    window.location.reload();
+  };
   return (
     <aside className="aside bg-dark">
       <SearchBar />
@@ -171,6 +173,11 @@ export default function Filter({ setCurrentPage }) {
           onChange={handleChange}
         />
         <label htmlFor="none">None</label>
+        <div className="mt-5">
+        <button type="button" onClick={() => handleReload()}>
+          Refresh{" "}
+        </button>
+      </div>
       </div>
     </aside>
   );
