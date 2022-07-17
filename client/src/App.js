@@ -42,9 +42,7 @@ function App() {
       <Route exact path={"/cpanel"} component={ControlPanel}/>
       <Route exact path={"/SignIn"} component={FormUserRegister}/>
       <Route exact path={"/Profile/:userId"} component={ProfileUser}/>
-      {/* ////////////////ImagesFromDataBase/////////// */}
       <Route exact path={"/CreateGallery"} component={CreateGallery}/>
-      {/* ////////////////ImagesFromDataBase/////////// */}
       <Route exact path={"/cpanel"} component={ControlPanel} />
       <Route exact path={"/SignIn"} component={FormUserRegister} />
       <RouteGuard
