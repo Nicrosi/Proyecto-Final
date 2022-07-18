@@ -17,6 +17,7 @@ export const PUT_USERS = "PUT_USERS";
 export const GET_TOURNAMENT = "GET_TOURNAMENT";
 export const PUT_TOURNAMENT = "PUT_TOURNAMENT"
 export const CLEAR_USER = "CLEAR_USER";
+export const ADD_SUBTOURNAMENT = "ADD_SUBTOURNAMENT";
 
 // export const getAllPlayers = () => { JSON
 //   return {
@@ -30,6 +31,7 @@ const urlSponsors = "http://localhost:3001/sponsor";
 const urlSubtByT = "http://localhost:3001/subtournament/prueba";
 const urlInscription = "http://localhost:3001/inscription"
 const urlTournament = "http://localhost:3001/tournament";
+const urlSubTournament = "http://localhost:3001/subtournament";
 const urlSponsor = "http://localhost:3001/sponsor"
 toast.configure();
 
@@ -144,6 +146,22 @@ export const putTournament = (id_tournament, input) => {
     return await axios.put(`${urlTournament}/${id_tournament}`, putValues);
   };
 };
+
+export const postSubTournament = (id_tournament, input) => {
+  return async (dispatch) => {
+    try {
+      await axios.post(`${urlSubTournament}/${id_tournament}`, input);
+
+      return dispatch({
+        type: ADD_SUBTOURNAMENT,
+        payload: input,
+      });
+    } catch (error) {
+      alert("Add subTournament error, try again later");
+    }
+  };
+};
+
 export const putSponsor = (id_sponsor, val) => {
   return async () => {
     const putval = {

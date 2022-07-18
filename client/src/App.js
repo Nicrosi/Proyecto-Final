@@ -16,6 +16,7 @@ import ProfileUser from "./components/Profile/ProfileUser/ProfileUser.jsx";
 import RouteGuard from "./components/RouteGuard/RouteGuard.js";
 import { verifyUser } from "./redux/actions/authorization.js";
 import { useDispatch } from "react-redux";
+import { FormSubTournament } from "./components/SubTournament/FormSubTournament/FormSubTournament.jsx";
 
 function App() {
   const dispatch = useDispatch();
@@ -39,6 +40,7 @@ function App() {
         <Route exact path={"/CreateScore/:userId"} component={FormScore} />
         <Route exact path={"/CreateSponsor"} component={FormSponsor} />
         <Route exact path={"/CreateTournament"} component={FormTournament} />
+        <Route exact path={"/CreateSubtournament/:tournamentId"} component={FormSubTournament} />
         <Route
           exact
           path={"/inscription/:tournament_id"}
