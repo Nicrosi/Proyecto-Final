@@ -57,10 +57,21 @@ export default function NavBar() {
               </Link>
             </li>
           ) : null}
-          
+
+          {auth.loggedIn && auth.currentUser.is_admin === false ? (
+            <li className="nav-item">
+              <Link
+                className="nav-link ms-auto"
+                style={{ fontWeight: "bold", color: "#e0e6e8" }}
+                to={"/Users"}
+              >
+                Inscription
+              </Link>
+            </li>
+          ) : null}
+
           <li className="nav-item">
-        
-            <a 
+            <a
               className="nav-link ms-auto"
               style={{ fontWeight: "bold", color: "#e0e6e8" }}
               href="/Gallery"
@@ -85,11 +96,12 @@ export default function NavBar() {
                     Tournaments
                   </Link>
         </ul>
+
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul className="navbar-nav mb-2 mb-lg-0 ms-auto pe-4 bg-morning">
+          <ul className="navbar-nav mb-2 mb-lg-0 ms-auto pe-2 bg-morning">
             {auth.loggedIn ? (
               <>
-                <li>
+                <li className="d-flex justify-content-center align-items-center">
                   <img
                     src={auth.currentUser.picture}
                     width="30"
@@ -99,10 +111,14 @@ export default function NavBar() {
                   />
                 </li>
                 <li>
-                  <NavDropdown id="basic-nav-dropdown">
+                  <NavDropdown
+                    id="basic-nav-dropdown"
+                    style={{ paddingTop: "2px" }}
+                  >
                     {auth.currentUser.is_admin ? (
-                      <NavDropdown.Item href="/HomeAdmin">
+                      <Link className="dropdown-item" to="/HomeAdmin">
                         Admin
+
                       </NavDropdown.Item>
                     ) : <NavDropdown.Item href={`/profile/${auth.currentUser.dni}`}>
                     Profile
