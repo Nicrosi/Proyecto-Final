@@ -1,5 +1,5 @@
 import React from "react";
-import { getAllUsers} from "../../../redux/actions";
+import { getAllSponsors} from "../../../redux/actions";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./ControlSponsorsList.module.css"
@@ -11,7 +11,7 @@ export default function ControlSponsorsList() {
 
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getAllUsers());
+    dispatch(getAllSponsors());
   }, [dispatch]);
 
   return (
@@ -20,6 +20,7 @@ export default function ControlSponsorsList() {
         sponsors.map((p) => {
           return (
               <ControlCardSponsor 
+                id_sponsor={p.id_sponsor}
                 company={p.company}
                 message={p.message}
                 logo={p.logo}
