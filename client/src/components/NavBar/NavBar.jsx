@@ -87,6 +87,13 @@ export default function NavBar() {
               Sponsor
             </a>
           </li>
+          <Link
+                    className="nav-link ms-auto"
+                    style={{ fontWeight: "bold", color: "#e0e6e8" }}
+                    to={"/TournamentsToShow"}
+                  >
+                    Tournaments
+                  </Link>
         </ul>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav mb-2 mb-lg-0 ms-auto pe-4 bg-morning">
@@ -152,13 +159,7 @@ export default function NavBar() {
                 </li>
               </>
             )}
-            <Link
-                    className="nav-link ms-auto"
-                    style={{ fontWeight: "bold", color: "#e0e6e8" }}
-                    to={"/TournamentsToShow"}
-                  >
-                    Tournaments
-                  </Link>
+            
           </ul>
         </div>
       </div>
