@@ -30,7 +30,7 @@ export const TournamentCard = ({ id, name, date, location }) => {
           >
             <div className="card-body">
               <h5 className="card-title">Name:{name}</h5>
-              <h5 className="card-title">Date:{date}</h5>
+              <h5 className="card-title">Date:{date.slice(0,10)}</h5>
               <h5 className="card-text mt-2 mb-0">Location: {location}</h5>
             </div>
             <div>
