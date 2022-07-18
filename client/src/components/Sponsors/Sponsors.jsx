@@ -8,10 +8,10 @@ export default function Sponsors() {
     sponsors = useSelector((state) => state.rootReducer.sponsors);
 
   useEffect(() => {
-    if (sponsors.length > 0) {
+
       dispatch(getAllSponsors());
-    }
-  }, [dispatch, sponsors]);
+
+  }, [dispatch]);
 
   return (
     <Container fluid className="py-5">

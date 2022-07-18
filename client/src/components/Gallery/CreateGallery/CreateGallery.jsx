@@ -87,8 +87,8 @@ export default function CreateGallery() {
           <div className='contaier_img' >
             {
               ImagesList.length ? ImagesList.map((image) => (
-                <div className='img_button_container' >
-                  <img className='images_from_db' src={`http://localhost:3001/${image}`} />
+                <div className='img_button_container' key={image}>
+                  <img className='images_from_db' src={`http://localhost:3001/${image}`} alt="galleryImg" />
                   {
                     auth.loggedIn && auth.currentUser.is_admin ? 
                     <div onClick={()=>HandleDelte(image)} className='btn_delete_image' >

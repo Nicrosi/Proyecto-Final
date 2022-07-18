@@ -2,7 +2,11 @@ import React from "react";
 import img1 from "../../../assets/fototenis.jpg";
 import styles from "./TournamentCard.module.css";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 export const TournamentCard = ({ id, name, date, location }) => {
+
+  const auth = useSelector((state) => state.auth);
+
   return (
     <div
       style={{
@@ -34,14 +38,22 @@ export const TournamentCard = ({ id, name, date, location }) => {
               <h5 className="card-text mt-2 mb-0">Location: {location}</h5>
             </div>
             <div>
-              <button style={{ backgroundColor: "#A7D129" }}>
+              {auth.loggedIn && auth.currentUser.is_admin === false ? <button style={{ backgroundColor: "#A7D129" }}>
                 <Link
                   style={{ fontWeight: "bold", color: "#10242b" }}
                   to={`/inscription/${id}`}
                 >
                   Inscription
                 </Link>
-              </button>
+              </button>:
+              <button style={{ backgroundColor: "#A7D129" }}>
+              <Link
+                style={{ fontWeight: "bold", color: "#10242b" }}
+                to={`/CreateSubtournament/${id}`}
+              >
+                Create Subtournament
+              </Link>
+            </button>}
             </div>
           </div>
         </div>

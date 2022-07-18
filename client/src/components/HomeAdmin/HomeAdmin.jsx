@@ -62,18 +62,19 @@ function HomeAdmin() {
                 Create Tournament
               </button>
             </Link>
+            <Link to={`/TournamentsToShow`}>
             <button
               type="button"
               className="btn btn-outline-secondary btn-dark my-2"
               style={{ width: "500px" }}
-              disabled
             >
               Create Sub-Tournament
             </button>
+            </Link>
             <Link to={"/CreateSponsor"}>
               <button
                 type="button"
-                className="btn btn-outline-secondary btn-dark my-2"
+              className="btn btn-outline-secondary btn-dark my-2"
                 style={{ width: "500px" }}
               >
                 Create New Sponsor
