@@ -107,22 +107,18 @@ export default function NavBar() {
                       <NavDropdown.Item href="/HomeAdmin">
                         Admin
                       </NavDropdown.Item>
-                    ) : null}
-                    <NavDropdown.Item href={`/profile/${auth.currentUser.dni}`}>
-                      Profile
-                    </NavDropdown.Item>
+                    ) : <NavDropdown.Item href={`/profile/${auth.currentUser.dni}`}>
+                    Profile
+                  </NavDropdown.Item>}
                     <NavDropdown.Item>
-                      <button
-                        style={{
-                          backgroundColor: "transparent",
-                          border: "none",
-                        }}
+                      <NavDropdown.Item href=""
+
                         onClick={() => {
                           dispatch(logoutUser());
                         }}
                       >
                         Logout
-                      </button>
+                        </NavDropdown.Item>
                     </NavDropdown.Item>
                   </NavDropdown>
                 </li>
