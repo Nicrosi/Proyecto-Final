@@ -1,0 +1,48 @@
+.logContainer{
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: auto;
+}
+
+.logContainer:before {
+  content: "";
+  display: block;
+  position: absolute;
+  height: 100vh;
+  width: 100%;
+  background: url("../../img/backGround-img-logIn.jpg");
+  background-size: cover;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  z-index: -2;
+  filter: brightness(0.5);
+}
+
+.title{
+  font-family: Bebas Neue, cursive;
+  font-size: 7rem;
+  color: #A7D129;
+  padding-top: 100px;
+  text-align: center;
+}
+
+.loginContainer {
+  position: relative;
+  width: 40%;
+  background-color: rgb(43, 43, 44);
+  border-radius: 10px;
+  padding: 20px 30px;
+  align-self: center;
+  margin-top: 10px;
+}
+
+
+@media screen and (max-width: 768px){
+  .loginContainer{
+    width: 80%;
+  }
+}
+          
+          
