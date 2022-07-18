@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import './CreateGallery.css';
 import axios from 'axios';
@@ -10,9 +9,6 @@ export default function CreateGallery() {
 
   const [file, setFile ] = useState(null);
   const [ImagesList, setImagesList ] = useState([]);
-  const [Change, setChange ] = useState(false);
-  const [ImageId, setImageId ] = useState('');
-  const History = useHistory();
   const auth = useSelector((state) => state.auth);
 
 
@@ -45,7 +41,6 @@ export default function CreateGallery() {
       .then(res => setImagesList(res.data))
       .catch(err => console.log(err))
     });
-    setChange(false)
     
   }
 
@@ -77,15 +72,6 @@ export default function CreateGallery() {
     setFile(null)
   }
 
-  const HandleImageId = (img) => {
-    const image = ImagesList.find((image) => image === img );
-    setImageId(image)
-    setChange(true)
-  }
-
-  const HandleSetChange = () => {
-    setChange(false)
-  }
 
   return (
     <div className='CONTAINER' >
@@ -101,14 +87,14 @@ export default function CreateGallery() {
           <div className='contaier_img' >
             {
               ImagesList.length ? ImagesList.map((image) => (
-                <div onClick={()=>HandleImageId(image)} className='img_button_container' >
+                <div className='img_button_container' >
                   <img className='images_from_db' src={`http://localhost:3001/${image}`} />
                   {
                     auth.loggedIn && auth.currentUser.is_admin ? 
-                      <div onClick={()=>HandleDelte(image)} className='btn_delete_image' >
-                        <AiOutlineCloseCircle className='tarea-icono' />
-                      </div>
-                       : null
+                    <div onClick={()=>HandleDelte(image)} className='btn_delete_image' >
+                      <AiOutlineCloseCircle className='tarea-icono' />
+                    </div>
+                     : null
                     
                   }
                   
@@ -131,14 +117,6 @@ export default function CreateGallery() {
             }
           </div>
       </div>
-        {/* <div onClick={()=>HandleSetChange()} className={ !Change ? 'block_container' : 'containe_img_id' } >
-          <div className={'image_id'} >
-            <img className='images_from_db_id' src={`http://localhost:3001/${ImageId}`} />
-            <div onClick={()=>HandleDelte(ImageId)} className='btn_delete_image' >
-               <AiOutlineCloseCircle className='tarea-icono-id' />
-             </div>
-          </div>
-        </div> */}
       
     </div>
   )

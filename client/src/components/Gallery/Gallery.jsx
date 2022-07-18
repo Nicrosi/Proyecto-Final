@@ -1,13 +1,9 @@
 import { useEffect, useState } from "react";
-import { Container, Col, Row } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import axios from 'axios';
 import './Gallery.css';
-// import img1 from "../../img/imgGallery1.webp";
-// import img2 from "../../img/imgGallery2.webp";
-// import img3 from "../../img/imgGallery3.webp";
-// import img4 from "../../img/imgGallery4.webp";
-// import img5 from "../../img/imgGallery5.webp";
-// import img6 from "../../img/imgGallery6.webp";
+import { Link } from "react-router-dom";
+
 
 export default function Gallery() {
 
@@ -33,6 +29,7 @@ export default function Gallery() {
       ImagesList.length ?
       (
         <section
+          id="multimediaLP"
           className="d-flex flex-column align-items-center pt-4 bg-dark"
           style={{ minHeight: "100vh" }}
         >
@@ -50,7 +47,23 @@ export default function Gallery() {
                 }
               </>
             </div> 
+            <Link to='/Gallery'>
+              <button
+                style={{
+                  fontFamily: "'Bebas Neue', cursive",
+                  fontSize: "3rem",
+                  marginLeft: "43vw",
+                  color: "#A7D129",
+                  cursor: "pointer",
+                  border: "none",
+                  backgroundColor: "transparent"
+                }}
+              >
+                Watch more
+              </button>
+            </Link>
           </Container>
+
         </section>
       )
       :
