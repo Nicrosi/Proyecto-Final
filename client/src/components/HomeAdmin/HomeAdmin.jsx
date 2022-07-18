@@ -3,41 +3,43 @@ import styles from "./HomeAdmin.module.css";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { getAllUsers } from "../../redux/actions";
+import { getUserById } from "../../redux/actions";
 
 function HomeAdmin() {
-  const users = useSelector((state) => state.rootReducer.users);
+  const user = useSelector((state) => state.rootReducer.user);
+  const auth = useSelector((state) => state.auth);
 
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getAllUsers());
-  }, [dispatch]);
+    if(auth.currentUser.is_admin) {
+      dispatch(getUserById(auth.currentUser.dni));
+    }
+  }, [dispatch, auth]);
 
   return (
     <React.Fragment>
       <div className={styles.containerBox}>
         <div className={styles.PanelBox}>
-          {users.map((p, i) => {
-            return (
-              <div key={i}>
-                {p.is_admin && (
+          {
+            user && 
+              <div key={user.id}>
+                {user.is_admin && (
                   <>
                     <img
                       className={styles.pictureUser}
-                      src={p.picture}
+                      src={user.picture}
                       alt="pictureAdm"
                     />
-                    <h3 className={styles.data1}>{p.name}</h3>
-                    <h3 className={styles.data1}>{p.last_name}</h3>
+                    <h3 className={styles.data1}>{user.name}</h3>
+                    <h3 className={styles.data1}>{user.last_name}</h3>
                     <h3 className={styles.data2} style={{ marginTop: "15px" }}>
-                      E-mail: {p.e_mail}
+                      E-mail: {user.e_mail}
                     </h3>
-                    <h3 className={styles.data2}>Phone: {p.phone}</h3>
+                    <h3 className={styles.data2}>Phone: {user.phone}</h3>
                   </>
                 )}
               </div>
-            );
-          })}
+          }
         </div>
         <div className={styles.principalBox}>
           <h3 className={styles.title}>HOME ADMINISTRATOR</h3>
@@ -75,6 +77,15 @@ function HomeAdmin() {
                 style={{ width: "500px" }}
               >
                 Create New Sponsor
+              </button>
+            </Link>
+            <Link to={"/Gallery"}>
+              <button
+                type="button"
+                className="btn btn-outline-secondary btn-dark my-2"
+                style={{ width: "500px" }}
+              >
+                Create Gallery
               </button>
             </Link>
             <Link to={"/cpanel"}>

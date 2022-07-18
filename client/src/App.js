@@ -14,6 +14,7 @@ import { FormUserRegister } from "./components/FormUserRegister/FormUserRegister
 import ControlPanel from "./components/controlPanel/ControlPanel/ControlPanel.jsx";
 import ProfileUser from "./components/Profile/ProfileUser/ProfileUser.jsx";
 import RouteGuard from "./components/RouteGuard/RouteGuard.js";
+import CreateGallery from "./components/Gallery/CreateGallery/CreateGallery.jsx";
 import { verifyUser } from "./redux/actions/authorization.js";
 import { useDispatch } from "react-redux";
 
@@ -45,6 +46,10 @@ function App() {
           component={Inscription}
         />
         <Route exact path={"/login"} component={LogIn} />
+        <Route exact path={"/cpanel"} component={ControlPanel} />
+        <Route exact path={"/SignIn"} component={FormUserRegister} />
+        <Route exact path={"/Profile/:userId"} component={ProfileUser}/>
+        <Route exact path={"/Gallery"} component={CreateGallery}/>
         <Route exact path={"/cpanel"} component={ControlPanel} />
         <Route exact path={"/SignIn"} component={FormUserRegister} />
         <RouteGuard
