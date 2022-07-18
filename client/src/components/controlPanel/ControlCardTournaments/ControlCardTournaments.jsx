@@ -2,20 +2,20 @@ import React, { useState } from "react";
 import { getAllSponsors, putSponsor } from "../../../redux/actions";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import styles from "./ControlCardSponsor.module.css"
+import styles from "./ControlCardTournaments.module.css"
 
-export default function ControlCardSponsor({
-  id_sponsor,
-  company,
-  message,
-  logo,
-  link,
+export default function ControlCardTournaments({
+  id_tournaments,
+  name,
+  date,
+  location,
+  earning,
 }) {
   const [input, setInput] = useState({
-    company: company,
-    message: message,
-    logo: logo,
-    link: link,
+    name: name,
+    date: date,
+    location: location,
+    earning: earning,
   });
 
   const dispatch = useDispatch();
@@ -30,36 +30,36 @@ export default function ControlCardSponsor({
   }
   function handleSubmit(e) {
     e.preventDefault();
-    dispatch(putSponsor(id_sponsor, input));
+    dispatch(putSponsor(id_tournaments, input));
     console.log(input);
   }
   return (
     <div className={styles.containerBox}>
         <form style={{ width: "100%" }} onSubmit={(e) => handleSubmit(e)}>
-          <div key={id_sponsor} className="card p-3">
+          <div key={id_tournaments} className="card p-3">
             <div className="row g-2 mb-3">
               <div className="form-floating col-md">
                 <input
                   type="text"
                   onChange={(e) => handleChange(e)}
-                  value={input.company}
+                  value={input.name}
                   placeholder=""
-                  name="company"
+                  name="name"
                   className="form-control  border-0"
                   id="floatingInput"
                 />
-                <label for="floatingInput">Company</label>
+                <label for="floatingInput">Name</label>
               </div>
               <div className="form-floating col-md">
                 <input
-                  type="text"
+                  type="date"
                   onChange={(e) => handleChange(e)}
-                  value={input.message}
-                  name="message"
+                  value={input.date}
+                  name="date"
                   className="form-control border-0"
                   id="floatingInput"
                 />
-                <label for="floatingInput">Message</label>
+                <label for="floatingInput">Date</label>
               </div>
             </div>
             <div className="row g-2 mb-3">
@@ -67,24 +67,23 @@ export default function ControlCardSponsor({
                 <input
                   type="text"
                   onChange={(e) => handleChange(e)}
-                  value={input.logo}
-                  placeholder=""
-                  name="logo"
+                  value={input.location}
+                  name="location"
                   className="form-control  border-0"
                   id="floatingInput"
                 />
-                <label for="floatingInput">Logo</label>
+                <label for="floatingInput">Location</label>
               </div>
               <div className="form-floating col-md">
                 <input
                   type="text"
                   onChange={(e) => handleChange(e)}
-                  value={input.link}
-                  name="link"
+                  value={input.earning}
+                  name="earning"
                   className="form-control border-0"
                   id="floatingInput"
                 />
-                <label for="floatingInput">Link</label>
+                <label for="floatingInput">Earning</label>
               </div>
             </div>
             <button className="btn btn-outline-secondary btn-dark my-2" type="submit">Confirm changes</button>

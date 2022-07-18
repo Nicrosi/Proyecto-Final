@@ -36,7 +36,6 @@ router.post("/:dni", async (req, res) => {
 
     let id = newScore.dataValues.id_score;
 
-
     let user = await User.findAll();
     user.forEach(async (el) => {
       if (el.dataValues.dni == dni) {
@@ -52,12 +51,11 @@ router.post("/:dni", async (req, res) => {
         );
       }
     });
-    category();
+    category(id);
     res.status(200).send("Sent!");
   } catch (err) {
     console.log(err);
   }
-
 });
 
 module.exports = router;

@@ -14,9 +14,11 @@ import { FormUserRegister } from "./components/FormUserRegister/FormUserRegister
 import ControlPanel from "./components/controlPanel/ControlPanel/ControlPanel.jsx";
 import ProfileUser from "./components/Profile/ProfileUser/ProfileUser.jsx";
 import RouteGuard from "./components/RouteGuard/RouteGuard.js";
+import CreateGallery from "./components/Gallery/CreateGallery/CreateGallery.jsx";
 import { verifyUser } from "./redux/actions/authorization.js";
 import { useDispatch } from "react-redux";
 import { FormSubTournament } from "./components/SubTournament/FormSubTournament/FormSubTournament.jsx";
+import TournamentsToShow from "./components/Tournament/TournamentsToShow/TournamentsToShow.jsx";
 
 function App() {
   const dispatch = useDispatch();
@@ -34,20 +36,24 @@ function App() {
           component={HomeAdmin}
           admin={true}
         />
-        {/* <Route exact path={"/HomeAdmin"} component={HomeAdmin} /> */}
+
         <Route exact path={"/"} component={LandingPage} />
         <Route exact path={"/Users/:userId"} component={DetailsUser} />
         <Route exact path={"/CreateScore/:userId"} component={FormScore} />
-        <Route exact path={"/CreateSponsor"} component={FormSponsor} />
-        <Route exact path={"/CreateTournament"} component={FormTournament} />
-        <Route exact path={"/CreateSubtournament/:tournamentId"} component={FormSubTournament} />
+        <RouteGuard exact path={"/CreateSponsor"} component={FormSponsor} admin={true}/>
+        <RouteGuard exact path={"/CreateTournament"} component={FormTournament} admin={true}/>
+        <RouteGuard exact path={"/CreateSubtournament/:tournamentId"} component={FormSubTournament} admin={true}/>
+        <Route exact path={"/TournamentsToShow"} component={TournamentsToShow} />
         <Route
           exact
           path={"/inscription/:tournament_id"}
           component={Inscription}
         />
         <Route exact path={"/login"} component={LogIn} />
-        <Route exact path={"/cpanel"} component={ControlPanel} />
+        <RouteGuard Route exact path={"/cpanel"} component={ControlPanel} admin={true}/>
+        <Route exact path={"/SignIn"} component={FormUserRegister} />
+        <RouteGuard exact path={"/Profile/:userId"} component={ProfileUser} admin={false}/>
+        <Route exact path={"/Gallery"} component={CreateGallery}/>
         <Route exact path={"/SignIn"} component={FormUserRegister} />
         <RouteGuard
           exact
@@ -56,6 +62,13 @@ function App() {
           admin={false}
         />
       </Switch>
+
+
+
+
+
+
+
     </div>
   );
 }

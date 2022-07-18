@@ -7,6 +7,7 @@ import {
   GET_ALL_SPONSORS,
   GET_SUBT_BY_TOURNAMENT,
   CLEAR_USER,
+  GET_TOURNAMENTS,
 } from "../actions";
 import { filterUsers } from "../helpers/filters";
 import { sortByName } from "../helpers/sorts";
@@ -18,7 +19,8 @@ const initialState = {
   user: {},
   filteredUsers: [],
   sponsors: [],
-  filteredSubt: []
+  filteredSubt: [],
+  tournaments:[],
 };
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -32,7 +34,7 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         users: action.payload,
-        filteredUsers: sortByName(action.payload).filter(user=>user.is_admin !== true),
+        filteredUsers: sortByName(action.payload),
       };
 
     case GET_ALL_USERS_NAME:
@@ -82,6 +84,11 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         user: {},
       };
+      case GET_TOURNAMENTS:
+        return {
+            ...state,
+            tournaments: action.payload
+                }
     default:
       return { ...state };
   }

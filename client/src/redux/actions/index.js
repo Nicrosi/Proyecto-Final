@@ -18,6 +18,7 @@ export const GET_TOURNAMENT = "GET_TOURNAMENT";
 export const PUT_TOURNAMENT = "PUT_TOURNAMENT"
 export const CLEAR_USER = "CLEAR_USER";
 export const ADD_SUBTOURNAMENT = "ADD_SUBTOURNAMENT";
+export const GET_TOURNAMENTS="GET_TOURNAMENTS"
 
 // export const getAllPlayers = () => { JSON
 //   return {
@@ -29,10 +30,11 @@ export const ADD_SUBTOURNAMENT = "ADD_SUBTOURNAMENT";
 const urlUser = "http://localhost:3001/user";
 const urlSponsors = "http://localhost:3001/sponsor";
 const urlSubtByT = "http://localhost:3001/subtournament/prueba";
-const urlInscription = "http://localhost:3001/inscription"
+const urlInscription = "http://localhost:3001/inscription";
 const urlTournament = "http://localhost:3001/tournament";
 const urlSubTournament = "http://localhost:3001/subtournament";
 const urlSponsor = "http://localhost:3001/sponsor"
+const urlTournaments = "http://localhost:3001/tournament"
 toast.configure();
 
 
@@ -205,3 +207,15 @@ export const postInscription = (body) => {
     }
   };
 };
+
+export const getTournament= () =>{
+  return async function (dispatch) {
+      const answer = await axios.get(urlTournaments);
+      return dispatch({
+          type: GET_TOURNAMENTS,
+          payload: answer.data
+      });
+  }
+}
+
+  
