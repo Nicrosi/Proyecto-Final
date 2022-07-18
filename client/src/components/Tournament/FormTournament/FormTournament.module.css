@@ -1,5 +1,5 @@
 .containerBox {
-  min-height: 100vh;
+  min-height: 50vh;
   width: 100%;
 }
 .imageBox {
@@ -15,7 +15,7 @@
   font-family: 'Bebas Neue', cursive;
   font-size: 7rem;
   position: absolute;
-  top: 150px;
+  top: 50px;
   margin-left: 10%;
   color: #A7D129;
 }

@@ -20,6 +20,11 @@ export function validate(input) {
   } else if (input.location.length > 255) {
     error.location = "Enter less than 255 characters";
   }
+  if (!input.name) {
+    error.name = "Name is required";
+  } else if (input.name.length > 255) {
+    error.name = "Enter less than 255 characters";
+  }
 
   return error;
 }
@@ -27,11 +32,14 @@ export function validate(input) {
 export const FormTournament = () => {
   const noError = "Looks good";
   const [input, setInput] = useState({
+    name:"",
     date: "",
     location: "",
+    
   });
 
   const [error, setError] = useState({
+    name: "Name is required",
     date: "Date is required",
     location: "Location is required",
   });
@@ -43,12 +51,15 @@ export const FormTournament = () => {
   }
 
   function handleOnChange(e) {
+    
     setInput({
       ...input,
       [e.target.name]: e.target.value,
     });    
     let objError = validate({ ...input, [e.target.name]: e.target.value });
     setError(objError);
+    console.log(e.target)
+    console.log(e.target.value)
   }
 
   return (
@@ -68,6 +79,28 @@ export const FormTournament = () => {
             >
               <li className="list-group-item" style={{ width: "50%" }}>
                 <div>
+                  <h5 className="card-text">Name</h5>
+                  <input
+                    key="name"
+                    type="text"
+                    onChange={(e) => handleOnChange(e)}
+                    placeholder="Tournament name"
+                    name="name"
+                    value={input.name}
+                    required
+                    className={error.name?"form-control is-invalid":"form-control is-valid"}
+                  />{error.name ?
+                    <div id="validationServerUsernameFeedback" className="invalid-feedback">
+                    {error.name}
+                    </div>:
+                    <div id="validationServerUsernameFeedback" className="valid-feedback">
+                    {noError}
+                    </div>
+                  }
+                </div>
+              </li>
+              <li className="list-group-item" style={{ width: "50%" }}>
+                <div>
                   <h5 className="card-text">Date</h5>
                   <input
                     key="date"
@@ -75,7 +108,7 @@ export const FormTournament = () => {
                     onChange={(e) => handleOnChange(e)}
                     placeholder="Tournaments Date..."
                     name="date"
-                    value={input.name}
+                    value={input.date}
                     required
                     className={error.date?"form-control is-invalid":"form-control is-valid"}
                   />{error.date ?

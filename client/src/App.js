@@ -17,6 +17,7 @@ import RouteGuard from "./components/RouteGuard/RouteGuard.js";
 import CreateGallery from "./components/Gallery/CreateGallery/CreateGallery.jsx";
 import { verifyUser } from "./redux/actions/authorization.js";
 import { useDispatch } from "react-redux";
+import TournamentsToShow from "./components/Tournament/TournamentsToShow/TournamentsToShow.jsx";
 
 function App() {
   const dispatch = useDispatch();
@@ -34,12 +35,13 @@ function App() {
           component={HomeAdmin}
           admin={true}
         />
-        {/* <Route exact path={"/HomeAdmin"} component={HomeAdmin} /> */}
+
         <Route exact path={"/"} component={LandingPage} />
         <Route exact path={"/Users/:userId"} component={DetailsUser} />
         <Route exact path={"/CreateScore/:userId"} component={FormScore} />
         <Route exact path={"/CreateSponsor"} component={FormSponsor} />
         <Route exact path={"/CreateTournament"} component={FormTournament} />
+        <Route exact path={"/TournamentsToShow"} component={TournamentsToShow} />
         <Route
           exact
           path={"/inscription/:tournament_id"}
@@ -59,6 +61,13 @@ function App() {
           admin={false}
         />
       </Switch>
+
+
+
+
+
+
+
     </div>
   );
 }
