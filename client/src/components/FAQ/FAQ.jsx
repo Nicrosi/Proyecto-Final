@@ -28,14 +28,12 @@ export const FAQ = () => {
             data-bs-parent="#accordionExample"
           >
             <div className="accordion-body">
-              <strong>This is the first question's body.</strong> It is shown by
-              default, until the collapse plugin adds the appropriate
-              classNamees that we use to style each element. These classNamees
-              control the overall appearance, as well as the showing and hiding
-              via CSS transitions. You can modify any of this with custom CSS or
-              overriding our default variables. It's also worth noting that just
-              about any HTML can go within the answer body,
-              though the transition does limit overflow.
+              <strong>
+                Do I have to be an expert player to sign up for a tournament
+              </strong>
+              You do not have to be an expert, you just have to complete your
+              profile to know in which category and tournament you can complete
+              your register.
             </div>
           </div>
         </div>
@@ -59,14 +57,13 @@ export const FAQ = () => {
             data-bs-parent="#accordionExample"
           >
             <div className="accordion-body">
-              <strong>This is the second question's body.</strong> It is hidden
-              by default, until the collapse plugin adds the appropriate
-              classNamees that we use to style each element. These classNamees
-              control the overall appearance, as well as the showing and hiding
-              via CSS transitions. You can modify any of this with custom CSS or
-              overriding our default variables. It's also worth noting that just
-              about any HTML can go within the answer body,
-              though the transition does limit overflow.
+              <strong>
+                there are age limits to play in category A tournaments
+              </strong>
+              There are no age limitations. You just have to demonstrate your
+              technical and tactical knowledge of the game. try to be as
+              objective as possible in your definition of scores so that the
+              tournament is fair for the players.
             </div>
           </div>
         </div>
@@ -90,14 +87,13 @@ export const FAQ = () => {
             data-bs-parent="#accordionExample"
           >
             <div className="accordion-body">
-              <strong>This is the third question's body.</strong> It is hidden
-              by default, until the collapse plugin adds the appropriate
-              classNamees that we use to style each element. These classNamees
-              control the overall appearance, as well as the showing and hiding
-              via CSS transitions. You can modify any of this with custom CSS or
-              overriding our default variables. It's also worth noting that just
-              about any HTML can go within the answer body,
-              though the transition does limit overflow.
+              <strong>
+                If I enter a tournament and lose in the first round, am I
+                disqualified and only play one match? .
+              </strong>{" "}
+              Depending on the number of players, it will be defined what type
+              of tournament is established, a_ all against all, b_ single
+              elimination or double elimination
             </div>
           </div>
         </div>
