@@ -1,0 +1,19 @@
+.picture{
+    min-height: 100%;
+    width: 100px;
+    object-fit: cover;
+    background-size: cover;
+  }
+  
+  .pictureContainer{
+    min-height: 100%;
+    width: 30%;
+  }
+  
+  .card{
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+  }
+  
+  .card:hover{
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.4);
+  }

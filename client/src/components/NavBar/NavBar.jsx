@@ -139,6 +139,9 @@ export default function NavBar() {
                   </Link>
                 </li>
                 <li className="nav-item">
+                  
+                </li>
+                <li className="nav-item">
                   <Link
                     className="nav-link ms-auto"
                     style={{ fontWeight: "bold", color: "#e0e6e8" }}
@@ -149,6 +152,13 @@ export default function NavBar() {
                 </li>
               </>
             )}
+            <Link
+                    className="nav-link ms-auto"
+                    style={{ fontWeight: "bold", color: "#e0e6e8" }}
+                    to={"/TournamentsToShow"}
+                  >
+                    Tournaments
+                  </Link>
           </ul>
         </div>
       </div>
