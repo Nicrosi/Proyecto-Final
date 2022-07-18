@@ -77,11 +77,11 @@ router.put('/:id_sponsor', async (req, res) => {
 
     let comparison = false
 
-    AllSponsor.map((sponsor) => {
-      if( company === sponsor.company || link === sponsor.link ){
-        comparison = true
-      }
-    })
+    // AllSponsor.map((sponsor) => {
+    //   if( company === sponsor.company || link === sponsor.link ){
+    //     comparison = true
+    //   }
+    // })
 
     console.log(comparison)
     
