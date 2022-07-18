@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { orderUsersByName } from "../../redux/actions";
 import SearchBar from "../SearchBar/SearchBar";
-import "./Filter.css";
+import styles from "./Filter.module.css";
 
 const initialFilter = {
   sort: "name",
@@ -32,7 +32,7 @@ export default function Filter({ setCurrentPage }) {
     window.location.reload();
   };
   return (
-    <aside className="aside bg-dark">
+    <aside className={`${styles.aside} bg-dark`}>
       <SearchBar />
       <br />
       <h5>Name</h5>
@@ -173,12 +173,14 @@ export default function Filter({ setCurrentPage }) {
           onChange={handleChange}
         />
         <label htmlFor="none">None</label>
-        <div className="mt-5">
-        <button type="button" onClick={() => handleReload()}>
-          Refresh{" "}
-        </button>
       </div>
-      </div>
+      <button
+        className={styles.btnRefresh}
+        type="button"
+        onClick={() => handleReload()}
+      >
+        Refresh
+      </button>
     </aside>
   );
 }

@@ -1,4 +1,6 @@
 .aside{
+  display: flex;
+  flex-direction: column;
   color: white;
   height: inherit;
   width: 20%;
@@ -15,4 +17,12 @@
 .aside hr {
   border-color: #9AD129;
   border-width: 2px;
+}
+
+.btnRefresh{
+  margin-top: 20px;
+  background-color: transparent;
+  color:#9AD129;
+  border-color: #9AD129;
+  align-self: end;
 }
