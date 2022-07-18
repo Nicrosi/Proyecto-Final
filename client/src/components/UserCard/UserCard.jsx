@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
+import styles from "./UserCard.module.css";
 export const UserCard = ({
   dni,
   name,
@@ -14,17 +14,19 @@ export const UserCard = ({
       to={`/Users/${dni}`}
       style={{ textDecoration: "none", color: "black" }}
     >
-      <div className="card shadow-lg">
-        <div className="d-flex flex-column flex flex-md-row flex-lg-row">
-          <div className="col-md-5">
+      <div className={`card ${styles.card}`} style={{ height: "100%" }}>
+        <div
+          className="d-flex flex flex-md-row flex-lg-row"
+          style={{ height: "100%" }}
+        >
+          <div className={`${styles.pictureContainer} col-md-5 col-sm-3`}>
             <img
-              className="rounded-start"
+              className={`${styles.picture} rounded-start`}
               src={picture}
               alt="img"
-              style={{ height: "100%", width: "100%", objectFit: "cover" }}
             />
           </div>
-          <div className="col-md-7">
+          <div className="col-md-7 col-sm-5">
             <div className="card-body">
               <h5 className="card-title">{`${name} ${last_name}`}</h5>
               <p className="card-text mt-2 mb-0">Gender: {gender}</p>

@@ -20,7 +20,7 @@ code {
 
 .carouselItem h1{
   z-index: 3;
-  font-family: cursive;
+  font-family: 'Courier New', Courier, monospace;
 }
 .carouselItem:before{
   content: "";
