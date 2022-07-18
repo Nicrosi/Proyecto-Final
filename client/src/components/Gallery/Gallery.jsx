@@ -12,6 +12,7 @@ import './Gallery.css';
 export default function Gallery() {
 
   const [ImagesList, setImagesList ] = useState([]);
+  const Gallery = ImagesList.length >= 9 ? [...ImagesList.slice(0, 9)] : [...ImagesList];
 
   useEffect(() => {
     axios.get('http://localhost:3001/gallery/get',)
@@ -39,7 +40,7 @@ export default function Gallery() {
             <div className="container_galery_images" >
               <>
                 {
-                  ImagesList.length && ImagesList.map((image) => (
+                  Gallery.length && Gallery.map((image) => (
                     <img
                       src={`http://localhost:3001/${image}`}
                       className="gallery_image"
@@ -47,7 +48,7 @@ export default function Gallery() {
                     />            
                   ))
                 }
-                </>
+              </>
             </div> 
           </Container>
         </section>

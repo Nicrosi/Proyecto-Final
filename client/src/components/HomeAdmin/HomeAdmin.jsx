@@ -77,7 +77,7 @@ function HomeAdmin() {
                 Create New Sponsor
               </button>
             </Link>
-            <Link to={"/CreateGallery"}>
+            <Link to={"/Gallery"}>
               <button
                 type="button"
                 className="btn btn-outline-secondary btn-dark my-2"

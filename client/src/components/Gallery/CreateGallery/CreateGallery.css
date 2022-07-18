@@ -28,7 +28,7 @@
 .contaier_img {
   display: flex;
   flex-wrap: wrap;
-  padding: 20px 1.5vw;
+  padding: 50px 1.5vw 20px 1.5vw;
   background-color: rgb(0 0 0 / 70%);
   min-height: 80vh;
   justify-content: center;

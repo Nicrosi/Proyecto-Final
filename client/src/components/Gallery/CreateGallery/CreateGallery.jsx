@@ -4,6 +4,7 @@ import { Link, useHistory } from 'react-router-dom';
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import './CreateGallery.css';
 import axios from 'axios';
+import { useSelector } from 'react-redux';
 
 export default function CreateGallery() {
 
@@ -12,6 +13,8 @@ export default function CreateGallery() {
   const [Change, setChange ] = useState(false);
   const [ImageId, setImageId ] = useState('');
   const History = useHistory();
+  const auth = useSelector((state) => state.auth);
+
 
 
   useEffect(() => {
@@ -86,19 +89,29 @@ export default function CreateGallery() {
 
   return (
     <div className='CONTAINER' >
-      <div className='container_inputs' >
-        <input className='input_images' id='fileInput' placeholder=' Select an Image ' onChange={ HandlerSelect} type='file' />
-        <button className='btn_click' onClick={()=>HandlerCLick()} >Click!</button>
-      </div>
+      {
+        auth.loggedIn && auth.currentUser.is_admin ? 
+          <div className='container_inputs' >
+            <input className='input_images' id='fileInput' placeholder=' Select an Image ' onChange={ HandlerSelect} type='file' />
+            <button className='btn_click' onClick={()=>HandlerCLick()} >Click!</button>
+          </div>
+         : null
+      }
       <div className='container_gallery_created' >
           <div className='contaier_img' >
             {
               ImagesList.length ? ImagesList.map((image) => (
                 <div onClick={()=>HandleImageId(image)} className='img_button_container' >
                   <img className='images_from_db' src={`http://localhost:3001/${image}`} />
-                  <div onClick={()=>HandleDelte(image)} className='btn_delete_image' >
-                    <AiOutlineCloseCircle className='tarea-icono' />
-                  </div>
+                  {
+                    auth.loggedIn && auth.currentUser.is_admin ? 
+                      <div onClick={()=>HandleDelte(image)} className='btn_delete_image' >
+                        <AiOutlineCloseCircle className='tarea-icono' />
+                      </div>
+                       : null
+                    
+                  }
+                  
                 </div>
               ))
               
