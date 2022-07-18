@@ -1,0 +1,16 @@
+.box {
+    width: 100%;
+    margin: 20px auto;
+}
+.itemScore {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-between;
+    align-content: center;
+}
+.subtitle {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+}

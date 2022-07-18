@@ -51,7 +51,7 @@ function HomeAdmin() {
                 Users
               </button>
             </Link>
-            <Link to={"/tournament"}>
+            <Link to={"/CreateTournament"}>
               <button
                 type="button"
                 className="btn btn-outline-secondary btn-dark my-2"
@@ -68,7 +68,7 @@ function HomeAdmin() {
             >
               Create Sub-Tournament
             </button>
-            <Link to={"/sponsor"}>
+            <Link to={"/CreateSponsor"}>
               <button
                 type="button"
                 className="btn btn-outline-secondary btn-dark my-2"

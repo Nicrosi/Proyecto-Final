@@ -34,7 +34,7 @@ export const StarsRating = ({ score, setScore, scoreName, setError }) => {
   };
 
   return (
-    <div className="container">
+    <div style={{display: "flex", flexDirection: "column", alignItems: "flex-end"}}>
       <div className="stars">
         <input
           id={`radio5${scoreName}`}

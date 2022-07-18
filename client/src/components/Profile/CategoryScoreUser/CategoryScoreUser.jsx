@@ -1,35 +1,41 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { FormScore } from "../../FormScore/FormScore";
 import styles  from "./CategoryScoreUser.module.css"
 
 
 export default function CategoryScoreUser({params, user}) {
+  const [showEditScore, setShowEditScore] = useState(true);
 
+  function handleClicShowEdit() {
+    setShowEditScore(false);
+  }
     return (
         <React.Fragment>
             {user && (
                 <div className={styles.box}>
+                   {showEditScore === false ? (
+                        <FormScore params={params} setShowEditScore={setShowEditScore} />
+                      ) : 
+                ( <>
                   <ul className="list-group">
                     <li className="list-group-item">
-                    <div className="card-body text-center">
-                            {user.category ? (
-                              <div>
-                                <h1 className="card-title">{user.category.type.toUpperCase()}</h1>
-                              </div>
-                            ) : (
-                              <div>
-                                <h5>{`${user.name} you do not have a Category, you must create a score to define your category`}</h5>
-                                <Link to={`/CreateScore/${params}`}>
-                                  <button type="button" className="btn btn-outline-secondary btn-dark my-2">
-                                    Create score
-                                  </button>
-                                </Link>
-                              </div>
-                            )}
-                          </div>
+                   
+                      <div className="card-body text-center">
+                          {user.category ? (
+                            <div>
+                              <h1 className="card-title">{user.category.type.toUpperCase()}</h1>
+                            </div>
+                          ) : (
+                            <div>
+                              <h5>{`${user.name} you do not have a Category, you must create a score to define your category`}</h5>
+                              <button type="button" className="btn btn-outline-secondary btn-dark my-2" onClick={() => handleClicShowEdit()}>
+                                Create score
+                              </button>
+                            </div>
+                          )}
+                      </div>
                     </li>
                   </ul>
-
                   {user.score && (
                     <ul className="list-group" style={{marginTop: "20px"}}>
                       <li className="list-group-item">
@@ -66,16 +72,11 @@ export default function CategoryScoreUser({params, user}) {
                       </li>
                     </ul>
                   ) }
-
-                                    
-
-
-
-                      </div>
-             
-                            
-            )}
-        </React.Fragment>
+                </>
+                )}
+          </div>
+        )}
+      </React.Fragment>
     )
 }
   

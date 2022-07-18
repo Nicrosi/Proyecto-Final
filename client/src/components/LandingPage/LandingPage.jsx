@@ -29,6 +29,7 @@ export default function LandingPage() {
         <FAQ />
       </section>
       <section
+        id="sponsorLP"
         className="d-flex align-items-center justify-content-center bg-dark"
         style={{ minHeight: "30vh" }}
       >
