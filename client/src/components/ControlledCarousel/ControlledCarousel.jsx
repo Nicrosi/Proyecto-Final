@@ -29,16 +29,16 @@ export default function ControlledCarousel() {
           style={{ objectFit: "cover", height: "100vh" }}
         />
         <Carousel.Caption
-          className="mx-auto d-flex align-items-center justify-content-center"
+          className="mx-auto d-flex flex-column align-items-center justify-content-center"
           style={{ height: "100%", paddingTop: "70px" }}
         >
           <h1 style={{ paddingTop: "70px" }}>
             "When you lose a couple of times, it makes you realize how difficult
             it is to win"
             <br />
-            <h1 style={{ textAlign: "end", paddingRight: "20px" }}>
-              -Steffi Graf
-            </h1>
+          </h1>
+          <h1 style={{ textAlign: "end", paddingRight: "20px" }}>
+            -Steffi Graf
           </h1>
         </Carousel.Caption>
       </Carousel.Item>
