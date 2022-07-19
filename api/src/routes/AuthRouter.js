@@ -1,6 +1,8 @@
 const { Router } = require("express");
 const router = Router();
-const { User } = require("../db");
+const { User,Inscription,
+  Score,
+  Category } = require("../db");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const verifyToken = require("../middlewares/authjwt");
@@ -64,6 +66,11 @@ router.post("/login", async (req, res, next) => {
 
     const user = await User.findOne({
       where: { e_mail: e_mail },
+      include: [
+        Inscription,
+        Score,
+        Category
+      ]
     });
 
     if (!user) {

@@ -1,4 +1,4 @@
-const { Subtournament } = require("../db");
+const { Subtournament,Category } = require("../db");
 const sequelize = require ('sequelize');
 
 const getAllSubt = async(id) => {
@@ -7,11 +7,18 @@ const getAllSubt = async(id) => {
             const getSubtId = await Subtournament.findAll({
                 where: {
                     id_subt: id
-                }
+                },
+                include: [
+                    Category
+                  ]
             })
             return getSubtId;
         }else{
-            const getSubt = await Subtournament.findAll();
+            const getSubt = await Subtournament.findAll({
+                include: [
+                    Category
+                  ]
+            });
             return getSubt;
         }
     }catch(err){
