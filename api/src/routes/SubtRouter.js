@@ -32,9 +32,11 @@ router.post('/:id_tournament', async (req, res) => {
         numb_players,
         gender,
         price,
-        id_tournament,
         id_category
     } = req.body
+
+    const tournament = req.params;
+
     try{
         await Subtournament.create({
             elimination_type,
@@ -43,10 +45,10 @@ router.post('/:id_tournament', async (req, res) => {
             numb_players,
             gender,
             price,
-            id_tournament,
+            id_tournament:tournament.id_tournament,
             id_category
         });
-        res.status(200).send('Sub tournament created!');
+        res.status(200).send(`Sub tournament created!`);
     }catch(err){
         console.log(err);
     }

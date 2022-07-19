@@ -237,7 +237,7 @@ describe("Routes", () => {
       console.error("Unable to connect to the database:", err);
     })
   );
-  beforeEach(() => User.sync({ force: true }));
+  beforeEach(() => User.sync({ force: false }));
   describe("Register /auth", () => {
     it("add users", (done) => {
       users.forEach((user) => {

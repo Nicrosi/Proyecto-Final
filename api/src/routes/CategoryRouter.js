@@ -26,8 +26,8 @@ router.post('/', async (req, res) => {
     type
   } = req.body;
   try {
-    await Category.create({
-      type
+    await Category.findOrCreate({
+      where: { type: type },
     });
     res.status(200).send('Created');
   } catch (error) {
