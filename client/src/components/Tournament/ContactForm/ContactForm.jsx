@@ -1,23 +1,27 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { MailIcon } from "@heroicons/react/solid";
 import emailjs from "@emailjs/browser";
 import styles from "./ContactForm.module.css";
+import { getAllUsers } from "../../../redux/actions";
 
 
 export const ContactForm = () => {
-
+  const dispatch = useDispatch();
   const users = useSelector((state) => state.rootReducer.users);
+  useEffect(() => {
+    dispatch(getAllUsers())
+  },[])
 
   console.log("users", users);
   const email = users.map((el) => el.e_mail);
   const allEmail = [...new Set(email)];
-  console.log("email", email);
-  console.log("allemail", allEmail);
+  const emails =  email.join(', ')
+  console.log("email", emails);
+  // console.log("allemail", allEmail);
   const [input, setInput] = useState({
     name: "",
-    email: "",
-    my_file: "",
+    email: emails,
     message: "",
   });
   console.log("Input", input);
@@ -35,14 +39,22 @@ export const ContactForm = () => {
         setStatus("");
       }, 10000);
     }
-  }, [status]);
+  }, []);
 
   function handleSubmit(e) {
     e.preventDefault();
     console.log(input);
 
+    const message = {
+      name: input.name,
+      email: emails, 
+      message: input.message,
+    }
+
+    console.log(message)
+
     emailjs
-      .send("service_7mimo0g", "template_2ah1aoj", input, "cYHyGctWLF2I5zGsl")
+      .send("service_7mimo0g", "template_2ah1aoj", message, "cYHyGctWLF2I5zGsl")
       .then(
         (response) => {
           console.log("success", response);

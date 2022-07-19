@@ -88,14 +88,13 @@ export default function CreateGallery() {
             {
               ImagesList.length ? ImagesList.map((image) => (
                 <div className='img_button_container' >
-                  <img className='images_from_db' src={`http://localhost:3001/${image}`} alt='tennis' />
+                  <img className='images_from_db' src={`http://localhost:3001/${image.imageURL}`} alt={image.title} />
                   {
                     auth.loggedIn && auth.currentUser.is_admin ? 
                     <div onClick={()=>HandleDelte(image)} className='btn_delete_image' >
                       <AiOutlineCloseCircle className='tarea-icono' />
                     </div>
                      : null
-                    
                   }
                   
                 </div>
