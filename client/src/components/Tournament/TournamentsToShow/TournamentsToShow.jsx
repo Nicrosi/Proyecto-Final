@@ -35,15 +35,17 @@ function TournamentsToShow() {
           {tournaments &&
             tournaments.map((e) => {
               return (
+                <div key={e.id_tournament}>
                 <Col>
                   <TournamentCard
-                    key={e.name}
+                    key={e.id_tournament}
                     id={e.id_tournament}
                     name={e.name}
                     date={e.date}
                     location={e.location}
                   />
                 </Col>
+                </div>
               );
             })}
         </Row>

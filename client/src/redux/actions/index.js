@@ -29,7 +29,7 @@ export const GET_TOURNAMENTS="GET_TOURNAMENTS"
 
 const urlUser = "http://localhost:3001/user";
 const urlSponsors = "http://localhost:3001/sponsor";
-const urlSubtByT = "http://localhost:3001/subtournament/prueba";
+const urlSubtByT = "http://localhost:3001/subtournament/ByTournament";
 const urlInscription = "http://localhost:3001/inscription";
 const urlTournament = "http://localhost:3001/tournament";
 const urlSubTournament = "http://localhost:3001/subtournament";
