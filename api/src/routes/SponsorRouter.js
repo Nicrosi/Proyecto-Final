@@ -82,17 +82,20 @@ router.put('/:id_sponsor', async (req, res) => {
 
   if(AllSponsor.length) {
 
-    let comparison = false
+    let compare = false
+    let SponsorFromDb = await Sponsor.findOne({where: {id_sponsor}})
 
-    // AllSponsor.map((sponsor) => {
-    //   if( company === sponsor.company || link === sponsor.link ){
-    //     comparison = true
-    //   }
-    // })
+    if(SponsorFromDb.link !== link) {
 
-    console.log(comparison)
+      AllSponsor.map((sponsor) => {
+        if( link === sponsor.link ){
+          compare = true
+        }
+      })
+    }
+
     
-    if(!comparison) {
+    if(!compare) {
       const SponsorUpated = await Sponsor.update(req.body, {
         where: {
           id_sponsor: parseInt(id_sponsor)
@@ -105,12 +108,20 @@ router.put('/:id_sponsor', async (req, res) => {
         res.status(400).send({msg_measge: 'Sponsor not found'});
       }
     }else{
-      return res.status(400).send({msg_error: 'Sponsor already exists'})
+      return res.status(400).send({msg_error: 'Link already exist'})
     }
 
   }else{
     res.status(400).send({msg_measge: 'No sponsor to update'});
   }
+
+})
+
+router.delete('/:id_sponsor', async (req, res) => {
+  const { id_sponsor } = req.params;
+
+  const imageDeleted = await Sponsor.destroy({ where: { id_sponsor: id_sponsor } })
+  imageDeleted === 1 ? res.status(200).send({msg: 'Sponsor deleted successfully'}) : res.status(400).send({msg: 'Sponsor does not exist'})
 
 })
 

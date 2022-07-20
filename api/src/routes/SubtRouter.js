@@ -41,7 +41,7 @@ router.post('/:id_tournament', async (req, res) => {
     const tournament = req.params;
 
     try{
-       const newSubtournament =  await Subtournament.create({
+        const newSubtournament =  await Subtournament.create({
             elimination_type,
             match_type,
             name,
@@ -55,8 +55,10 @@ router.post('/:id_tournament', async (req, res) => {
         let category = await Category.findByPk(id_category);
         if(category){
             await newSubtournament.addCategory(category)
+            res.status(200).send(`Sub tournament created!`);
+        }else{
+            res.status(400).send(`Tournament id does not exist`);
         }
-        res.status(200).send(`Sub tournament created!`);
     }catch(err){
         console.log(err);
     }
@@ -87,6 +89,12 @@ router.put('/:id', async (req, res) => {
     }catch(err){
         console.log(err);
     }
+})
+
+router.delete('/:id_subtournament', async (req, res) => {
+    const { id_subtournament } = req.params;
+    const subtournament = await Subtournament.destroy({where: {id_subt: id_subtournament}})
+    subtournament === 1 ? res.status(200).send({msg: 'Subtournament deleted successfully'}) : res.status(400).send({msg: 'Subtournament not found'})
 })
 
 module.exports = router;

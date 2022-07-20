@@ -90,7 +90,6 @@ export default function CreateGallery() {
                     </div>
                      : null
                   }
-                  
                 </div>
               ))
               
