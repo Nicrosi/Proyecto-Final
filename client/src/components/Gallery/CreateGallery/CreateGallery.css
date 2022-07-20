@@ -10,7 +10,7 @@
   position: relative;
   display: flex;
   margin-top: 55px;
-  padding: 10px;
+  padding: 10px 20vw;
   background-color: rgb(0 0 0 / 70%);
   justify-content: center;
   align-items: center;
@@ -28,9 +28,10 @@
 .contaier_img {
   display: flex;
   flex-wrap: wrap;
-  padding: 50px 1.5vw 20px 1.5vw;
+  scroll-behavior: auto;
+  padding: 20px 1.5vw;
   background-color: rgb(0 0 0 / 70%);
-  min-height: 80vh;
+  min-height: 100vh;
   justify-content: center;
   width: 100vw;
 }
@@ -38,7 +39,7 @@
 .images_from_db {
   height: min-content;
   width: 30vw;
-  border-radius: 10px;
+  border-radius: 20px;
   padding: 10px;
 }
 
@@ -58,10 +59,14 @@
 .btn_click {
   margin-left: 10px;
   border: none;
-  height: 30px;
+  height: 37px;
   width: 5vw;
   background-color: rgb(255 255 255 / 70%);
-  border-radius: 3px;
+  border-radius: 5px;
+}
+
+.btn_click:active {
+  background-color: rgb(255 255 255);
 }
 
 .btn_delete_image {
@@ -120,4 +125,44 @@
 
 .block_container {
   display: none;
+
+}
+
+.padding {
+  padding-top: 7vw;
+}
+/////////////////////////////////////////////////////////////
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 4px;
+}
+
+/* Create four equal columns that sits next to each other */
+.column {
+  flex: 25%;
+  max-width: 25%;
+  padding: 0 4px;
+}
+
+.column img {
+  margin-top: 8px;
+  vertical-align: middle;
+  width: 100%;
+}
+
+/* Responsive layout - makes a two column-layout instead of four columns */
+@media screen and (max-width: 800px) {
+  .column {
+    flex: 50%;
+    max-width: 50%;
+  }
+}
+
+/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .column {
+    flex: 100%;
+    max-width: 100%;
+  }
 }

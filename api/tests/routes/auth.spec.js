@@ -10,7 +10,7 @@ const agent = session(app);
 const users = [
   {
     name: "example1",
-    dni: 23442,
+    dni: "23442",
     last_name: "a",
     is_admin: false,
     e_mail: "example1@gmail.com",
@@ -23,7 +23,7 @@ const users = [
   },
   {
     name: "example2",
-    dni: 2344,
+    dni: "2344",
     last_name: "a",
     is_admin: false,
     e_mail: "example2@gmail.com",
@@ -36,7 +36,7 @@ const users = [
   },
   {
     name: "example3",
-    dni: 234,
+    dni: "234",
     last_name: "a",
     is_admin: false,
     e_mail: "example3@gmail.com",
@@ -49,7 +49,7 @@ const users = [
   },
   {
     name: "example4",
-    dni: 23,
+    dni: "23",
     last_name: "a",
     is_admin: false,
     e_mail: "example4@gmail.com",
@@ -62,7 +62,7 @@ const users = [
   },
   {
     name: "example5",
-    dni: 231,
+    dni: "231",
     last_name: "a",
     is_admin: false,
     e_mail: "example5@gmail.com",
@@ -75,7 +75,7 @@ const users = [
   },
   {
     name: "example6",
-    dni: 2311,
+    dni: "2311",
     last_name: "a",
     is_admin: false,
     e_mail: "example6@gmail.com",
@@ -88,7 +88,7 @@ const users = [
   },
   {
     name: "example7",
-    dni: 23111,
+    dni: "23111",
     last_name: "a",
     is_admin: false,
     e_mail: "example7@gmail.com",
@@ -101,7 +101,7 @@ const users = [
   },
   {
     name: "example8",
-    dni: 231111,
+    dni: "231111",
     last_name: "a",
     is_admin: false,
     e_mail: "example8@gmail.com",
@@ -114,7 +114,7 @@ const users = [
   },
   {
     name: "example9",
-    dni: 2311511,
+    dni: "2311511",
     last_name: "a",
     is_admin: false,
     e_mail: "example9@gmail.com",
@@ -127,7 +127,7 @@ const users = [
   },
   {
     name: "example10",
-    dni: 2311111,
+    dni: "2311111",
     last_name: "a",
     is_admin: false,
     e_mail: "example10@gmail.com",
@@ -153,7 +153,7 @@ const users = [
   },
   {
     name: "example12",
-    dni: 23333,
+    dni: "23333",
     last_name: "a",
     is_admin: false,
     e_mail: "example12@gmail.com",
@@ -166,7 +166,7 @@ const users = [
   },
   {
     name: "example13",
-    dni: 234444,
+    dni: "234444",
     last_name: "a",
     is_admin: false,
     e_mail: "example13@gmail.com",
@@ -179,7 +179,7 @@ const users = [
   },
   {
     name: "example14",
-    dni: 236666,
+    dni: "236666",
     last_name: "a",
     is_admin: false,
     e_mail: "example14@gmail.com",
@@ -192,7 +192,7 @@ const users = [
   },
   {
     name: "example15",
-    dni: 23888,
+    dni: "23888",
     last_name: "a",
     is_admin: false,
     e_mail: "example15@gmail.com",
@@ -205,7 +205,7 @@ const users = [
   },
   {
     name: "example16",
-    dni: 23669,
+    dni: "23669",
     last_name: "a",
     is_admin: false,
     e_mail: "example16@gmail.com",
@@ -218,7 +218,7 @@ const users = [
   },
   {
     name: "example17",
-    dni: 234455,
+    dni: "234455",
     last_name: "a",
     is_admin: false,
     e_mail: "example17@gmail.com",
@@ -237,7 +237,7 @@ describe("Routes", () => {
       console.error("Unable to connect to the database:", err);
     })
   );
-  beforeEach(() => User.sync({ force: true }));
+  beforeEach(() => User.sync({ force: false }));
   describe("Register /auth", () => {
     it("add users", (done) => {
       users.forEach((user) => {

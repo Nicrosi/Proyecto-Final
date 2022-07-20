@@ -1,0 +1,18 @@
+.title{
+  font-weight: bold;
+  color: #A7D129 !important;
+}
+.btnLogout{
+  background-color: transparent;
+  border: none;
+}
+.dropMenu{
+  right:10% !important;
+  left: auto !important; 
+  background-color: #212529 !important;
+  border: 1px solid gray !important;
+}
+
+.dropMenu hr{
+  border-color: gray !important;
+}

@@ -1,0 +1,393 @@
+import React from "react";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { postSubTournament } from "../../../redux/actions/index";
+
+export function validate(input) {
+  let error = {};
+  if (!input.name) {
+    error.name = "Name is required";
+  } else if (input.name.length > 255) {
+    error.name = "Enter less than 255 characters";
+  }
+
+  if (!input.numb_players) {
+    error.numb_players = "Numb players is required";
+  } else if (Number(input.numb_players) % 2 === 1) {
+    error.numb_players = "only pairs";
+  } else if (input.numb_players > 16 || input.numb_players < 4) {
+    error.numb_players = "Enter less than 16 players and more than 4";
+  }
+  if (!input.price) {
+    error.price = "Price is required";
+  }
+
+  if (input.gender.length === 0 && input.gender === "") {
+    error.gender = "Gender is required";
+  }
+
+  if (input.match_type.length === 0 && input.match_type === "") {
+    error.match_type = "Match type is required";
+  }
+
+  if (input.elimination_type.length === 0 && input.elimination_type === "") {
+    error.elimination_type = "Elimination type is required";
+  }
+
+  if (input.id_category.length === 0 && input.id_category === "") {
+    error.id_category = "Category type is required";
+  }
+  return error;
+}
+
+export const FormSubTournament = (props) => {
+  const params = Number(props.match.params.tournamentId);
+  const noError = "Looks good";
+  const dispatch = useDispatch();
+
+  const [input, setInput] = useState({
+    elimination_type: "",
+    match_type: "",
+    name: "",
+    numb_players: "",
+    gender: "",
+    price: "",
+    id_category: "",
+  });
+
+  const [error, setError] = useState({
+    elimination_type: "Elimination type is required",
+    match_type: "Match type type is required",
+    name: "Name type is required",
+    numb_players: "Numb players is required",
+    gender: "Gender type is required",
+    price: "Price type is required",
+    id_category: "Category type is required",
+  });
+
+  function handleOnChange(e) {
+    setInput({
+      ...input,
+      [e.target.name]: e.target.value,
+    });
+
+    let objError = validate({ ...input, [e.target.name]: e.target.value });
+    setError(objError);
+  }
+
+  async function handleOnSubmit(e) {
+    e.preventDefault();
+
+    dispatch(postSubTournament(params, input));
+    setInput({
+      elimination_type: "",
+      match_type: "",
+      name: "",
+      numb_players: "",
+      gender: "",
+      price: "",
+      id_category: "",
+    });
+    return alert("SubTournament created successfully");
+  }
+
+  return (
+    <>
+    <div style={{ minHeight: "100vh", width: "100%" }}>
+        <div style={{ position: "absolute", top: "0", width: "100%" }}>
+          <p>prueba</p>
+        </div>
+        <h1
+          style={{
+            fontFamily: "'Bebas Neue', cursive",
+            fontSize: "7rem",
+            position: "absolute",
+            top: "150px",
+            marginLeft: "10%",
+            color: "#A7D129",
+          }}
+        >
+          Create Subtournament
+        </h1>
+        <div
+          className="mx-auto"
+          style={{
+            position: "relative",
+            marginTop: "300px",
+            width: "60%",
+            backgroundColor: "rgb(43, 43, 44)",
+            borderRadius: "10px",
+            padding: "20px",
+          }}
+        >
+          <form style={{ width: "100%" }} onSubmit={(e) => handleOnSubmit(e)}>
+            <div className="row g-2 mb-3">
+              <div className="form-floating col-md">
+                <input
+                  key="name"
+                  type="text"
+                  onChange={(e) => handleOnChange(e)}
+                  placeholder="Name is required"
+                  id="floatingInputName"
+                  name="name"
+                  value={input.name}
+                  className={
+                    error.name
+                      ? "form-control is-invalid"
+                      : "form-control is-valid"
+                  }
+                  required
+                />
+                {error.name ? (
+                  <div
+                    id="validationServerUsernameFeedback"
+                    className="invalid-feedback"
+                  >
+                    {error.name}
+                  </div>
+                ) : (
+                  <div
+                    id="validationServerUsernameFeedback"
+                    className="valid-feedback"
+                  >
+                    {noError}
+                  </div>
+                )}
+                <label htmlFor="floatingInputName">name</label>
+              </div>
+              <div className="form-floating col-md">
+                <input
+                  key="numb_players"
+                  type="number"
+                  min="4"
+                  max="16"
+                  onChange={(e) => handleOnChange(e)}
+                  placeholder="Number players required"
+                  id="floatingInput"
+                  name="numb_players"
+                  value={input.numb_players}
+                  className={
+                    error.numb_players
+                      ? "form-control is-invalid"
+                      : "form-control is-valid"
+                  }
+                  required
+                />
+                {error.numb_players ? (
+                  <div
+                    id="validationServerUsernameFeedback"
+                    className="invalid-feedback"
+                  >
+                    {error.numb_players}
+                  </div>
+                ) : (
+                  <div
+                    id="validationServerUsernameFeedback"
+                    className="valid-feedback"
+                  >
+                    {noError}
+                  </div>
+                )}
+                <label htmlFor="floatingInput">numb_players</label>
+              </div>
+            </div>
+            <div className="row g-2 mb-3">
+              <div className="form-floating col-md">
+                <input
+                  key="price"
+                  type="number"
+                  onChange={(e) => handleOnChange(e)}
+                  placeholder="Price is required"
+                  id="floatingInput"
+                  name="price"
+                  value={input.price}
+                  className={
+                    error.price
+                      ? "form-control is-invalid"
+                      : "form-control is-valid"
+                  }
+                  required
+                />
+                {error.price ? (
+                  <div
+                    id="validationServerUsernameFeedback"
+                    className="invalid-feedback"
+                  >
+                    {error.price}
+                  </div>
+                ) : (
+                  <div
+                    id="validationServerUsernameFeedback"
+                    className="valid-feedback"
+                  >
+                    {noError}
+                  </div>
+                )}
+                <label>price</label>
+              </div>
+            </div>
+            <div className="form-floating col-md">
+              <select
+                className={
+                  error.gender
+                    ? "form-control is-invalid"
+                    : "form-control is-valid"
+                }
+                id="floatingSelect"
+                aria-label="Floating label select example"
+                name="gender"
+                onChange={(e) => handleOnChange(e)}
+              >
+                <option value="">Choose a gender</option>
+                <option value="female">Female</option>
+                <option value="male">Male</option>
+              </select>
+              {error.gender ? (
+                <div
+                  id="validationServerUsernameFeedback"
+                  className="invalid-feedback"
+                >
+                  {error.gender}
+                </div>
+              ) : (
+                <div
+                  id="validationServerUsernameFeedback"
+                  className="valid-feedback"
+                >
+                  {noError}
+                </div>
+              )}
+              <label htmlFor="floatingSelect">Gender</label>
+            </div>
+
+            <div className="form-floating col-md">
+              <select
+                className={
+                  error.elimination_type
+                    ? "form-control is-invalid"
+                    : "form-control is-valid"
+                }
+                id="floatingSelect"
+                aria-label="Floating label select example"
+                name="elimination_type"
+                onChange={(e) => handleOnChange(e)}
+              >
+                <option value="">Choose a elimination type</option>
+                <option value="All">All vs All</option>
+                <option value="Simple">Simple Elimination</option>
+                <option value="Double">Double Elimination</option>
+              </select>
+              {error.elimination_type ? (
+                <div
+                  id="validationServerUsernameFeedback"
+                  className="invalid-feedback"
+                >
+                  {error.elimination_type}
+                </div>
+              ) : (
+                <div
+                  id="validationServerUsernameFeedback"
+                  className="valid-feedback"
+                >
+                  {noError}
+                </div>
+              )}
+              <label htmlFor="floatingSelect">elimination_type</label>
+            </div>
+            <div className="form-floating col-md">
+              <select
+                className={
+                  error.match_type
+                    ? "form-control is-invalid"
+                    : "form-control is-valid"
+                }
+                id="floatingSelect"
+                aria-label="Floating label select example"
+                name="match_type"
+                onChange={(e) => handleOnChange(e)}
+              >
+                <option value="">Choose a match type</option>
+                <option value="singles">singles</option>
+                <option value="dobles">dobles</option>
+              </select>
+              {error.match_type ? (
+                <div
+                  id="validationServerUsernameFeedback"
+                  className="invalid-feedback"
+                >
+                  {error.match_type}
+                </div>
+              ) : (
+                <div
+                  id="validationServerUsernameFeedback"
+                  className="valid-feedback"
+                >
+                  {noError}
+                </div>
+              )}
+              <label htmlFor="floatingSelect">match_type</label>
+            </div>
+            <div className="form-floating col-md">
+              <select
+                className={
+                  error.id_category
+                    ? "form-control is-invalid"
+                    : "form-control is-valid"
+                }
+                id="floatingSelect"
+                aria-label="Floating label select example"
+                name="id_category"
+                onChange={(e) => handleOnChange(e)}
+              >
+                <option value="">Choose a Category</option>
+                <option value="1">A</option>
+                <option value="2">B</option>
+                <option value="3">C</option>
+                <option value="4">E</option>
+              </select>
+              {error.id_category ? (
+                <div
+                  id="validationServerUsernameFeedback"
+                  className="invalid-feedback"
+                >
+                  {error.id_category}
+                </div>
+              ) : (
+                <div
+                  id="validationServerUsernameFeedback"
+                  className="valid-feedback"
+                >
+                  {noError}
+                </div>
+              )}
+              <label htmlFor="floatingSelect">id_category</label>
+            </div>
+
+            <div className="row g-2 mb-3">
+              <div>
+                {Object.keys(error).length > 0 ? (
+                  <button
+                    className="btn btn-secondary"
+                    style={{ backgroundColor: "#A7D129", width: "100%" }}
+                    type="submit"
+                    disabled
+                  >
+                    Create
+                  </button>
+                ) : (
+                  <button
+                    className="btn btn-success"
+                    style={{ backgroundColor: "#A7D129", width: "100%" }}
+                    type="submit"
+                  >
+                    Create
+                  </button>
+                )}
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </>
+  );
+};

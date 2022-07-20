@@ -56,7 +56,7 @@ router.put('/:id_tournament', async (req, res) => {
     if(parseInt(Date[1]) > 12 || parseInt(Date[2]) > 31 ) return res.status(404).send({msg_error: 'Invalid date'})
   }
 
-  const tournament = await Tournament.findByPk(parseInt(id_tournament))
+  const tournament = await Tournament.findByPk(id_tournament)
 
   if(tournament) {
     await Tournament.update(req.body,{
@@ -70,6 +70,13 @@ router.put('/:id_tournament', async (req, res) => {
   }else{
     res.status(400).send({msg_mesage: 'Tournament not found'});
   }
+})
+
+
+router.delete('/:id_tournament', async (req, res) => {
+  const { id_tournament } = req.params;
+  const tournament = await Tournament.destroy({where: {id_tournament: id_tournament}})
+  tournament === 1 ? res.status(200).send({msg: 'tournament deleted successfully'}) : res.status(400).send({msg: 'tournament does not exist'})
 })
 
 

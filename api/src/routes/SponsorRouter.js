@@ -2,6 +2,8 @@ const { Router } = require("express");
 const router = Router();
 const { Sponsor, Tournament } = require("../db");
 
+
+
 router.get("/", async (req, res) => {
   const { id_tournament } = req.query;
 
@@ -27,7 +29,8 @@ router.get("/", async (req, res) => {
         Sponsors.push(Sponsor);
       });
 
-      return res.status(200).json(Sponsors);
+      return res.status(200).json(Sponsors); 
+      
     } else {
       res.status(400).json({ msg: "No sponsors found" });
     }
@@ -41,6 +44,8 @@ router.get("/", async (req, res) => {
     }
   }
 });
+
+
 
 router.post("/", async (req, res, next) => {
   const { company, message, logo, link } = req.body;
@@ -67,6 +72,8 @@ router.post("/", async (req, res, next) => {
   }
 });
 
+
+
 router.put('/:id_sponsor', async (req, res) => {
   const { id_sponsor } = req.params;
   const { company, link } = req.body;
@@ -75,17 +82,21 @@ router.put('/:id_sponsor', async (req, res) => {
 
   if(AllSponsor.length) {
 
-    let comparison = false
+    let compare = false
+    let SponsorFromDb = await Sponsor.findOne({where: {id_sponsor}})
 
-    // AllSponsor.map((sponsor) => {
-    //   if( company === sponsor.company || link === sponsor.link ){
-    //     comparison = true
-    //   }
-    // })
 
-    console.log(comparison)
-    
-    if(!comparison) {
+
+    if(SponsorFromDb.link !== link) {
+
+      AllSponsor.map((sponsor) => {
+        if( link === sponsor.link ){
+          compare = true
+        }
+      })
+    }
+
+    if(!compare) {
       const SponsorUpated = await Sponsor.update(req.body, {
         where: {
           id_sponsor: parseInt(id_sponsor)
@@ -98,12 +109,20 @@ router.put('/:id_sponsor', async (req, res) => {
         res.status(400).send({msg_measge: 'Sponsor not found'});
       }
     }else{
-      return res.status(400).send({msg_error: 'Sponsor already exists'})
+      return res.status(400).send({msg_error: 'Link already exist'})
     }
 
   }else{
     res.status(400).send({msg_measge: 'No sponsor to update'});
   }
+
+})
+
+router.delete('/:id_sponsor', async (req, res) => {
+  const { id_sponsor } = req.params;
+
+  const imageDeleted = await Sponsor.destroy({ where: { id_sponsor: id_sponsor } })
+  imageDeleted === 1 ? res.status(200).send({msg: 'Sponsor deleted successfully'}) : res.status(400).send({msg: 'Sponsor does not exist'})
 
 })
 

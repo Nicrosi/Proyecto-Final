@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 //import styles from "./FormUser.module.css"
-import { useHistory } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { Redirect, useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { postNewUser } from "../../redux/actions/authorization";
 import img1 from "../../img/imgForm1.webp";
 
@@ -82,6 +82,7 @@ export const FormUserRegister = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const noError = "Looks good";
+  const auth = useSelector((state) => state.auth);
   const [input, setInput] = useState({
     dni: "",
     name: "",
@@ -151,8 +152,7 @@ export const FormUserRegister = () => {
     <React.Fragment>
       {/* font-family: 'Bebas Neue', cursive;
 font-family: 'Gruppo', cursive; */}
-
-      <div style={{ minHeight: "100vh", width: "100%" }}>
+{auth.loggedIn? <Redirect to={`/Profile/${auth.currentUser.dni}`}/>:<div style={{ minHeight: "100vh", width: "100%" }}>
         <div style={{ position: "absolute", top: "0", width: "100%" }}>
           <img
             src={img1}
@@ -538,7 +538,8 @@ font-family: 'Gruppo', cursive; */}
             </div>
           </form>
         </div>
-      </div>
+      </div>}
+      
     </React.Fragment>
   );
 };

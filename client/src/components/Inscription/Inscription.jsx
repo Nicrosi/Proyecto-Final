@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { getSubtournament } from "../../redux/actions";
 import { Row, Col } from "react-bootstrap";
 import SubtCard from "./SubtCard";
@@ -10,11 +10,17 @@ export const Inscription = () => {
   const user = useSelector((state) => state.auth.currentUser);
   const dispatch = useDispatch();
   const {tournament_id} = useParams();
-
-
+  const history = useHistory();
+  
   useEffect(() => {
     dispatch(getSubtournament(tournament_id));
+    if(!user.id_category){ 
+      alert(`The user ${user.name} has no score to categorize`)
+      history.push("/HomeAdmin");
+            }
   }, [dispatch, tournament_id])
+
+  console.log(user)
   return (
     <div
       style={{ paddingTop: "56px", minHeight: "100vh" }}
@@ -25,17 +31,22 @@ export const Inscription = () => {
     <Row className="g-3 mx-3 mt-2">
      {subt.length > 0 ? (
             subt.map((p) => {
+             
               return (
+                user.gender === p.gender && user.id_category === p.category.id_category ?
                 <Col lg={3} key={p.id_subt}>
                   <SubtCard
                     key={p.id_subt}
                     name={p.name}
                     id_tournament={tournament_id}
                     price={p.price}
+                    subt_gender = {p.gender}
+                    subt_category = {p.category}
                     id_user={user.id_user}
                     email={user.e_mail}
+                    id_subt={p.id_subt}
                   />
-                </Col>
+                </Col>:null
               );
             })
           ) : (
