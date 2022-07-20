@@ -30,7 +30,6 @@ const users = useSelector((state) => state.rootReducer.users);
   console.log("Input", input);
 
   const [status, setStatus] = useState("");
-  const [input, setInput] = useState({ email: "", name: "", message: "" });
 
   useEffect(() => {
     dispatch(getAllUsers()).then(() => setInput({ ...input, email: emails }));
