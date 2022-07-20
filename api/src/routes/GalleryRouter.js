@@ -62,7 +62,8 @@ router.get('/get',  async (req, res) => {
   try {
     
     const images = await Image.findAll();
-    res.status(200).json(images);
+    const Images = images.sort((a, b) => a.id - b.id)
+    res.status(200).json(Images);
   
   } catch (error) {
     console.log(error);

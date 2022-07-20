@@ -10,11 +10,18 @@ export default function CreateGallery() {
 
   const dispatch = useDispatch();
   const ImagesList = useSelector((state) => state.rootReducer.gallery);
+  // const FirstLine = useSelector((state) => state.rootReducer.FirstLine);
+  // const SecondLine = useSelector((state) => state.rootReducer.SecondLine);
+  // const ThridLine = useSelector((state) => state.rootReducer.ThridLine);
+  
   const [file, setFile ] = useState(null);
   const auth = useSelector((state) => state.auth);
 
   
 
+  // console.log(FirstLine);
+  // console.log(SecondLine);
+  // console.log(ThridLine);
   useEffect(() => {
     dispatch(getAllImages())
   },[dispatch])
@@ -103,12 +110,12 @@ export default function CreateGallery() {
                 
               }
             {/* {
-              ImagesList.length ? (
+              FirstLine.length ? (
                 
             <div class="row">
               <div class="column">
                 {
-                  firstLine.length && firstLine.map((image) => (
+                  FirstLine.length && FirstLine.map((image) => (
                     <div key={image.id} className='img_button_container' >
                       <img src={image.imageURL} alt={image.title}/>
                       {
@@ -124,7 +131,7 @@ export default function CreateGallery() {
               </div>
               <div class="column">
                 {
-                  secondLine.length && secondLine.map((image) => (
+                  SecondLine.length && SecondLine.map((image) => (
                     <div key={image.id} className='img_button_container' >
                       <img src={image.imageURL} alt={image.title}/>
                       {
@@ -140,7 +147,7 @@ export default function CreateGallery() {
               </div>
               <div class="column">
                 {
-                  thirdLine.length && thirdLine.map((image) => (
+                  ThridLine.length && ThridLine.map((image) => (
                     <div key={image.id} className='img_button_container' >
                       <img src={image.imageURL} alt={image.title}/>
                       {

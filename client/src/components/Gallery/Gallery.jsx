@@ -11,7 +11,6 @@ export default function Gallery() {
 
   const dispatch = useDispatch();
   const ImagesList = useSelector((state) => state.rootReducer.gallery);
-  const Gallery = ImagesList.length >= 9 ? [...ImagesList.slice(0, 9)] : [...ImagesList];
 
   useEffect(() => {
     dispatch(getAllImages())
@@ -31,14 +30,32 @@ export default function Gallery() {
             <div className="container_galery_images" >
               <>
                 {
-                  Gallery.length && Gallery.map((image) => (
-                    <img
-                      key={image.id}
-                      src={image.imageURL} 
-                      className="gallery_image"
-                      alt={image.title}
-                    />            
-                  ))
+                    ImagesList.length ? (
+                      
+                    <div class="row">
+                      <div class="column">
+                        <div className='img_button_container' >
+                          {ImagesList.length >= 1 ? (<img className='gallery_image' src={ImagesList[0].imageURL} alt={ImagesList[0].title}/>) : (<div></div>)}
+                          {ImagesList.length >= 4 ? (<img className='gallery_image' src={ImagesList[3].imageURL} alt={ImagesList[3].title}/>) : (<div></div>)}
+                          {ImagesList.length >= 7 ? (<img className='gallery_image' src={ImagesList[6].imageURL} alt={ImagesList[6].title}/>) : (<div></div>)}
+                        </div>
+                      </div>
+                      <div class="column">
+                        <div className='img_button_container' >
+                          {ImagesList.length >= 2 ? (<img className='gallery_image' src={ImagesList[1].imageURL} alt={ImagesList[1].title}/>) : (<div></div>)}
+                          {ImagesList.length >= 5 ? (<img className='gallery_image' src={ImagesList[4].imageURL} alt={ImagesList[4].title}/>) : (<div></div>)}
+                          {ImagesList.length >= 8 ? (<img className='gallery_image' src={ImagesList[7].imageURL} alt={ImagesList[7].title}/>) : (<div></div>)}
+                        </div>
+                      </div>
+                      <div class="column">
+                        <div className='img_button_container' >
+                          {ImagesList.length >= 3 ? (<img className='gallery_image' src={ImagesList[2].imageURL} alt={ImagesList[2].title}/>) : (<div></div>)}
+                          {ImagesList.length >= 6 ? (<img className='gallery_image' src={ImagesList[5].imageURL} alt={ImagesList[5].title}/>) : (<div></div>)}
+                          {ImagesList.length >= 9 ? (<img className='gallery_image' src={ImagesList[8].imageURL} alt={ImagesList[8].title}/>) : (<div></div>)}
+                        </div>
+                      </div>
+                    </div>
+                  ) : (<div></div>)
                 }
               </>
             </div> 
@@ -64,87 +81,6 @@ export default function Gallery() {
       :
       (<div></div>)
     }
-      {/* <Row>
-        <Col md={4} sm={4}>
-          <img
-            src={`http://localhost:3001/${ImagesList[0]}`}
-            className="w-100 shadow-1-strong rounded mb-4"
-            alt="Boat on Calm Water"
-          />
-          <img
-            src={`http://localhost:3001/${ImagesList[1]}`}
-            className="w-100 shadow-1-strong rounded mb-4"
-            alt="Wintry Mountain Landscape"
-          />
-        </Col>
-
-        <Col md={4} sm={4}>
-          <img
-            src={`http://localhost:3001/${ImagesList[2]}`}
-            className="w-100 shadow-1-strong rounded mb-4"
-            alt="Boat on Calm Water"
-          />
-          <img
-            src={`http://localhost:3001/${ImagesList[3]}`}
-            className="w-100 shadow-1-strong rounded mb-4"
-            alt="Wintry Mountain Landscape"
-          />
-        </Col>
-
-        <Col md={4} sm={4}>
-          <img
-            src={`http://localhost:3001/${ImagesList[4]}`}
-            className="w-100 shadow-1-strong rounded mb-4"
-            alt="Boat on Calm Water"
-          />
-          <img
-            src={`http://localhost:3001/${ImagesList[5]}`}
-            className="w-100 shadow-1-strong rounded mb-4"
-            alt="Wintry Mountain Landscape"
-          />
-        </Col>
-      </Row> 
-    </Container>{/* <Row>
-        <Col md={4} sm={4}>
-          <img
-            src={`http://localhost:3001/${ImagesList[0]}`}
-            className="w-100 shadow-1-strong rounded mb-4"
-            alt="Boat on Calm Water"
-          />
-          <img
-            src={`http://localhost:3001/${ImagesList[1]}`}
-            className="w-100 shadow-1-strong rounded mb-4"
-            alt="Wintry Mountain Landscape"
-          />
-        </Col>
-
-        <Col md={4} sm={4}>
-          <img
-            src={`http://localhost:3001/${ImagesList[2]}`}
-            className="w-100 shadow-1-strong rounded mb-4"
-            alt="Boat on Calm Water"
-          />
-          <img
-            src={`http://localhost:3001/${ImagesList[3]}`}
-            className="w-100 shadow-1-strong rounded mb-4"
-            alt="Wintry Mountain Landscape"
-          />
-        </Col>
-
-        <Col md={4} sm={4}>
-          <img
-            src={`http://localhost:3001/${ImagesList[4]}`}
-            className="w-100 shadow-1-strong rounded mb-4"
-            alt="Boat on Calm Water"
-          />
-          <img
-            src={`http://localhost:3001/${ImagesList[5]}`}
-            className="w-100 shadow-1-strong rounded mb-4"
-            alt="Wintry Mountain Landscape"
-          />
-        </Col>
-      </Row> 
-    </Container>*/}
     </>
   );
 }
