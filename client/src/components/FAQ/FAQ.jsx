@@ -1,5 +1,5 @@
 import React from "react";
-
+//hola
 export const FAQ = () => {
   return (
     <>
