@@ -49,7 +49,10 @@ User.belongsTo(Category, {foreignKey: 'id_category'});
 User.hasMany(Inscription, {foreignKey: 'id_user'});
 Inscription.belongsTo(User, {foreignKey: 'id_user'});
 
-Team.hasMany(User, {foreignKey: 'id_team'});
+Subtournament.hasMany(Inscription, {foreignKey: 'id_subt'});
+Inscription.belongsTo(Subtournament, {foreignKey: 'id_subt'});
+
+Team.hasMany(User, {foreignKey: 'id_team'}); 
 User.belongsTo(Team, {foreignKey: 'id_team'});
 
 Tournament.belongsToMany(Sponsor, {through: 'sponsor_tournament'});
