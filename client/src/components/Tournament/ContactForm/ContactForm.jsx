@@ -36,14 +36,6 @@ const users = useSelector((state) => state.rootReducer.users);
     console.log("efef");
   }, [dispatch, emails]);
 
-  const handleChange = (e) => {
-    setInput({
-      ...input,
-      [e.target.name]: e.target.value,
-      
-    });
-  };
-
   useEffect(() => {
     if (status === "SUCCESS") {
       setTimeout(() => {
