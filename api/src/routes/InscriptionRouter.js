@@ -26,7 +26,6 @@ router.post('/:id', async (req, res) => {
     const { id } = req.params;
     const {product, token} = req.body;    
     const charge = await createPayment([product, token]); 
-    console.log(product, "asasdasd")
     if(typeof charge === 'string'){
       res.status(404).send({Message: charge})
     }else{
