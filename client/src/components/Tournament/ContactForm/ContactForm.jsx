@@ -13,28 +13,8 @@ const renderAlert = () => {
 
 export const ContactForm = () => {
   const dispatch = useDispatch();
-<<<<<<< HEAD
-  const users = useSelector((state) => state.rootReducer.users);
-  useEffect(() => {
-    dispatch(getAllUsers())
-  },[])
-
-  console.log("users", users);
-  const email = users.map((el) => el.e_mail);
-  const allEmail = [...new Set(email)];
-  const emails =  email.join(', ')
-  console.log("email", emails);
-  // console.log("allemail", allEmail);
-  const [input, setInput] = useState({
-    name: "",
-    email: emails,
-    message: "",
-  });
-  console.log("Input", input);
-=======
   const users = useSelector((state) => state.rootReducer.filteredUsers);
   const emails = users.map((el) => el.e_mail).join(", ");
->>>>>>> 0793d044ec29cc3811c0601e166a0035ebbfd3ad
   const [status, setStatus] = useState("");
   const [input, setInput] = useState({ email: "", name: "", message: "" });
 
@@ -58,21 +38,10 @@ export const ContactForm = () => {
     });
   };
 
-<<<<<<< HEAD
-    const message = {
-      name: input.name,
-      email: emails, 
-      message: input.message,
-    }
-
-    console.log(message)
-
-=======
   const handleSubmit = (e) => {
     e.preventDefault();
->>>>>>> 0793d044ec29cc3811c0601e166a0035ebbfd3ad
     emailjs
-      .send("service_7mimo0g", "template_2ah1aoj", message, "cYHyGctWLF2I5zGsl")
+      .send("service_7mimo0g", "template_2ah1aoj", input, "cYHyGctWLF2I5zGsl")
       .then(
         (response) => {
           console.log("success", response);

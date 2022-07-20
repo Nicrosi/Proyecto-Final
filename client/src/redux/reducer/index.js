@@ -8,6 +8,7 @@ import {
   GET_SUBT_BY_TOURNAMENT,
   CLEAR_USER,
   GET_TOURNAMENTS,
+  GET_ALL_IMAGES,
 } from "../actions";
 import { filterUsers } from "../helpers/filters";
 import { sortByName } from "../helpers/sorts";
@@ -21,6 +22,7 @@ const initialState = {
   sponsors: [],
   filteredSubt: [],
   tournaments:[],
+  gallery:[],
 };
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -86,9 +88,14 @@ const rootReducer = (state = initialState, action) => {
       };
       case GET_TOURNAMENTS:
         return {
-            ...state,
-            tournaments: action.payload
-                }
+          ...state,
+          tournaments: action.payload
+        }
+      case GET_ALL_IMAGES:
+        return {
+          ...state,
+          gallery: action.payload
+        }
     default:
       return { ...state };
   }

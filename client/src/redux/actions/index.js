@@ -18,7 +18,8 @@ export const GET_TOURNAMENT = "GET_TOURNAMENT";
 export const PUT_TOURNAMENT = "PUT_TOURNAMENT"
 export const CLEAR_USER = "CLEAR_USER";
 export const ADD_SUBTOURNAMENT = "ADD_SUBTOURNAMENT";
-export const GET_TOURNAMENTS="GET_TOURNAMENTS"
+export const GET_TOURNAMENTS="GET_TOURNAMENTS";
+export const GET_ALL_IMAGES="GET_ALL_IMAGES";
 
 // export const getAllPlayers = () => { JSON
 //   return {
@@ -217,5 +218,20 @@ export const getTournament= () =>{
       });
   }
 }
+
+export const getAllImages = () => async (dispatch) => {
+  try {
+    const { data } = await axios.get('http://localhost:3001/gallery/get')
+    return dispatch({
+      type: GET_ALL_IMAGES,
+      payload: data
+    });
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+
+
 
   

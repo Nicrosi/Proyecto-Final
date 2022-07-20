@@ -3,25 +3,19 @@ import { Container } from "react-bootstrap";
 import axios from 'axios';
 import './Gallery.css';
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllImages } from "../../redux/actions";
 
 
 export default function Gallery() {
 
-  const [ImagesList, setImagesList ] = useState([]);
+  const dispatch = useDispatch();
+  const ImagesList = useSelector((state) => state.rootReducer.gallery);
   const Gallery = ImagesList.length >= 9 ? [...ImagesList.slice(0, 9)] : [...ImagesList];
 
   useEffect(() => {
-    axios.get('http://localhost:3001/gallery/get',)
-    .then(res => setImagesList(res.data))
-    .catch(err => console.log(err))
-
-    return () => {
-      axios.delete('http://localhost:3001/gallery/delete')
-      .then(res => console.log(res.data))
-      .catch(err => console.log(err))
-    }
-
-  },[])
+    dispatch(getAllImages())
+  },[dispatch])
 
   return (
     <>
@@ -39,9 +33,10 @@ export default function Gallery() {
                 {
                   Gallery.length && Gallery.map((image) => (
                     <img
-                      src={`http://localhost:3001/${image}`}
+                      key={image.id}
+                      src={image.imageURL} 
                       className="gallery_image"
-                      alt="Boat on Calm Water"
+                      alt={image.title}
                     />            
                   ))
                 }

@@ -8,13 +8,7 @@ export default function Sponsors() {
     sponsors = useSelector((state) => state.rootReducer.sponsors);
 
   useEffect(() => {
-<<<<<<< HEAD
     dispatch(getAllSponsors());
-=======
-
-      dispatch(getAllSponsors());
-
->>>>>>> 0793d044ec29cc3811c0601e166a0035ebbfd3ad
   }, [dispatch]);
 
   return (

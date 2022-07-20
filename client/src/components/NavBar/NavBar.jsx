@@ -59,14 +59,13 @@ export default function NavBar() {
           ) : null}
           
           <li className="nav-item">
-        
-            <a 
+            <Link
               className="nav-link ms-auto"
               style={{ fontWeight: "bold", color: "#e0e6e8" }}
-              href="/Gallery"
+              to={"/Gallery"}
             >
               Multimedia
-            </a>
+            </Link>
           </li>
           <li className="nav-item">
             <a
