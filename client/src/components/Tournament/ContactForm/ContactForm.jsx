@@ -29,7 +29,7 @@ export const ContactForm = () => {
         setStatus("");
       }, 10000);
     }
-  }, [status]);
+  }, []);
 
   const handleChange = (e) => {
     setInput({

@@ -2,6 +2,8 @@ const { Router } = require("express");
 const router = Router();
 const { Sponsor, Tournament } = require("../db");
 
+
+
 router.get("/", async (req, res) => {
   const { id_tournament } = req.query;
 
@@ -27,7 +29,8 @@ router.get("/", async (req, res) => {
         Sponsors.push(Sponsor);
       });
 
-      return res.status(200).json(Sponsors);
+      return res.status(200).json(Sponsors); 
+      
     } else {
       res.status(400).json({ msg: "No sponsors found" });
     }
@@ -41,6 +44,8 @@ router.get("/", async (req, res) => {
     }
   }
 });
+
+
 
 router.post("/", async (req, res, next) => {
   const { company, message, logo, link } = req.body;
@@ -66,6 +71,8 @@ router.post("/", async (req, res, next) => {
     next(error.message);
   }
 });
+
+
 
 router.put('/:id_sponsor', async (req, res) => {
   const { id_sponsor } = req.params;
