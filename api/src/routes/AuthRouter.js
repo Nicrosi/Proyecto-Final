@@ -1,8 +1,6 @@
 const { Router } = require("express");
 const router = Router();
-const { User,Inscription,
-  Score,
-  Category } = require("../db");
+const { User,Inscription,Score,Category } = require("../db");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const verifyToken = require("../middlewares/authjwt");
@@ -73,6 +71,8 @@ router.post("/login", async (req, res, next) => {
       ]
     });
 
+
+    console.log(user)
     if (!user) {
       return res.status(403).json({ error: "Username or Password invalid" });
     }
@@ -100,6 +100,11 @@ router.post("/login", async (req, res, next) => {
 router.get("/verifytoken", [verifyToken], async (req, res) => {
   const user = await User.findOne({
     where: { e_mail: req.e_mail },
+    include: [
+      Inscription,
+      Score,
+      Category
+    ]
   });
   res.status(200).json({ ...user?.dataValues, password: "Hackeame perro" });
 });
