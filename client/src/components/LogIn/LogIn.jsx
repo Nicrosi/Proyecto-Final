@@ -56,6 +56,10 @@ export default function LogIn() {
     setSuccess([]);
   };
 
+  const logGoogle = (e) => {
+    window.open("http://localhost:3001/auth/login/google");
+  };
+
   return (
     <div className={styles.logContainer}>
       <h1 className={styles.title}>LogIn</h1>
@@ -149,7 +153,20 @@ export default function LogIn() {
               </button>
             )}
           </div>
+          <hr style={{ borderColor: "white" }} />
         </form>
+        <div className="d-flex justify-content-center">
+          <button
+            onClick={logGoogle}
+            style={{
+              backgroundColor: "transparent",
+              borderColor: "white",
+              color: "white",
+            }}
+          >
+            Log with Google
+          </button>
+        </div>
       </div>
     </div>
   );
