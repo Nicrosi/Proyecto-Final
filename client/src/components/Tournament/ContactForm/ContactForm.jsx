@@ -1,23 +1,27 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { MailIcon } from "@heroicons/react/solid";
 import emailjs from "@emailjs/browser";
 import styles from "./ContactForm.module.css";
+import { getAllUsers } from "../../../redux/actions";
 
 
 export const ContactForm = () => {
-
+const dispatch=useDispatch();
   const users = useSelector((state) => state.rootReducer.users);
+useEffect(()=>{
+  dispatch(getAllUsers())
+  
+},[dispatch])
 
   console.log("users", users);
-  const email = users.map((el) => el.e_mail);
-  const allEmail = [...new Set(email)];
-  console.log("email", email);
+  const emails = users.map((el) => el.e_mail);
+  const allEmail = [...new Set(emails)];
+  console.log("email", emails);
   console.log("allemail", allEmail);
   const [input, setInput] = useState({
     name: "",
-    email: "",
-    my_file: "",
+    email:emails.join(", "),
     message: "",
   });
   console.log("Input", input);
@@ -27,6 +31,7 @@ export const ContactForm = () => {
     setInput({
       ...input,
       [e.target.name]: e.target.value,
+      
     });
   };
   useEffect(() => {
@@ -81,13 +86,13 @@ export const ContactForm = () => {
             value={input.name}
             className="form-control"
           />
-          <label htmlFor="floatingInput">Full Name</label>      
+          <label htmlFor="floatingInput">Subject</label>      
           </div>
         </div>
           
         <div className={styles.messageBox}>
         <div className="form-floating me-2" style={{width: "70%"}}>
-            <input
+            <textarea
               onChange={(e) => handleChange(e)}
               name="message"
               type="text"

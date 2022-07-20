@@ -7,19 +7,18 @@ const  ArrayUsers  = require('../ArrayUserEjemplo.js')
 // console.log(ArrayUsers);
 
 
-router.get('/', async (req,res) => {
+router.get('/' , async (req,res) => {
     let {name}= req.query
     const allUsers = await get_Userdb()
     
     if(name){
         let user_name = await get_Userdb(name)
         user_name.length > 0 ? res.status(200).send(user_name) : res.status(404).send("User not found!")
-    }else{
+    }
+    else{
         allUsers.length > 0? res.status(200).send(allUsers) : res.status(404).send("Users doesn't exist!")
     }
 }) 
-
-
 
 
 

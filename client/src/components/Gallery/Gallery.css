@@ -1,0 +1,17 @@
+.container_galery_images {
+  min-height: 80vh;
+  width: 95vw;
+  margin: 1vw;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.gallery_image {
+  width: 30vw;
+  height: min-content;
+  /* height: 400px;
+  width: min-content; */
+  margin: 10px;
+  border-radius: 10px;
+}

@@ -34,7 +34,7 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         users: action.payload,
-        filteredUsers: sortByName(action.payload).filter(user=>user.is_admin !== true),
+        filteredUsers: sortByName(action.payload),
       };
 
     case GET_ALL_USERS_NAME:

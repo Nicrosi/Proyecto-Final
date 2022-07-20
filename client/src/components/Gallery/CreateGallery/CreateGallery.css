@@ -1,0 +1,123 @@
+.CONTAINER {
+  background-image: url('../../../img/imgCarousel1.webp');
+  background-position: contain;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.container_inputs {
+  position: relative;
+  display: flex;
+  margin-top: 55px;
+  padding: 10px;
+  background-color: rgb(0 0 0 / 70%);
+  justify-content: center;
+  align-items: center;
+  height: 70px;
+}
+
+.container_gallery_created {
+  display: flex;
+  position: relative;
+  justify-content:center;
+  align-items: flex-start;
+  min-height: 80vh;
+}
+
+.contaier_img {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 50px 1.5vw 20px 1.5vw;
+  background-color: rgb(0 0 0 / 70%);
+  min-height: 80vh;
+  justify-content: center;
+  width: 100vw;
+}
+
+.images_from_db {
+  height: min-content;
+  width: 30vw;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.img_button_container {
+  height:  min-content;
+  min-width: 10px;
+  position: relative;
+}
+
+.input_images {
+  height: 30px;
+  width: 30vw;
+  border: none;
+  background-color: rgb(255 255 255 / 70%);
+}
+
+.btn_click {
+  margin-left: 10px;
+  border: none;
+  height: 30px;
+  width: 5vw;
+  background-color: rgb(255 255 255 / 70%);
+  border-radius: 3px;
+}
+
+.btn_delete_image {
+  position: absolute;
+  height: 20px;
+  width: 20px;
+  border: none;
+  top: 10px;
+  right: 30px;
+}
+
+.tarea-icono {
+  width:25px;
+  height:25px;
+  margin: 5px;
+  cursor: pointer;
+}
+
+.containe_img_id {
+  display: flex;
+  top: 2vh;
+  left: 0;
+  position: absolute;
+  height: 100vh;
+  width: 100vw;
+  background: rgb(0 0 0 / 50%);
+  justify-content: center;
+  align-items:center;
+}
+
+.images_from_db_id {
+  margin-top: 2vh;
+  display: flex;
+  position: relative;
+  height: 80vh;
+  width: min-content;
+}
+
+.tarea-icono-id {
+  display: flex;
+  width:35px;
+  height:35px;
+  margin: 5px;
+  cursor: pointer;
+  position: absolute;
+  top: 30px;
+  right: 5px;
+}
+
+.image_id {
+  min-height: 20px; 
+  min-width: 20px;
+  position: relative;
+  padding: 10px;
+}
+
+.block_container {
+  display: none;
+}

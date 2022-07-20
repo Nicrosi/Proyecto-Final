@@ -87,7 +87,7 @@ export default function ControlCardSponsor({
                 <label for="floatingInput">Link</label>
               </div>
             </div>
-            <button type="submit">Confirm changes</button>
+            <button className="btn btn-outline-secondary btn-dark my-2" type="submit">Confirm changes</button>
           </div>
         </form>
     </div>

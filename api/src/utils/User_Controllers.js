@@ -6,7 +6,8 @@ const get_Userdb = async (name) => {
         if(name){
             const Username_db = await User.findAll({
                 where : { 
-                    name: sequelize.where(sequelize.fn('LOWER', sequelize.col('name')), 'LIKE', '%' + name.toLowerCase() + '%')
+                    name: sequelize.where(sequelize.fn('LOWER', sequelize.col('name')), 'LIKE', '%' + name.toLowerCase() + '%'),
+                    is_admin: false
                 }, 
                 attributes: {
                     exclude: ['password']},
@@ -20,11 +21,14 @@ const get_Userdb = async (name) => {
         }else{
             const User_db = await User.findAll({
                 attributes: {exclude: ['password']},
-      include: [
-        Inscription,
-        Score,
-        Category
-      ]
+                where: {
+                    is_admin: false
+                },
+                include: [
+                  Inscription,
+                  Score,
+                  Category
+                ]
             });
             return User_db;
         }
