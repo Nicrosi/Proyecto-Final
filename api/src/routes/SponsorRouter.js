@@ -85,6 +85,8 @@ router.put('/:id_sponsor', async (req, res) => {
     let compare = false
     let SponsorFromDb = await Sponsor.findOne({where: {id_sponsor}})
 
+
+
     if(SponsorFromDb.link !== link) {
 
       AllSponsor.map((sponsor) => {
@@ -94,7 +96,6 @@ router.put('/:id_sponsor', async (req, res) => {
       })
     }
 
-    
     if(!compare) {
       const SponsorUpated = await Sponsor.update(req.body, {
         where: {

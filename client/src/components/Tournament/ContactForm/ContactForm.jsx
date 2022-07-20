@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { MailIcon } from "@heroicons/react/solid";
 import emailjs from "@emailjs/browser";
 import styles from "./ContactForm.module.css";
@@ -12,11 +12,24 @@ const renderAlert = () => {
 };
 
 export const ContactForm = () => {
-  const dispatch = useDispatch();
-  const users = useSelector((state) => state.rootReducer.filteredUsers);
-  const emails = users.map((el) => el.e_mail).join(", ");
+
+const dispatch=useDispatch();
+const users = useSelector((state) => state.rootReducer.users);
+
+
+  console.log("users", users);
+  const emails = users.map((el) => el.e_mail);
+  const allEmail = [...new Set(emails)];
+  console.log("email", emails);
+  console.log("allemail", allEmail);
+  const [input, setInput] = useState({
+    name: "",
+    email:emails.join(", "),
+    message: "",
+  });
+  console.log("Input", input);
+
   const [status, setStatus] = useState("");
-  const [input, setInput] = useState({ email: "", name: "", message: "" });
 
   useEffect(() => {
     dispatch(getAllUsers()).then(() => setInput({ ...input, email: emails }));
@@ -69,7 +82,7 @@ export const ContactForm = () => {
         <h3 className={styles.subtitle}>Send a Message to Players</h3>
         {status && renderAlert()}
         <form style={{ width: "100%" }} onSubmit={(e) => handleSubmit(e)}>
-          <div className="row g-2 mb-3">
+         <div className="row g-2 mb-3">
             <div className="form-floating col-md">
               <input
                 onChange={(e) => handleChange(e)}

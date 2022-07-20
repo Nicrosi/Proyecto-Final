@@ -22,6 +22,7 @@ server.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
 server.use(bodyParser.json({ limit: "50mb" }));
 server.use(cookieParser());
 server.use(morgan("dev"));
+////////////////ImagesFromDataBase///////////
 server.use(cors());
 server.use(express.static(path.join(__dirname, "dataBaseImages")));
 ////////////////ImagesFromDataBase///////////

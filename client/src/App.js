@@ -55,6 +55,10 @@ function App() {
         <RouteGuard exact path={"/Profile/:userId"} component={ProfileUser} admin={false}/>
         <Route exact path={"/Gallery"} component={CreateGallery}/>
         <Route exact path={"/SignIn"} component={FormUserRegister} />
+        <Route exact path={"/Profile/:userId"} component={ProfileUser}/>
+        <Route exact path={"/Gallery"} component={CreateGallery}/>
+        <Route exact path={"/cpanel"} component={ControlPanel} />
+        <Route exact path={"/SignIn"} component={FormUserRegister} />
         <RouteGuard
           exact
           path={"/Profile/:userId"}
