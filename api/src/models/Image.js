@@ -12,14 +12,17 @@ module.exports = (sequelize) => {
         primaryKey: true,
         allowNull:false
       },
-      type: {
+      public_id:{
         type: DataTypes.STRING,
       },
-      name: {
+      title: {
         type: DataTypes.STRING,
       },
-      data: {
-        type: DataTypes.BLOB('medium'),
+      description: {
+        type: DataTypes.STRING,
+      },
+      imageURL: {
+        type: DataTypes.STRING,
       }
     }
   );

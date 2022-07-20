@@ -4,6 +4,7 @@
   border-left: 2px;
   border: none;
   border-top-left-radius: 20px;
+  outline: none;
 }
 
 .btnSearch{

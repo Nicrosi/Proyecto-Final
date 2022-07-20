@@ -3,72 +3,52 @@ import { useState } from 'react';
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import './CreateGallery.css';
 import axios from 'axios';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { deleteImage, getAllImages, postImage } from '../../../redux/actions';
 
 export default function CreateGallery() {
 
+  const dispatch = useDispatch();
+  const ImagesList = useSelector((state) => state.rootReducer.gallery);
+  // const FirstLine = useSelector((state) => state.rootReducer.FirstLine);
+  // const SecondLine = useSelector((state) => state.rootReducer.SecondLine);
+  // const ThridLine = useSelector((state) => state.rootReducer.ThridLine);
+  
   const [file, setFile ] = useState(null);
-  const [ImagesList, setImagesList ] = useState([]);
   const auth = useSelector((state) => state.auth);
 
+  
 
-
+  // console.log(FirstLine);
+  // console.log(SecondLine);
+  // console.log(ThridLine);
   useEffect(() => {
-    axios.get('http://localhost:3001/gallery/get',)
-    .then(res => setImagesList(res.data))
-    .catch(err => console.log(err))
-
-    return () => {
-      axios.delete('http://localhost:3001/gallery/delete')
-      .then(res => console.log(res.data))
-      .catch(err => console.log(err))
-    }
-
-  },[])
+    dispatch(getAllImages())
+  },[dispatch])
 
   const HandlerSelect = (e) => {
     setFile(e.target.files[0]);
   }
 
-  const HandleDelte = (image) => {
-    const promise = axios.delete(`http://localhost:3001/gallery/delete/${image}`)
-    .then(res => console.log(res.data))
-    .catch(err => console.log(err))
-  
-    Promise.all([promise]).then(function(values) {
-      console.log(values);
-      axios.get('http://localhost:3001/gallery/get',)
-      .then(res => setImagesList(res.data))
-      .catch(err => console.log(err))
+  const HandleDelte = async (image) => {
+    const imagedeleted = axios.delete(`http://localhost:3001/gallery/delete?image_id=${image.id}&public_id=${image.public_id}`)
+    Promise.all([imagedeleted]).then(() => {
+      dispatch(getAllImages())
     });
-    
   }
 
-  const HandlerCLick = () => {
+  const HandlerCLick = async () => {
     if(!file) {
       return alert('you must chose a file')
     }
-
-    const formData = new FormData();
-    const image = ImagesList.find((image) => image.split('-')[1] === file.name)
-
-    if(!image) {
-
-      formData.append('image', file)
-      const promise = axios.post('http://localhost:3001/gallery/post',formData)
-      .then(res => console.log(res.data))
-      .catch(err => console.log(err))
-  
-      Promise.all([promise]).then(function() {
-        axios.get('http://localhost:3001/gallery/get',)
-        .then(res => setImagesList(res.data))
-        .catch(err => console.log(err))
-      });
-    }else {
-      alert('The name of the image is already added')
-    }
     
-    document.getElementById('fileInput').value = null;
+    const formData = new FormData();
+    formData.append('image', file);
+
+    await axios.post('http://localhost:3001/gallery/post',formData)
+    dispatch(getAllImages())
+    
+    document.getElementById('floatingInput2').value = null;
     setFile(null)
   }
 
@@ -78,24 +58,37 @@ export default function CreateGallery() {
       {
         auth.loggedIn && auth.currentUser.is_admin ? 
           <div className='container_inputs' >
-            <input className='input_images' id='fileInput' placeholder=' Select an Image ' onChange={ HandlerSelect} type='file' />
+            <input
+                type='file'
+                name="password"
+                placeholder="Select an Image"
+                id="floatingInput2"
+                onChange={ HandlerSelect} 
+                className={ "form-control" }
+              />
             <button className='btn_click' onClick={()=>HandlerCLick()} >Click!</button>
           </div>
          : null
       }
       <div className='container_gallery_created' >
-          <div className='contaier_img' >
+          <div 
+            className={
+              auth.currentUser.is_admin ? 
+              'contaier_img' :
+              auth.loggedIn && !auth.currentUser.is_admin ?
+              'contaier_img padding' : 'contaier_img padding'
+            }
+          >
             {
               ImagesList.length ? ImagesList.map((image) => (
-                <div className='img_button_container' key={image}>
-                  <img className='images_from_db' src={`http://localhost:3001/${image}`} alt="galleryImg" />
+                <div key={image.id} className='img_button_container' >
+                  <img className='images_from_db' src={image.imageURL} alt={image.title} />
                   {
                     auth.loggedIn && auth.currentUser.is_admin ? 
                     <div onClick={()=>HandleDelte(image)} className='btn_delete_image' >
                       <AiOutlineCloseCircle className='tarea-icono' />
                     </div>
                      : null
-                    
                   }
                   
                 </div>
@@ -114,10 +107,66 @@ export default function CreateGallery() {
                     Add images from your galery
                   </h1>
                 )
-            }
+                
+              }
+            {/* {
+              FirstLine.length ? (
+                
+            <div class="row">
+              <div class="column">
+                {
+                  FirstLine.length && FirstLine.map((image) => (
+                    <div key={image.id} className='img_button_container' >
+                      <img src={image.imageURL} alt={image.title}/>
+                      {
+                        auth.loggedIn && auth.currentUser.is_admin ? 
+                          <div onClick={()=>HandleDelte(image)} className='btn_delete_image' >
+                            <AiOutlineCloseCircle className='tarea-icono' />
+                          </div>
+                         : null
+                      }
+                    </div>
+                  ))
+                }
+              </div>
+              <div class="column">
+                {
+                  SecondLine.length && SecondLine.map((image) => (
+                    <div key={image.id} className='img_button_container' >
+                      <img src={image.imageURL} alt={image.title}/>
+                      {
+                        auth.loggedIn && auth.currentUser.is_admin ? 
+                          <div onClick={()=>HandleDelte(image)} className='btn_delete_image' >
+                            <AiOutlineCloseCircle className='tarea-icono' />
+                          </div>
+                         : null
+                      }
+                    </div>
+                  ))
+                }
+              </div>
+              <div class="column">
+                {
+                  ThridLine.length && ThridLine.map((image) => (
+                    <div key={image.id} className='img_button_container' >
+                      <img src={image.imageURL} alt={image.title}/>
+                      {
+                        auth.loggedIn && auth.currentUser.is_admin ? 
+                          <div onClick={()=>HandleDelte(image)} className='btn_delete_image' >
+                            <AiOutlineCloseCircle className='tarea-icono' />
+                          </div>
+                         : null
+                      }
+                    </div>
+                  ))
+                }
+              </div>
+            
+             </div>
+                ) : (<div></div>)
+          } */}
           </div>
       </div>
-      
     </div>
   )
 }
