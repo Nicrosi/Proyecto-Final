@@ -14,11 +14,8 @@ const renderAlert = () => {
 export const ContactForm = () => {
 
 const dispatch=useDispatch();
-  const users = useSelector((state) => state.rootReducer.users);
-useEffect(()=>{
-  dispatch(getAllUsers())
-  
-},[dispatch])
+const users = useSelector((state) => state.rootReducer.users);
+
 
   console.log("users", users);
   const emails = users.map((el) => el.e_mail);
