@@ -24,6 +24,7 @@ export default function SubtCard({
     gender: subt_gender,
     category: subt_category,
     id_tournament: id_tournament,
+    id_subt: id_subt,
   });
 
   const makePayment = (token) => {
