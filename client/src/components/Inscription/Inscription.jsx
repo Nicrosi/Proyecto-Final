@@ -44,6 +44,8 @@ export const Inscription = () => {
                     subt_category = {p.category}
                     id_user={user.id_user}
                     email={user.e_mail}
+                    id_subt={p.id_subt}
+
                   />
                 </Col>:null
               );

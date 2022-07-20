@@ -16,6 +16,7 @@ export default function SubtCard({
 }) {
   const user = id_user;
   const dispatch = useDispatch();
+  console.log(id_subt)
   // eslint-disable-next-line no-unused-vars
   const [product, setProduct] = useState({
     name: name,
@@ -24,6 +25,7 @@ export default function SubtCard({
     gender: subt_gender,
     category: subt_category,
     id_tournament: id_tournament,
+    id_subt: id_subt,
   });
 
   const makePayment = (token) => {
