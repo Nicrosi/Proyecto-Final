@@ -340,10 +340,10 @@ export const FormSubTournament = (props) => {
                 onChange={(e) => handleOnChange(e)}
               >
                 <option value="">Choose a Category</option>
-                <option value={1}>A</option>
-                <option value={2}>B</option>
-                <option value={3}>C</option>
-                <option value={4}>E</option>
+                <option value="1">A</option>
+                <option value="2">B</option>
+                <option value="3">C</option>
+                <option value="4">E</option>
               </select>
               {error.id_category ? (
                 <div
