@@ -11,7 +11,7 @@ export const Inscription = () => {
   const dispatch = useDispatch();
   const {tournament_id} = useParams();
   const history = useHistory();
-  console.log(user)
+  
   useEffect(() => {
     dispatch(getSubtournament(tournament_id));
     if(!user.id_category){ 
@@ -19,6 +19,8 @@ export const Inscription = () => {
       history.push("/HomeAdmin");
             }
   }, [dispatch, tournament_id])
+
+  console.log(user)
   return (
     <div
       style={{ paddingTop: "56px", minHeight: "100vh" }}
