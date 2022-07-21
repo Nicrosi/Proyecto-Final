@@ -8,8 +8,7 @@ module.exports = (sequelize) => {
             allowNull: false,
             unique: true,
             primaryKey: true,
-            autoIncrement: true,
-        
+            autoIncrement: true,        
         },
         results: {
             type: DataTypes.INTEGER,
@@ -20,13 +19,13 @@ module.exports = (sequelize) => {
             allowNull: false,
         },
         loser: {
-            type: DataTypes.DATE,
+            type: DataTypes.STRING,
             allowNull: false,
         },
-        b_number: {
-            type: DataTypes.INTEGER,
+        date: {
+            type: DataTypes.DATE,
             allowNull: false
-        }
+        },
     },
     {
         timestamps: false,

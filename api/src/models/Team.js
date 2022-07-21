@@ -15,10 +15,6 @@ module.exports = (sequelize) => {
         type: DataTypes.BIGINT,
         allowNull: false,
       },
-      accumulated_points: {
-        type: DataTypes.BIGINT,
-        allowNull: false,
-      },
     },
     { timestamps: false }
   );
