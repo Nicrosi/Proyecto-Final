@@ -45,18 +45,18 @@ User.belongsTo(Score, {foreignKey: 'id_score'});
 
 Category.hasMany(User, {foreignKey: 'id_category'});
 User.belongsTo(Category, {foreignKey: 'id_category'});
-////////////////////////////
+
 User.hasMany(Inscription, {foreignKey: 'id_user'});
 Inscription.belongsTo(User, {foreignKey: 'id_user'});
-//////////////////////////////////
+
 Subtournament.hasMany(Inscription, {foreignKey: 'id_subt'});
 Inscription.belongsTo(Subtournament, {foreignKey: 'id_subt'});
-///////////////////////////////////
-Team.hasMany(User, {foreignKey: 'id_team'}); 
-User.belongsTo(Team, {foreignKey: 'id_team'});
 
-Tournament.belongsToMany(Sponsor, {through: 'sponsor_tournament'});
-Sponsor.belongsToMany(Tournament, {through: 'sponsor_tournament'});
+Team.belongsToMany(User, {through: 'team_user', foreignKey: 'id_team'}); 
+User.belongsToMany(Team, {through: 'team_user', foreignKey: 'id_user'});
+
+Tournament.belongsToMany(Sponsor, {through: 'sponsor_tournament', foreignKey: 'id_tournament'});
+Sponsor.belongsToMany(Tournament, {through: 'sponsor_tournament', foreignKey: 'id_sponsor'});
 
 Tournament.hasMany(Inscription, {foreignKey: 'id_tournament'});
 Inscription.belongsTo(Tournament, {foreignKey: 'id_tournament'});
@@ -70,11 +70,11 @@ Subtournament.belongsTo(Category, {foreignKey: 'id_category'});
 Subtournament.hasMany(Round, {foreignKey: 'id_subt'});
 Round.belongsTo(Subtournament, {foreignKey: 'id_subt'});
 
-Match.hasMany(Round, {foreignKey: 'id_match'});
-Round.belongsTo(Match, {foreignKey: 'id_match'});
+Round.hasMany(Match, {foreignKey: 'id_round'});
+Match.belongsTo(Round, {foreignKey: 'id_round'});
 
-Match.hasMany(Team, {foreignKey: 'id_match'});
-Team.belongsTo(Match, {foreignKey: 'id_match'});
+Team.belongsToMany(Match, {through: 'match_team', foreignKey: 'id_team'});
+Match.belongsToMany(Team, {through: 'match_team', foreignKey: 'id_match'});
 
 
 
