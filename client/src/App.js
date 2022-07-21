@@ -19,6 +19,7 @@ import { verifyUser } from "./redux/actions/authorization.js";
 import { useDispatch } from "react-redux";
 import { FormSubTournament } from "./components/SubTournament/FormSubTournament/FormSubTournament.jsx";
 import TournamentsToShow from "./components/Tournament/TournamentsToShow/TournamentsToShow.jsx";
+import ControlCardUsers from "./components/controlPanel/ControlCardUsers/ControlCardUsers.jsx";
 
 function App() {
   const dispatch = useDispatch();
@@ -50,7 +51,8 @@ function App() {
           component={Inscription}
         />
         <Route exact path={"/login"} component={LogIn} />
-        <RouteGuard Route exact path={"/cpanel"} component={ControlPanel} admin={true}/>
+        <RouteGuard Route path={"/cpanel"} component={ControlPanel} admin={true}/>
+        <Route path={"/edit/:userId"} component={ControlCardUsers} />
         <Route exact path={"/SignIn"} component={FormUserRegister} />
         <RouteGuard exact path={"/Profile/:userId"} component={ProfileUser} admin={false}/>
         <Route exact path={"/Gallery"} component={CreateGallery}/>
@@ -65,6 +67,7 @@ function App() {
           component={ProfileUser}
           admin={false}
         />
+
       </Switch>
 
 
