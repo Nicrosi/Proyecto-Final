@@ -9,12 +9,15 @@ import { deleteImage, getAllImages, postImage } from '../../../redux/actions';
 export default function CreateGallery() {
 
   const dispatch = useDispatch();
-  const ImagesList = useSelector((state) => state.rootReducer.gallery);
-  // const FirstLine = useSelector((state) => state.rootReducer.FirstLine);
-  // const SecondLine = useSelector((state) => state.rootReducer.SecondLine);
-  // const ThridLine = useSelector((state) => state.rootReducer.ThridLine);
+  // const ImagesList = useSelector((state) => state.rootReducer.gallery);
+  const FirstLine = useSelector((state) => state.rootReducer.FirstLine);
+  const SecondLine = useSelector((state) => state.rootReducer.SecondLine);
+  const ThirdLine = useSelector((state) => state.rootReducer.ThirdLine);
   
-  const [file, setFile ] = useState(null);
+  const [ file, setFile ] = useState(null);
+  const [ title, setTitle ] = useState({
+    title: ''
+  });
   const [Gallery, setGallery ] = useState(true);
   const auth = useSelector((state) => state.auth);
 
@@ -22,7 +25,7 @@ export default function CreateGallery() {
 
   // console.log(FirstLine);
   // console.log(SecondLine);
-  // console.log(ThridLine);
+  // console.log(ThirdLine);
   useEffect(() => {
     dispatch(getAllImages())
   },[dispatch])
@@ -48,15 +51,24 @@ export default function CreateGallery() {
     });
   }
 
+  const handleChange = (e) => {
+    e.preventDefault();
+    setTitle({
+      ...title, 
+      [e.target.name] : e.target.value
+    })
+  }
+
   const HandlerCLick = async () => {
     if(!file) {
       return alert('you must chose a file')
     }
+    console.log(title.title);
     
     const formData = new FormData();
     formData.append('image', file);
 
-    await axios.post('http://localhost:3001/gallery/post',formData)
+    await axios.post(`http://localhost:3001/gallery/post?title=${title.title}`,formData)
     dispatch(getAllImages())
     
     document.getElementById('floatingInput2').value = null;
@@ -71,31 +83,22 @@ export default function CreateGallery() {
           <div className='container_inputs' >
             {
               Gallery ? 
-              <h1 onClick={(e)=>HandlerStateGallery(e)} style={{marginTop: "10px",fontFamily: "'Bebas Neue', cursive", fontSize: "3vw", top: "100px", cursor: "pointer", color: "#A7D129",}}>
+              <h1 onClick={(e)=>HandlerStateGallery(e)} style={{fontFamily: "'Bebas Neue', cursive", fontSize: "3vw", top: "100px", cursor: "pointer", color: "#A7D129",}}>
                 Gallery
               </h1> :
-              <h1 onClick={(e)=>HandlerStateGallery(e)} style={{marginTop: "10px",fontFamily: "'Bebas Neue', cursive", fontSize: "3vw", top: "100px", cursor: "pointer", color: "rgb( 255 255 255 / 80%)",}}>
+              <h1 onClick={(e)=>HandlerStateGallery(e)} style={{fontFamily: "'Bebas Neue', cursive", fontSize: "3vw", top: "100px", cursor: "pointer", color: "rgb( 255 255 255 / 80%)",}}>
                 Gallery
               </h1> 
             }
             {
               !Gallery ? 
-              <h1 onClick={(e)=>HandlerStateUpload(e)} style={{marginTop: "10px",fontFamily: "'Bebas Neue', cursive", fontSize: "3vw", top: "100px", cursor: "pointer", color: "#A7D129",}}>
+              <h1 onClick={(e)=>HandlerStateUpload(e)} style={{fontFamily: "'Bebas Neue', cursive", fontSize: "3vw", top: "100px", cursor: "pointer", color: "#A7D129",}}>
                 Upload Images
               </h1> :
-              <h1 onClick={(e)=>HandlerStateUpload(e)} style={{marginTop: "10px",fontFamily: "'Bebas Neue', cursive", fontSize: "3vw", top: "100px", cursor: "pointer", color: "rgb( 255 255 255 / 80%)",}}>
+              <h1 onClick={(e)=>HandlerStateUpload(e)} style={{fontFamily: "'Bebas Neue', cursive", fontSize: "3vw", top: "100px", cursor: "pointer", color: "rgb( 255 255 255 / 80%)",}}>
                 Upload Images
               </h1> 
             }
-            {/* <input
-                type='file'
-                name="password"
-                placeholder="Select an Image"
-                id="floatingInput2"
-                onChange={ HandlerSelect} 
-                className={ "form-control" }
-              />
-            <button className='btn_click' onClick={()=>HandlerCLick()} >Click!</button> */}
           </div>
          : null
       }
@@ -111,19 +114,60 @@ export default function CreateGallery() {
             }
           >
             {
-              ImagesList.length ? ImagesList.map((image) => (
-                <div key={image.id} className='img_button_container' >
-                  <img className='images_from_db' src={image.imageURL} alt={image.title} />
-                  {
-                    auth.loggedIn && auth.currentUser.is_admin ? 
-                    <div onClick={()=>HandleDelte(image)} className='btn_delete_image' >
-                      <AiOutlineCloseCircle className='tarea-icono' />
-                    </div>
-                     : null
-                  }
+              FirstLine.length ? (
+                
+                <div class="row">
+                  <div class="column">
+                    {
+                      FirstLine.length && FirstLine.map((img) => (
+                        <div key={img.id} className='img_button_container' >
+                          <img className='images_from_db' src={img.imageURL} alt={img.title} />
+                          {
+                            auth.loggedIn && auth.currentUser.is_admin ? 
+                            <div onClick={()=>HandleDelte(img)} className='btn_delete_image' >
+                              <AiOutlineCloseCircle className='tarea-icono' />
+                            </div>
+                             : null
+                          }
+                        </div>
+                      ))
+                    }
+                  </div>
+                  <div class="column">
+                    {
+                      SecondLine.length && SecondLine.map((img) => (
+                        <div key={img.id} className='img_button_container' >
+                          <img className='images_from_db' src={img.imageURL} alt={img.title} />
+                          {
+                            auth.loggedIn && auth.currentUser.is_admin ? 
+                            <div onClick={()=>HandleDelte(img)} className='btn_delete_image' >
+                              <AiOutlineCloseCircle className='tarea-icono' />
+                            </div>
+                             : null
+                          }
+                        </div>
+                      ))
+                    }
+                  </div>
+                  <div class="column">
+                    {
+                      ThirdLine.length && ThirdLine.map((img) => (
+                        <div key={img.id} className='img_button_container' >
+                          <img className='images_from_db' src={img.imageURL} alt={img.title} />
+                          {
+                            auth.loggedIn && auth.currentUser.is_admin ? 
+                            <div onClick={()=>HandleDelte(img)} className='btn_delete_image' >
+                              <AiOutlineCloseCircle className='tarea-icono' />
+                            </div>
+                             : null
+                          }
+                        </div>
+                      ))
+                    }
+                  </div>
                 </div>
-              ))
-              
+
+              ) 
               : ( 
                   <h1
                     style={{
@@ -136,7 +180,7 @@ export default function CreateGallery() {
                   >
                     Add images from your gallery
                   </h1>
-                )
+                ) 
                 
               }
             
@@ -154,6 +198,9 @@ export default function CreateGallery() {
               <div className="form-floating col-md">
                 <input
                   type="text"
+                  name="title"
+                  value={title.title}
+                  onChange={(e)=>handleChange(e)}
                   placeholder="Enter a title"
                   id="floatingInput1"
                   className={"form-control"}
@@ -172,16 +219,18 @@ export default function CreateGallery() {
               <br/>
               <div className="btn_upload" >
                 <button
+                  onClick={()=>HandlerCLick()} 
                   className="btn btn-success"
                   style={{ backgroundColor: "#A7D129" }}
                 >
                   Update Image
                 </button>
               </div>
-            </div>
+            </div> 
           </div>
-        }
-      </div>
+          
+      }
+      </div> 
     </div>
   )
 }

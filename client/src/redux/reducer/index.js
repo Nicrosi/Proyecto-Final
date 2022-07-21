@@ -23,9 +23,9 @@ const initialState = {
   filteredSubt: [],
   tournaments:[],
   gallery:[],
-  // FirstLine:[],
-  // SecondLine:[],
-  // ThridLine:[],
+  FirstLine:[],
+  SecondLine:[],
+  ThirdLine:[],
 };
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -95,21 +95,21 @@ const rootReducer = (state = initialState, action) => {
           tournaments: action.payload
         }
       case GET_ALL_IMAGES:
-        // const images = [...action.payload];
-        // let firstLine = [];
-        // let secondLine = [];
-        // let thridLine = [];
-        // while(images.length) {
-        //   images.length && firstLine.push(images.shift())
-        //   images.length && secondLine.push(images.shift())
-        //   images.length && thridLine.push(images.shift())
-        // }
+        const images = [...action.payload];
+        let firstLine = [];
+        let secondLine = [];
+        let thirdLine = [];
+        while(images.length) {
+          images.length && firstLine.push(images.shift())
+          images.length && secondLine.push(images.shift())
+          images.length && thirdLine.push(images.shift())
+        }
         return {
           ...state,
           gallery: action.payload,
-          // FirstLine: firstLine,
-          // SecondLine: secondLine,
-          // ThridLine: thridLine,
+          FirstLine: firstLine,
+          SecondLine: secondLine,
+          ThirdLine: thirdLine,
         }
     default:
       return { ...state };

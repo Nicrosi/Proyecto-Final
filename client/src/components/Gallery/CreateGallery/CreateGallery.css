@@ -6,6 +6,10 @@
   background-attachment: fixed;
 }
 
+li:hover > ul {
+  display: block;
+}
+
 .container_inputs {
   position: relative;
   display: flex;
@@ -147,6 +151,13 @@
 .padding {
   padding-top: 7vw;
 }
+
+.btn_img_hover {
+  display: none;
+}
+
+
+
 
 .row {
   display: flex;

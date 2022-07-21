@@ -18,8 +18,13 @@ module.exports = (sequelize) => {
       title: {
         type: DataTypes.STRING,
       },
-      description: {
-        type: DataTypes.STRING,
+      likes: {
+        type: DataTypes.INTEGER,
+        defaultValue: 0
+      },
+      Image_LP: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false
       },
       imageURL: {
         type: DataTypes.STRING,
