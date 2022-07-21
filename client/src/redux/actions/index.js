@@ -125,6 +125,12 @@ export const putUsers = (dni, valuesChange) => {
   };
 };
 
+export const deleteUser = (dni) => {
+  return async () => {
+    return await axios.delete(`${urlUser}/${dni}`);
+  };
+};
+
 export function getTournaments(id_tournament) {
   return async (dispatch) => {
     try {

@@ -162,4 +162,25 @@ router.put('/:dni', async (req, res) => {
     }
   
   })
+
+
+  router.delete('/:dni', async (req, res) => {
+    const { dni } = req.params;
+
+    try {
+      const find_user_by_pk = await User.findOne({where: { dni: parseInt(dni)}});
+
+      if (!dni || !find_user_by_pk) {
+        res.send({msg_mesage: 'User not found'})
+    } else {
+        await User.destroy(
+          {where: { dni: parseInt(dni)}}
+        )
+        res.json({msg_mesage: `user deleted successfully`});
+    }
+    } catch (error) {
+      console.log("error",error);
+    }
+  
+  })
 module.exports = router;

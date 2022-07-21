@@ -1,14 +1,35 @@
 .containerBox {
-    width: 45%;
+    width: 100%;
     display: flex;
     flex-wrap: wrap;
     flex-direction:row;
-    margin: 10px;
+    margin: 0;
+}
+.itemScore {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-between;
+    align-content: center;
+}
+.subtitle {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+}
+.data {
+    font-size: 1rem;
 }
 
-.title {
-    font-family: 'Bebas Neue', cursive;
-    font-size: 3rem;
-    margin-top: 80px;
-    color: #bebebe;
+.button {
+    width: 2rem;
+    height: 2rem;
+    margin-left: 10px;
+    border-radius: 50%;
+    background-color: transparent;    
+    filter:  opacity(0.6) drop-shadow(0 0 0 rgb(43, 43, 44))
+}
+.button:hover {
+    background-color: rgb(151, 151, 151);
+    transition: 0.5s;
 }
