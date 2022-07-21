@@ -20,6 +20,7 @@ export const CLEAR_USER = "CLEAR_USER";
 export const ADD_SUBTOURNAMENT = "ADD_SUBTOURNAMENT";
 export const GET_TOURNAMENTS="GET_TOURNAMENTS";
 export const GET_ALL_IMAGES="GET_ALL_IMAGES";
+export const GET_PLAYERS_ON_SUBT= "GET_PLAYERS_ON_SUBT"
 
 // export const getAllPlayers = () => { JSON
 //   return {
@@ -36,6 +37,8 @@ const urlTournament = "http://localhost:3001/tournament";
 const urlSubTournament = "http://localhost:3001/subtournament";
 const urlSponsor = "http://localhost:3001/sponsor"
 const urlTournaments = "http://localhost:3001/tournament"
+const urlPlayersOnSubt = "http://localhost:3001/players/"
+
 toast.configure();
 
 
@@ -225,6 +228,15 @@ export const getTournament= () =>{
   }
 }
 
+export const getPLayersOnSubt= (id_subt) =>{
+  return async function (dispatch) {
+      const response = await axios.get(`${urlPlayersOnSubt}/${id_subt}`);
+      return dispatch({
+          type: GET_PLAYERS_ON_SUBT,
+          payload: response.data
+      });
+  }
+}
 export const getAllImages = () => async (dispatch) => {
   try {
     const { data } = await axios.get('http://localhost:3001/gallery/get')
