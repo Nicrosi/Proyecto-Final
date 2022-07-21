@@ -13,6 +13,8 @@ export default function SubtCard({
   email,
   subt_gender,
   subt_category,
+  match_type,
+  el_type
 }) {
   const user = id_user;
   const dispatch = useDispatch();
@@ -39,7 +41,7 @@ export default function SubtCard({
     <React.Fragment>
       <Card
         bg="light"
-        style={{ width: "20rem" }}
+        style={{ width: "30rem" }}
         className="mb-2"
         key={id_subt}
       >
@@ -55,6 +57,12 @@ export default function SubtCard({
             </Card.Subtitle>
             <Card.Subtitle>
               <div>Category: {product.category.type}</div>
+            </Card.Subtitle>
+            <Card.Subtitle>
+              <div>Match Type: {match_type}</div>
+            </Card.Subtitle>
+            <Card.Subtitle>
+              <div>Elimination Type: {el_type}</div>
             </Card.Subtitle>
           </div>
           <div className="col">
