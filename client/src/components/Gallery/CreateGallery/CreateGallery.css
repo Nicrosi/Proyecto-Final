@@ -69,7 +69,6 @@
   background-color: rgb(255 255 255);
 }
 
-
 .btn_delete_image {
   position: absolute;
   height: 20px;
@@ -126,36 +125,13 @@
 
 .block_container {
   display: none;
+
 }
 
 .padding {
   padding-top: 7vw;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/////////////////////////////////////////////////////////////
 .row {
   display: flex;
   flex-wrap: wrap;

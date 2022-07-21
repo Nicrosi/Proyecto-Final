@@ -19,8 +19,7 @@ export const Inscription = () => {
       history.push("/HomeAdmin");
             }
   }, [dispatch, tournament_id])
-
-  console.log(user)
+  console.log(subt)
   return (
     <div
       style={{ paddingTop: "56px", minHeight: "100vh" }}
@@ -45,6 +44,8 @@ export const Inscription = () => {
                     id_user={user.id_user}
                     email={user.e_mail}
                     id_subt={p.id_subt}
+                    el_type={p.elimination_type}
+                    match_type={p.match_type}
                   />
                 </Col>:null
               );

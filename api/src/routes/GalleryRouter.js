@@ -3,6 +3,7 @@ const path = require('path');
 const fs = require('fs');
 const { Image } = require('../db.js');
 const { Router } = require("express");
+
 const cloudinary = require('cloudinary');
 require('dotenv').config();
 
@@ -27,6 +28,7 @@ const diskStorege = multer.diskStorage({
   destination: path.join(__dirname, '../images'),
   filename: (req, file, cb) => {
     cb(null, new Date().getTime() + path.extname(file.originalname))
+
   }
 })
 
@@ -72,6 +74,7 @@ router.get('/get',  async (req, res) => {
 })
 
 
+
 router.delete('/delete', async (req, res) => {
   try {
     
@@ -84,7 +87,5 @@ router.delete('/delete', async (req, res) => {
     res.status(400).send(error)
   }
 })
-
-
 
 module.exports = router;
