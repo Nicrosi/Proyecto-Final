@@ -1,4 +1,4 @@
-const GoogleStrategy = require("passport-google-oauth").OAuth2Strategy;
+const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const passport = require("passport");
 const { User } = require("../db");
 
@@ -11,7 +11,6 @@ passport.deserializeUser((user, done) => {
 });
 
 passport.use(
-  "sign-up-google",
   new GoogleStrategy(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
@@ -19,16 +18,15 @@ passport.use(
       callbackURL: "/auth/google/callback",
     },
     async (accessToken, refreshToken, profile, done) => {
-      /* return done(null, { profile: "profile" }); */
       const user = await User.findOne({
         where: {
           e_mail: profile.emails[0].value,
         },
       });
       if (user) {
-        return done(null, user);
+        done(null, user);
       } else {
-        return done(null, false);
+        done(null, false);
       }
     }
   )
