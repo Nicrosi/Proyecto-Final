@@ -7,8 +7,12 @@ import {
   GET_ALL_SPONSORS,
   GET_SUBT_BY_TOURNAMENT,
   CLEAR_USER,
+  CLEAR_SUBTOURNAMENT,
   GET_TOURNAMENTS,
   GET_ALL_IMAGES,
+  GET_ALL_SUBTOURNAMENTS,
+  PUT_SUBTOURNAMENT,
+  CLEAR_GALLERY,
 } from "../actions";
 import { filterUsers } from "../helpers/filters";
 import { sortByName } from "../helpers/sorts";
@@ -22,10 +26,12 @@ const initialState = {
   sponsors: [],
   filteredSubt: [],
   tournaments:[],
+  subtournaments:[],
   gallery:[],
   FirstLine:[],
   SecondLine:[],
   ThirdLine:[],
+  ImageLoading: false,
 };
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -89,10 +95,33 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         user: {},
       };
+    case CLEAR_SUBTOURNAMENT:
+      return {
+        ...state,
+        subtournaments: []
+      };
       case GET_TOURNAMENTS:
         return {
           ...state,
           tournaments: action.payload
+        }
+      case GET_ALL_SUBTOURNAMENTS:
+        return {
+          ...state,
+          subtournaments: action.payload
+        }
+      case PUT_SUBTOURNAMENT:
+        return {
+          ...state,
+          subtournaments: action.payload
+        }
+      case CLEAR_GALLERY:
+        return {
+          ...state,
+          FirstLine: [],
+          SecondLine: [],
+          ThirdLine: [],
+          ImageLoading: true
         }
       case GET_ALL_IMAGES:
         const images = [...action.payload];
@@ -110,6 +139,7 @@ const rootReducer = (state = initialState, action) => {
           FirstLine: firstLine,
           SecondLine: secondLine,
           ThirdLine: thirdLine,
+          ImageLoading: false,
         }
     default:
       return { ...state };

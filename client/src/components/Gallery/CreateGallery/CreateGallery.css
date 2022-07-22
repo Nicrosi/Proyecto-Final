@@ -10,6 +10,14 @@ li:hover > ul {
   display: block;
 }
 
+.container_loading {
+  min-height: 10px;
+  min-width: 10px;
+  position: absolute;
+  left: 43%;
+  top: 20vh;
+}
+
 .container_inputs {
   position: relative;
   display: flex;

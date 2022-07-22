@@ -4,7 +4,7 @@ import { AiOutlineCloseCircle } from "react-icons/ai";
 import './CreateGallery.css';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteImage, getAllImages, postImage } from '../../../redux/actions';
+import { ClearGallery, deleteImage, getAllImages, postImage } from '../../../redux/actions';
 
 export default function CreateGallery() {
 
@@ -13,6 +13,7 @@ export default function CreateGallery() {
   const FirstLine = useSelector((state) => state.rootReducer.FirstLine);
   const SecondLine = useSelector((state) => state.rootReducer.SecondLine);
   const ThirdLine = useSelector((state) => state.rootReducer.ThirdLine);
+  const ImageLoading = useSelector((state) => state.rootReducer.ImageLoading);
   
   const [ file, setFile ] = useState(null);
   const [ title, setTitle ] = useState({
@@ -45,6 +46,7 @@ export default function CreateGallery() {
   }
 
   const HandleDelte = async (image) => {
+    dispatch(ClearGallery())
     const imagedeleted = axios.delete(`http://localhost:3001/gallery/delete?image_id=${image.id}&public_id=${image.public_id}`)
     Promise.all([imagedeleted]).then(() => {
       dispatch(getAllImages())
@@ -67,11 +69,13 @@ export default function CreateGallery() {
     
     const formData = new FormData();
     formData.append('image', file);
+    dispatch(ClearGallery())
+    setGallery(true)
 
     await axios.post(`http://localhost:3001/gallery/post?title=${title.title}`,formData)
     dispatch(getAllImages())
     
-    document.getElementById('floatingInput2').value = null;
+    // document.getElementById('floatingInput2').value = null;
     setFile(null)
   }
 
@@ -113,8 +117,9 @@ export default function CreateGallery() {
               'contaier_img padding' : 'contaier_img padding'
             }
           >
+            
             {
-              FirstLine.length ? (
+              FirstLine?.length && (
                 
                 <div class="row">
                   <div class="column">
@@ -127,7 +132,7 @@ export default function CreateGallery() {
                             <div onClick={()=>HandleDelte(img)} className='btn_delete_image' >
                               <AiOutlineCloseCircle className='tarea-icono' />
                             </div>
-                             : null
+                             : null 
                           }
                         </div>
                       ))
@@ -168,7 +173,18 @@ export default function CreateGallery() {
                 </div>
 
               ) 
-              : ( 
+            }
+            {
+              ImageLoading  &&
+              <div className='container_loading' >
+                <div className="spinner-border text-light" style={{width: "12vw", height: "12vw" }} role="status">
+                  <span class="sr-only"></span>
+                </div>
+              </div>
+            }
+              {
+                !FirstLine.length && !ImageLoading ?
+                ( 
                   <h1
                     style={{
                       fontFamily: "'Bebas Neue', cursive",
@@ -180,9 +196,10 @@ export default function CreateGallery() {
                   >
                     Add images from your gallery
                   </h1>
-                ) 
-                
+                ) : (<div></div>)
               }
+                
+              
             
           </div>
           :
