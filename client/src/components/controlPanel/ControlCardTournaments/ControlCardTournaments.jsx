@@ -1,94 +1,64 @@
-import React, { useState } from "react";
-import { getAllSponsors, putSponsor } from "../../../redux/actions";
-import { useEffect } from "react";
+import React from "react";
 import { useDispatch } from "react-redux";
 import styles from "./ControlCardTournaments.module.css"
+import deleteimg from "../../../img/delete.png";
+import edit from "../../../img/edit.png";
+import Swal from "sweetalert2"
+import { deleteTournament } from "../../../redux/actions";
 
-export default function ControlCardTournaments({
-  id_tournaments,
-  name,
-  date,
-  location,
-  earning,
-}) {
-  const [input, setInput] = useState({
-    name: name,
-    date: date,
-    location: location,
-    earning: earning,
-  });
+
+export default function ControlCardTournaments({tournament, setDataModal, setUpdateList, updateList}) {
+  function handleEdit(e) { 
+    e.preventDefault()
+    setDataModal(tournament)
+  }
 
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getAllSponsors());
-  }, [dispatch]);
 
-  function handleChange(e) {
-    e.preventDefault();
+  function handleDelete(e) { 
+    e.preventDefault()
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#A7D129',
+      cancelButtonColor: 'rgb(43, 43, 44);',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch(deleteTournament(tournament.id_tournaments))
+        Swal.fire(
+          'Deleted!',
+          'Your file has been deleted.',
+          'success'
+        )
+        setUpdateList(!updateList)
+      }
+    })
+  }
 
-    setInput({ ...input, [e.target.name]: e.target.value });
-  }
-  function handleSubmit(e) {
-    e.preventDefault();
-    dispatch(putSponsor(id_tournaments, input));
-    console.log(input);
-  }
   return (
-    <div className={styles.containerBox}>
-        <form style={{ width: "100%" }} onSubmit={(e) => handleSubmit(e)}>
-          <div key={id_tournaments} className="card p-3">
-            <div className="row g-2 mb-3">
-              <div className="form-floating col-md">
-                <input
-                  type="text"
-                  onChange={(e) => handleChange(e)}
-                  value={input.name}
-                  placeholder=""
-                  name="name"
-                  className="form-control  border-0"
-                  id="floatingInput"
-                />
-                <label for="floatingInput">Name</label>
-              </div>
-              <div className="form-floating col-md">
-                <input
-                  type="date"
-                  onChange={(e) => handleChange(e)}
-                  value={input.date}
-                  name="date"
-                  className="form-control border-0"
-                  id="floatingInput"
-                />
-                <label for="floatingInput">Date</label>
-              </div>
-            </div>
-            <div className="row g-2 mb-3">
-              <div className="form-floating col-md">
-                <input
-                  type="text"
-                  onChange={(e) => handleChange(e)}
-                  value={input.location}
-                  name="location"
-                  className="form-control  border-0"
-                  id="floatingInput"
-                />
-                <label for="floatingInput">Location</label>
-              </div>
-              <div className="form-floating col-md">
-                <input
-                  type="text"
-                  onChange={(e) => handleChange(e)}
-                  value={input.earning}
-                  name="earning"
-                  className="form-control border-0"
-                  id="floatingInput"
-                />
-                <label for="floatingInput">Earning</label>
-              </div>
-            </div>
-            <button className="btn btn-outline-secondary btn-dark my-2" type="submit">Confirm changes</button>
-          </div>
-        </form>
-    </div>
-  );
+    <div className={styles.box}>
+    <div className={styles.itemScore}>
+      <div className={styles.subtitle}>      
+      <h5 className={styles.data}>Company: {tournament.name}</h5>
+      </div>
+      <div className={styles.itemScore}>
+      <img
+            src={edit}
+            alt="buttonedit"
+            className={styles.button} type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop" 
+            onClick={(e)=>handleEdit(e)}
+          />
+      <img
+            src={deleteimg}
+            alt="buttondelete"
+            className={styles.button} type="button" 
+            onClick={(e)=>handleDelete(e)}
+          />
+      </div>
+     
+      </div>     
+    </div>  );
 }

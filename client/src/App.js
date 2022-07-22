@@ -15,20 +15,24 @@ import ControlPanel from "./components/controlPanel/ControlPanel/ControlPanel.js
 import ProfileUser from "./components/Profile/ProfileUser/ProfileUser.jsx";
 import RouteGuard from "./components/RouteGuard/RouteGuard.js";
 import CreateGallery from "./components/Gallery/CreateGallery/CreateGallery.jsx";
-import { verifyUser } from "./redux/actions/authorization.js";
+import { loginGoogle, verifyUser } from "./redux/actions/authorization.js";
 import { useDispatch } from "react-redux";
 import { FormSubTournament } from "./components/SubTournament/FormSubTournament/FormSubTournament.jsx";
 import TournamentsToShow from "./components/Tournament/TournamentsToShow/TournamentsToShow.jsx";
 import ControlCardUsers from "./components/controlPanel/ControlCardUsers/ControlCardUsers.jsx";
 import {TournamentSimpleElimination} from "./components/SubTournament/TournamentSimpleElimination/TournamentSimpleElimination.jsx"
+import { ChatBot } from "./components/ChatBot/ChatBot.jsx";
+
 
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
+    dispatch(loginGoogle());
     dispatch(verifyUser());
   }, [dispatch]);
   return (
     <div className="App">
+      <Route path={"/"} component={ChatBot} />
       <Route path={"/"} component={NavBar} />
       <Switch>
         <RouteGuard exact path={"/Users"} component={Users} admin={false} />
@@ -42,10 +46,29 @@ function App() {
         <Route exact path={"/"} component={LandingPage} />
         <Route exact path={"/Users/:userId"} component={DetailsUser} />
         <Route exact path={"/CreateScore/:userId"} component={FormScore} />
-        <RouteGuard exact path={"/CreateSponsor"} component={FormSponsor} admin={true}/>
-        <RouteGuard exact path={"/CreateTournament"} component={FormTournament} admin={true}/>
-        <RouteGuard exact path={"/CreateSubtournament/:tournamentId"} component={FormSubTournament} admin={true}/>
-        <Route exact path={"/TournamentsToShow"} component={TournamentsToShow} />
+        <RouteGuard
+          exact
+          path={"/CreateSponsor"}
+          component={FormSponsor}
+          admin={true}
+        />
+        <RouteGuard
+          exact
+          path={"/CreateTournament"}
+          component={FormTournament}
+          admin={true}
+        />
+        <RouteGuard
+          exact
+          path={"/CreateSubtournament/:tournamentId"}
+          component={FormSubTournament}
+          admin={true}
+        />
+        <Route
+          exact
+          path={"/TournamentsToShow"}
+          component={TournamentsToShow}
+        />
         <Route
           exact
           path={"/inscription/:tournament_id"}
@@ -57,14 +80,24 @@ function App() {
           component={TournamentSimpleElimination}
         />
         <Route exact path={"/login"} component={LogIn} />
-        <RouteGuard Route path={"/cpanel"} component={ControlPanel} admin={true}/>
+        <RouteGuard
+          Route
+          path={"/cpanel"}
+          component={ControlPanel}
+          admin={true}
+        />
         <Route path={"/edit/:userId"} component={ControlCardUsers} />
         <Route exact path={"/SignIn"} component={FormUserRegister} />
-        <RouteGuard exact path={"/Profile/:userId"} component={ProfileUser} admin={false}/>
-        <Route exact path={"/Gallery"} component={CreateGallery}/>
+        <RouteGuard
+          exact
+          path={"/Profile/:userId"}
+          component={ProfileUser}
+          admin={false}
+        />
+        <Route exact path={"/Gallery"} component={CreateGallery} />
         <Route exact path={"/SignIn"} component={FormUserRegister} />
-        <Route exact path={"/Profile/:userId"} component={ProfileUser}/>
-        <Route exact path={"/Gallery"} component={CreateGallery}/>
+        <Route exact path={"/Profile/:userId"} component={ProfileUser} />
+        <Route exact path={"/Gallery"} component={CreateGallery} />
         <Route exact path={"/cpanel"} component={ControlPanel} />
         <Route exact path={"/SignIn"} component={FormUserRegister} />
         <RouteGuard
@@ -73,15 +106,7 @@ function App() {
           component={ProfileUser}
           admin={false}
         />
-
       </Switch>
-
-
-
-
-
-
-
     </div>
   );
 }

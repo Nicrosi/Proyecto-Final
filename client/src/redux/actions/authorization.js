@@ -4,7 +4,7 @@ import { getToken, setToken, deleteToken } from "../helpers/token";
 
 export const AUTHENTICATED = "AUTHENTICATED";
 export const NOT_AUTHENTICATED = "NOT_AUTHENTICATED";
-const urlAuth = "http://localhost:3001/auth";
+export const urlAuth = "http://localhost:3001/auth";
 
 export const postNewUser = (valuesInput) => {
   return async () => {
@@ -68,5 +68,28 @@ export const verifyUser = () => {
     } catch (err) {
       dispatch({ type: NOT_AUTHENTICATED });
     }
+  };
+};
+
+export const loginGoogle = () => {
+  return (dispatch) => {
+    fetch(`${urlAuth}/login/google/success`, {
+      method: "GET",
+      credentials: "include",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        "Access-control-Allow-Credentials": true,
+      },
+    })
+      .then((response) => {
+        if (response.status === 200) return response.json();
+        else throw new Error("Authentication has been failed!");
+      })
+      .then((data) => {
+        setToken(data.token);
+        dispatch({ type: AUTHENTICATED, payload: data.user });
+      })
+      .catch((err) => console.log(err));
   };
 };

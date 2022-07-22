@@ -7,8 +7,12 @@ import {
   GET_ALL_SPONSORS,
   GET_SUBT_BY_TOURNAMENT,
   CLEAR_USER,
+  CLEAR_SUBTOURNAMENT,
   GET_TOURNAMENTS,
   GET_ALL_IMAGES,
+  GET_ALL_SUBTOURNAMENTS,
+  PUT_SUBTOURNAMENT,
+  CLEAR_GALLERY,
   GET_PLAYERS_ON_SUBT,
 } from "../actions";
 import { filterUsers } from "../helpers/filters";
@@ -23,11 +27,13 @@ const initialState = {
   sponsors: [],
   filteredSubt: [],
   tournaments:[],
+  subtournaments:[],
   gallery:[],
+  FirstLine:[],
+  SecondLine:[],
+  ThirdLine:[],
+  ImageLoading: false,
   playersOnSubt:[],
-  // FirstLine:[],
-  // SecondLine:[],
-  // ThridLine:[],
 };
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -91,10 +97,33 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         user: {},
       };
+    case CLEAR_SUBTOURNAMENT:
+      return {
+        ...state,
+        subtournaments: []
+      };
       case GET_TOURNAMENTS:
         return {
           ...state,
           tournaments: action.payload
+        }
+      case GET_ALL_SUBTOURNAMENTS:
+        return {
+          ...state,
+          subtournaments: action.payload
+        }
+      case PUT_SUBTOURNAMENT:
+        return {
+          ...state,
+          subtournaments: action.payload
+        }
+      case CLEAR_GALLERY:
+        return {
+          ...state,
+          FirstLine: [],
+          SecondLine: [],
+          ThirdLine: [],
+          ImageLoading: true
         }
         case GET_PLAYERS_ON_SUBT:
         return {
@@ -102,21 +131,22 @@ const rootReducer = (state = initialState, action) => {
           playersOnSubt: action.payload
         }
       case GET_ALL_IMAGES:
-        // const images = [...action.payload];
-        // let firstLine = [];
-        // let secondLine = [];
-        // let thridLine = [];
-        // while(images.length) {
-        //   images.length && firstLine.push(images.shift())
-        //   images.length && secondLine.push(images.shift())
-        //   images.length && thridLine.push(images.shift())
-        // }
+        const images = [...action.payload];
+        let firstLine = [];
+        let secondLine = [];
+        let thirdLine = [];
+        while(images.length) {
+          images.length && firstLine.push(images.shift())
+          images.length && secondLine.push(images.shift())
+          images.length && thirdLine.push(images.shift())
+        }
         return {
           ...state,
           gallery: action.payload,
-          // FirstLine: firstLine,
-          // SecondLine: secondLine,
-          // ThridLine: thridLine,
+          FirstLine: firstLine,
+          SecondLine: secondLine,
+          ThirdLine: thirdLine,
+          ImageLoading: false,
         }
     default:
       return { ...state };

@@ -17,9 +17,13 @@ export const PUT_USERS = "PUT_USERS";
 export const GET_TOURNAMENT = "GET_TOURNAMENT";
 export const PUT_TOURNAMENT = "PUT_TOURNAMENT"
 export const CLEAR_USER = "CLEAR_USER";
+export const CLEAR_SUBTOURNAMENT = "CLEAR_SUBTOURNAMENT";
 export const ADD_SUBTOURNAMENT = "ADD_SUBTOURNAMENT";
 export const GET_TOURNAMENTS="GET_TOURNAMENTS";
 export const GET_ALL_IMAGES="GET_ALL_IMAGES";
+export const GET_ALL_SUBTOURNAMENTS="GET_ALL_SUBTOURNAMENTS";
+export const PUT_SUBTOURNAMENT="PUT_SUBTOURNAMENT";
+export const CLEAR_GALLERY="CLEAR_GALLERY";
 export const GET_PLAYERS_ON_SUBT= "GET_PLAYERS_ON_SUBT"
 
 // export const getAllPlayers = () => { JSON
@@ -52,6 +56,23 @@ export const getAllUsers = () => (dispatch) => {
       })
     )
     .catch((err) => console.log(err));
+};
+
+export const getAllSubtournaments = () => (dispatch) => {
+  return axios
+    .get(urlSubTournament)
+    .then((response) =>
+      dispatch({
+        type: GET_ALL_SUBTOURNAMENTS,
+        payload: response.data,
+      })
+    )
+    .catch((err) => console.log(err));
+};
+export const deleteSubtournament = (id_sub) => {
+  return async () => {
+    return await axios.delete(`${urlSubTournament}/${id_sub}`);
+  };
 };
 
 export const getAllSponsors = () => (dispatch) => {
@@ -129,6 +150,27 @@ export const putUsers = (dni, valuesChange) => {
   };
 };
 
+export const putSubtournament = (id_subt, subTourn) => {
+  return async (dispatch) => {
+    const subtournament = {
+      elimination_type: subTourn.elimination_type,
+      match_type: subTourn.match_type,
+      name: subTourn.name,
+      numb_players: subTourn.numb_players,
+      gender: subTourn.gender,
+      price: subTourn.price,
+      id_tournament: subTourn.id_tournament,
+      id_category: subTourn.id_category,
+    };
+    await axios.put(`${urlSubTournament}/${id_subt}`, subtournament);
+    const { data } = await axios.get(urlSubTournament);
+    return dispatch({
+      type: PUT_SUBTOURNAMENT,
+      payload: data,
+    });
+  };
+};
+
 export const deleteUser = (dni) => {
   return async () => {
     return await axios.delete(`${urlUser}/${dni}`);
@@ -152,13 +194,14 @@ export function getTournaments(id_tournament) {
 export const putTournament = (id_tournament, input) => {
   return async () => {
     const putValues = {
+      name: input.name,
       date: input.date,
       location: input.location,
+      earning: input.earning
     };
     return await axios.put(`${urlTournament}/${id_tournament}`, putValues);
   };
 };
-
 export const postSubTournament = (id_tournament, input) => {
   return async (dispatch) => {
     try {
@@ -186,9 +229,22 @@ export const putSponsor = (id_sponsor, val) => {
   };
 };
 
+export const deleteSponsor = (id_sponsor) => {
+  return async () => {
+    return await axios.delete(`${urlSponsor}/${id_sponsor}`);
+  };
+};
+
 export const clearUser = () => {
   return {
     type: CLEAR_USER,
+  };
+};
+
+
+export const clearSubtournament = () => {
+  return {
+    type: CLEAR_SUBTOURNAMENT,
   };
 };
 
@@ -228,6 +284,12 @@ export const getTournament= () =>{
   }
 }
 
+export const deleteTournament = (id_tournament) => {
+  return async () => {
+    return await axios.delete(`${urlTournaments}/${id_tournament}`);
+  };
+};
+
 export const getPLayersOnSubt= (id_subt) =>{
   return async function (dispatch) {
       const response = await axios.get(`${urlPlayersOnSubt}/${id_subt}`);
@@ -237,6 +299,7 @@ export const getPLayersOnSubt= (id_subt) =>{
       });
   }
 }
+
 export const getAllImages = () => async (dispatch) => {
   try {
     const { data } = await axios.get('http://localhost:3001/gallery/get')
@@ -246,6 +309,12 @@ export const getAllImages = () => async (dispatch) => {
     });
   } catch (error) {
     console.log(error)
+  }
+}
+
+export const ClearGallery = () => {
+  return {
+    type: CLEAR_GALLERY
   }
 }
 

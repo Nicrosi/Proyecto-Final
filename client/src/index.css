@@ -7,6 +7,16 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.root{
+  flex: 1;
+}
+
+html,body{
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
@@ -32,4 +42,29 @@ code {
   opacity: 0.5;
   position: absolute;
   z-index: 2;
+}
+
+
+.react-chatbot-kit-chat-container {
+  position: fixed !important;
+  z-index: 7;
+  right: 3%;
+  top: 10%;
+}
+@media screen and (max-width: 768px){
+  .react-chatbot-kit-chat-container{
+    height: 80%;
+  }
+}
+.react-chatbot-kit-chat-header {
+  background-color: #212529 !important;
+  color: white !important;
+}
+
+.react-chatbot-kit-chat-bot-avatar-container {
+  background-image: url("./img/bot.png") !important;
+  background-size: cover;
+}
+.react-chatbot-kit-chat-bot-avatar-container p{
+  display: none;
 }
