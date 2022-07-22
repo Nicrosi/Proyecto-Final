@@ -40,14 +40,12 @@ const fileUpload = multer({
 
 router.post('/post', fileUpload, async (req, res) => {
   try {
-    
+    const { title } = req.query;
     const result = await cloudinary.v2.uploader.upload(req.file.path)
-    
   
     const imageFromDb = await Image.create({
       public_id: result.public_id,
-      title: 'titulo',
-      description: 'descriotion',
+      title,
       imageURL: result.secure_url
     })
 

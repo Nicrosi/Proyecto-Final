@@ -65,26 +65,34 @@ router.post('/:id_tournament', async (req, res) => {
 })
 
 router.put('/:id', async (req, res) => {
-    let { id } = req.params;
-    let {
+    const { id } = req.params;
+    const {
         elimination_type,
         match_type,
         name,
         numb_players,
-        gender
+        gender,
+        price,
+        id_category
     } = req.body
     try{
+
+        const newCategory = await Category.findOne({where: {id_category: parseInt(id_category)}})
+
         await Subtournament.update({
             elimination_type,
             match_type,
             name,
             numb_players,
-            gender
+            gender,
+            price,
+            id_category: newCategory.id_category
         },{
             where: {
                 id_subt : id
             }
         });
+        
         res.status(200).send('Sub tournament has been updated!');
     }catch(err){
         console.log(err);

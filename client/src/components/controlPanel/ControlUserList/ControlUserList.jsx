@@ -21,18 +21,18 @@ export default function ControlUserList() {
   function handleChange(e) {
     e.preventDefault();
 
-    if (e.target.type === "tel" || e.target.name === "dni") {
-      setDataModal({
-        ...dataModal,
-        [e.target.name]: parseInt(e.target.value, 10),
-      });
-    }
-    if (e.target.type === "text" || e.target.type === "email") {
-      setDataModal((prev) => ({
-        ...prev,
-        [e.target.name]: e.target.value.toLowerCase(),
-      }));
-    }
+    // if (e.target.type === "tel" || e.target.name === "dni") {
+    //   setDataModal({
+    //     ...dataModal,
+    //     [e.target.name]: parseInt(e.target.value, 10),
+    //   });
+    // }
+    // if (e.target.type === "text" || e.target.type === "email") {
+    //   setDataModal((prev) => ({
+    //     ...prev,
+    //     [e.target.name]: e.target.value.toLowerCase(),
+    //   }));
+    // }
     setDataModal({ ...dataModal, [e.target.name]: e.target.value });
   }
 
@@ -62,7 +62,6 @@ export default function ControlUserList() {
     })
   }
 
-  console.log(dataModal);
 
   return (
     <div className={styles.userBox}>
@@ -70,7 +69,7 @@ export default function ControlUserList() {
         {users &&
           users.map((user) => {
             return (
-              <li className="list-group-item">
+              <li key={user.id_user} className="list-group-item">
                 <ControlCardUsers
                   user={user}
                   setDataModal={setDataModal}
@@ -83,7 +82,7 @@ export default function ControlUserList() {
                   id="staticBackdrop"
                   data-bs-backdrop="static"
                   data-bs-keyboard="false"
-                  tabindex="-1"
+                  tabIndex="-1"
                   aria-labelledby="staticBackdropLabel"
                   aria-hidden="true"
                 >
@@ -125,7 +124,7 @@ export default function ControlUserList() {
                                   className="form-control  border-0"
                                   id="floatingInput"
                                 />
-                                <label for="floatingInput">Name:</label>
+                                <label htmlFor="floatingInput">Name:</label>
                               </div>
                               <div className="form-floating col-md">
                                 <input
@@ -136,7 +135,7 @@ export default function ControlUserList() {
                                   className="form-control border-0"
                                   id="floatingInput"
                                 />
-                                <label for="floatingInput">Last Name</label>
+                                <label htmlFor="floatingInput">Last Name</label>
                               </div>
                             </div>
 
@@ -150,7 +149,7 @@ export default function ControlUserList() {
                                   className="form-control border-0"
                                   id="floatingInput"
                                 />
-                                <label for="floatingInput">DNI</label>
+                                <label htmlFor="floatingInput">DNI</label>
                               </div>
                               <div className="form-floating col-md">
                                 <select
@@ -164,7 +163,7 @@ export default function ControlUserList() {
                                   <option value="true">True</option>
                                   <option value="false">False</option>
                                 </select>
-                                <label for="floatingInput">isAdmin</label>
+                                <label htmlFor="floatingInput">isAdmin</label>
                               </div>
                             </div>
 
@@ -178,7 +177,7 @@ export default function ControlUserList() {
                                   className="form-control border-0"
                                   id="floatingInput"
                                 />
-                                <label for="floatingInput">Email</label>
+                                <label htmlFor="floatingInput">Email</label>
                               </div>
                             </div>
                             <div className="row g-2 mb-3">
@@ -191,7 +190,7 @@ export default function ControlUserList() {
                                   className="form-control  border-0"
                                   id="floatingInput"
                                 />
-                                <label for="floatingInput">Picture</label>
+                                <label htmlFor="floatingInput">Picture</label>
                               </div>
                             </div>
                             <div className="row g-2 mb-3">
@@ -209,7 +208,7 @@ export default function ControlUserList() {
                                   <option value="C">C</option>
                                   <option value="E">E</option>
                                 </select>
-                                <label for="floatingInput">Category</label>
+                                <label htmlFor="floatingInput">Category</label>
                               </div>
                               <div className="form-floating col-md">
                                 <select
@@ -223,7 +222,7 @@ export default function ControlUserList() {
                                   <option value="female">Female</option>
                                   <option value="male">Male</option>
                                 </select>
-                                <label for="floatingInput">Gender</label>
+                                <label htmlFor="floatingInput">Gender</label>
                               </div>
                             </div>
                             <div className="row g-2 mb-3">
@@ -236,7 +235,7 @@ export default function ControlUserList() {
                                   className="form-control  border-0"
                                   id="floatingInput"
                                 />
-                                <label for="floatingInput">Phone</label>
+                                <label htmlFor="floatingInput">Phone</label>
                               </div>
                               <div className="form-floating col-md">
                                 <input
@@ -247,12 +246,12 @@ export default function ControlUserList() {
                                   className="form-control border-0"
                                   id="floatingInput"
                                 />
-                                <label for="floatingInput">
+                                <label htmlFor="floatingInput">
                                   Emergency Number
                                 </label>
                               </div>
                             </div>
-                            <div class="modal-footer">
+                            <div className="modal-footer">
 
                               <button
                                 className="btn btn-outline-secondary btn-dark my-2"
