@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const router = Router();
-const { Inscription } = require("../db");
+const { Inscription, Team, User } = require("../db");
 const { getIscription } = require("../utils/Inscription_Controller");
 const {createPayment} = require("../utils/Payment_controller");
 
@@ -30,6 +30,11 @@ router.post('/:id', async (req, res) => {
       res.status(404).send({Message: charge})
     }else{
       try {
+        const newTeam = await Team.create({
+          points: 0
+        })
+        const teamUser = await User.findByPk(id)
+        teamUser.addTeam(newTeam)
         await Inscription.create({
            description: product.name,
            amount: product.price,
