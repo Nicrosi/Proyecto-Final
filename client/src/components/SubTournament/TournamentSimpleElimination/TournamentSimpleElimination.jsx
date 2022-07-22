@@ -1,21 +1,21 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { getPLayersOnSubt } from "../../../redux/actions/index";
-import { Row, Col } from "react-bootstrap";
 
 //////////////////////
 import generator from "tournament-generator";
 //////////////////////
 export const TournamentSimpleElimination = () => {
   const players = useSelector((state) => state.rootReducer.playersOnSubt);
-  const team = players.map((x) => x.user.name);
+  const team = players.map((x) => x.user.name + ' ' + x.user.last_name);
   console.log(team);
   const dispatch = useDispatch();
   const { subt_id } = useParams();
   const { data: games } = generator(team, { type: "simple-cup" });
 
   console.log(games, "asdasdasd");
+  console.log(players);
   useEffect(() => {
     dispatch(getPLayersOnSubt(subt_id));
   }, [dispatch, subt_id]);

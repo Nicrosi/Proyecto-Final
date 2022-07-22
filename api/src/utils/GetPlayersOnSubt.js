@@ -7,11 +7,11 @@ const getPlayerOnSubt = async (id) => {
             },
             include: [{
                 model: User,
-                attributes: ['name'],
+                attributes: ['name', 'last_name'],
             },
             {
                 model: Subtournament,
-                attributes: ['name', 'match_type', 'elimination_type'],
+                attributes: ['name', 'match_type', 'elimination_type', 'numb_players'],
             }
             ]
         });

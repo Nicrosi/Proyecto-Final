@@ -1,0 +1,19 @@
+.inputSearch{
+  width: 100%;
+  padding-left: 10px;
+  border-left: 2px;
+  border: none;
+  border-radius: 5px 0 0 5px;
+  outline: none;
+}
+
+.btnSearch{
+  height: 30px;
+  width: 30px;
+  background-color: #A7D129;
+  border: 6px solid #A7D129;
+  color: #A7D129;
+  padding: 1;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}

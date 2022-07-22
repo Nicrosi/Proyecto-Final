@@ -41,7 +41,7 @@ const urlTournament = "http://localhost:3001/tournament";
 const urlSubTournament = "http://localhost:3001/subtournament";
 const urlSponsor = "http://localhost:3001/sponsor"
 const urlTournaments = "http://localhost:3001/tournament"
-const urlPlayersOnSubt = "http://localhost:3001/players/"
+const urlPlayersOnSubt = "http://localhost:3001/players"
 
 toast.configure();
 
