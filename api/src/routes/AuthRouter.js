@@ -72,7 +72,6 @@ router.post("/login", async (req, res, next) => {
       ],
     });
 
-    console.log(user);
     if (!user) {
       return res.status(403).json({ error: "Username or Password invalid" });
     }
@@ -108,38 +107,37 @@ router.get("/verifytoken", [verifyToken], async (req, res) => {
 
 router.get(
   "/login/google",
-  [
-    passport.authenticate("sign-up-google", {
-      scope: ["profile", "email"],
-      session: false,
-    }),
-  ],
-  (req, res, next) => {
-    res.status(404).send("esfsese");
-    /* if (req.user) {
-      const token = jwt.sign(
-        { user_email: req.user.e_mail },
-        process.env.JWT_SECRET
-      );
-      res.status(200).json({
-        token,
-        user: { ...req.user.dataValues, password: "Hackeame perro" },
-      });
-    } else {
-      res.status(404).send("Error,please try again!");
-    } */
-  }
-);
-router.get(
-  "/google/callback",
-  passport.authenticate("sign-up-google", {
-    successRedirect: "http://localhost:3000/profile/1",
-    failureRedirect: "http://localhost:3000/login/failed",
-    session: false,
+  passport.authenticate("google", {
+    scope: ["profile", "email"],
   })
 );
-router.get("/login/failed", (req, res) => {
-  res.status(401).json({ success: false, message: "failure" });
+
+router.get("/login/google/success", function (req, res) {
+  if (req.user) {
+    const token = jwt.sign(
+      { user_email: req.user.e_mail },
+      process.env.JWT_SECRET
+    );
+    res.status(200).json({
+      token,
+      user: { ...req.user, password: "Hackeame perro" },
+    });
+  } else {
+    res.status(404).send("Error,please try again!");
+  }
+});
+
+router.get(
+  "/google/callback",
+  passport.authenticate("google", {
+    failureRedirect: "http://localhost:3000/SignIn",
+    successRedirect: "http://localhost:3000/login",
+  })
+);
+router.get("/login/google/logout", (req, res) => {
+  req.session.destroy(function (err) {
+    res.redirect("http://localhost:3000/login");
+  });
 });
 
 module.exports = router;

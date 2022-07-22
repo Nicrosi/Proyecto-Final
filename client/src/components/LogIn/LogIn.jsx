@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { postLogin } from "../../redux/actions/authorization";
+import { postLogin, urlAuth } from "../../redux/actions/authorization";
+import img from "../../img/google-icon.png";
 import styles from "./LogIn.module.css";
 
 export default function LogIn() {
@@ -57,13 +58,12 @@ export default function LogIn() {
   };
 
   const logGoogle = (e) => {
-    window.open("http://localhost:3001/auth/login/google");
+    window.open(urlAuth + "/login/google");
   };
 
   return (
     <div className={styles.logContainer}>
       <h1 className={styles.title}>LogIn</h1>
-
       <div className={styles.loginContainer}>
         <form style={{ width: "100%" }} onSubmit={(e) => handleSubmit(e)}>
           <div className="row g-2 mb-3">
@@ -145,10 +145,7 @@ export default function LogIn() {
                 Log in
               </button>
             ) : (
-              <button
-                className="btn btn-success"
-                style={{ backgroundColor: "#A7D129" }}
-              >
+              <button className={`${styles.btnCustom} btn btn-success`}>
                 Log in
               </button>
             )}
@@ -158,12 +155,9 @@ export default function LogIn() {
         <div className="d-flex justify-content-center">
           <button
             onClick={logGoogle}
-            style={{
-              backgroundColor: "transparent",
-              borderColor: "white",
-              color: "white",
-            }}
+            className={`${styles.btnCustom} btn btn-success`}
           >
+            <img src={img} alt="" />
             Log with Google
           </button>
         </div>
