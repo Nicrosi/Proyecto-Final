@@ -76,7 +76,7 @@ function App() {
         />
         <Route
           exact
-          path={"/playersOnSubt/:subt_id"}
+          path={"/tournamentplayers/:subt_id"}
           component={TournamentSimpleElimination}
         />
         <Route exact path={"/login"} component={LogIn} />

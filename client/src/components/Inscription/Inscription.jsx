@@ -11,14 +11,15 @@ export const Inscription = () => {
   const dispatch = useDispatch();
   const {tournament_id} = useParams();
   const history = useHistory();
+  const auth = useSelector((state) => state.auth)
   
   useEffect(() => {
     dispatch(getSubtournament(tournament_id));
-    if(!user.id_category){ 
+    if(!user.id_category && auth.currentUser.is_admin === false){ 
       alert(`The user ${user.name} has no score to categorize`)
       history.push("/HomeAdmin");
             }
-  }, [dispatch, tournament_id])
+  }, [auth.currentUser.is_admin, dispatch, history, tournament_id, user.id_category, user.name])
   console.log(subt)
   return (
     <div
@@ -30,9 +31,10 @@ export const Inscription = () => {
     <Row className="g-3 mx-3 mt-2">
      {subt.length > 0 ? (
             subt.map((p) => {
-             
+              let option;
+              auth.loggedIn && auth.currentUser.is_admin === false ? option = user.gender === p.gender && user.id_category === p.category.id_category : option = user
               return (
-                user.gender === p.gender && user.id_category === p.category.id_category ?
+               option ?
                 <Col lg={3} key={p.id_subt}>
                   <SubtCard
                     key={p.id_subt}
@@ -46,6 +48,7 @@ export const Inscription = () => {
                     id_subt={p.id_subt}
                     el_type={p.elimination_type}
                     match_type={p.match_type}
+                    numb_players={p.numb_players}
                   />
                 </Col>:null
               );

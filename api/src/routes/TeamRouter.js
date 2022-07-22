@@ -28,13 +28,12 @@ router.get('/:id_team', async (req, res) => {
 
 router.post('/', async (req, res, next) => {
 
-  const { points, accumulated_points } = req.body;
-  if(!points || !accumulated_points) return res.status(404).send({msg_error: 'Missing team properties'})
+  const { points } = req.body;
+  if(!points) return res.status(404).send({msg_error: 'Missing team properties'})
 
   await Team.create(
     {
-      points,
-      accumulated_points
+      points
     }
   )
 

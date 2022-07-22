@@ -1,6 +1,7 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { postInscription } from "../../redux/actions";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { postInscription, getPLayersOnSubt } from "../../redux/actions";
+import {Link} from 'react-router-dom'
 import Stripecheckout from "react-stripe-checkout";
 import Card from "react-bootstrap/Card";
 
@@ -14,10 +15,16 @@ export default function SubtCard({
   subt_gender,
   subt_category,
   match_type,
-  el_type
+  el_type,
+  numb_players
 }) {
   const user = id_user;
+  const auth = useSelector((state) => state.auth);
+  const amount_players = useSelector((state) => state.rootReducer.playersOnSubt)
   const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getPLayersOnSubt(id_subt));
+  }, [dispatch, id_subt]);
   // eslint-disable-next-line no-unused-vars
   const [product, setProduct] = useState({
     name: name,
@@ -28,7 +35,6 @@ export default function SubtCard({
     id_tournament: id_tournament,
     id_subt: id_subt,
   });
-
   const makePayment = (token) => {
     const body = {
       token,
@@ -37,6 +43,7 @@ export default function SubtCard({
     };
     dispatch(postInscription(body));
   };
+  console.log(amount_players.length + ' ' + numb_players)
   return (
     <React.Fragment>
       <Card
@@ -72,6 +79,7 @@ export default function SubtCard({
         </Card.Body>
         <Card.Footer >
           <div className="d-flex justify-content-end">
+          {auth.loggedIn && auth.currentUser.is_admin === false ? 
           <Stripecheckout
             stripeKey="pk_test_51LLBogC5JnQCZsvqgXxqWC00Ui3tQXiMSljwFGFv28WhZ69g54hmBGjb9XKE1mjZTsipyzW49f7CQ8G1qS6lWL9H00MY1ocH5Z"
             token={makePayment}
@@ -80,7 +88,19 @@ export default function SubtCard({
             email={product.email}
           >
             <button className="btn btn-primary ">Buy</button>
-          </Stripecheckout>
+          </Stripecheckout> :
+          amount_players.length === numb_players ? 
+              <button style={{ backgroundColor: "#A7D129" }}>
+              <Link
+                style={{ fontWeight: "bold", color: "#10242b"}}
+                to={`/tournamentplayers/${id_subt}`}
+                >
+                Create Brackets
+              </Link>
+            </button> :
+            <button style={{ backgroundColor: "#82a222" }} disabled>Not enough players</button>
+            }
+          
           </div>
           
         </Card.Footer>
@@ -88,3 +108,4 @@ export default function SubtCard({
     </React.Fragment>
   );
 }
+// disabled={amount_players.length === numb_players ? false : true}
