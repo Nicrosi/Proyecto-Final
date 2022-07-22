@@ -52,7 +52,7 @@ export default function ControlUserList() {
         dispatch(putUsers(dataModal.dni, dataModal));
        
         Swal.fire('Saved!', '', 'success');
-        dispatch(clearUser());
+        // dispatch(clearUser());
         dispatch(getAllUsers());
         setUpdateList(!updateList)
 
