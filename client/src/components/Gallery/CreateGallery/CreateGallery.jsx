@@ -65,7 +65,6 @@ export default function CreateGallery() {
     if(!file) {
       return alert('you must chose a file')
     }
-    console.log(title.title);
     
     const formData = new FormData();
     formData.append('image', file);

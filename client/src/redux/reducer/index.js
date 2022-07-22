@@ -10,13 +10,10 @@ import {
   CLEAR_SUBTOURNAMENT,
   GET_TOURNAMENTS,
   GET_ALL_IMAGES,
-<<<<<<< HEAD
   GET_ALL_SUBTOURNAMENTS,
   PUT_SUBTOURNAMENT,
   CLEAR_GALLERY,
-=======
   GET_PLAYERS_ON_SUBT,
->>>>>>> c02e837c077cf2b875ec4606af3b99bdcc2b7cd0
 } from "../actions";
 import { filterUsers } from "../helpers/filters";
 import { sortByName } from "../helpers/sorts";
@@ -32,17 +29,11 @@ const initialState = {
   tournaments:[],
   subtournaments:[],
   gallery:[],
-<<<<<<< HEAD
   FirstLine:[],
   SecondLine:[],
   ThirdLine:[],
   ImageLoading: false,
-=======
   playersOnSubt:[],
-  // FirstLine:[],
-  // SecondLine:[],
-  // ThridLine:[],
->>>>>>> c02e837c077cf2b875ec4606af3b99bdcc2b7cd0
 };
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -116,7 +107,6 @@ const rootReducer = (state = initialState, action) => {
           ...state,
           tournaments: action.payload
         }
-<<<<<<< HEAD
       case GET_ALL_SUBTOURNAMENTS:
         return {
           ...state,
@@ -134,12 +124,11 @@ const rootReducer = (state = initialState, action) => {
           SecondLine: [],
           ThirdLine: [],
           ImageLoading: true
-=======
+        }
         case GET_PLAYERS_ON_SUBT:
         return {
           ...state,
           playersOnSubt: action.payload
->>>>>>> c02e837c077cf2b875ec4606af3b99bdcc2b7cd0
         }
       case GET_ALL_IMAGES:
         const images = [...action.payload];
