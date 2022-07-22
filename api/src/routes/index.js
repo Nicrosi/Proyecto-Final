@@ -9,8 +9,8 @@ const inscription = require("../routes/InscriptionRouter.js");
 const Team = require("../routes/TeamRouter.js");
 const Auth = require("../routes/AuthRouter.js");
 const Gallery = require("../routes/GalleryRouter.js");
+const Players = require("../routes/playersOnSubtRoute.js")
 const router = Router();
-
 
 
 router.use("/category", category);
@@ -23,6 +23,8 @@ router.use('/tournament', Tournament);
 router.use('/team', Team);
 router.use('/auth', Auth);
 router.use('/gallery', Gallery);
+router.use('/players', Players);
+
 
 
 module.exports = router;
