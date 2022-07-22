@@ -21,6 +21,7 @@ import { FormSubTournament } from "./components/SubTournament/FormSubTournament/
 import TournamentsToShow from "./components/Tournament/TournamentsToShow/TournamentsToShow.jsx";
 import ControlCardUsers from "./components/controlPanel/ControlCardUsers/ControlCardUsers.jsx";
 import { ShowPlayerOn } from "./components/Inscription/ShowPlayerOn.jsx";
+import { ChatBot } from "./components/ChatBot/ChatBot.jsx";
 
 function App() {
   const dispatch = useDispatch();
@@ -30,6 +31,7 @@ function App() {
   }, [dispatch]);
   return (
     <div className="App">
+      <Route path={"/"} component={ChatBot} />
       <Route path={"/"} component={NavBar} />
       <Switch>
         <RouteGuard exact path={"/Users"} component={Users} admin={false} />
