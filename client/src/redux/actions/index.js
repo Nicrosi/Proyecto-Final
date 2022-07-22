@@ -24,6 +24,7 @@ export const GET_ALL_IMAGES="GET_ALL_IMAGES";
 export const GET_ALL_SUBTOURNAMENTS="GET_ALL_SUBTOURNAMENTS";
 export const PUT_SUBTOURNAMENT="PUT_SUBTOURNAMENT";
 export const CLEAR_GALLERY="CLEAR_GALLERY";
+export const GET_PLAYERS_ON_SUBT= "GET_PLAYERS_ON_SUBT"
 
 // export const getAllPlayers = () => { JSON
 //   return {
@@ -40,6 +41,8 @@ const urlTournament = "http://localhost:3001/tournament";
 const urlSubTournament = "http://localhost:3001/subtournament";
 const urlSponsor = "http://localhost:3001/sponsor"
 const urlTournaments = "http://localhost:3001/tournament"
+const urlPlayersOnSubt = "http://localhost:3001/players/"
+
 toast.configure();
 
 
@@ -191,13 +194,14 @@ export function getTournaments(id_tournament) {
 export const putTournament = (id_tournament, input) => {
   return async () => {
     const putValues = {
+      name: input.name,
       date: input.date,
       location: input.location,
+      earning: input.earning
     };
     return await axios.put(`${urlTournament}/${id_tournament}`, putValues);
   };
 };
-
 export const postSubTournament = (id_tournament, input) => {
   return async (dispatch) => {
     try {
@@ -222,6 +226,12 @@ export const putSponsor = (id_sponsor, val) => {
       link: val.link,
     };
     return await axios.put(`${urlSponsor}/${id_sponsor}`, putval);
+  };
+};
+
+export const deleteSponsor = (id_sponsor) => {
+  return async () => {
+    return await axios.delete(`${urlSponsor}/${id_sponsor}`);
   };
 };
 
@@ -270,6 +280,22 @@ export const getTournament= () =>{
       return dispatch({
           type: GET_TOURNAMENTS,
           payload: answer.data
+      });
+  }
+}
+
+export const deleteTournament = (id_tournament) => {
+  return async () => {
+    return await axios.delete(`${urlTournaments}/${id_tournament}`);
+  };
+};
+
+export const getPLayersOnSubt= (id_subt) =>{
+  return async function (dispatch) {
+      const response = await axios.get(`${urlPlayersOnSubt}/${id_subt}`);
+      return dispatch({
+          type: GET_PLAYERS_ON_SUBT,
+          payload: response.data
       });
   }
 }

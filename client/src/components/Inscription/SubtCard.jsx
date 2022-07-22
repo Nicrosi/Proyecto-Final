@@ -41,7 +41,7 @@ export default function SubtCard({
     <React.Fragment>
       <Card
         bg="light"
-        style={{ width: "30rem" }}
+        style={{ width: "24rem" }}
         className="mb-2"
         key={id_subt}
       >

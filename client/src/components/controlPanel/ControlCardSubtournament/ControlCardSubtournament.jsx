@@ -1,16 +1,17 @@
 import React from "react";
-import { useDispatch } from "react-redux";
-import styles from "./ControlCardTournaments.module.css"
+import styles from "../ControlCardUsers/ControlCardUsers.module.css"
 import deleteimg from "../../../img/delete.png";
 import edit from "../../../img/edit.png";
+import { useDispatch } from "react-redux";
+import { deleteSubtournament } from "../../../redux/actions";
 import Swal from "sweetalert2"
-import { deleteTournament } from "../../../redux/actions";
 
 
-export default function ControlCardTournaments({tournament, setDataModal, setUpdateList, updateList}) {
+export default function ControlCardSubtournament({subtournament, setDataModal, setUpdateList, updateList}) {
+
   function handleEdit(e) { 
-    e.preventDefault()
-    setDataModal(tournament)
+    e.preventDefault();
+    setDataModal(subtournament);
   }
 
   const dispatch = useDispatch();
@@ -27,7 +28,7 @@ export default function ControlCardTournaments({tournament, setDataModal, setUpd
       confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
       if (result.isConfirmed) {
-        dispatch(deleteTournament(tournament.id_tournaments))
+        dispatch(deleteSubtournament(subtournament.id_subt))
         Swal.fire(
           'Deleted!',
           'Your file has been deleted.',
@@ -41,8 +42,12 @@ export default function ControlCardTournaments({tournament, setDataModal, setUpd
   return (
     <div className={styles.box}>
     <div className={styles.itemScore}>
-      <div className={styles.subtitle}>      
-      <h5 className={styles.data}>Company: {tournament.name}</h5>
+      <div className={styles.subtitle}>
+      <h5 className={styles.data}>Tournament: {subtournament.tournament.name} </h5>
+      
+      <h5 className={styles.data}>Subtournament: {subtournament.name}</h5>
+      
+      <h5 className={styles.data}>Category: {subtournament.category.type} </h5>
       </div>
       <div className={styles.itemScore}>
       <img
@@ -60,5 +65,6 @@ export default function ControlCardTournaments({tournament, setDataModal, setUpd
       </div>
      
       </div>     
-    </div>  );
+    </div>
+  );
 }

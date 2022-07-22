@@ -1,43 +1,33 @@
 import React, { useState } from "react";
-import { clearUser, getAllUsers, putUsers } from "../../../redux/actions";
+import { clearSubtournament, getAllSubtournaments, putSubtournament } from "../../../redux/actions";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import styles from "./ControlUserList.module.css";
-import ControlCardUsers from "../ControlCardUsers/ControlCardUsers";
+import styles from "../ControlUserList/ControlUserList.module.css";
+// import ControlCardUsers from "../ControlCardUsers/ControlCardUsers";
 import Swal from "sweetalert2"
+import ControlCardSubtournament from "../ControlCardSubtournament/ControlCardSubtournament.jsx";
 
 
-export default function ControlUserList() {
-  const users = useSelector((state) => state.rootReducer.users);
+export default function ControlSubtournamentsList() {
+  const subtournaments = useSelector((state) => state.rootReducer.subtournaments);
 
   const [updateList, setUpdateList] = useState(false);
   const [dataModal, setDataModal] = useState({});
 
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getAllUsers());
+    dispatch(getAllSubtournaments());
   }, [dispatch, updateList]);
+
 
   function handleChange(e) {
     e.preventDefault();
-
-    // if (e.target.type === "tel" || e.target.name === "dni") {
-    //   setDataModal({
-    //     ...dataModal,
-    //     [e.target.name]: parseInt(e.target.value, 10),
-    //   });
-    // }
-    // if (e.target.type === "text" || e.target.type === "email") {
-    //   setDataModal((prev) => ({
-    //     ...prev,
-    //     [e.target.name]: e.target.value.toLowerCase(),
-    //   }));
-    // }
     setDataModal({ ...dataModal, [e.target.name]: e.target.value });
   }
 
-  function handleSubmit(e) {
+   function handleSubmit(e) {
     e.preventDefault();
+    console.log( dataModal);
     Swal.fire({
       title: 'Do you want to save the changes?',
       showDenyButton: true,
@@ -49,11 +39,10 @@ export default function ControlUserList() {
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
-        dispatch(putUsers(dataModal.dni, dataModal));
+        dispatch(putSubtournament(dataModal.id_subt, dataModal));
        
         Swal.fire('Saved!', '', 'success');
-        // dispatch(clearUser());
-        dispatch(getAllUsers());
+        dispatch(clearSubtournament());
         setUpdateList(!updateList)
 
       } else if (result.isDenied) {
@@ -62,16 +51,18 @@ export default function ControlUserList() {
     })
   }
 
+  
+
 
   return (
     <div className={styles.userBox}>
       <ul className="list-group" style={{ width: "90%" }}>
-        {users &&
-          users.map((user) => {
+        {subtournaments &&
+          subtournaments.map((subtournament) => {
             return (
-              <li key={user.id_user} className="list-group-item">
-                <ControlCardUsers
-                  user={user}
+              <li key={subtournament.id_subt} className="list-group-item">
+                <ControlCardSubtournament
+                  subtournament={subtournament}
                   setDataModal={setDataModal}
                   setUpdateList={setUpdateList}
                   updateList={updateList}
@@ -117,6 +108,7 @@ export default function ControlUserList() {
                             <div className={"row g-2 mb-3"}>
                               <div className="form-floating col-md">
                                 <input
+                                  key="name"
                                   type="text"
                                   onChange={(e) => handleChange(e)}
                                   value={dataModal.name}
@@ -128,87 +120,32 @@ export default function ControlUserList() {
                               </div>
                               <div className="form-floating col-md">
                                 <input
-                                  type="text"
+                                  key="numb_players"
+                                  type="number"
+                                  min="4"
+                                  max="16"
                                   onChange={(e) => handleChange(e)}
-                                  value={dataModal.last_name}
-                                  name="last_name"
+                                  value={dataModal.numb_players}
+                                  name="numb_players"
                                   className="form-control border-0"
                                   id="floatingInput"
                                 />
-                                <label htmlFor="floatingInput">Last Name</label>
+                                <label htmlFor="floatingInput">Numb Players</label>
                               </div>
                             </div>
 
                             <div className="row g-2 mb-3">
                               <div className="form-floating col-md">
                                 <input
-                                  type="text"
+                                  key="price"
+                                  type="number"
                                   onChange={(e) => handleChange(e)}
-                                  value={dataModal.dni}
-                                  name="dni"
+                                  value={dataModal.price}
+                                  name="price"
                                   className="form-control border-0"
                                   id="floatingInput"
                                 />
-                                <label htmlFor="floatingInput">DNI</label>
-                              </div>
-                              <div className="form-floating col-md">
-                                <select
-                                  onChange={(e) => handleChange(e)}
-                                  className="form-select border-0"
-                                  id="floatingSelect"
-                                  aria-label="Floating label select example"
-                                  name="is_admin"
-                                >
-                                  <option value="">{`${dataModal.is_admin}`}</option>
-                                  <option value="true">True</option>
-                                  <option value="false">False</option>
-                                </select>
-                                <label htmlFor="floatingInput">isAdmin</label>
-                              </div>
-                            </div>
-
-                            <div className="row g-2 mb-3">
-                              <div className="form-floating col-md">
-                                <input
-                                  type="email"
-                                  onChange={(e) => handleChange(e)}
-                                  value={dataModal.e_mail}
-                                  name="e_mail"
-                                  className="form-control border-0"
-                                  id="floatingInput"
-                                />
-                                <label htmlFor="floatingInput">Email</label>
-                              </div>
-                            </div>
-                            <div className="row g-2 mb-3">
-                              <div className="form-floating col-md">
-                                <input
-                                  type="text"
-                                  onChange={(e) => handleChange(e)}
-                                  value={dataModal.picture}
-                                  name="picture"
-                                  className="form-control  border-0"
-                                  id="floatingInput"
-                                />
-                                <label htmlFor="floatingInput">Picture</label>
-                              </div>
-                            </div>
-                            <div className="row g-2 mb-3">
-                              <div className="form-floating col-md">
-                                <select
-                                  onChange={(e) => handleChange(e)}
-                                  className="form-select border-0"
-                                  id="floatingSelect"
-                                  aria-label="Floating label select example"
-                                  name="is_admin"
-                                >
-                                  <option value="">{`${dataModal.category}`}</option>
-                                  <option value="A">A</option>
-                                  <option value="B">B</option>
-                                  <option value="C">C</option>
-                                  <option value="E">E</option>
-                                </select>
-                                <label htmlFor="floatingInput">Category</label>
+                                <label htmlFor="floatingInput">Price</label>
                               </div>
                               <div className="form-floating col-md">
                                 <select
@@ -218,37 +155,63 @@ export default function ControlUserList() {
                                   aria-label="Floating label select example"
                                   name="gender"
                                 >
-                                  <option value="">{dataModal.gender}</option>
+                                  <option value="">{`${dataModal.gender}`}</option>
                                   <option value="female">Female</option>
                                   <option value="male">Male</option>
                                 </select>
                                 <label htmlFor="floatingInput">Gender</label>
                               </div>
                             </div>
+
                             <div className="row g-2 mb-3">
                               <div className="form-floating col-md">
-                                <input
-                                  type="tel"
+                                <select
                                   onChange={(e) => handleChange(e)}
-                                  value={dataModal.phone}
-                                  name="phone"
-                                  className="form-control  border-0"
-                                  id="floatingInput"
-                                />
-                                <label htmlFor="floatingInput">Phone</label>
+                                  className="form-select border-0"
+                                  id="floatingSelect"
+                                  aria-label="Floating label select example"
+                                  name="elimination_type"
+                                >
+                                  <option value="">{`${dataModal.elimination_type}`}</option>
+                                  <option value="All">All vs All</option>
+                                  <option value="Simple">Simple Elimination</option>
+                                  <option value="Double">Double Elimination</option>
+                                </select>
+                                <label htmlFor="floatingInput">Elimination Type</label>
                               </div>
+                            </div>
+                            <div className="row g-2 mb-3">
                               <div className="form-floating col-md">
-                                <input
-                                  type="tel"
+                                <select
                                   onChange={(e) => handleChange(e)}
-                                  value={dataModal.num_contact}
-                                  name="num_contact"
-                                  className="form-control border-0"
-                                  id="floatingInput"
-                                />
-                                <label htmlFor="floatingInput">
-                                  Emergency Number
-                                </label>
+                                  className="form-select border-0"
+                                  id="floatingSelect"
+                                  aria-label="Floating label select example"
+                                  name="match_type"
+                                >
+                                  <option value="">{`${dataModal.match_type}`}</option>
+                                  <option value="singles">singles</option>
+                                  <option value="dobles">dobles</option>
+                                </select>
+                                <label htmlFor="floatingInput">Match Type</label>
+                              </div>
+                            </div>
+                            <div className="row g-2 mb-3">
+                              <div className="form-floating col-md">
+                                <select
+                                  onChange={(e) => handleChange(e)}
+                                  className="form-select border-0"
+                                  id="floatingSelect"
+                                  aria-label="Floating label select example"
+                                  name="id_category"
+                                >
+                                  <option value="">{`${dataModal?.category ? dataModal.category.type : null}`}</option>
+                                  <option value="1">A</option>
+                                  <option value="2">B</option>
+                                  <option value="3">C</option>
+                                  <option value="4">E</option>
+                                </select>
+                                <label htmlFor="floatingInput">Category</label>
                               </div>
                             </div>
                             <div className="modal-footer">

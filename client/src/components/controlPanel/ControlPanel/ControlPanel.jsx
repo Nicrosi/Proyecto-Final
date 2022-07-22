@@ -6,6 +6,7 @@ import ControlBar from "../ControlBar/ControlBar";
 import ControlUserList from "../ControlUserList/ControlUserList";
 import ControlSponsorsList from "../ControlSponsorsList/ControlSponsorsList";
 import ControlSubtournamentsList from "../ControlSubtournamentsList/ControlSubtournamentsList";
+import ControlTournamentsList from "../ControlTournamentsList/ControlTournamentsList";
 
 
 export default function ControlPanel() {
@@ -25,7 +26,7 @@ export default function ControlPanel() {
       <div className={styles.principalBox}>
           {show === "users" && <ControlUserList />}
           {show === "sponsors" && <ControlSponsorsList/>}
-          {/* {show === "tournaments" && <ControlTournamentsList />} */}
+          {show === "tournaments" && <ControlTournamentsList />}
           {show === "subtournaments" && <ControlSubtournamentsList />}
           
       </div>
