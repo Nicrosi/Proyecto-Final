@@ -152,13 +152,14 @@ export function getTournaments(id_tournament) {
 export const putTournament = (id_tournament, input) => {
   return async () => {
     const putValues = {
+      name: input.name,
       date: input.date,
       location: input.location,
+      earning: input.earning
     };
     return await axios.put(`${urlTournament}/${id_tournament}`, putValues);
   };
 };
-
 export const postSubTournament = (id_tournament, input) => {
   return async (dispatch) => {
     try {
@@ -183,6 +184,12 @@ export const putSponsor = (id_sponsor, val) => {
       link: val.link,
     };
     return await axios.put(`${urlSponsor}/${id_sponsor}`, putval);
+  };
+};
+
+export const deleteSponsor = (id_sponsor) => {
+  return async () => {
+    return await axios.delete(`${urlSponsor}/${id_sponsor}`);
   };
 };
 
@@ -228,6 +235,12 @@ export const getTournament= () =>{
   }
 }
 
+export const deleteTournament = (id_tournament) => {
+  return async () => {
+    return await axios.delete(`${urlTournaments}/${id_tournament}`);
+  };
+};
+
 export const getPLayersOnSubt= (id_subt) =>{
   return async function (dispatch) {
       const response = await axios.get(`${urlPlayersOnSubt}/${id_subt}`);
@@ -237,6 +250,7 @@ export const getPLayersOnSubt= (id_subt) =>{
       });
   }
 }
+
 export const getAllImages = () => async (dispatch) => {
   try {
     const { data } = await axios.get('http://localhost:3001/gallery/get')

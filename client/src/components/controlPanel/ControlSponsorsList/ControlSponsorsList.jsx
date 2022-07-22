@@ -4,17 +4,20 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./ControlSponsorsList.module.css"
 import ControlCardSponsor from "../ControlCardSponsor/ControlCardSponsor";
+import Swal from "sweetalert2"
+
 
 
 export default function ControlSponsorsList() {
   const sponsors = useSelector((state) => state.rootReducer.sponsors);
 
+  const [updateList, setUpdateList] = useState(false);
   const [dataModal, setDataModal] = useState({});
 
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getAllSponsors());
-  }, [dispatch]);
+  }, [dispatch, updateList]);
 
   function handleChange(e) {
     e.preventDefault();
@@ -23,7 +26,29 @@ export default function ControlSponsorsList() {
   }
   function handleSubmit(e) {
     e.preventDefault();
-    dispatch(putSponsor(dataModal.id_sponsor, dataModal));
+    Swal.fire({
+      title: 'Do you want to save the changes?',
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonColor: '#A7D129',
+      denyButtonColor: 'rgb(43, 43, 44)',
+      confirmButtonText: 'Save',
+      denyButtonText: `Don't save`,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        dispatch(putSponsor(dataModal.id_sponsor, dataModal));       
+        Swal.fire('Saved!', '', 'success');
+
+        dispatch(getAllSponsors());
+        setUpdateList(!updateList)
+
+        // window.location.reload()
+
+      } else if (result.isDenied) {
+        Swal.fire('Changes are not saved', '', 'info')
+      }
+    })    
     console.log(dataModal);
   }
 
@@ -37,17 +62,20 @@ export default function ControlSponsorsList() {
             <li className="list-group-item">
 
               <ControlCardSponsor 
-                sponsor={sponsor} setDataModal={setDataModal} 
+                sponsor={sponsor} 
+                setDataModal={setDataModal} 
+                setUpdateList={setUpdateList}
+                updateList={updateList}
               />
               <div
-              className="modal fade"
-              id="staticBackdrop"
-              data-bs-backdrop="static"
-              data-bs-keyboard="false"
-              tabindex="-1"
-              aria-labelledby="staticBackdropLabel"
-              aria-hidden="true"
-            >
+                className="modal fade"
+                id="staticBackdrop"
+                data-bs-backdrop="static"
+                data-bs-keyboard="false"
+                tabindex="-1"
+                aria-labelledby="staticBackdropLabel"
+                aria-hidden="true"
+              >
               <div className="modal-dialog modal-dialog-centered modal-lg">
                 <div
                   className="modal-content"
@@ -74,7 +102,7 @@ export default function ControlSponsorsList() {
                       style={{ width: "100%" }}
                       onSubmit={(e) => handleSubmit(e)}
                     >
-                      <div key={dataModal.dni} className={styles.editBox}>
+                      <div key={dataModal.id_sponsor} className={styles.editBox}>
                         <div className={"row g-2 mb-3"}>
                           <div className="form-floating col-md">
                           <input
@@ -126,14 +154,11 @@ export default function ControlSponsorsList() {
                 <label for="floatingInput">Link</label>
                           </div>
                         </div>
-
-                  
-
-                        {/* <h5 onClick={()=>handleOnClick()}>dni={p.category.type}</h5> */}
                         <div class="modal-footer">
                         <button
                           className="btn btn-outline-secondary btn-dark my-2"
                           type="submit"
+                          data-bs-dismiss="modal"
                         >
                           Confirm changes
                         </button>
