@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React from "react";
 import { generateRandomDraw } from "../Tournaments/Tournaments";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -15,7 +15,7 @@ export const TournamentsToShowAllAgainst=()=> {
   console.log("array",array);
   const tournaments = generateRandomDraw(array);
   console.log("tournaments", tournaments);
-  return console.log(tournaments);
+  console.log(tournaments);
   const dispatch = useDispatch();
   const { subt_id } = useParams();
 //   const { data: games } = generator(team, { type: "simple-cup" });
