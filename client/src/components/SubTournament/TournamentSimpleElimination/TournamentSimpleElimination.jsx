@@ -1,13 +1,13 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
-import { getPLayersOnSubt } from "../../redux/actions/index";
+import { getPLayersOnSubt } from "../../../redux/actions/index";
 import { Row, Col } from "react-bootstrap";
 
 //////////////////////
 import generator from "tournament-generator";
 //////////////////////
-export const ShowPlayerOn = () => {
+export const TournamentSimpleElimination = () => {
   const players = useSelector((state) => state.rootReducer.playersOnSubt);
   const team = players.map((x) => x.user.name);
   console.log(team);
