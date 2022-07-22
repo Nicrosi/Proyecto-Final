@@ -20,7 +20,7 @@ import { useDispatch } from "react-redux";
 import { FormSubTournament } from "./components/SubTournament/FormSubTournament/FormSubTournament.jsx";
 import TournamentsToShow from "./components/Tournament/TournamentsToShow/TournamentsToShow.jsx";
 import ControlCardUsers from "./components/controlPanel/ControlCardUsers/ControlCardUsers.jsx";
-import {ShowPlayerOn} from "./components/Inscription/ShowPlayerOn.jsx"
+import {TournamentSimpleElimination} from "./components/SubTournament/TournamentSimpleElimination/TournamentSimpleElimination.jsx"
 
 function App() {
   const dispatch = useDispatch();
@@ -54,7 +54,7 @@ function App() {
         <Route
           exact
           path={"/playersOnSubt/:subt_id"}
-          component={ShowPlayerOn}
+          component={TournamentSimpleElimination}
         />
         <Route exact path={"/login"} component={LogIn} />
         <RouteGuard Route path={"/cpanel"} component={ControlPanel} admin={true}/>
