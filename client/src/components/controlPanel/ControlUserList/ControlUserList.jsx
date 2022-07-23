@@ -9,9 +9,12 @@ import Swal from "sweetalert2"
 
 export default function ControlUserList() {
   const users = useSelector((state) => state.rootReducer.users);
+<<<<<<< Updated upstream
 
   const [updateList, setUpdateList] = useState(false);
   const [dataModal, setDataModal] = useState({});
+=======
+>>>>>>> Stashed changes
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -65,6 +68,7 @@ export default function ControlUserList() {
 
   return (
     <div className={styles.userBox}>
+<<<<<<< Updated upstream
       <ul className="list-group" style={{ width: "90%" }}>
         {users &&
           users.map((user) => {
@@ -272,6 +276,27 @@ export default function ControlUserList() {
             );
           })}
       </ul>
+=======
+  
+      {users &&
+        users.map((p) => {
+          return (
+            <div key={p.dni}>
+              <ControlCardUsers 
+                dni={p.dni}
+                name={p.name}
+                last_name={p.last_name}
+                is_admin={p.is_admin}
+                e_mail={p.e_mail}
+                password={p.password}
+                picture={p.picture}
+                gender={p.gender}
+                phone={p.phone}
+                num_contact={p.num_contact}
+              />
+              </div>
+          )})}
+>>>>>>> Stashed changes
     </div>
   );
 }

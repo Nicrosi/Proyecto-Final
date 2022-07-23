@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserById } from "../../redux/actions";
+import { RadarChart } from "../Charts/RadarChart/RadarChart";
 import styles from "./DetailsUser.module.css";
 
 const DetailsUser = (props) => {
@@ -13,7 +14,6 @@ const DetailsUser = (props) => {
 
   let user = useSelector((state) => state.rootReducer.user);
 
-  console.log(user);
 
   return (
     <React.Fragment>
@@ -135,8 +135,9 @@ const DetailsUser = (props) => {
                     <div className="mx-auto" style={{ width: "100%" }}>
                       <div className="card mx-auto" style={{ width: "100%" }}>
                         <div className="card-body text-center">
-                          {user.score ? (
-                            <ul className="list-group">
+                          {user.score ? (<div>
+                            <div><RadarChart dataUser={user.score}/></div>
+                            <div><ul className="list-group">
                               <li className="list-group-item">
                                 <h5>
                                   Previous Tournaments:{" "}
@@ -167,7 +168,9 @@ const DetailsUser = (props) => {
                                   Game strategy: {user.score.game_strategy}
                                 </h5>
                               </li>
-                            </ul>
+                            </ul></div>
+                            
+                            </div>
                           ) : (
                             <h3>{`${user.name} has no score`}</h3>
                           )}
