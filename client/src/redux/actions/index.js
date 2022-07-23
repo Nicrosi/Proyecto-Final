@@ -25,6 +25,8 @@ export const GET_ALL_SUBTOURNAMENTS="GET_ALL_SUBTOURNAMENTS";
 export const PUT_SUBTOURNAMENT="PUT_SUBTOURNAMENT";
 export const CLEAR_GALLERY="CLEAR_GALLERY";
 export const GET_PLAYERS_ON_SUBT= "GET_PLAYERS_ON_SUBT"
+export const GET_BY_NAME= "GET_BY_NAME"
+export const CHANGE_PANEL_PAGE= "CHANGE_PANEL_PAGE"
 
 // export const getAllPlayers = () => { JSON
 //   return {
@@ -33,6 +35,7 @@ export const GET_PLAYERS_ON_SUBT= "GET_PLAYERS_ON_SUBT"
 //   };
 // };
 
+const Url = "http://localhost:3001";
 const urlUser = "http://localhost:3001/user";
 const urlSponsors = "http://localhost:3001/sponsor";
 const urlSubtByT = "http://localhost:3001/subtournament/ByTournament";
@@ -93,7 +96,7 @@ export const getAllUsersName = (name) => (dispatch) => {
     .then((response) =>
       dispatch({
         type: GET_ALL_USERS_NAME,
-        payload: response.data,
+        payload: response.data.value,
       })
     )
     .catch(() => alert("User not found"));
@@ -318,7 +321,20 @@ export const ClearGallery = () => {
   }
 }
 
+export const getByName = (route, name) => async (dispatch) => {
+  const { data } = await axios.get(`${Url}/${route}?name=${name}`);
+  return dispatch({
+    type: GET_BY_NAME,
+    payload: data,
+  })
+}
 
+export const changePanelPage = (page) => {
+  return {
+    type: CHANGE_PANEL_PAGE,
+    payload: page
+  }
+}
 
 
   

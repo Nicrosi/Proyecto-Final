@@ -205,7 +205,7 @@ export default function ControlSubtournamentsList() {
                                   aria-label="Floating label select example"
                                   name="id_category"
                                 >
-                                  <option value="">{`${dataModal?.category ? dataModal.category.type : null}`}</option>
+                                  <option value={dataModal?.category ? dataModal.category.type : ""}>{dataModal?.category ? `Current Category ${dataModal.category.type}` : null}</option>
                                   <option value="1">A</option>
                                   <option value="2">B</option>
                                   <option value="3">C</option>

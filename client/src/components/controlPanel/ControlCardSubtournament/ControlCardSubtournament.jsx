@@ -43,7 +43,7 @@ export default function ControlCardSubtournament({subtournament, setDataModal, s
     <div className={styles.box}>
     <div className={styles.itemScore}>
       <div className={styles.subtitle}>
-      <h5 className={styles.data}>Tournament: {subtournament.tournament.name} </h5>
+      <h5 className={styles.data}>Tournament: {subtournament.tournament.location} </h5>
       
       <h5 className={styles.data}>Subtournament: {subtournament.name}</h5>
       

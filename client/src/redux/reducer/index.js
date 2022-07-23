@@ -14,6 +14,8 @@ import {
   PUT_SUBTOURNAMENT,
   CLEAR_GALLERY,
   GET_PLAYERS_ON_SUBT,
+  GET_BY_NAME,
+  CHANGE_PANEL_PAGE,
 } from "../actions";
 import { filterUsers } from "../helpers/filters";
 import { sortByName } from "../helpers/sorts";
@@ -33,9 +35,10 @@ const initialState = {
   SecondLine:[],
   ThirdLine:[],
   ImageLoading: false,
+  CurrentPanelPage: 'user',
   playersOnSubt:[],
 };
-const rootReducer = (state = initialState, action) => {
+const rootReducer = (state = initialState, action, name) => {
   switch (action.type) {
     // case GET_ALL_PLAYERS: JSON
     //   return {
@@ -116,6 +119,20 @@ const rootReducer = (state = initialState, action) => {
         return {
           ...state,
           subtournaments: action.payload
+        }
+      case GET_BY_NAME:
+        return {
+          ...state,
+          CurrentPanelPage: action.payload.name,
+          users: action.payload.name === 'user' ? action.payload.value : state.users,
+          tournaments: action.payload.name === 'tournament' ? action.payload.value : state.tournaments,
+          sponsors: action.payload.name === 'sponsor' ? action.payload.value : state.sponsors,
+          subtournaments: action.payload.name === 'subtournament' ? action.payload.value : state.subtournaments
+        }
+      case CHANGE_PANEL_PAGE:
+        return {
+          ...state,
+          CurrentPanelPage: action.payload
         }
       case CLEAR_GALLERY:
         return {

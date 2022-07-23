@@ -4,7 +4,7 @@ import { AiOutlineCloseCircle } from "react-icons/ai";
 import './CreateGallery.css';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
-import { ClearGallery, deleteImage, getAllImages, postImage } from '../../../redux/actions';
+import { ClearGallery, deleteImage, getAllImages, getByName, postImage } from '../../../redux/actions';
 
 export default function CreateGallery() {
 
@@ -29,6 +29,7 @@ export default function CreateGallery() {
   // console.log(ThirdLine);
   useEffect(() => {
     dispatch(getAllImages())
+    dispatch(getByName('user','tom'))
   },[dispatch])
 
   const HandlerSelect = (e) => {

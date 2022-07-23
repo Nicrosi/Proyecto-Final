@@ -4,7 +4,7 @@ import { getAllUsersName } from "../../redux/actions";
 import styles from "./SearchBar.module.css";
 import searchIcon from "../../img/search-icon.png";
 
-export default function SearchBar() {
+export default function SearchBar({route}) {
   const [input, setInput] = useState("");
   const dispatch = useDispatch();
 

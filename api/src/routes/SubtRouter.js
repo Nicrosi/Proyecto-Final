@@ -1,11 +1,22 @@
 const { Router } = require("express");
 const router = Router();
-const { Subtournament,Category } = require("../db");
+const { Subtournament, Category, Tournament, Op } = require("../db");
 const {getAllSubt} = require('../utils/Subt_Controller');
 
 router.get('/', async (req, res) => {
-    let allSubt = await getAllSubt();
-    allSubt.length > 0 ? res.status(200).send(allSubt) : res.status(404).send('No sub tournament found');
+    const { name } = req.query;
+    if(name) {
+        const subtournament = await Subtournament.findAll({where: {name: {[Op.iLike]: `${name}%`}}, include: [Tournament,Category]});
+        const subTourn = {
+            name: "subtournament",
+            value: subtournament
+        }
+        subtournament.length ? res.status(200).json(subTourn) : res.status(400).send({msg: 'No subtournament found'})
+    }else{
+
+        let allSubt = await getAllSubt();
+        allSubt.length > 0 ? res.status(200).send(allSubt) : res.status(404).send('No sub tournament found');
+    }
 })
 
 router.get('/:id', async (req, res) => {
@@ -21,7 +32,8 @@ router.get('/ByTournament/:id_tournament', async (req, res) => {
             id_tournament: id_tournament
         },
         include: [
-            Category
+            Category,
+            Tournament
           ]
     })
     filter_subt.length > 0 ? res.status(200).send(filter_subt) : res.status(404).json({msg_error: 'Subtournament not found'});

@@ -1,12 +1,23 @@
 const { Router } = require("express");
 const router = Router();
-const { Tournament, Subtournament } = require('../db');
+const { Tournament, Op } = require('../db');
 
 router.get('/', async (req, res) => {
-  const Tournaments = await Tournament.findAll();
-  if(!Tournaments.length) return res.status(404).send({msg_errors: 'Not tournament found'})
+  const { name } = req.query;  //http://localhost:3001/${tournament}?name=${name}
+  if(name) {
+    const Tournaments = await Tournament.findAll({where: {location: {[Op.iLike]: `${name}%`}}});
+    const tournaments = {
+      name: "tournament",
+      value: Tournaments
+    }
+    Tournaments.length ? res.status(200).json(tournaments) : res.status(404).send({msg: 'No tournament found'})
+  }else{
 
-  res.status(200).send(Tournaments)
+    const Tournaments = await Tournament.findAll();
+    if(!Tournaments.length) return res.status(404).send({msg_errors: 'Not tournament found'})
+  
+    res.status(200).send(Tournaments)
+  }
 
 })
 
