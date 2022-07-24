@@ -25,7 +25,10 @@ export const GET_ALL_SUBTOURNAMENTS="GET_ALL_SUBTOURNAMENTS";
 export const PUT_SUBTOURNAMENT="PUT_SUBTOURNAMENT";
 export const CLEAR_GALLERY="CLEAR_GALLERY";
 export const GET_PLAYERS_ON_SUBT= "GET_PLAYERS_ON_SUBT"
-
+export const GET_INSCRIPTIONS="GET_INSCRIPTIONS"
+export const GET_GESTION="GET_GESTION"
+export const PUT_GESTION = "PUT_GESTION" 
+export const GETPUT_GESTION = "GETPUT_GESTION"
 // export const getAllPlayers = () => { JSON
 //   return {
 //     type: GET_ALL_PLAYERS,
@@ -42,7 +45,8 @@ const urlSubTournament = "http://localhost:3001/subtournament";
 const urlSponsor = "http://localhost:3001/sponsor"
 const urlTournaments = "http://localhost:3001/tournament"
 const urlPlayersOnSubt = "http://localhost:3001/players"
-
+const urlGestion = "http://localhost:3001/gestion"
+const urlInscriptions = "http://localhost:3001/inscription"
 toast.configure();
 
 
@@ -318,7 +322,38 @@ export const ClearGallery = () => {
   }
 }
 
+export const getInscriptions= () =>{
+  return async function (dispatch) {
+      const answer = await axios.get(urlInscriptions);
+      return dispatch({
+          type: GET_INSCRIPTIONS,
+          payload: answer.data
+      });
+  }
+}
 
+export const getGestion= (id_gestion) =>{
+  return async function (dispatch) {
+      const answer = await axios.get(`${urlGestion}/${id_gestion}`); 
+      return dispatch({ 
+          type: GET_GESTION,
+          payload: answer.data
+      });
+  }
+}
 
-
-  
+export const putGestion = (id_gestion, input) => {
+  return async (dispatch) => {
+    const putValues = {
+      organizer_earnings: input.organizer_earnings,
+      tennis_courts: input.tennis_courts,
+      awards: input.awards,
+    };
+     await axios.put(`${urlGestion}/${id_gestion}`, putValues);
+     const {data} = await axios.get(`${urlGestion}/${id_gestion}`);
+     return dispatch({
+      type: GETPUT_GESTION,
+      payload: data
+  });
+  };
+};

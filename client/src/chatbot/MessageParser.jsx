@@ -6,8 +6,24 @@ const MessageParser = ({ children, actions }) => {
     if (message.includes("hello") || message.includes("hi")) {
       actions.handleHello();
     }
-    if (message.includes("como estas?") || message.includes("Como estas?")) {
+    if (message.includes("como estas")) {
       actions.handleState();
+    }
+    if (message.includes("sponsor")) {
+      actions.handleSponsors();
+    }
+    if (
+      message.includes("instruction") ||
+      message.includes("inscription") ||
+      message.includes("register")
+    ) {
+      actions.handleInscription();
+    }
+    if (message.includes("options") || message.includes("frequent questions")) {
+      actions.handleOptions();
+    }
+    if (message.includes("tournament")) {
+      actions.handleTournament();
     }
   };
 

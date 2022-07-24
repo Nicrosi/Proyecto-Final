@@ -13,7 +13,7 @@ const tournament = [
     }
   ];
 
-xdescribe("Routes", () => {
+describe("Routes", () => {
 before(() =>
     conn.authenticate().catch((err) => {
     console.error("Unable to connect to the database:", err);
