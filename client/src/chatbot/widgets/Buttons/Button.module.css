@@ -1,0 +1,51 @@
+.containerBtn{
+  text-align: center;
+  padding-left: 60px;
+}
+
+.containerBtn a{
+  text-decoration: none;
+  display: inline-block;
+}
+
+.containerBtn button{
+  border-radius: 5px;
+  font-size: 14px;
+  transition: all ease-in 0.2s;
+  border-color: #212529;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.containerBtn button:hover{
+  border-color: #A7D129;
+}
+
+.btn{
+  min-width: 80px;
+}
+
+.btn:hover span {
+  display: none
+}
+
+.btn:hover:before {
+  content: "Go to!"
+}
+
+.btnEmail{
+  min-height: 36px;
+}
+
+.btnTel{
+  min-height: 36px;
+  margin-left: 20px;
+}
+
+.btnEmail img{
+  width: 30px;
+}
+.btnTel img{
+  width: 30px;
+}

@@ -3,8 +3,9 @@
   padding-left: 10px;
   border-left: 2px;
   border: none;
-  border-top-left-radius: 20px;
   outline: none;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
 }
 
 .btnSearch{

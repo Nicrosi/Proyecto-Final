@@ -11,18 +11,30 @@ import "react-chatbot-kit/build/main.css";
 export const ChatBot = () => {
   const [showBot, setShowBot] = useState(false);
 
+  const saveMessages = (messages, HTMLString) => {
+    console.log("save");
+    localStorage.setItem("chat_messages", JSON.stringify(messages));
+  };
+
+  const loadMessages = () => {
+    const messages = JSON.parse(localStorage.getItem("chat_messages"));
+    return messages;
+  };
+
   const handleShow = (e) => {
-    setShowBot(!showBot);
+    setShowBot((prev) => !prev);
   };
   return (
     <>
-      {showBot ? (
+      {showBot && (
         <Chatbot
           config={config}
           messageParser={MessageParser}
           actionProvider={ActionProvider}
+          messageHistory={loadMessages()}
+          saveMessages={saveMessages}
         />
-      ) : null}
+      )}
       <button className={styles.btnBot}>
         <img
           className={styles.img}
