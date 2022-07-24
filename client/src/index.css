@@ -53,7 +53,14 @@ code {
 }
 @media screen and (max-width: 768px){
   .react-chatbot-kit-chat-container{
-    height: 80%;
+    top: 15%;
+    height: 62vh !important;
+  }
+  .react-chatbot-kit-chat-message-container{
+    height: 50vh !important;
+  }
+  .react-chatbot-kit-chat-inner-container{
+    height: 60vh !important;
   }
 }
 .react-chatbot-kit-chat-header {
@@ -67,4 +74,11 @@ code {
 }
 .react-chatbot-kit-chat-bot-avatar-container p{
   display: none;
+}
+.react-chatbot-kit-user-chat-message {
+  background-color: rgb(104,104,104) !important;
+  color: white !important;
+}
+.react-chatbot-kit-user-chat-message-arrow{
+  border-left-color: rgb(104,104,104)!important;
 }
