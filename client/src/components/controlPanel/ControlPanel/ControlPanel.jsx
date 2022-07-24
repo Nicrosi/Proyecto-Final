@@ -1,4 +1,4 @@
-import { getAllSponsors, getAllUsers } from "../../../redux/actions";
+import { getAllSponsors, getAllUsers, getGestion } from "../../../redux/actions";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import styles from "./ControlPanel.module.css"
@@ -7,6 +7,7 @@ import ControlUserList from "../ControlUserList/ControlUserList";
 import ControlSponsorsList from "../ControlSponsorsList/ControlSponsorsList";
 import ControlSubtournamentsList from "../ControlSubtournamentsList/ControlSubtournamentsList";
 import ControlTournamentsList from "../ControlTournamentsList/ControlTournamentsList";
+import { DashBoard } from "../DashBoard/DashBoard";
 
 
 export default function ControlPanel() {
@@ -16,7 +17,7 @@ export default function ControlPanel() {
 
   useEffect(() => {
     dispatch(getAllUsers());
-
+    dispatch(getGestion(1));
     dispatch(getAllSponsors());
   }, [dispatch]);
   
@@ -28,6 +29,9 @@ export default function ControlPanel() {
           {show === "sponsors" && <ControlSponsorsList/>}
           {show === "tournaments" && <ControlTournamentsList />}
           {show === "subtournaments" && <ControlSubtournamentsList />}
+          {/* {show === "tournaments" && <ControlTournamentsList />} */}
+          {/* {show === "subtournaments" && <ControlSubtournamentsList />} */}
+          {show === "dashboard" && <DashBoard/>}
           
       </div>
     </div>

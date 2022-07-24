@@ -1,0 +1,31 @@
+
+.containerOpt{
+  display: flex;
+  flex-direction: column;
+  margin-top: 25px;
+}
+.containerOpt p{
+  text-align: center;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+.option{
+  padding-left: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #212529;
+  color: white;
+  border-top-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: all ease-in-out 0.3s;
+  font-size: 14px;
+  border-color: #212529;
+}
+
+.option:hover{
+  background-color: rgb(120,160,20);
+}
