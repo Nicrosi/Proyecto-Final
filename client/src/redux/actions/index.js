@@ -56,11 +56,11 @@ export const getAllUsers = () => (dispatch) => {
       dispatch({
         type: GET_ALL_USERS,
         payload: response.data,
+        
       })
     )
     .catch((err) => console.log(err));
 };
-
 export const getAllSubtournaments = () => (dispatch) => {
   return axios
     .get(urlSubTournament)

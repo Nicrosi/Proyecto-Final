@@ -5,7 +5,7 @@ const { Tournament, Op } = require('../db');
 router.get('/', async (req, res) => {
   const { name } = req.query;  //http://localhost:3001/${tournament}?name=${name}
   if(name) {
-    const Tournaments = await Tournament.findAll({where: {location: {[Op.iLike]: `${name}%`}}});
+    const Tournaments = await Tournament.findAll({where: {name: {[Op.iLike]: `${name}%`}}});
     const tournaments = {
       name: "tournament",
       value: Tournaments

@@ -35,7 +35,7 @@ const initialState = {
   SecondLine:[],
   ThirdLine:[],
   ImageLoading: false,
-  CurrentPanelPage: 'user',
+  CurrentPanelPage: "user",
   playersOnSubt:[],
 };
 const rootReducer = (state = initialState, action, name) => {

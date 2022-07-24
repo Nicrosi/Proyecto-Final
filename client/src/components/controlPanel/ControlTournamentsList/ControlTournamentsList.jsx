@@ -9,12 +9,15 @@ import { useDispatch, useSelector } from "react-redux";
 import styles from "./ControlTournamentsList.module.css";
 import ControlCardTournaments from "../ControlCardTournaments/ControlCardTournaments";
 import Swal from "sweetalert2";
+import validate from './Validations';
 
 export default function ControlTournamentsList() {
   const tournaments = useSelector((state) => state.rootReducer.tournaments);
 
   const [updateList, setUpdateList] = useState(false);
   const [dataModal, setDataModal] = useState({});
+  const [error, setError] = useState({});
+
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -23,9 +26,15 @@ export default function ControlTournamentsList() {
 
   function handleChange(e) {
     e.preventDefault();
-
     setDataModal({ ...dataModal, [e.target.name]: e.target.value });
+    setError(
+      validate({
+        ...dataModal, 
+        [e.target.name]: e.target.value
+      })
+    )
   }
+
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -40,7 +49,7 @@ export default function ControlTournamentsList() {
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
-        dispatch(putTournament(dataModal.id_tournaments, dataModal));
+        dispatch(putTournament(dataModal.id_tournament, dataModal));
         Swal.fire("Saved!", "", "success");
 
         dispatch(getTournament());
@@ -51,7 +60,6 @@ export default function ControlTournamentsList() {
         Swal.fire("Changes are not saved", "", "info");
       }
     });
-    console.log(dataModal);
   }
 
   return (
@@ -113,10 +121,22 @@ export default function ControlTournamentsList() {
                                   onChange={(e) => handleChange(e)}
                                   value={dataModal.name}
                                   placeholder=""
-                                  name="company"
-                                  className="form-control  border-0"
+                                  name="name"
                                   id="floatingInput"
+                                  className={
+                                    error.name
+                                      ? "form-control border-0 is-invalid"
+                                      : "form-control border-0 is-valid"
+                                  }
                                 />
+                                {error.name && (
+                                  <div
+                                    id="validationServerUsernameFeedback"
+                                    className="invalid-feedback"
+                                  >
+                                    {error.name}
+                                  </div>
+                                )}
                                 <label for="floatingInput">Name</label>
                               </div>
                               <div className="form-floating col-md">
@@ -124,11 +144,23 @@ export default function ControlTournamentsList() {
                                   type="date"
                                   onChange={(e) => handleChange(e)}
                                   value={dataModal.date}
-                                  name="message"
-                                  className="form-control border-0"
+                                  name="date"
                                   id="floatingInput"
+                                  className={
+                                    error.date
+                                      ? "form-control border-0 is-invalid"
+                                      : "form-control border-0 is-valid"
+                                  }
                                 />
-                                <label for="floatingInput">Date</label>
+                                {error.date && (
+                                  <div
+                                    id="validationServerUsernameFeedback"
+                                    className="invalid-feedback"
+                                  >
+                                    {error.date}
+                                  </div>
+                                )}
+                                <label for="floatingInput">Current Date {dataModal?.date?.slice(0,10)}</label>
                               </div>
                             </div>
 
@@ -139,32 +171,44 @@ export default function ControlTournamentsList() {
                                   onChange={(e) => handleChange(e)}
                                   value={dataModal.location}
                                   placeholder=""
-                                  name="logo"
-                                  className="form-control  border-0"
+                                  name="location"
                                   id="floatingInput"
+                                  className={
+                                    error.location
+                                      ? "form-control border-0 is-invalid"
+                                      : "form-control border-0 is-valid"
+                                  }
                                 />
+                                {error.location && (
+                                  <div
+                                    id="validationServerUsernameFeedback"
+                                    className="invalid-feedback"
+                                  >
+                                    {error.location}
+                                  </div>
+                                )}
                                 <label for="floatingInput">Location</label>
-                              </div>
-                              <div className="form-floating col-md">
-                                <input
-                                  type="text"
-                                  onChange={(e) => handleChange(e)}
-                                  value={dataModal.earning}
-                                  name="link"
-                                  className="form-control border-0"
-                                  id="floatingInput"
-                                />
-                                <label for="floatingInput">Earning</label>
                               </div>
                             </div>
                             <div class="modal-footer">
-                              <button
-                                className="btn btn-outline-secondary btn-dark my-2"
-                                type="submit"
-                                data-bs-dismiss="modal"
-                              >
-                                Confirm changes
-                              </button>
+                              {Object.keys(error).length > 0 ? (
+                                <button
+                                  className="btn btn-outline-secondary btn-dark my-2"
+                                  type="submit"
+                                  data-bs-dismiss="modal"
+                                  disabled
+                                >
+                                  Confirm changes
+                                </button>
+                              ) : (
+                                <button
+                                  className="btn btn-outline-secondary btn-dark my-2"
+                                  type="submit"
+                                  data-bs-dismiss="modal"
+                                >
+                                  Confirm changes
+                                </button>
+                              )}
                             </div>
                           </div>
                         </form>
