@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { RadarChart } from "../../Charts/RadarChart/RadarChart";
 import { FormScore } from "../../FormScore/FormScore";
 import styles  from "./CategoryScoreUser.module.css"
 
@@ -37,7 +38,9 @@ export default function CategoryScoreUser({params, user}) {
                     </li>
                   </ul>
                   {user.score && (
-                    <ul className="list-group" style={{marginTop: "20px"}}>
+                    <div>
+                    <div ><RadarChart dataUser={user.score}/></div>
+                    <div><ul className="list-group">
                       <li className="list-group-item">
                         <h5>
                           Previous Tournaments:{" "}
@@ -55,9 +58,7 @@ export default function CategoryScoreUser({params, user}) {
                         </h5>
                       </li>
                       <li className="list-group-item">
-                        <h5>
-                          Special hits: {user.score.special_hits}
-                        </h5>
+                        <h5>Special hits: {user.score.special_hits}</h5>
                       </li>
                       <li className="list-group-item">
                         <h5>
@@ -70,7 +71,9 @@ export default function CategoryScoreUser({params, user}) {
                           Game strategy: {user.score.game_strategy}
                         </h5>
                       </li>
-                    </ul>
+                    </ul></div>
+                    
+                    </div>
                   ) }
                 </>
                 )}
