@@ -19,7 +19,6 @@ export default function CreateGallery() {
   const ImageLoading = useSelector((state) => state.rootReducer.ImageLoading);
   
   const [ file, setFile ] = useState(null);
-  const [ error, setError ] = useState(null);
   const [ title, setTitle ] = useState({
     title: ''
   });
@@ -95,6 +94,7 @@ export default function CreateGallery() {
       formData.append('image', file);
       dispatch(ClearGallery())
       setGallery(true)
+      setTitle({title: ''})
   
       await axios.post(`http://localhost:3001/gallery/post?title=${title.title}`,formData)
       dispatch(getAllImages())
@@ -108,10 +108,6 @@ export default function CreateGallery() {
         confirmButtonColor: '#A7D129',
         cancelButtonColor: '#A7D129',
         confirmButtonText: ' Okey '
-      }).then((result) => {
-        if (result.isConfirmed) {
-          // History.go()
-        }
       })
     }
     
