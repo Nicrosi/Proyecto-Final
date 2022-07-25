@@ -5,58 +5,25 @@ const { Subtournament, conn } = require("../../src/db.js");
 
 const agent = session(app);
 
-const subtournaments = [  
-    {
-    elimination_type: "Double",
-    match_type: "Singles",
-    name: "Ladies Singles",
-    numb_players: 26,
-    gender: "female",
-    price: 120,
+const cantSubt=5;
+
+const subtournaments = [];
+  
+const eliminations = ["Allvsall","Double","Simple"]
+
+for(i=0; i <= cantSubt; i++){
+  subtournaments.push({
+    elimination_type: eliminations[Math.floor(Math.random() * 3)],
+    match_type: i%2==0?"Singles":"Dobles",
+    name: "subTournament test"+i,
+    numb_players: 12,
+    gender: i%2==0?"female":"male",
+    price: Math.floor(Math.random() * 200) + 100,
     id_tournament: 1,
-    id_category: 1
-  },
-  {
-    elimination_type: "Double",
-    match_type: "Doubles",
-    name: "Ladies Dobules",
-    numb_players: 52,
-    gender: "female",
-    price: 200,
-    id_tournament: 1,
-    id_category: 1
-  },
-  {
-    elimination_type: "Single",
-    match_type: "Doubles",
-    name: "Men's Doubles",
-    numb_players: 52,
-    gender: "male",
-    price: 200,
-    id_tournament: 1,
-    id_category: 1
-  },
-  {
-    elimination_type: "Single",
-    match_type: "Singles",
-    name: "Men's Dobules",
-    numb_players: 26,
-    gender: "male",
-    price: 120,
-    id_tournament: 1,
-    id_category: 1
-  },
-  {
-    elimination_type: "Double",
-    match_type: "Singles",
-    name: "Children's Singles",
-    numb_players: 26,
-    gender: "child",
-    price: 100,
-    id_tournament: 1,
-    id_category: 1
-  },
-  ];
+    id_category: `${Math.floor(Math.random() * 4) + 1}`
+  })
+}
+
   
 
 xdescribe("Routes", () => {

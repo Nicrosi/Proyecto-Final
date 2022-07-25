@@ -14,7 +14,9 @@ import {
   PUT_SUBTOURNAMENT,
   CLEAR_GALLERY,
   GET_PLAYERS_ON_SUBT,
-  ADD_MATCH,
+  GET_INSCRIPTIONS,
+  GET_GESTION,
+  GETPUT_GESTION
 } from "../actions";
 import { filterUsers } from "../helpers/filters";
 import { sortByName } from "../helpers/sorts";
@@ -29,13 +31,14 @@ const initialState = {
   filteredSubt: [],
   tournaments:[],
   subtournaments:[],
-  gallery:[],
   FirstLine:[],
   SecondLine:[],
   ThirdLine:[],
   ImageLoading: false,
-  playersOnSubt:[],
-  match:[],
+  gallery: [],
+  playersOnSubt: [],
+  gestion: {},
+  inscriptions: [],
 };
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -93,7 +96,7 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         filteredSubt: action.payload,
-      }    
+      };
     case CLEAR_USER:
       return {
         ...state,
@@ -127,11 +130,6 @@ const rootReducer = (state = initialState, action) => {
           ThirdLine: [],
           ImageLoading: true
         }
-        case GET_PLAYERS_ON_SUBT:
-        return {
-          ...state,
-          playersOnSubt: action.payload
-        }
       case GET_ALL_IMAGES:
         const images = [...action.payload];
         let firstLine = [];
@@ -150,12 +148,25 @@ const rootReducer = (state = initialState, action) => {
           ThirdLine: thirdLine,
           ImageLoading: false,
         }
-
-        case ADD_MATCH:
-      console.log("action", action.payload);
+    case GET_PLAYERS_ON_SUBT:
       return {
         ...state,
-        match: [...state.match, action.payload],
+        playersOnSubt: action.payload,
+      };
+    case GET_INSCRIPTIONS:
+      return {
+        ...state,
+        inscriptions: action.payload,
+      };
+    case GET_GESTION:
+      return {
+        ...state,
+        gestion: action.payload,
+      };
+      case GETPUT_GESTION:
+      return {
+        ...state,
+        gestion: action.payload,
       };
     default:
       return { ...state };

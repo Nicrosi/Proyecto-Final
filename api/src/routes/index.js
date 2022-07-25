@@ -10,9 +10,10 @@ const Team = require("../routes/TeamRouter.js");
 const Auth = require("../routes/AuthRouter.js");
 const Gallery = require("../routes/GalleryRouter.js");
 const Players = require("../routes/playersOnSubtRoute.js")
+const gestion = require("../routes/GestionRouter.js")
 const router = Router();
 
-
+router.use("/gestion", gestion);
 router.use("/category", category);
 router.use("/user", RouteUser);
 router.use("/sponsor", Sponsor);

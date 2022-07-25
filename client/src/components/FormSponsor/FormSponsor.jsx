@@ -44,10 +44,10 @@ export const FormSponsor = () => {
   });
 
   const [error, setError] = useState({
-    company: "Company is required",
-    message: "Message is required",
-    logo: "Logo is required",
-    link: "Link is required",
+    company: "init",
+    message: "init",
+    logo: "init",
+    link: "init",
   });
 
   function handleOnChange(e) {
@@ -56,6 +56,7 @@ export const FormSponsor = () => {
       [e.target.name]: e.target.value,
     });
 
+    
     let objError = validate({ ...input, [e.target.name]: e.target.value });
     setError(objError);
   }
@@ -90,16 +91,16 @@ export const FormSponsor = () => {
                   id="floatingInput"
                   name="company"
                   value={input.name}
-                  className={error.company?"form-control is-invalid":"form-control is-valid"}
+                  className={error.company==="init"?("form-control"):(error.company?"form-control is-invalid":"form-control is-valid")}
                   required
                 />
-                {error.company ?
+                {error.company==="init"?<br/>:(error.company ?
                   <div id="validationServerUsernameFeedback" className="invalid-feedback">
                   {error.company}
                   </div>:
                   <div id="validationServerUsernameFeedback" className="valid-feedback">
                   {noError}
-                  </div>
+                  </div>)
                 }
                 <label htmlFor="floatingInput">Company</label>      
               </div>
@@ -112,16 +113,16 @@ export const FormSponsor = () => {
                   id="floatingInput"
                   name="logo"
                   value={input.logo}
-                  className={error.logo?"form-control is-invalid":"form-control is-valid"}
+                  className={error.logo==="init"?("form-control"):(error.logo?"form-control is-invalid":"form-control is-valid")}
                   required
                 />
-                {error.logo ?
+                {error.logo==="init"?<br/>:(error.logo ?
                   <div id="validationServerUsernameFeedback" className="invalid-feedback">
                   {error.logo}
                   </div>:
                   <div id="validationServerUsernameFeedback" className="valid-feedback">
                   {noError}
-                  </div>
+                  </div>)
                 }
                 <label htmlFor="floatingInput">Logo</label>
               </div>
@@ -136,16 +137,16 @@ export const FormSponsor = () => {
                   id="floatingInput"
                   name="link"
                   value={input.link}
-                  className={error.link?"form-control is-invalid":"form-control is-valid"}
+                  className={error.link==="init"?("form-control"):(error.link?"form-control is-invalid":"form-control is-valid")}
                   required
                 />
-                {error.link ?
+                {error.link==="init"?<br/>:(error.link ?
                   <div id="validationServerUsernameFeedback" className="invalid-feedback">
                   {error.link}
                   </div>:
                   <div id="validationServerUsernameFeedback" className="valid-feedback">
                   {noError}
-                  </div>
+                  </div>)
                 }
                 <label>Link</label>
               </div>
@@ -161,16 +162,16 @@ export const FormSponsor = () => {
                   name="message"
                   value={input.message}
                   style={{height: "100px"}} 
-                  className={error.message?"form-control is-invalid":"form-control is-valid"}
+                  className={error.message==="init"?("form-control"):(error.message?"form-control is-invalid":"form-control is-valid")}
                   required
                 />
-                {error.message ?
+                {error.message==="init"?<br/>:(error.message ?
                   <div id="validationServerUsernameFeedback" className="invalid-feedback">
                   {error.message}
                   </div>:
                   <div id="validationServerUsernameFeedback" className="valid-feedback">
                   {noError}
-                  </div>
+                  </div>)
                 }
                 <label htmlFor="floatingInput">Message</label>
               </div>

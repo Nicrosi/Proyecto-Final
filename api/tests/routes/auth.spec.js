@@ -3,233 +3,43 @@ const { expect } = require("chai");
 const session = require("supertest-session");
 const app = require("../../src/app.js");
 const { User, conn } = require("../../src/db.js");
-
+const { faker } = require('@faker-js/faker');
 const agent = session(app);
 
+const cantUser = 100
+const cantScore = 80
 //For test
-const users = [
-  {
-    name: "example1",
-    dni: "23442",
-    last_name: "a",
+const users = [];
+const score = [];
+
+
+for(i=0; i <= cantUser; i++){
+  users.push({
+    name: faker.name.firstName(i % 2===0? "male":"female"),
+    dni: i,
+    last_name: faker.name.lastName(),
     is_admin: false,
-    e_mail: "example1@gmail.com",
-    password: "22345",
-    phone: 1231,
-    num_contact: 2131,
+    e_mail: `example${i}@gmail.com`,
+    password: "example"+i,
+    phone: 8888+i,
+    num_contact: 8889+i,
     picture:
-      "https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png",
-    gender: "male",
-  },
-  {
-    name: "example2",
-    dni: "2344",
-    last_name: "a",
-    is_admin: false,
-    e_mail: "example2@gmail.com",
-    password: "22345",
-    phone: 1231,
-    num_contact: 2131,
-    picture:
-      "https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png",
-    gender: "male",
-  },
-  {
-    name: "example3",
-    dni: "234",
-    last_name: "a",
-    is_admin: false,
-    e_mail: "example3@gmail.com",
-    password: "22345",
-    phone: 1231,
-    num_contact: 2131,
-    picture:
-      "https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png",
-    gender: "male",
-  },
-  {
-    name: "example4",
-    dni: "23",
-    last_name: "a",
-    is_admin: false,
-    e_mail: "example4@gmail.com",
-    password: "22345",
-    phone: 1231,
-    num_contact: 2131,
-    picture:
-      "https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png",
-    gender: "male",
-  },
-  {
-    name: "example5",
-    dni: "231",
-    last_name: "a",
-    is_admin: false,
-    e_mail: "example5@gmail.com",
-    password: "22345",
-    phone: 1231,
-    num_contact: 2131,
-    picture:
-      "https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png",
-    gender: "male",
-  },
-  {
-    name: "example6",
-    dni: "2311",
-    last_name: "a",
-    is_admin: false,
-    e_mail: "example6@gmail.com",
-    password: "22345",
-    phone: 1231,
-    num_contact: 2131,
-    picture:
-      "https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png",
-    gender: "male",
-  },
-  {
-    name: "example7",
-    dni: "23111",
-    last_name: "a",
-    is_admin: false,
-    e_mail: "example7@gmail.com",
-    password: "22345",
-    phone: 1231,
-    num_contact: 2131,
-    picture:
-      "https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png",
-    gender: "male",
-  },
-  {
-    name: "example8",
-    dni: "231111",
-    last_name: "a",
-    is_admin: false,
-    e_mail: "example8@gmail.com",
-    password: "22345",
-    phone: 1231,
-    num_contact: 2131,
-    picture:
-      "https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png",
-    gender: "male",
-  },
-  {
-    name: "example9",
-    dni: "2311511",
-    last_name: "a",
-    is_admin: false,
-    e_mail: "example9@gmail.com",
-    password: "22345",
-    phone: 1231,
-    num_contact: 2131,
-    picture:
-      "https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png",
-    gender: "male",
-  },
-  {
-    name: "example10",
-    dni: "2311111",
-    last_name: "a",
-    is_admin: false,
-    e_mail: "example10@gmail.com",
-    password: "22345",
-    phone: 1231,
-    num_contact: 2131,
-    picture:
-      "https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png",
-    gender: "male",
-  },
-  {
-    name: "example11",
-    dni: 23222,
-    last_name: "a",
-    is_admin: false,
-    e_mail: "example11@gmail.com",
-    password: "22345",
-    phone: 1231,
-    num_contact: 2131,
-    picture:
-      "https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png",
-    gender: "male",
-  },
-  {
-    name: "example12",
-    dni: "23333",
-    last_name: "a",
-    is_admin: false,
-    e_mail: "example12@gmail.com",
-    password: "22345",
-    phone: 1231,
-    num_contact: 2131,
-    picture:
-      "https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png",
-    gender: "male",
-  },
-  {
-    name: "example13",
-    dni: "234444",
-    last_name: "a",
-    is_admin: false,
-    e_mail: "example13@gmail.com",
-    password: "22345",
-    phone: 1231,
-    num_contact: 2131,
-    picture:
-      "https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png",
-    gender: "male",
-  },
-  {
-    name: "example14",
-    dni: "236666",
-    last_name: "a",
-    is_admin: false,
-    e_mail: "example14@gmail.com",
-    password: "22345",
-    phone: 1231,
-    num_contact: 2131,
-    picture:
-      "https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png",
-    gender: "male",
-  },
-  {
-    name: "example15",
-    dni: "23888",
-    last_name: "a",
-    is_admin: false,
-    e_mail: "example15@gmail.com",
-    password: "22345",
-    phone: 1231,
-    num_contact: 2131,
-    picture:
-      "https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png",
-    gender: "male",
-  },
-  {
-    name: "example16",
-    dni: "23669",
-    last_name: "a",
-    is_admin: false,
-    e_mail: "example16@gmail.com",
-    password: "22345",
-    phone: 1231,
-    num_contact: 2131,
-    picture:
-      "https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png",
-    gender: "male",
-  },
-  {
-    name: "example17",
-    dni: "234455",
-    last_name: "a",
-    is_admin: false,
-    e_mail: "example17@gmail.com",
-    password: "22345",
-    phone: 1231,
-    num_contact: 2131,
-    picture:
-      "https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png",
-    gender: "male",
-  },
-];
+    faker.image.image(640,480,true),
+    gender: i % 2===0? "male":"female",
+  })
+}
+
+for(i=0; i <= cantScore; i++){
+  score.push({
+    previous_tournaments: Math.floor(Math.random() * 5) + 1,
+    hit_knowledge: Math.floor(Math.random() * 5) + 1,
+    other_strokes: Math.floor(Math.random() * 5) + 1,
+    special_hits: Math.floor(Math.random() * 5) + 1,
+    kick_serve_control: Math.floor(Math.random() * 5) + 1,
+    game_strategy: Math.floor(Math.random() * 5) + 1,
+  })
+}
+
 
 describe("Routes", () => {
   before(() =>
@@ -249,5 +59,16 @@ describe("Routes", () => {
       });
       done();
     });
+    it("add score", (done) => {
+      users.slice(0,79).forEach((user,index) => {
+        agent
+          .post(`/score/${user.dni}`)
+          .send(score[index])
+          .then()
+          .catch(() => done(new Error("not added")));
+      });
+      done();
+    });
+
   });
 });
