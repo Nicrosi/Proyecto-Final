@@ -20,9 +20,9 @@ import { useDispatch } from "react-redux";
 import { FormSubTournament } from "./components/SubTournament/FormSubTournament/FormSubTournament.jsx";
 import TournamentsToShow from "./components/Tournament/TournamentsToShow/TournamentsToShow.jsx";
 import ControlCardUsers from "./components/controlPanel/ControlCardUsers/ControlCardUsers.jsx";
-import {TournamentSimpleElimination} from "./components/SubTournament/TournamentSimpleElimination/TournamentSimpleElimination.jsx"
+import { TournamentSimpleElimination } from "./components/SubTournament/TournamentSimpleElimination/TournamentSimpleElimination.jsx";
 import { ChatBot } from "./components/ChatBot/ChatBot.jsx";
-
+import Brackets from "./components/Brackets/Brackets.js";
 
 function App() {
   const dispatch = useDispatch();
@@ -35,6 +35,7 @@ function App() {
       <Route path={"/"} component={ChatBot} />
       <Route path={"/"} component={NavBar} />
       <Switch>
+        <Route path={"/bracket"} component={Brackets} />
         <RouteGuard exact path={"/Users"} component={Users} admin={false} />
         <RouteGuard
           exact

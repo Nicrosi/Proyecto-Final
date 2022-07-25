@@ -3,7 +3,7 @@ const { expect } = require("chai");
 const session = require("supertest-session");
 const app = require("../../src/app.js");
 const { User, conn } = require("../../src/db.js");
-
+const { faker } = require('@faker-js/faker');
 const agent = session(app);
 
 const cantUser = 100
@@ -15,32 +15,16 @@ const score = [];
 
 for(i=0; i <= cantUser; i++){
   users.push({
-    name: "example"+i,
+    name: faker.name.firstName(i % 2===0? "male":"female"),
     dni: i,
-    last_name: "LastName"+i,
+    last_name: faker.name.lastName(),
     is_admin: false,
     e_mail: `example${i}@gmail.com`,
     password: "example"+i,
     phone: 8888+i,
     num_contact: 8889+i,
     picture:
-      "https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png",
-    gender: i % 2===0? "male":"female",
-  })
-}
-
-for(i=0; i <= cantUser; i++){
-  users.push({
-    name: "example"+i,
-    dni: i,
-    last_name: "LastName"+i,
-    is_admin: false,
-    e_mail: `example${i}@gmail.com`,
-    password: "example"+i,
-    phone: 8888+i,
-    num_contact: 8889+i,
-    picture:
-      "https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png",
+    faker.image.image(640,480,true),
     gender: i % 2===0? "male":"female",
   })
 }
