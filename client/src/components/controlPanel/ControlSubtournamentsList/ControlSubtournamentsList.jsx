@@ -6,13 +6,14 @@ import styles from "../ControlUserList/ControlUserList.module.css";
 // import ControlCardUsers from "../ControlCardUsers/ControlCardUsers";
 import Swal from "sweetalert2"
 import ControlCardSubtournament from "../ControlCardSubtournament/ControlCardSubtournament.jsx";
-
+import validate from './Validations'
 
 export default function ControlSubtournamentsList() {
   const subtournaments = useSelector((state) => state.rootReducer.subtournaments);
 
   const [updateList, setUpdateList] = useState(false);
   const [dataModal, setDataModal] = useState({});
+  const [error, setError] = useState({});
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -23,6 +24,12 @@ export default function ControlSubtournamentsList() {
   function handleChange(e) {
     e.preventDefault();
     setDataModal({ ...dataModal, [e.target.name]: e.target.value });
+    setError(
+      validate({
+        ...dataModal, 
+        [e.target.name]: e.target.value
+      })
+    )
   }
 
    function handleSubmit(e) {
@@ -113,9 +120,21 @@ export default function ControlSubtournamentsList() {
                                   onChange={(e) => handleChange(e)}
                                   value={dataModal.name}
                                   name="name"
-                                  className="form-control  border-0"
                                   id="floatingInput"
+                                  className={
+                                    error.name
+                                      ? "form-control  border-0 is-invalid"
+                                      : "form-control  border-0 is-valid"
+                                  } 
                                 />
+                                {error.name && (
+                                  <div
+                                    id="validationServerUsernameFeedback"
+                                    className="invalid-feedback"
+                                  >
+                                    {error.name}
+                                  </div>
+                                )}
                                 <label htmlFor="floatingInput">Name:</label>
                               </div>
                               <div className="form-floating col-md">
@@ -127,9 +146,21 @@ export default function ControlSubtournamentsList() {
                                   onChange={(e) => handleChange(e)}
                                   value={dataModal.numb_players}
                                   name="numb_players"
-                                  className="form-control border-0"
                                   id="floatingInput"
+                                  className={
+                                    error.numb_players
+                                      ? "form-control border-0 is-invalid"
+                                      : "form-control border-0 is-valid"
+                                  }
                                 />
+                                {error.numb_players && (
+                                  <div
+                                    id="validationServerUsernameFeedback"
+                                    className="invalid-feedback"
+                                  >
+                                    {error.numb_players}
+                                  </div>
+                                )}
                                 <label htmlFor="floatingInput">Numb Players</label>
                               </div>
                             </div>
@@ -142,23 +173,47 @@ export default function ControlSubtournamentsList() {
                                   onChange={(e) => handleChange(e)}
                                   value={dataModal.price}
                                   name="price"
-                                  className="form-control border-0"
                                   id="floatingInput"
+                                  className={
+                                    error.price
+                                      ? "form-control border-0 is-invalid"
+                                      : "form-control border-0 is-valid"
+                                  }
                                 />
+                                {error.price && (
+                                  <div
+                                    id="validationServerUsernameFeedback"
+                                    className="invalid-feedback"
+                                  >
+                                    {error.price}
+                                  </div>
+                                )}
                                 <label htmlFor="floatingInput">Price</label>
                               </div>
                               <div className="form-floating col-md">
                                 <select
                                   onChange={(e) => handleChange(e)}
-                                  className="form-select border-0"
                                   id="floatingSelect"
                                   aria-label="Floating label select example"
                                   name="gender"
+                                  className={
+                                    error.gender
+                                      ? "form-select border-0 is-invalid"
+                                      : "form-select border-0 is-valid"
+                                  }
                                 >
-                                  <option value="">{`${dataModal.gender}`}</option>
+                                  <option value={dataModal.gender}>{`Current Gender ${dataModal.gender}`}</option>
                                   <option value="female">Female</option>
                                   <option value="male">Male</option>
                                 </select>
+                                {error.gender && (
+                                  <div
+                                    id="validationServerUsernameFeedback"
+                                    className="invalid-feedback"
+                                  >
+                                    {error.gender}
+                                  </div>
+                                )}
                                 <label htmlFor="floatingInput">Gender</label>
                               </div>
                             </div>
@@ -167,16 +222,28 @@ export default function ControlSubtournamentsList() {
                               <div className="form-floating col-md">
                                 <select
                                   onChange={(e) => handleChange(e)}
-                                  className="form-select border-0"
                                   id="floatingSelect"
                                   aria-label="Floating label select example"
                                   name="elimination_type"
+                                  className={
+                                    error.elimination_type
+                                      ? "form-select border-0 is-invalid"
+                                      : "form-select border-0 is-valid"
+                                  }
                                 >
-                                  <option value="">{`${dataModal.elimination_type}`}</option>
+                                  <option value={dataModal.elimination_type}>{`Current Elimination Type ${dataModal.elimination_type}`}</option>
                                   <option value="All">All vs All</option>
                                   <option value="Simple">Simple Elimination</option>
                                   <option value="Double">Double Elimination</option>
                                 </select>
+                                {error.elimination_type && (
+                                  <div
+                                    id="validationServerUsernameFeedback"
+                                    className="invalid-feedback"
+                                  >
+                                    {error.elimination_type}
+                                  </div>
+                                )}
                                 <label htmlFor="floatingInput">Elimination Type</label>
                               </div>
                             </div>
@@ -184,15 +251,27 @@ export default function ControlSubtournamentsList() {
                               <div className="form-floating col-md">
                                 <select
                                   onChange={(e) => handleChange(e)}
-                                  className="form-select border-0"
                                   id="floatingSelect"
                                   aria-label="Floating label select example"
                                   name="match_type"
+                                  className={
+                                    error.match_type
+                                      ? "form-select border-0 is-invalid"
+                                      : "form-select border-0 is-valid"
+                                  }
                                 >
-                                  <option value="">{`${dataModal.match_type}`}</option>
+                                  <option value={dataModal.match_type}>{`Current Match Type ${dataModal.match_type}`}</option>
                                   <option value="singles">singles</option>
                                   <option value="dobles">dobles</option>
                                 </select>
+                                {error.match_type && (
+                                  <div
+                                    id="validationServerUsernameFeedback"
+                                    className="invalid-feedback"
+                                  >
+                                    {error.match_type}
+                                  </div>
+                                )}
                                 <label htmlFor="floatingInput">Match Type</label>
                               </div>
                             </div>
@@ -200,12 +279,12 @@ export default function ControlSubtournamentsList() {
                               <div className="form-floating col-md">
                                 <select
                                   onChange={(e) => handleChange(e)}
-                                  className="form-select border-0"
+                                  className="form-select border-0 is-valid"
                                   id="floatingSelect"
                                   aria-label="Floating label select example"
                                   name="id_category"
                                 >
-                                  <option value="">{`${dataModal?.category ? dataModal.category.type : null}`}</option>
+                                  <option value={dataModal?.category ? dataModal.category.type : ""}>{dataModal?.category ? `Current Category ${dataModal.category.type}` : null}</option>
                                   <option value="1">A</option>
                                   <option value="2">B</option>
                                   <option value="3">C</option>
@@ -216,13 +295,24 @@ export default function ControlSubtournamentsList() {
                             </div>
                             <div className="modal-footer">
 
-                              <button
-                                className="btn btn-outline-secondary btn-dark my-2"
-                                type="submit"
-                                data-bs-dismiss="modal"
-                              >
-                                Confirm changes
-                              </button>
+                              {Object.keys(error).length > 0 ? (
+                                <button
+                                  className="btn btn-outline-secondary btn-dark my-2"
+                                  type="submit"
+                                  data-bs-dismiss="modal"
+                                  disabled
+                                >
+                                  Confirm changes
+                                </button>
+                              ) : (
+                                <button
+                                  className="btn btn-outline-secondary btn-dark my-2"
+                                  type="submit"
+                                  data-bs-dismiss="modal"
+                                >
+                                  Confirm changes
+                                </button>
+                              )}
                             </div>
                           </div>
                         </form>

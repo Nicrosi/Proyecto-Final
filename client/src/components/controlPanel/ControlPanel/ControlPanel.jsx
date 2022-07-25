@@ -29,8 +29,6 @@ export default function ControlPanel() {
           {show === "sponsors" && <ControlSponsorsList/>}
           {show === "tournaments" && <ControlTournamentsList />}
           {show === "subtournaments" && <ControlSubtournamentsList />}
-          {/* {show === "tournaments" && <ControlTournamentsList />} */}
-          {/* {show === "subtournaments" && <ControlSubtournamentsList />} */}
           {show === "dashboard" && <DashBoard/>}
           
       </div>

@@ -4,7 +4,8 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./ControlUserList.module.css";
 import ControlCardUsers from "../ControlCardUsers/ControlCardUsers";
-import Swal from "sweetalert2"
+import Swal from "sweetalert2";
+import validate from './Validations';
 
 
 export default function ControlUserList() {
@@ -12,6 +13,8 @@ export default function ControlUserList() {
 
   const [updateList, setUpdateList] = useState(false);
   const [dataModal, setDataModal] = useState({});
+  const [error, setError] = useState({});
+  // const [prueba, setPrueba] = useState({dni: ''});
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -20,20 +23,23 @@ export default function ControlUserList() {
 
   function handleChange(e) {
     e.preventDefault();
+    if (e.target.type === "text" || e.target.type === "email") {
+      setDataModal((prev) => ({
+        ...prev,
+        [e.target.name]: e.target.value.toLowerCase(),
+      }));
+    }
+    // setPrueba({...prueba, [e.target.name]: e.target.value})
+    // console.log(prueba);
 
-    // if (e.target.type === "tel" || e.target.name === "dni") {
-    //   setDataModal({
-    //     ...dataModal,
-    //     [e.target.name]: parseInt(e.target.value, 10),
-    //   });
-    // }
-    // if (e.target.type === "text" || e.target.type === "email") {
-    //   setDataModal((prev) => ({
-    //     ...prev,
-    //     [e.target.name]: e.target.value.toLowerCase(),
-    //   }));
-    // }
     setDataModal({ ...dataModal, [e.target.name]: e.target.value });
+    setError(
+      validate({
+        ...dataModal, 
+        [e.target.name]: e.target.value
+      })
+    )
+    // console.log(dataModal);
   }
 
   function handleSubmit(e) {
@@ -52,7 +58,7 @@ export default function ControlUserList() {
         dispatch(putUsers(dataModal.dni, dataModal));
        
         Swal.fire('Saved!', '', 'success');
-        // dispatch(clearUser());
+        dispatch(clearUser());
         dispatch(getAllUsers());
         setUpdateList(!updateList)
 
@@ -113,7 +119,8 @@ export default function ControlUserList() {
                           style={{ width: "100%" }}
                           onSubmit={(e) => handleSubmit(e)}
                         >
-                          <div key={dataModal.dni} className={styles.editBox}>
+                          <div key={dataModal.id_user} className={styles.editBox}>
+                          
                             <div className={"row g-2 mb-3"}>
                               <div className="form-floating col-md">
                                 <input
@@ -121,9 +128,21 @@ export default function ControlUserList() {
                                   onChange={(e) => handleChange(e)}
                                   value={dataModal.name}
                                   name="name"
-                                  className="form-control  border-0"
                                   id="floatingInput"
+                                  className={
+                                    error.name
+                                      ? "form-control  border-0 is-invalid"
+                                      : "form-control  border-0 is-valid"
+                                  }
                                 />
+                                {error.name && (
+                                  <div
+                                    id="validationServerUsernameFeedback"
+                                    className="invalid-feedback"
+                                  >
+                                    {error.name}
+                                  </div>
+                                )}
                                 <label htmlFor="floatingInput">Name:</label>
                               </div>
                               <div className="form-floating col-md">
@@ -132,9 +151,21 @@ export default function ControlUserList() {
                                   onChange={(e) => handleChange(e)}
                                   value={dataModal.last_name}
                                   name="last_name"
-                                  className="form-control border-0"
                                   id="floatingInput"
+                                  className={
+                                    error.last_name
+                                      ? "form-control border-0 is-invalid"
+                                      : "form-control border-0 is-valid"
+                                  }
                                 />
+                                {error.last_name && (
+                                  <div
+                                    id="validationServerUsernameFeedback"
+                                    className="invalid-feedback"
+                                  >
+                                    {error.last_name}
+                                  </div>
+                                )}
                                 <label htmlFor="floatingInput">Last Name</label>
                               </div>
                             </div>
@@ -142,22 +173,39 @@ export default function ControlUserList() {
                             <div className="row g-2 mb-3">
                               <div className="form-floating col-md">
                                 <input
-                                  type="text"
+                                  key="dni"
+                                  type="number"
                                   onChange={(e) => handleChange(e)}
-                                  value={dataModal.dni}
+                                  value={dataModal?.dni}
                                   name="dni"
-                                  className="form-control border-0"
                                   id="floatingInput"
+                                  className={
+                                    error.dni
+                                      ? "form-control border-0 is-invalid"
+                                      : "form-control border-0 is-valid"
+                                  } 
                                 />
+                                {error.dni && (
+                                  <div
+                                    id="validationServerUsernameFeedback"
+                                    className="invalid-feedback"
+                                  >
+                                    {error.dni}
+                                  </div>
+                                )}
                                 <label htmlFor="floatingInput">DNI</label>
                               </div>
                               <div className="form-floating col-md">
                                 <select
                                   onChange={(e) => handleChange(e)}
-                                  className="form-select border-0"
                                   id="floatingSelect"
                                   aria-label="Floating label select example"
                                   name="is_admin"
+                                  className={
+                                    error.e_mail
+                                      ? "form-control border-0 is-invalid"
+                                      : "form-control border-0 is-valid"
+                                  }
                                 >
                                   <option value="">{`${dataModal.is_admin}`}</option>
                                   <option value="true">True</option>
@@ -165,6 +213,14 @@ export default function ControlUserList() {
                                 </select>
                                 <label htmlFor="floatingInput">isAdmin</label>
                               </div>
+                              {error.e_mail && (
+                                  <div
+                                    id="validationServerUsernameFeedback"
+                                    className="invalid-feedback"
+                                  >
+                                    {error.e_mail}
+                                  </div>
+                                )}
                             </div>
 
                             <div className="row g-2 mb-3">
@@ -174,9 +230,21 @@ export default function ControlUserList() {
                                   onChange={(e) => handleChange(e)}
                                   value={dataModal.e_mail}
                                   name="e_mail"
-                                  className="form-control border-0"
                                   id="floatingInput"
+                                  className={
+                                    error.e_mail
+                                      ? "form-control border-0 is-invalid"
+                                      : "form-control border-0 is-valid"
+                                  }
                                 />
+                                {error.e_mail && (
+                                  <div
+                                    id="validationServerUsernameFeedback"
+                                    className="invalid-feedback"
+                                  >
+                                    {error.e_mail}
+                                  </div>
+                                )}
                                 <label htmlFor="floatingInput">Email</label>
                               </div>
                             </div>
@@ -187,9 +255,21 @@ export default function ControlUserList() {
                                   onChange={(e) => handleChange(e)}
                                   value={dataModal.picture}
                                   name="picture"
-                                  className="form-control  border-0"
                                   id="floatingInput"
+                                  className={
+                                    error.e_mail
+                                      ? "form-control border-0 is-invalid"
+                                      : "form-control border-0 is-valid"
+                                  }
                                 />
+                                {error.picture && (
+                                  <div
+                                    id="validationServerUsernameFeedback"
+                                    className="invalid-feedback"
+                                  >
+                                    {error.picture}
+                                  </div>
+                                )}
                                 <label htmlFor="floatingInput">Picture</label>
                               </div>
                             </div>
@@ -197,12 +277,12 @@ export default function ControlUserList() {
                               <div className="form-floating col-md">
                                 <select
                                   onChange={(e) => handleChange(e)}
-                                  className="form-select border-0"
+                                  className="form-select border-0 is-valid"
                                   id="floatingSelect"
                                   aria-label="Floating label select example"
-                                  name="is_admin"
+                                  name="is_category"
                                 >
-                                  <option value="">{`${dataModal.category}`}</option>
+                                  <option value={dataModal?.category ? dataModal.category.type : ""}>{dataModal?.category ? `Current Category ${dataModal.category.type}` : null}</option>
                                   <option value="A">A</option>
                                   <option value="B">B</option>
                                   <option value="C">C</option>
@@ -213,7 +293,7 @@ export default function ControlUserList() {
                               <div className="form-floating col-md">
                                 <select
                                   onChange={(e) => handleChange(e)}
-                                  className="form-select border-0"
+                                  className="form-select border-0 is-valid"
                                   id="floatingSelect"
                                   aria-label="Floating label select example"
                                   name="gender"
@@ -228,38 +308,74 @@ export default function ControlUserList() {
                             <div className="row g-2 mb-3">
                               <div className="form-floating col-md">
                                 <input
-                                  type="tel"
+                                  key="phone"
+                                  type="number"
                                   onChange={(e) => handleChange(e)}
                                   value={dataModal.phone}
                                   name="phone"
-                                  className="form-control  border-0"
                                   id="floatingInput"
+                                  className={
+                                    error.phone
+                                      ? "form-control border-0 is-invalid"
+                                      : "form-control border-0 is-valid"
+                                  }
                                 />
+                                {error.phone && (
+                                  <div
+                                    id="validationServerUsernameFeedback"
+                                    className="invalid-feedback"
+                                  >
+                                    {error.phone}
+                                  </div>
+                                )}
                                 <label htmlFor="floatingInput">Phone</label>
                               </div>
                               <div className="form-floating col-md">
                                 <input
-                                  type="tel"
+                                  key="num_contact"
+                                  type="number"
                                   onChange={(e) => handleChange(e)}
                                   value={dataModal.num_contact}
                                   name="num_contact"
-                                  className="form-control border-0"
                                   id="floatingInput"
+                                  className={
+                                    error.num_contact
+                                      ? "form-control border-0 is-invalid"
+                                      : "form-control border-0 is-valid"
+                                  }
                                 />
+                                {error.num_contact && (
+                                  <div
+                                    id="validationServerUsernameFeedback"
+                                    className="invalid-feedback"
+                                  >
+                                    {error.num_contact}
+                                  </div>
+                                )}
                                 <label htmlFor="floatingInput">
                                   Emergency Number
                                 </label>
                               </div>
                             </div>
                             <div className="modal-footer">
-
-                              <button
-                                className="btn btn-outline-secondary btn-dark my-2"
-                                type="submit"
-                                data-bs-dismiss="modal"
-                              >
-                                Confirm changes
-                              </button>
+                              {Object.keys(error).length > 0 ? (
+                                  <button
+                                    className="btn btn-outline-secondary btn-dark my-2"
+                                    type="submit"
+                                    data-bs-dismiss="modal"
+                                    disabled
+                                  >
+                                    Confirm changes
+                                  </button>
+                              ) : (
+                                <button
+                                  className="btn btn-outline-secondary btn-dark my-2"
+                                  type="submit"
+                                  data-bs-dismiss="modal"
+                                >
+                                  Confirm changes
+                                </button>
+                              )}
                             </div>
                           </div>
                         </form>

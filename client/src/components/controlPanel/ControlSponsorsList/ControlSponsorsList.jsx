@@ -4,7 +4,8 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./ControlSponsorsList.module.css"
 import ControlCardSponsor from "../ControlCardSponsor/ControlCardSponsor";
-import Swal from "sweetalert2"
+import Swal from "sweetalert2";
+import validate from './Validations';
 
 
 
@@ -13,6 +14,8 @@ export default function ControlSponsorsList() {
 
   const [updateList, setUpdateList] = useState(false);
   const [dataModal, setDataModal] = useState({});
+  const [error, setError] = useState({});
+
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -21,8 +24,13 @@ export default function ControlSponsorsList() {
 
   function handleChange(e) {
     e.preventDefault();
-
     setDataModal({ ...dataModal, [e.target.name]: e.target.value });
+    setError(
+      validate({
+        ...dataModal, 
+        [e.target.name]: e.target.value
+      })
+    )
   }
   function handleSubmit(e) {
     e.preventDefault();
@@ -59,7 +67,7 @@ export default function ControlSponsorsList() {
       {sponsors &&
         sponsors.map((sponsor) => {
           return (
-            <li className="list-group-item">
+            <li key={sponsor.id_sponsor} className="list-group-item">
 
               <ControlCardSponsor 
                 sponsor={sponsor} 
@@ -72,7 +80,7 @@ export default function ControlSponsorsList() {
                 id="staticBackdrop"
                 data-bs-backdrop="static"
                 data-bs-keyboard="false"
-                tabindex="-1"
+                tabIndex="-1"
                 aria-labelledby="staticBackdropLabel"
                 aria-hidden="true"
               >
@@ -106,62 +114,121 @@ export default function ControlSponsorsList() {
                         <div className={"row g-2 mb-3"}>
                           <div className="form-floating col-md">
                           <input
-                  type="text"
-                  onChange={(e) => handleChange(e)}
-                  value={dataModal.company}
-                  placeholder=""
-                  name="company"
-                  className="form-control  border-0"
-                  id="floatingInput"
-                />
-                <label for="floatingInput">Company</label>
+                            type="text"
+                            onChange={(e) => handleChange(e)}
+                            value={dataModal.company}
+                            placeholder=""
+                            name="company"
+                            id="floatingInput"
+                            className={
+                              error.company
+                                ? "form-control border-0 is-invalid"
+                                : "form-control border-0 is-valid"
+                            }
+                          />
+                          {error.company && (
+                            <div
+                              id="validationServerUsernameFeedback"
+                              className="invalid-feedback"
+                            >
+                              {error.company}
+                            </div>
+                          )}
+                          <label htmlFor="floatingInput">Company</label>
                           </div>
                           <div className="form-floating col-md">
                           <input
-                  type="text"
-                  onChange={(e) => handleChange(e)}
-                  value={dataModal.message}
-                  name="message"
-                  className="form-control border-0"
-                  id="floatingInput"
-                />
-                <label for="floatingInput">Message</label>
+                            type="text"
+                            onChange={(e) => handleChange(e)}
+                            value={dataModal.message}
+                            name="message"
+                            id="floatingInput"
+                            className={
+                              error.message
+                                ? "form-control border-0 is-invalid"
+                                : "form-control border-0 is-valid"
+                            }
+                          />
+                          {error.message && (
+                            <div
+                              id="validationServerUsernameFeedback"
+                              className="invalid-feedback"
+                            >
+                              {error.message}
+                            </div>
+                          )}
+                          <label htmlFor="floatingInput">Message</label>
                           </div>
                         </div>
 
                         <div className="row g-2 mb-3">
                           <div className="form-floating col-md">
                           <input
-                  type="text"
-                  onChange={(e) => handleChange(e)}
-                  value={dataModal.logo}
-                  placeholder=""
-                  name="logo"
-                  className="form-control  border-0"
-                  id="floatingInput"
-                />
-                <label for="floatingInput">Logo</label>
+                            type="text"
+                            onChange={(e) => handleChange(e)}
+                            value={dataModal.logo}
+                            placeholder=""
+                            name="logo"
+                            id="floatingInput"
+                            className={
+                              error.logo
+                                ? "form-control border-0 is-invalid"
+                                : "form-control border-0 is-valid"
+                            }
+                          />
+                          {error.logo && (
+                            <div
+                              id="validationServerUsernameFeedback"
+                              className="invalid-feedback"
+                            >
+                              {error.logo}
+                            </div>
+                          )}
+                          <label htmlFor="floatingInput">Logo</label>
                           </div>
                           <div className="form-floating col-md">
                           <input
-                  type="text"
-                  onChange={(e) => handleChange(e)}
-                  value={dataModal.link}
-                  name="link"
-                  className="form-control border-0"
-                  id="floatingInput"
-                />
-                <label for="floatingInput">Link</label>
+                            type="text"
+                            onChange={(e) => handleChange(e)}
+                            value={dataModal.link}
+                            name="link"
+                            id="floatingInput"
+                            className={
+                              error.link
+                                ? "form-control border-0 is-invalid"
+                                : "form-control border-0 is-valid"
+                            }
+                          />
+                          {error.link && (
+                            <div
+                              id="validationServerUsernameFeedback"
+                              className="invalid-feedback"
+                            >
+                              {error.link}
+                            </div>
+                          )}
+                          <label htmlFor="floatingInput">Link</label>
                           </div>
                         </div>
-                        <div class="modal-footer">
-                        <button
-                          className="btn btn-outline-secondary btn-dark my-2"
-                          type="submit"
-                          data-bs-dismiss="modal"
-                        >
-                          Confirm changes
-                        </button>
+                        <div className="modal-footer">
+                          {Object.keys(error).length > 0 ? (
+                            <button
+                              className="btn btn-outline-secondary btn-dark my-2"
+                              type="submit"
+                              data-bs-dismiss="modal"
+                              disabled
+                            >
+                              Confirm changes
+                            </button>
+                          ) : (
+                            <button
+                              className="btn btn-outline-secondary btn-dark my-2"
+                              type="submit"
+                              data-bs-dismiss="modal"
+                            >
+                              Confirm changes
+                            </button>
+                          )}
                         </div>
                       </div>
                     </form>

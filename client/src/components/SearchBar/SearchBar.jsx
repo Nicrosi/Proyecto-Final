@@ -10,8 +10,8 @@ export default function SearchBar() {
 
   const handleSubmit = function (e) {
     e.preventDefault();
-
     dispatch(getAllUsersName(input));
+    setInput("");
   };
 
   const handleOnChange = function (e) {

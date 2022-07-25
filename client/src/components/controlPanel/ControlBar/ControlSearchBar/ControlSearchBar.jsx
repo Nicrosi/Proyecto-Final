@@ -1,17 +1,19 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styles from "./ControlSearchBar.module.css";
  import searchIcon from "../../../../img/search-icon.png";
-import { getAllUsersName } from "../../../../redux/actions";
+import { getByName } from "../../../../redux/actions";
 
 export default function ControlSearchBar() {
+
+  const CurrentPanelPage = useSelector((state) => state.rootReducer.CurrentPanelPage);
   const [input, setInput] = useState("");
   const dispatch = useDispatch();
 
   const handleSubmit = function (e) {
     e.preventDefault();
-
-    dispatch(getAllUsersName(input));   //<-- aqui colocar action creada por FERNANDO!!,
+    dispatch(getByName(CurrentPanelPage, input));   //<-- aqui colocar action creada por FERNANDO!!,
+    setInput("");
   };
 
   const handleOnChange = function (e) {
