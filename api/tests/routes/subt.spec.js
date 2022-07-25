@@ -26,7 +26,7 @@ for(i=0; i <= cantSubt; i++){
 
   
 
-describe("Routes", () => {
+xdescribe("Routes", () => {
 before(() =>
     conn.authenticate().catch((err) => {
     console.error("Unable to connect to the database:", err);

@@ -33,6 +33,7 @@
     "stripe": "^9.13.0"
   },
   "devDependencies": {
+    "@faker-js/faker": "^7.3.0",
     "chai": "^4.2.0",
     "mocha": "^8.2.1",
     "nodemon": "^2.0.6",
