@@ -1,0 +1,58 @@
+.containerBox {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction:row;
+  background: url("../../img/imgInscription1.webp") no-repeat center center;
+  background-size: cover;
+}
+.principalBox {
+  width: 70%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction:row;
+  margin: 0 auto;
+  /* background-color: rgba(43, 43, 44, 0.604); */
+
+}
+.textBox {
+  width: auto;
+  margin: 70px 0 0 20px;
+  display: flex;
+  background-size: cover;
+  background-attachment:scroll;
+  flex-wrap: wrap;
+  flex-direction:row;
+  align-items: center;
+}
+.title {
+  font-family: 'Bebas Neue', cursive;
+  font-size: 3rem;
+  color: #A7D129;
+  width: 400px;
+}
+.subtitle {
+  font-size: 1rem;
+  color: #ffffff;
+  width: 400px;
+}
+
+.buttonLeft, .buttonRight {
+  width: 3rem;
+  height: 3rem;
+  margin-right: 15px;
+  border-radius: 50%;
+  background-color: transparent;    
+  filter:  opacity(0.6) drop-shadow(0 0 0 rgb(43, 43, 44))
+}
+.buttonLeft:hover {
+  background-color: rgb(151, 151, 151);
+  transition: 0.5s;
+}
+
+.buttonRight:hover {
+  background-color: rgb(151, 151, 151);
+  transition: 0.5s;
+}
+
