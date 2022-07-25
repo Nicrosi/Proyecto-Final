@@ -129,7 +129,6 @@ const rootReducer = (state = initialState, action, name) => {
       case GET_BY_NAME:
         return {
           ...state,
-          CurrentPanelPage: action.payload.name,
           users: action.payload.name === 'user' ? action.payload.value : state.users,
           tournaments: action.payload.name === 'tournament' ? action.payload.value : state.tournaments,
           sponsors: action.payload.name === 'sponsor' ? action.payload.value : state.sponsors,

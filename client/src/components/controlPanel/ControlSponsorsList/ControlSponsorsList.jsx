@@ -67,7 +67,7 @@ export default function ControlSponsorsList() {
       {sponsors &&
         sponsors.map((sponsor) => {
           return (
-            <li className="list-group-item">
+            <li key={sponsor.id_sponsor} className="list-group-item">
 
               <ControlCardSponsor 
                 sponsor={sponsor} 
@@ -80,7 +80,7 @@ export default function ControlSponsorsList() {
                 id="staticBackdrop"
                 data-bs-backdrop="static"
                 data-bs-keyboard="false"
-                tabindex="-1"
+                tabIndex="-1"
                 aria-labelledby="staticBackdropLabel"
                 aria-hidden="true"
               >
@@ -134,7 +134,7 @@ export default function ControlSponsorsList() {
                               {error.company}
                             </div>
                           )}
-                          <label for="floatingInput">Company</label>
+                          <label htmlFor="floatingInput">Company</label>
                           </div>
                           <div className="form-floating col-md">
                           <input
@@ -157,7 +157,7 @@ export default function ControlSponsorsList() {
                               {error.message}
                             </div>
                           )}
-                          <label for="floatingInput">Message</label>
+                          <label htmlFor="floatingInput">Message</label>
                           </div>
                         </div>
 
@@ -184,7 +184,7 @@ export default function ControlSponsorsList() {
                               {error.logo}
                             </div>
                           )}
-                          <label for="floatingInput">Logo</label>
+                          <label htmlFor="floatingInput">Logo</label>
                           </div>
                           <div className="form-floating col-md">
                           <input
@@ -207,10 +207,10 @@ export default function ControlSponsorsList() {
                               {error.link}
                             </div>
                           )}
-                          <label for="floatingInput">Link</label>
+                          <label htmlFor="floatingInput">Link</label>
                           </div>
                         </div>
-                        <div class="modal-footer">
+                        <div className="modal-footer">
                           {Object.keys(error).length > 0 ? (
                             <button
                               className="btn btn-outline-secondary btn-dark my-2"

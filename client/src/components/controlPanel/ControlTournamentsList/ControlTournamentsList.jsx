@@ -68,7 +68,7 @@ export default function ControlTournamentsList() {
         {tournaments &&
           tournaments.map((tournament) => {
             return (
-              <li className="list-group-item">
+              <li key={tournament.id_tournament} className="list-group-item">
                 <ControlCardTournaments
                   tournament={tournament}
                   setDataModal={setDataModal}
@@ -80,7 +80,7 @@ export default function ControlTournamentsList() {
                   id="staticBackdrop"
                   data-bs-backdrop="static"
                   data-bs-keyboard="false"
-                  tabindex="-1"
+                  tabIndex="-1"
                   aria-labelledby="staticBackdropLabel"
                   aria-hidden="true"
                 >
@@ -137,7 +137,7 @@ export default function ControlTournamentsList() {
                                     {error.name}
                                   </div>
                                 )}
-                                <label for="floatingInput">Name</label>
+                                <label htmlFor="floatingInput">Name</label>
                               </div>
                               <div className="form-floating col-md">
                                 <input
@@ -160,7 +160,7 @@ export default function ControlTournamentsList() {
                                     {error.date}
                                   </div>
                                 )}
-                                <label for="floatingInput">Current Date {dataModal?.date?.slice(0,10)}</label>
+                                <label htmlFor="floatingInput">Current Date {dataModal?.date?.slice(0,10)}</label>
                               </div>
                             </div>
 
@@ -187,10 +187,10 @@ export default function ControlTournamentsList() {
                                     {error.location}
                                   </div>
                                 )}
-                                <label for="floatingInput">Location</label>
+                                <label htmlFor="floatingInput">Location</label>
                               </div>
                             </div>
-                            <div class="modal-footer">
+                            <div className="modal-footer">
                               {Object.keys(error).length > 0 ? (
                                 <button
                                   className="btn btn-outline-secondary btn-dark my-2"

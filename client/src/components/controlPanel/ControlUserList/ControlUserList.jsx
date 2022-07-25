@@ -23,12 +23,6 @@ export default function ControlUserList() {
 
   function handleChange(e) {
     e.preventDefault();
-    // if (e.target.type === "tel" || e.target.name === "dni") {
-    //   setDataModal({
-    //     ...dataModal,
-    //     [e.target.name]: parseInt(e.target.value, 10),
-    //   });
-    // }
     if (e.target.type === "text" || e.target.type === "email") {
       setDataModal((prev) => ({
         ...prev,

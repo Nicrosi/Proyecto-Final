@@ -25,16 +25,12 @@ export const GET_ALL_SUBTOURNAMENTS="GET_ALL_SUBTOURNAMENTS";
 export const PUT_SUBTOURNAMENT="PUT_SUBTOURNAMENT";
 export const CLEAR_GALLERY="CLEAR_GALLERY";
 export const GET_PLAYERS_ON_SUBT= "GET_PLAYERS_ON_SUBT"
-<<<<<<< HEAD
 export const GET_BY_NAME= "GET_BY_NAME"
 export const CHANGE_PANEL_PAGE= "CHANGE_PANEL_PAGE"
-
-=======
 export const GET_INSCRIPTIONS="GET_INSCRIPTIONS"
 export const GET_GESTION="GET_GESTION"
 export const PUT_GESTION = "PUT_GESTION" 
 export const GETPUT_GESTION = "GETPUT_GESTION"
->>>>>>> dd73647ace7dcd52f946b80c7d7a0ba8368c021a
 // export const getAllPlayers = () => { JSON
 //   return {
 //     type: GET_ALL_PLAYERS,
@@ -329,20 +325,33 @@ export const ClearGallery = () => {
   }
 }
 
-<<<<<<< HEAD
 export const getByName = (route, name) => async (dispatch) => {
-  const { data } = await axios.get(`${Url}/${route}?name=${name}`);
-  return dispatch({
-    type: GET_BY_NAME,
-    payload: data,
-  })
+  try {
+    const response = await axios.get(`${Url}/${route}?name=${name}`);
+    return dispatch({
+      type: GET_BY_NAME,
+      payload: response.data,
+    })
+  } catch (error) {
+    if(error.response.data === "User not found!") {
+      alert('User Not Found')
+    }else if(error.response.data === "Tournament not found!"){
+      alert('Tournament not found')
+    }else if(error.response.data === "Subtournament not found!"){
+      alert('Subtournament not found')
+    }else if(error.response.data === "Sponsor not found!"){
+      alert('Sponsor not found')
+    }
+  }
 }
 
 export const changePanelPage = (page) => {
   return {
     type: CHANGE_PANEL_PAGE,
     payload: page
-=======
+  }
+}
+
 export const getInscriptions= () =>{
   return async function (dispatch) {
       const answer = await axios.get(urlInscriptions);
@@ -360,7 +369,6 @@ export const getGestion= (id_gestion) =>{
           type: GET_GESTION,
           payload: answer.data
       });
->>>>>>> dd73647ace7dcd52f946b80c7d7a0ba8368c021a
   }
 }
 

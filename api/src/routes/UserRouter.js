@@ -19,10 +19,10 @@ router.get('/' , async (req,res) => {
           name: "user",
           value: user
         }
-        user.length > 0 ? res.status(200).send(user_name) : res.status(404).send("User not found!")
+        user.length > 0 ? res.status(200).send(user_name) : res.status(400).send("User not found!")
     }
     else{
-        allUsers.length > 0? res.status(200).send(allUsers) : res.status(404).send("Users doesn't exist!")
+        allUsers.length > 0? res.status(200).send(allUsers) : res.status(400).send("Users doesn't exist!")
     }
   } catch (error) {
     console.log(error)
@@ -136,8 +136,6 @@ router.put('/:dni', async (req, res) => {
             CategoryToUpdate = categoryFromDb.id_category;
             
           }
-
-          console.log(CategoryToUpdate);
 
           await User.update(
             { 

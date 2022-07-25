@@ -6,8 +6,18 @@
   background-attachment: fixed;
 }
 
+.prueba{
+  display: none;
+}
+
+ul{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
 li:hover > ul {
-  display: block;
+  display: flex;
 }
 
 .container_loading {
@@ -59,6 +69,7 @@ li:hover > ul {
   height:  min-content;
   min-width: 10px;
   position: relative;
+  cursor: pointer;
 }
 
 .input_images {

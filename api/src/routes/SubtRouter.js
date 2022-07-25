@@ -11,7 +11,7 @@ router.get('/', async (req, res) => {
             name: "subtournament",
             value: subtournament
         }
-        subtournament.length ? res.status(200).json(subTourn) : res.status(400).send({msg: 'No subtournament found'})
+        subtournament.length ? res.status(200).json(subTourn) : res.status(400).send('Subtournament not found!')
     }else{
 
         let allSubt = await getAllSubt();

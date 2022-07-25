@@ -10,11 +10,11 @@ router.get('/', async (req, res) => {
       name: "tournament",
       value: Tournaments
     }
-    Tournaments.length ? res.status(200).json(tournaments) : res.status(404).send({msg: 'No tournament found'})
+    Tournaments.length ? res.status(200).json(tournaments) : res.status(404).send('Tournament not found!')
   }else{
 
     const Tournaments = await Tournament.findAll();
-    if(!Tournaments.length) return res.status(404).send({msg_errors: 'Not tournament found'})
+    if(!Tournaments.length) return res.status(404).send({msg_errors: 'Not tournament found!'})
   
     res.status(200).send(Tournaments)
   }
@@ -31,7 +31,7 @@ router.get('/:id_tournament', async (req, res) => {
     include: Subtournament
   })
 
-  tournamentFromDb ? res.status(200).send(tournamentFromDb) : res.status(404).send({msg_error: 'Tournament not found'});
+  tournamentFromDb ? res.status(200).send(tournamentFromDb) : res.status(404).send({msg_error: 'Tournament not found!'});
 
 })
 

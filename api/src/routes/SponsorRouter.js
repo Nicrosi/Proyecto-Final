@@ -13,7 +13,7 @@ router.get("/", async (req, res) => {
         name: "sponsor",
         value: sponsor
       }
-      sponsor.length ? res.status(200).json(Sponsors) : res.status(400).send({msg: 'No sponsor found'})
+      sponsor.length ? res.status(200).json(Sponsors) : res.status(400).send('Sponsor not found!')
     }else{
       const Sponsors = await Sponsor.findAll();
     

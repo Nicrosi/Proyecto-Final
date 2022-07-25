@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch } from "react-redux";
 import { changePanelPage, getAllSponsors, getAllSubtournaments, getAllUsers, getTournament } from "../../../redux/actions";
 import styles from "./ControlBar.module.css"

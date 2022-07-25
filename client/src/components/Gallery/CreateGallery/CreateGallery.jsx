@@ -4,9 +4,8 @@ import { BiTrash } from "react-icons/bi";
 import './CreateGallery.css';
 import axios from 'axios';
 import Swal from "sweetalert2";
-import validate from './Validations';
 import { useDispatch, useSelector } from 'react-redux';
-import { ClearGallery, deleteImage, getAllImages, getByName, postImage } from '../../../redux/actions';
+import { ClearGallery, getAllImages, getByName } from '../../../redux/actions';
 
 export default function CreateGallery() {
 
@@ -64,12 +63,12 @@ export default function CreateGallery() {
         const imagedeleted = axios.delete(`http://localhost:3001/gallery/delete?image_id=${image.id}&public_id=${image.public_id}`)
         Promise.all([imagedeleted]).then(() => {
           dispatch(getAllImages())
+          Swal.fire(
+            'Deleted!',
+            'Your image has been deleted.',
+            'success'
+          )
         });
-        Swal.fire(
-          'Deleted!',
-          'Your image has been deleted.',
-          'success'
-        )
       }
     })
   }
@@ -102,9 +101,17 @@ export default function CreateGallery() {
   
       await axios.post(`http://localhost:3001/gallery/post?title=${title.title}`,formData)
       dispatch(getAllImages())
-      
-      // document.getElementById('floatingInput2').value = null;
       setFile(null)
+      Swal.fire({
+        title: 'Success',
+        text: "Image uploaded successfully",
+        icon: 'success',
+        showCancelButton: false,
+        showConfirmButton: true,
+        confirmButtonColor: '#A7D129',
+        cancelButtonColor: '#A7D129',
+        confirmButtonText: ' Okey '
+      })
     }
     
   }
@@ -149,66 +156,84 @@ export default function CreateGallery() {
           >
             
             {
-              FirstLine?.length && (
+              FirstLine?.length ? (
                 
-                <div class="row">
-                  <div class="column">
+                <div className="row">
+                  <div className="column">
                     {
                       FirstLine.length && FirstLine.map((img) => (
                         <div key={img.id} className='img_button_container' >
-                          <img className='images_from_db' src={img.imageURL} alt={img.title} />
-                          {
-                            auth.loggedIn && auth.currentUser.is_admin ? 
-                            <div onClick={()=>HandleDelte(img)} className='btn_delete_image' >
-                              <BiTrash className='tarea-icono' />
-                            </div>
-                             : null 
-                          }
+                          <ul>
+                            <li>
+                              <img className='images_from_db' src={img.imageURL} alt={img.title} />
+                              <ul className='prueba' ><li>
+                                {
+                                  auth.loggedIn && auth.currentUser.is_admin ? 
+                                  <div onClick={()=>HandleDelte(img)} className='btn_delete_image' >
+                                    <BiTrash className='tarea-icono danger' />
+                                  </div>
+                                   : null
+                                }
+                              </li></ul>
+                            </li>
+                          </ul>
                         </div>
                       ))
                     }
                   </div>
-                  <div class="column">
+                  <div className="column">
                     {
                       SecondLine.length && SecondLine.map((img) => (
                         <div key={img.id} className='img_button_container' >
-                          <img className='images_from_db' src={img.imageURL} alt={img.title} />
-                          {
-                            auth.loggedIn && auth.currentUser.is_admin ? 
-                            <div onClick={()=>HandleDelte(img)} className='btn_delete_image' >
-                              <BiTrash className='tarea-icono' />
-                            </div>
-                             : null
-                          }
+                          <ul>
+                            <li>
+                              <img className='images_from_db' src={img.imageURL} alt={img.title} />
+                              <ul className='prueba' ><li>
+                                {
+                                  auth.loggedIn && auth.currentUser.is_admin ? 
+                                  <div onClick={()=>HandleDelte(img)} className='btn_delete_image' >
+                                    <BiTrash className='tarea-icono' />
+                                  </div>
+                                   : null
+                                }
+                              </li></ul>
+                            </li>
+                          </ul>
                         </div>
                       ))
                     }
                   </div>
-                  <div class="column">
+                  <div className="column">
                     {
                       ThirdLine.length && ThirdLine.map((img) => (
                         <div key={img.id} className='img_button_container' >
-                          <img className='images_from_db' src={img.imageURL} alt={img.title} />
-                          {
-                            auth.loggedIn && auth.currentUser.is_admin ? 
-                            <div onClick={()=>HandleDelte(img)} className='btn_delete_image' >
-                              <BiTrash className='tarea-icono' />
-                            </div>
-                             : null
-                          }
+                          <ul>
+                            <li>
+                              <img className='images_from_db' src={img.imageURL} alt={img.title} />
+                              <ul className='prueba' ><li>
+                                {
+                                  auth.loggedIn && auth.currentUser.is_admin ? 
+                                  <div onClick={()=>HandleDelte(img)} className='btn_delete_image' >
+                                    <BiTrash className='tarea-icono' />
+                                  </div>
+                                   : null
+                                }
+                              </li></ul>
+                            </li>
+                          </ul>
                         </div>
                       ))
                     }
                   </div>
                 </div>
 
-              ) 
+              ) : (<div></div>)
             }
             {
               ImageLoading  &&
               <div className='container_loading' >
                 <div className="spinner-border text-light" style={{width: "12vw", height: "12vw" }} role="status">
-                  <span class="sr-only"></span>
+                  <span className="sr-only"></span>
                 </div>
               </div>
             }
