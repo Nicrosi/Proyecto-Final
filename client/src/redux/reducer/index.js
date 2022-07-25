@@ -14,6 +14,7 @@ import {
   PUT_SUBTOURNAMENT,
   CLEAR_GALLERY,
   GET_PLAYERS_ON_SUBT,
+  ADD_MATCH,
 } from "../actions";
 import { filterUsers } from "../helpers/filters";
 import { sortByName } from "../helpers/sorts";
@@ -34,6 +35,7 @@ const initialState = {
   ThirdLine:[],
   ImageLoading: false,
   playersOnSubt:[],
+  match:[],
 };
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -148,6 +150,13 @@ const rootReducer = (state = initialState, action) => {
           ThirdLine: thirdLine,
           ImageLoading: false,
         }
+
+        case ADD_MATCH:
+      console.log("action", action.payload);
+      return {
+        ...state,
+        match: [...state.match, action.payload],
+      };
     default:
       return { ...state };
   }

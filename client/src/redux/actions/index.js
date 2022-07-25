@@ -24,7 +24,8 @@ export const GET_ALL_IMAGES="GET_ALL_IMAGES";
 export const GET_ALL_SUBTOURNAMENTS="GET_ALL_SUBTOURNAMENTS";
 export const PUT_SUBTOURNAMENT="PUT_SUBTOURNAMENT";
 export const CLEAR_GALLERY="CLEAR_GALLERY";
-export const GET_PLAYERS_ON_SUBT= "GET_PLAYERS_ON_SUBT"
+export const GET_PLAYERS_ON_SUBT= "GET_PLAYERS_ON_SUBT";
+export const ADD_MATCH = "ADD_MATCH"
 
 // export const getAllPlayers = () => { JSON
 //   return {
@@ -318,7 +319,17 @@ export const ClearGallery = () => {
   }
 }
 
-
+export function postMatch(id_subt,input) {
+  return async (dispatch) => {
+      dispatch( postMatch())
+      try {
+          await axios.post(`${urlPlayersOnSubt}/${id_subt}`, input)
+            
+      } catch (error) {
+          console.log(error)           
+      }
+  }
+}
 
 
   

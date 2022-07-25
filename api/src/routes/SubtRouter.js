@@ -1,6 +1,8 @@
+const { getRounds } = require("bcrypt");
 const { Router } = require("express");
 const router = Router();
-const { Subtournament,Category } = require("../db");
+const { Subtournament,Category, Round, Match } = require("../db");
+
 const {getAllSubt} = require('../utils/Subt_Controller');
 
 router.get('/', async (req, res) => {
@@ -54,7 +56,7 @@ router.post('/:id_tournament', async (req, res) => {
         res.status(200).send(`Sub tournament created!`);
     }catch(err){
         console.log(err);
-    }
+    }    
 })
 
 router.put('/:id', async (req, res) => {

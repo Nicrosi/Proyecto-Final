@@ -1,0 +1,33 @@
+.formBox {
+    position: relative;
+    color:blanchedalmond;
+    margin: 3px auto 20px 10px;
+    width: 25%;
+    background-color: rgb(43, 43, 44);
+    border-radius: 10px;
+    padding: 20px;
+  }
+  .matchBox {
+    position: relative;
+    color:greenyellow;
+    font-size:x-large;
+    margin: 3px auto 20px 10px;
+    width: 70%;
+    background-color: rgb(43, 43, 44);
+    border-radius: 10px;
+    padding: 20px;
+  }
+  .imageBox {
+    position: absolute;
+    top: 15%;
+    margin-left: 40%;
+    width: 60%;
+    height: 500px;
+    display: flex;
+    background: url("../../../assets/lavercup.png") no-repeat center center;
+    background-size: cover;
+  }
+  .title{
+    margin-top: 3%;
+
+  }
