@@ -1,6 +1,8 @@
 import axios from "axios";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Swal from "sweetalert2";
+
 
 //import players from "../../players.json";
 
@@ -103,7 +105,17 @@ export const getAllUsersName = (name) => (dispatch) => {
         payload: response.data.value,
       })
     )
-    .catch(() => alert("User not found"));
+    .catch(() => {
+      Swal.fire({
+        title: 'Error',
+        text: "User not found",
+        icon: 'error',
+        showCancelButton: false,
+        confirmButtonColor: '#A7D129',
+        cancelButtonColor: 'rgb(43, 43, 44);',
+        confirmButtonText: 'Okey'
+      })
+    });
 };
 
 export const orderUsersByName = ({ order, gender, category }) => {
@@ -135,7 +147,15 @@ export function postSponsor(input) {
         payload: input,
       });
     } catch (error) {
-      alert("Add Sponsor error, try again later");
+      Swal.fire({
+        title: 'Error',
+        text: "Add Sponsor error, try again later",
+        icon: 'error',
+        showCancelButton: false,
+        confirmButtonColor: '#A7D129',
+        cancelButtonColor: 'rgb(43, 43, 44);',
+        confirmButtonText: 'Okey'
+      })
     }
   };
 }
@@ -194,7 +214,15 @@ export function getTournaments(id_tournament) {
         payload: response.data,
       });
     } catch (error) {
-      alert("get tournament error, try again later");
+      Swal.fire({
+        title: 'Error',
+        text: "get tournament error, try again later",
+        icon: 'error',
+        showCancelButton: false,
+        confirmButtonColor: '#A7D129',
+        cancelButtonColor: 'rgb(43, 43, 44);',
+        confirmButtonText: 'Okey'
+      })
     }
   };
 }
@@ -219,7 +247,15 @@ export const postSubTournament = (id_tournament, input) => {
         payload: input,
       });
     } catch (error) {
-      alert("Add subTournament error, try again later");
+      Swal.fire({
+        title: 'Error',
+        text: "Add subTournament error, try again later",
+        icon: 'error',
+        showCancelButton: false,
+        confirmButtonColor: '#A7D129',
+        cancelButtonColor: 'rgb(43, 43, 44);',
+        confirmButtonText: 'Okey'
+      })
     }
   };
 };
@@ -334,13 +370,45 @@ export const getByName = (route, name) => async (dispatch) => {
     })
   } catch (error) {
     if(error.response.data === "User not found!") {
-      alert('User Not Found')
+      Swal.fire({
+        title: 'Error',
+        text: "User not found",
+        icon: 'error',
+        showCancelButton: false,
+        confirmButtonColor: '#A7D129',
+        cancelButtonColor: 'rgb(43, 43, 44);',
+        confirmButtonText: 'Okey'
+      })
     }else if(error.response.data === "Tournament not found!"){
-      alert('Tournament not found')
+      Swal.fire({
+        title: 'Error',
+        text: "Tournament not found",
+        icon: 'error',
+        showCancelButton: false,
+        confirmButtonColor: '#A7D129',
+        cancelButtonColor: 'rgb(43, 43, 44);',
+        confirmButtonText: 'Okey'
+      })
     }else if(error.response.data === "Subtournament not found!"){
-      alert('Subtournament not found')
+      Swal.fire({
+        title: 'Error',
+        text: "Subtournament not found",
+        icon: 'error',
+        showCancelButton: false,
+        confirmButtonColor: '#A7D129',
+        cancelButtonColor: 'rgb(43, 43, 44);',
+        confirmButtonText: 'Okey'
+      })
     }else if(error.response.data === "Sponsor not found!"){
-      alert('Sponsor not found')
+      Swal.fire({
+        title: 'Error',
+        text: "Sponsor not found",
+        icon: 'error',
+        showCancelButton: false,
+        confirmButtonColor: '#A7D129',
+        cancelButtonColor: 'rgb(43, 43, 44);',
+        confirmButtonText: 'Okey'
+      })
     }
   }
 }

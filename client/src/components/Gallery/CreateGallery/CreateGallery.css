@@ -65,6 +65,11 @@ li:hover > ul {
   padding: 10px;
 }
 
+.container_images {
+  width: 100vw;
+  min-height: 100vh;
+}
+
 .img_button_container {
   height:  min-content;
   min-width: 10px;

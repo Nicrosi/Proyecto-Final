@@ -13,6 +13,8 @@ export default function validate(input) {
     error.name = "Name is required";
   } else if (input.name.length > 255) {
     error.name = "Enter less than 255 characters";
+  } else if (/([0-9])/.test(input.name) ) {
+    error.name = 'The Name cannot have letters'; 
   }
 
   if (!input.last_name) {
@@ -48,9 +50,10 @@ export default function validate(input) {
 
   if (!input.picture) {
     error.picture = "Picture is required";
-  } else if (!/.(gif|jpeg|jpg|png)$/i.test(input.picture) && input.picture) {
-    error.picture = "Should be a valid format (gif,jpeg,jpg,png)";
-  }
+  } 
+  // else if (!/.(gif|jpeg|jpg|png)$/i.test(input.picture) && input.picture) {
+  //   error.picture = "Should be a valid format (gif,jpeg,jpg,png)";
+  // }
 
   return error;
 }

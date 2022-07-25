@@ -39,7 +39,7 @@ export default function ControlUserList() {
         [e.target.name]: e.target.value
       })
     )
-    console.log(dataModal);
+    // console.log(dataModal);
   }
 
   function handleSubmit(e) {
@@ -119,8 +119,58 @@ export default function ControlUserList() {
                           style={{ width: "100%" }}
                           onSubmit={(e) => handleSubmit(e)}
                         >
-                          <div key={dataModal.dni} className={styles.editBox}>
-                          <div className="row g-2 mb-3">
+                          <div key={dataModal.id_user} className={styles.editBox}>
+                          
+                            <div className={"row g-2 mb-3"}>
+                              <div className="form-floating col-md">
+                                <input
+                                  type="text"
+                                  onChange={(e) => handleChange(e)}
+                                  value={dataModal.name}
+                                  name="name"
+                                  id="floatingInput"
+                                  className={
+                                    error.name
+                                      ? "form-control  border-0 is-invalid"
+                                      : "form-control  border-0 is-valid"
+                                  }
+                                />
+                                {error.name && (
+                                  <div
+                                    id="validationServerUsernameFeedback"
+                                    className="invalid-feedback"
+                                  >
+                                    {error.name}
+                                  </div>
+                                )}
+                                <label htmlFor="floatingInput">Name:</label>
+                              </div>
+                              <div className="form-floating col-md">
+                                <input
+                                  type="text"
+                                  onChange={(e) => handleChange(e)}
+                                  value={dataModal.last_name}
+                                  name="last_name"
+                                  id="floatingInput"
+                                  className={
+                                    error.last_name
+                                      ? "form-control border-0 is-invalid"
+                                      : "form-control border-0 is-valid"
+                                  }
+                                />
+                                {error.last_name && (
+                                  <div
+                                    id="validationServerUsernameFeedback"
+                                    className="invalid-feedback"
+                                  >
+                                    {error.last_name}
+                                  </div>
+                                )}
+                                <label htmlFor="floatingInput">Last Name</label>
+                              </div>
+                            </div>
+
+                            <div className="row g-2 mb-3">
                               <div className="form-floating col-md">
                                 <input
                                   key="dni"
@@ -172,56 +222,6 @@ export default function ControlUserList() {
                                   </div>
                                 )}
                             </div>
-                            <div className={"row g-2 mb-3"}>
-                              <div className="form-floating col-md">
-                                <input
-                                  type="text"
-                                  onChange={(e) => handleChange(e)}
-                                  value={dataModal.name}
-                                  name="name"
-                                  id="floatingInput"
-                                  className={
-                                    error.name
-                                      ? "form-control  border-0 is-invalid"
-                                      : "form-control  border-0 is-valid"
-                                  }
-                                />
-                                {error.name && (
-                                  <div
-                                    id="validationServerUsernameFeedback"
-                                    className="invalid-feedback"
-                                  >
-                                    {error.name}
-                                  </div>
-                                )}
-                                <label htmlFor="floatingInput">Name:</label>
-                              </div>
-                              <div className="form-floating col-md">
-                                <input
-                                  type="text"
-                                  onChange={(e) => handleChange(e)}
-                                  value={dataModal.last_name}
-                                  name="last_name"
-                                  id="floatingInput"
-                                  className={
-                                    error.last_name
-                                      ? "form-control border-0 is-invalid"
-                                      : "form-control border-0 is-valid"
-                                  }
-                                />
-                                {error.last_name && (
-                                  <div
-                                    id="validationServerUsernameFeedback"
-                                    className="invalid-feedback"
-                                  >
-                                    {error.last_name}
-                                  </div>
-                                )}
-                                <label htmlFor="floatingInput">Last Name</label>
-                              </div>
-                            </div>
-
-                            
 
                             <div className="row g-2 mb-3">
                               <div className="form-floating col-md">

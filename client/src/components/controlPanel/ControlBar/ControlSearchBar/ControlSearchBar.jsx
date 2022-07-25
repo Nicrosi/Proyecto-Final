@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./ControlSearchBar.module.css";
  import searchIcon from "../../../../img/search-icon.png";
-import { getAllUsersName, getByName } from "../../../../redux/actions";
+import { getByName } from "../../../../redux/actions";
 
 export default function ControlSearchBar() {
 

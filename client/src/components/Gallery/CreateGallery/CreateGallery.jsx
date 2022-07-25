@@ -6,8 +6,10 @@ import axios from 'axios';
 import Swal from "sweetalert2";
 import { useDispatch, useSelector } from 'react-redux';
 import { ClearGallery, getAllImages, getByName } from '../../../redux/actions';
+import { useHistory, useLocation } from 'react-router-dom';
 
 export default function CreateGallery() {
+
 
   const dispatch = useDispatch();
   // const ImagesList = useSelector((state) => state.rootReducer.gallery);
@@ -24,14 +26,9 @@ export default function CreateGallery() {
   const [Gallery, setGallery ] = useState(true);
   const auth = useSelector((state) => state.auth);
 
-  
 
-  // console.log(FirstLine);
-  // console.log(SecondLine);
-  // console.log(ThirdLine);
   useEffect(() => {
     dispatch(getAllImages())
-    dispatch(getByName('user','tom'))
   },[dispatch])
 
   const HandlerSelect = (e) => {
@@ -111,6 +108,10 @@ export default function CreateGallery() {
         confirmButtonColor: '#A7D129',
         cancelButtonColor: '#A7D129',
         confirmButtonText: ' Okey '
+      }).then((result) => {
+        if (result.isConfirmed) {
+          // History.go()
+        }
       })
     }
     
@@ -158,10 +159,10 @@ export default function CreateGallery() {
             {
               FirstLine?.length ? (
                 
-                <div className="row">
-                  <div className="column">
+                <div className="row container_images">
+                  <div className="column ">
                     {
-                      FirstLine.length && FirstLine.map((img) => (
+                      FirstLine.length ? FirstLine.map((img) => (
                         <div key={img.id} className='img_button_container' >
                           <ul>
                             <li>
@@ -178,12 +179,12 @@ export default function CreateGallery() {
                             </li>
                           </ul>
                         </div>
-                      ))
+                      )) : null
                     }
                   </div>
                   <div className="column">
                     {
-                      SecondLine.length && SecondLine.map((img) => (
+                      SecondLine.length ? SecondLine.map((img) => (
                         <div key={img.id} className='img_button_container' >
                           <ul>
                             <li>
@@ -200,12 +201,12 @@ export default function CreateGallery() {
                             </li>
                           </ul>
                         </div>
-                      ))
+                      )) : null
                     }
                   </div>
                   <div className="column">
                     {
-                      ThirdLine.length && ThirdLine.map((img) => (
+                      ThirdLine.length ? ThirdLine.map((img) => (
                         <div key={img.id} className='img_button_container' >
                           <ul>
                             <li>
@@ -222,7 +223,7 @@ export default function CreateGallery() {
                             </li>
                           </ul>
                         </div>
-                      ))
+                      )) : null
                     }
                   </div>
                 </div>

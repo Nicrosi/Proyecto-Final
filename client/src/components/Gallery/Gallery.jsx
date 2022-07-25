@@ -31,7 +31,7 @@ export default function Gallery() {
                 {
                     ImagesList.length ? (
                       
-                    <div className="row">
+                    <div className="row container_images">
                       <div className="column">
                         <div className='img_button_container' >
                           {ImagesList.length >= 1 ? (<img className='gallery_image' src={ImagesList[0].imageURL} alt={ImagesList[0].title}/>) : (<div></div>)}
