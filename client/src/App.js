@@ -21,7 +21,8 @@ import { FormSubTournament } from "./components/SubTournament/FormSubTournament/
 import TournamentsToShow from "./components/Tournament/TournamentsToShow/TournamentsToShow.jsx";
 import ControlCardUsers from "./components/controlPanel/ControlCardUsers/ControlCardUsers.jsx";
 import { ChatBot } from "./components/ChatBot/ChatBot.jsx";
-import {TournamentsAllAgainst} from "./components/Tournament/TournamentsAllAgainst/TournamentsAllAgainst.jsx"
+import {TournamentsAllAgainst} from "./components/Tournament/TournamentsAllAgainst/TournamentsAllAgainst.jsx";
+import Brackets from "./components/Brackets/Brackets.js";
 
 function App() {
   const dispatch = useDispatch();
@@ -34,6 +35,7 @@ function App() {
       <Route path={"/"} component={ChatBot} />
       <Route path={"/"} component={NavBar} />
       <Switch>
+        <Route path={"/bracket"} component={Brackets} />
         <RouteGuard exact path={"/Users"} component={Users} admin={false} />
         <RouteGuard
           exact

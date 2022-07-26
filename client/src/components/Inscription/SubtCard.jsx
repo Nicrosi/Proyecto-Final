@@ -4,6 +4,8 @@ import { postInscription, getPLayersOnSubt } from "../../redux/actions";
 import {Link} from 'react-router-dom'
 import Stripecheckout from "react-stripe-checkout";
 import Card from "react-bootstrap/Card";
+import axios from "axios";
+import { getBracket } from "../../redux/actions";
 
 export default function SubtCard({
   id_subt,
@@ -43,6 +45,18 @@ export default function SubtCard({
     };
     dispatch(postInscription(body));
   };
+  const handleClick=async()=>{
+    return(dispatch)=>{
+      dispatch(getBracket())
+      try{
+      // await axios.post(`http://localhost:3001/roundRouter/${id_subt}`)
+    }
+    catch(error){
+      console.error(error)
+    }
+  }}
+    
+
   console.log(amount_players.length + ' ' + numb_players)
   return (
     <React.Fragment>
@@ -90,10 +104,11 @@ export default function SubtCard({
             <button className="btn btn-primary ">Buy</button>
           </Stripecheckout> :
           amount_players.length === numb_players ? 
-              <button style={{ backgroundColor: "#A7D129" }}>
+              <button style={{ backgroundColor: "#A7D129" }}
+              onClick={handleClick}>
               <Link
                 style={{ fontWeight: "bold", color: "#10242b"}}
-                to={`/tournamentplayers/${id_subt}`}
+                to="/bracket"
                 >
                 Create Brackets
               </Link>

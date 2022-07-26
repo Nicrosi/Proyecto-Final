@@ -1,6 +1,7 @@
 .containerBtn{
   text-align: center;
   padding-left: 60px;
+  display: flex;
 }
 
 .containerBtn a{
@@ -24,6 +25,7 @@
 
 .btn{
   min-width: 80px;
+  margin-left: 35px;
 }
 
 .btn:hover span {
@@ -40,7 +42,7 @@
 
 .btnTel{
   min-height: 36px;
-  margin-left: 20px;
+  margin-left: 10px;
 }
 
 .btnEmail img{

@@ -24,13 +24,13 @@ export const GET_ALL_IMAGES="GET_ALL_IMAGES";
 export const GET_ALL_SUBTOURNAMENTS="GET_ALL_SUBTOURNAMENTS";
 export const PUT_SUBTOURNAMENT="PUT_SUBTOURNAMENT";
 export const CLEAR_GALLERY="CLEAR_GALLERY";
-
-
 export const GET_PLAYERS_ON_SUBT= "GET_PLAYERS_ON_SUBT"
 export const GET_INSCRIPTIONS="GET_INSCRIPTIONS"
 export const GET_GESTION="GET_GESTION"
 export const PUT_GESTION = "PUT_GESTION" 
 export const GETPUT_GESTION = "GETPUT_GESTION"
+export const GET_BRACKET="GET_BRACKET"
+
 // export const getAllPlayers = () => { JSON
 //   return {
 //     type: GET_ALL_PLAYERS,
@@ -48,7 +48,8 @@ const urlSponsor = "http://localhost:3001/sponsor"
 const urlTournaments = "http://localhost:3001/tournament"
 const urlPlayersOnSubt = "http://localhost:3001/players"
 const urlGestion = "http://localhost:3001/gestion"
-const urlInscriptions = "http://localhost:3001/inscription"
+const urlInscriptions = "http://localhost:3001/inscription";
+const urlBrackets = "http://localhost:3001/roundRouter/"
 toast.configure();
 
 
@@ -360,3 +361,16 @@ export const putGestion = (id_gestion, input) => {
   });
   };
 };
+
+export const getBracket =(id_subt)=>{
+  return async (dispatch)=>{
+    try{ const response = await axios.get(`${urlBrackets}/${id_subt}`)
+    dispatch({
+      type: GET_BRACKET,
+      payload: response.data
+    })}
+   catch(error){
+    console.log(error)
+   }
+  }
+}

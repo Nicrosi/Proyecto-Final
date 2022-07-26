@@ -16,7 +16,8 @@ import {
   GET_PLAYERS_ON_SUBT,
   GET_INSCRIPTIONS,
   GET_GESTION,
-  GETPUT_GESTION
+  GETPUT_GESTION,
+  GET_BRACKET
 } from "../actions";
 import { filterUsers } from "../helpers/filters";
 import { sortByName } from "../helpers/sorts";
@@ -39,6 +40,7 @@ const initialState = {
   playersOnSubt: [],
   gestion: {},
   inscriptions: [],
+  bracket:[]
 };
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -168,6 +170,11 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         gestion: action.payload,
       };
+      case GET_BRACKET:
+        return{
+          ...state,
+          bracket:action.payload,
+        }
     default:
       return { ...state };
   }
