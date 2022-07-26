@@ -47,13 +47,13 @@ export default function NavBar() {
             ) : null}
             {loggedIn && currentUser.is_admin === false ? (
               <li className="nav-item">
-                <Link
-                  className="nav-link ms-auto"
-                  style={{ fontWeight: "bold", color: "#e0e6e8" }}
-                  to={"/TournamentsToShow"}
-                >
-                  Tournaments
-                </Link>
+                 <a
+                className="nav-link ms-auto"
+                style={{ fontWeight: "bold", color: "#e0e6e8" }}
+                href="/#tournamentLP  "
+              >
+                Tournaments
+              </a>
               </li>
             ) : null}
             <li className="nav-item">

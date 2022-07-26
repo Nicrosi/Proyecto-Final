@@ -42,7 +42,7 @@ export default function ControlCardTournaments({tournament, setDataModal, setUpd
     <div className={styles.box}>
     <div className={styles.itemScore}>
       <div className={styles.subtitle}>      
-      <h5 className={styles.data}>Company: {tournament.name}</h5>
+      <h5 className={styles.data}>Tournament: {tournament.name}</h5>
       </div>
       <div className={styles.itemScore}>
       <img

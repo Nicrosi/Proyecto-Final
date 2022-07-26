@@ -6,8 +6,18 @@
   background-attachment: fixed;
 }
 
+.prueba{
+  display: none;
+}
+
+ul{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
 li:hover > ul {
-  display: block;
+  display: flex;
 }
 
 .container_loading {
@@ -55,10 +65,16 @@ li:hover > ul {
   padding: 10px;
 }
 
+.container_images {
+  width: 100vw;
+  min-height: 100vh;
+}
+
 .img_button_container {
   height:  min-content;
   min-width: 10px;
   position: relative;
+  cursor: pointer;
 }
 
 .input_images {
@@ -93,7 +109,7 @@ li:hover > ul {
 .tarea-icono {
   width:25px;
   height:25px;
-  margin: 5px;
+  margin: 20px 5px;
   cursor: pointer;
 }
 

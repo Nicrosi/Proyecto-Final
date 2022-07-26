@@ -6,10 +6,11 @@ module.exports = (sequelize) => {
       type: DataTypes.BIGINT,
       autoIncrement: true,
       allowNull: false,
-      primaryKey: true
+      primaryKey: true,
+      unique: true
     },
-    is_finished: {
-      type: DataTypes.BOOLEAN,
+    round_numb: {
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
   },
