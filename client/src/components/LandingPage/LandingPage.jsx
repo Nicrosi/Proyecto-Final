@@ -3,6 +3,7 @@ import Carousel from "../ControlledCarousel/ControlledCarousel";
 import Gallery from "../Gallery/Gallery";
 import Sponsors from "../Sponsors/Sponsors";
 import Steps from "../Steps/Steps";
+import TournamentsToShow from "../Tournament/TournamentsToShow/TournamentsToShow";
 
 export default function LandingPage() {
   return (
@@ -19,6 +20,11 @@ export default function LandingPage() {
         <Steps />
       </section>
       <Gallery />
+      <section
+        id="tournamentLP"
+      >
+        <TournamentsToShow />
+      </section>
       <section
         id="sponsorLP"
         className="d-flex align-items-center justify-content-center bg-dark"
