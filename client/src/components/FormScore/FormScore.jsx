@@ -26,12 +26,12 @@ export const FormScore = ({params, setShowEditScore}) => {
   };
 
   const [error, setError] = useState({
-    previous_tournaments: "Previous tournaments is required",
-    hit_knowledge: "Hit knowledge is required",
-    other_strokes: "Other strokes is required",
-    special_hits: "Special hits is required",
-    kick_serve_control: "Kick serve control is required",
-    game_strategy: "Game strategy is required",
+    previous_tournaments: "init",
+    hit_knowledge: "init",
+    other_strokes: "init",
+    special_hits: "init",
+    kick_serve_control: "init",
+    game_strategy: "init",
   });
 
   return (
@@ -44,7 +44,7 @@ export const FormScore = ({params, setShowEditScore}) => {
               <div className={styles.itemScore}>
                 <div className={styles.subtitle}>
                   <h5 className="card-text">Previous tournaments</h5>
-                  {error.previous_tournaments?<p className="text-danger">{error.previous_tournaments} ✗</p>:<p className="text-success">Looks good ✓</p>}
+                  {error.previous_tournaments === "init"?<br />:(error.previous_tournaments?<p className="text-danger">{error.previous_tournaments} ✗</p>:<p className="text-success">Looks good ✓</p>)}
                 </div>
                   <StarsRating
                     score={score}
@@ -59,7 +59,7 @@ export const FormScore = ({params, setShowEditScore}) => {
             <div className={styles.itemScore}>
               <div className={styles.subtitle}>
                 <h5 className="card-text">Hit knowledge</h5>
-                {error.hit_knowledge?<p className="text-danger">{error.hit_knowledge} ✗</p>:<p className="text-success">Looks good ✓</p>}
+                {error.hit_knowledge === "init"?<br />:(error.hit_knowledge?<p className="text-danger">{error.hit_knowledge} ✗</p>:<p className="text-success">Looks good ✓</p>)}
                 </div>
                 <StarsRating
                   score={score}
@@ -74,7 +74,7 @@ export const FormScore = ({params, setShowEditScore}) => {
             <div className={styles.itemScore}>
               <div className={styles.subtitle}>
                 <h5 className="card-text">Other strokes</h5>
-                {error.other_strokes?<p className="text-danger">{error.other_strokes} ✗</p>:<p className="text-success">Looks good ✓</p>}
+                {error.other_strokes === "init"?<br />:(error.other_strokes?<p className="text-danger">{error.other_strokes} ✗</p>:<p className="text-success">Looks good ✓</p>)}
               </div>
                 <StarsRating
                   score={score}
@@ -88,7 +88,7 @@ export const FormScore = ({params, setShowEditScore}) => {
             <div className={styles.itemScore}>
               <div className={styles.subtitle}>
                 <h5 className="card-text">Special hits</h5>
-                {error.special_hits?<p className="text-danger">{error.special_hits} ✗</p>:<p className="text-success">Looks good ✓</p>}
+                {error.special_hits === "init"?<br />:(error.special_hits?<p className="text-danger">{error.special_hits} ✗</p>:<p className="text-success">Looks good ✓</p>)}
               </div>
                 <StarsRating
                   score={score}
@@ -102,7 +102,7 @@ export const FormScore = ({params, setShowEditScore}) => {
             <div className={styles.itemScore}>
               <div className={styles.subtitle}>
                 <h5 className="card-text">Kick serve control</h5>
-                {error.kick_serve_control?<p className="text-danger">{error.kick_serve_control} ✗</p>:<p className="text-success">Looks good ✓</p>}
+                {error.kick_serve_control === "init"?<br />:(error.kick_serve_control?<p className="text-danger">{error.kick_serve_control} ✗</p>:<p className="text-success">Looks good ✓</p>)}
               </div>
                 <StarsRating
                   score={score}
@@ -116,7 +116,7 @@ export const FormScore = ({params, setShowEditScore}) => {
             <div className={styles.itemScore}>
               <div className={styles.subtitle}>
                 <h5 className="card-text">Game strategy</h5>
-                {error.game_strategy?<p className="text-danger">{error.game_strategy} ✗</p>:<p className="text-success">Looks good ✓</p>}
+                {error.game_strategy === "init"?<br />:(error.game_strategy?<p className="text-danger">{error.game_strategy} ✗</p>:<p className="text-success">Looks good ✓</p>)}
               </div>
                 <StarsRating
                   score={score}
