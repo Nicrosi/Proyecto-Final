@@ -14,26 +14,51 @@ export const TournamentCard = ({ id, name, date, location }) => {
           <h5 className={styles.date_location}>{location.toUpperCase()}</h5>
         </div>
       </div>
-      <div>
-        {auth.loggedIn && auth.currentUser.is_admin === false ? (
-          <Link
-            style={{ fontWeight: "bold", color: "#10242b" }}
-            to={`/inscription/${id}`}
+      <div>        
+        {
+          !auth.loggedIn ? (
+            <button
+            className="btn"
+            style={{ backgroundColor: "#A7D129" }}
+            disabled
           >
-            <button className="btn" style={{ backgroundColor: "#A7D129" }}>
-              Inscription
-            </button>{" "}
-          </Link>
-        ) : (
-          <Link
-            style={{ fontWeight: "bold", color: "#10242b" }}
-            to={`/CreateSubtournament/${id}`}
-          >
-            <button className="btn" style={{ backgroundColor: "#A7D129" }}>
-              Create Subtournament
-            </button>
-          </Link>
-        )}
+            See All Subtournaments
+          </button>
+          ) : <>
+            {auth.loggedIn && auth.currentUser.is_admin === false ? (
+              <Link
+                style={{ fontWeight: "bold", color: "#10242b" }}
+                to={`/inscription/${id}`}
+              >
+                <button className="btn" style={{ backgroundColor: "#A7D129" }}>
+                  Inscription
+                </button>{" "}
+              </Link>
+            ) : (
+              <>
+                <Link
+                  style={{ fontWeight: "bold", color: "#10242b" }}
+                  to={`/CreateSubtournament/${id}`}
+                >
+                  <button className="btn" style={{ backgroundColor: "#A7D129", marginRight: "20px" }}>
+                    Create Subtournament
+                  </button>
+                </Link>
+    
+                <button
+                  className="btn"
+                  style={{ backgroundColor: "#A7D129" }}
+                  disabled
+                >
+                  See All Subtournaments
+                </button>
+              </>
+            )
+            }</>
+    
+          
+        }
+        
       </div>
     </div>
   );
