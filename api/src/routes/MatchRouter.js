@@ -34,6 +34,23 @@ router.get('/:id_subt', async (req, res) => {
     } catch (error) {
         console.log(error)
     }
+
+router.put('/putscore/:id_match', async (req, res) => {
+    const {id_match} = req.params;
+    let {
+        score
+    } = req.body
+    try {
+        await Match.update({
+            score: score,
+            where: {
+                id_match: id_match
+            }
+        })
+    } catch (error) {
+        console.log(error)
+    }
+})
     
 })
 
