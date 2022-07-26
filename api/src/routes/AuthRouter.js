@@ -1,10 +1,12 @@
 const { Router } = require("express");
 const router = Router();
-const { User, Inscription, Score, Category } = require("../db");
+const { User, Inscription, Score, Category, Image } = require("../db");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const verifyToken = require("../middlewares/authjwt");
 const passport = require("passport");
+
+
 
 router.post("/register", async (req, res, next) => {
   try {
@@ -18,8 +20,9 @@ router.post("/register", async (req, res, next) => {
       phone,
       num_contact,
       picture,
-      gender,
+      gender
     } = req.body;
+    const image = await Image.findByPk(parseInt(req.body.id_image));
 
     const user = await User.findOne({
       where: {
@@ -47,6 +50,7 @@ router.post("/register", async (req, res, next) => {
       num_contact,
       picture,
       gender,
+      id_image: image && image.id_image 
     });
 
     return res.status(201).json({ ok: "User created!" });

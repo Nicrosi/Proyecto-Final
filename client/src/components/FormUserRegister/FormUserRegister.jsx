@@ -4,6 +4,7 @@ import { Redirect, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { postNewUser } from "../../redux/actions/authorization";
 import img1 from "../../img/imgForm1.webp";
+import Swal from "sweetalert2";
 
 export function validate(input) {
   let error = {};
@@ -53,11 +54,11 @@ export function validate(input) {
     error.num_contact = "Enter a number";
   }
 
-  if (!input.picture) {
-    error.picture = "Picture is required";
-  } else if (!/.(gif|jpeg|jpg|png)$/i.test(input.picture) && input.picture) {
-    error.picture = "Should be a valid format (gif,jpeg,jpg,png)";
-  }
+  // if (!input.picture) {
+  //   error.picture = "Picture is required";
+  // } else if (!/.(gif|jpeg|jpg|png)$/i.test(input.picture) && input.picture) {
+  //   error.picture = "Should be a valid format (gif,jpeg,jpg,png)";
+  // }
 
   if (input.gender.length === 0 && input.gender === "") {
     error.gender = "Gender is required";
@@ -83,13 +84,13 @@ export const FormUserRegister = () => {
   const history = useHistory();
   const noError = "Looks good";
   const auth = useSelector((state) => state.auth);
+  const [UserImage, setUserImage] = useState(null);
   const [input, setInput] = useState({
     dni: "",
     name: "",
     last_name: "",
     is_admin: false,
     num_contact: "",
-    picture: "",
     gender: "",
     phone: "",
     e_mail: "",
@@ -104,7 +105,6 @@ export const FormUserRegister = () => {
     e_mail: "E-mail is required",
     phone: "Phone is required",
     num_contact: "Emergency contact is required",
-    picture: "Picture is required",
     gender: "Gender is required",
     password: "Password is required",
     password2: "Repeat password is required",
@@ -112,6 +112,9 @@ export const FormUserRegister = () => {
 
   function handleInputChange(e) {
     e.preventDefault();
+    if (e.target.type === "file") {
+      setUserImage(e.target.files[0])
+    }
     if (e.target.type === "tel") {
       setInput({ ...input, [e.target.name]: parseInt(e.target.value, 10) });
     }
@@ -130,7 +133,15 @@ export const FormUserRegister = () => {
   function handleSubmit(e) {
     e.preventDefault();
 
-    dispatch(postNewUser(input)); //auth register
+    const formData = new FormData();
+    formData.append('image', UserImage);
+    const User = {
+      userInfo: input,
+      userImage: formData
+    }
+
+    console.log(User);
+    dispatch(postNewUser(User)); //auth register
     setInput({
       dni: "",
       name: "",
@@ -144,8 +155,19 @@ export const FormUserRegister = () => {
       password: "",
       password2: "",
     });
-    alert("Created user");
-    history.push("/HomeAdmin");
+    Swal.fire({
+      title: 'Success',
+      text: "User Created",
+      icon: 'succces',
+      showCancelButton: false,
+      confirmButtonColor: '#A7D129',
+      cancelButtonColor: 'rgb(43, 43, 44);',
+      confirmButtonText: 'Greate'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        history.push("/HomeAdmin");
+      }
+    })
   }
 
   return (
@@ -358,34 +380,17 @@ font-family: 'Gruppo', cursive; */}
               </div>
               <div className="form-floating col-md">
                 <input
-                  type="text"
-                  value={input.picture}
+                  type="file"
                   name="picture"
                   placeholder="Paste an image link..."
                   id="floatingInput"
                   onChange={(e) => handleInputChange(e)}
                   className={
-                    error.picture
-                      ? "form-control is-invalid"
+                    !UserImage 
+                      ? "form-control"
                       : "form-control is-valid"
                   }
                 />
-                {error.picture ? (
-                  <div
-                    id="validationServerUsernameFeedback"
-                    className="invalid-feedback"
-                  >
-                    {error.picture}
-                  </div>
-                ) : (
-                  <div
-                    id="validationServerUsernameFeedback"
-                    className="valid-feedback"
-                  >
-                    {noError}
-                  </div>
-                )}
-                <label htmlFor="floatingInput">Paste an image link...</label>
               </div>
             </div>
             <div className="row g-2 mb-3">

@@ -1,7 +1,7 @@
 const {Router} = require('express');
 const router = Router();
 const {get_Userdb} = require('../utils/User_Controllers');
-const { User, Category, Inscription, Score, Op } = require('../db');
+const { User, Category, Inscription, Score, Image, Op } = require('../db');
 const  ArrayUsers  = require('../ArrayUserEjemplo.js')
 
 // console.log(ArrayUsers);
@@ -99,74 +99,67 @@ router.post('/', async (req, res) => {
 
 
 router.put('/:dni', async (req, res) => {
-    const { dni } = req.params;
-    const { name, last_name, is_admin, e_mail, phone, num_contact, picture, gender, category } = req.body; 
-///////////////////////////////////////////////////////////
-    try {
+  ///////////////////////////////////////////////////////////
+  console.log(req.body);
+  // try {
+  //     const { name, last_name, is_admin, e_mail, phone, num_contact, picture, gender, category } = req.body; 
+  //     const { id_user } = req.params;
+
+  //     const image = await Image.findByPk(parseInt(req.body.id_image));
+
   
-      const find_user_by_pk = await User.findOne({where: { dni: parseInt(dni) }});
+  //     const find_user_by_pk = await User.findOne({where: { id_user: parseInt(id_user) }});
 
-      const AllUsers = await User.findAll();
-      let comparison = false;
-
-      // if(find_user_by_pk.e_mail !== e_mail) {
-
-      //   AllUsers.length && AllUsers.map((user) => {
-      //     if( e_mail && e_mail === user.e_mail ) {
-      //       comparison = true;
-      //     }
-      //   })
-        
-      // }
+  //     if(find_user_by_pk) {
   
-      if(find_user_by_pk) {
-  
-        if(!comparison) {
+  //       if(!comparison) {
 
-          let CategoryToUpdate = find_user_by_pk.id_category;
+  //         let CategoryToUpdate = find_user_by_pk.id_category;
 
-          if( category && category === "A" || category && category === "B" || category && category === "C" || category && category === "E" ) {
+  //         if( category && category === "A" || category && category === "B" || category && category === "C" || category && category === "E" ) {
           
-            const categoryFromDb = category && await Category.findOne({
-              where: {
-                type: category
-              }
-            })
+  //           const categoryFromDb = category && await Category.findOne({
+  //             where: {
+  //               type: category
+  //             }
+  //           })
 
-            CategoryToUpdate = categoryFromDb.id_category;
+  //           CategoryToUpdate = categoryFromDb.id_category;
             
-          }
+  //         }
 
-          await User.update(
-            { 
-              name: name && name, 
-              last_name: last_name && last_name, 
-              is_admin: is_admin && is_admin , 
-              e_mail: e_mail && e_mail , 
-              phone: phone && phone , 
-              num_contact: num_contact && num_contact , 
-              picture: picture && picture , 
-              gender: gender && gender , 
-              id_category: CategoryToUpdate 
-            },
-            {
-              where :{
-                dni: parseInt(dni)
-              }
-            }
-          )
-          res.send({msg_mesage: 'User updated'})
-        }else{
-          res.status(400).send({msg_mesage: 'User email already exist'})
-        }
+  //         await User.update(
+  //           { 
+  //             dni: dni && dni,
+  //             name: name && name, 
+  //             last_name: last_name && last_name, 
+  //             is_admin: is_admin && is_admin , 
+  //             e_mail: e_mail && e_mail , 
+  //             phone: phone && phone , 
+  //             num_contact: num_contact && num_contact , 
+  //             picture: picture && picture , 
+  //             gender: gender && gender , 
+  //             id_image: image && image.id_image,
+  //             id_category: CategoryToUpdate 
+  //           },
+  //           {
+  //             where :{
+  //               id_user: parseInt(id_user)
+  //             }
+  //           }
+  //         )
+  //         res.send({msg_mesage: 'User updated'})
+  //       }else{
+  //         res.status(400).send({msg_mesage: 'User email already exist'})
+  //       }
   
-      }else{
-        res.send({msg_mesage: 'User not found'})
-      }
+  //     }else{
+  //       res.send({msg_mesage: 'User not found'})
+  //     }
   
-    } catch (error) {
-      console.log("error",error);
-    }
+  //   } catch (error) {
+  //     console.log("error",error);
+  //   }
   
   })
 

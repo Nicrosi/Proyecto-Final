@@ -12,6 +12,7 @@ export default function ControlUserList() {
   const users = useSelector((state) => state.rootReducer.users);
 
   const [updateList, setUpdateList] = useState(false);
+  const [UserImage, setUserImage] = useState(null);
   const [dataModal, setDataModal] = useState({});
   const [error, setError] = useState({});
   // const [prueba, setPrueba] = useState({dni: ''});
@@ -23,22 +24,30 @@ export default function ControlUserList() {
 
   function handleChange(e) {
     e.preventDefault();
-    if (e.target.type === "text" || e.target.type === "email") {
+    if (e.target.type === "file") {
+      return setUserImage(e.target.files[0])
+    } else if (e.target.type === "text" || e.target.type === "email") {
       setDataModal((prev) => ({
         ...prev,
         [e.target.name]: e.target.value.toLowerCase(),
       }));
-    }
-    // setPrueba({...prueba, [e.target.name]: e.target.value})
-    // console.log(prueba);
+      setError(
+        validate({
+          ...dataModal, 
+          [e.target.name]: e.target.value.toLowerCase(),
+        })
+      )
+    } else {
 
-    setDataModal({ ...dataModal, [e.target.name]: e.target.value });
-    setError(
-      validate({
-        ...dataModal, 
-        [e.target.name]: e.target.value
-      })
-    )
+      setDataModal({ ...dataModal, [e.target.name]: e.target.value });
+      setError(
+        validate({
+          ...dataModal, 
+          [e.target.name]: e.target.value
+        })
+      )
+    }
+    
     // console.log(dataModal);
   }
 
@@ -55,7 +64,14 @@ export default function ControlUserList() {
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
-        dispatch(putUsers(dataModal.dni, dataModal));
+        const formData = new FormData();
+        formData.append('image', UserImage);
+        const User = {
+          userInfo: dataModal,
+          userImage: formData
+        }
+    
+        dispatch(putUsers(dataModal.id_user, User));
        
         Swal.fire('Saved!', '', 'success');
         dispatch(clearUser());
@@ -251,25 +267,16 @@ export default function ControlUserList() {
                             <div className="row g-2 mb-3">
                               <div className="form-floating col-md">
                                 <input
-                                  type="text"
+                                  type="file"
                                   onChange={(e) => handleChange(e)}
-                                  value={dataModal.picture}
                                   name="picture"
                                   id="floatingInput"
                                   className={
-                                    error.e_mail
-                                      ? "form-control border-0 is-invalid"
+                                    !UserImage
+                                      ? "form-control border-0"
                                       : "form-control border-0 is-valid"
                                   }
                                 />
-                                {error.picture && (
-                                  <div
-                                    id="validationServerUsernameFeedback"
-                                    className="invalid-feedback"
-                                  >
-                                    {error.picture}
-                                  </div>
-                                )}
                                 <label htmlFor="floatingInput">Picture</label>
                               </div>
                             </div>

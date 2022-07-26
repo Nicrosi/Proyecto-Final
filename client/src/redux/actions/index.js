@@ -160,20 +160,31 @@ export function postSponsor(input) {
   };
 }
 
-export const putUsers = (dni, valuesChange) => {
+export const putUsers = (id_user, valuesChange) => {
   return async () => {
-    const putValues = {
-      name: valuesChange.name,
-      last_name: valuesChange.last_name,
-      is_admin: valuesChange.is_admin,
-      e_mail: valuesChange.e_mail,
-      phone: valuesChange.phone,
-      num_contact: valuesChange.num_contact,
-      picture: valuesChange.picture,
-      gender: valuesChange.gender,
-      // category: valuesChange.category.type
+    const public_id = valuesChange?.userInfo?.picture?.split('/')[7].split('.')[0]
+    const title = valuesChange.userInfo.name + ' ' + valuesChange.userInfo.last_name
+    console.log(public_id);
+
+    // const response = await axios.delete(`http://localhost:3001/gallery/delete?image_id=${valuesChange.userInfo.id_image}&public_id=${public_id}`)
+    // console.log(response);
+    const { data } = await axios.post(`http://localhost:3001/gallery/UserImage?title=${title}`,valuesChange.userImage)
+    console.log(data.imageURL);
+    
+    const input = {
+      dni: valuesChange.userInfo.dni,
+      name: valuesChange.userInfo.name,
+      last_name: valuesChange.userInfo.last_name,
+      is_admin: valuesChange.userInfo.is_admin,
+      e_mail: valuesChange.userInfo.e_mail,
+      phone: valuesChange.userInfo.phone,
+      num_contact: valuesChange.userInfo.num_contact,
+      picture: data.imageURL,
+      gender: valuesChange.userInfo.gender,
+      id_image: data && data.id_image
     };
-    return await axios.put(`${urlUser}/${dni}`, putValues);
+
+    return await axios.put(`${urlUser}/${id_user}`, input);
   };
 };
 
