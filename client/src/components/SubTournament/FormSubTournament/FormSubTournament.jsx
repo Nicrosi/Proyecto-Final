@@ -56,13 +56,13 @@ export const FormSubTournament = (props) => {
   });
 
   const [error, setError] = useState({
-    elimination_type: "Elimination type is required",
-    match_type: "Match type type is required",
-    name: "Name type is required",
-    numb_players: "Numb players is required",
-    gender: "Gender type is required",
-    price: "Price type is required",
-    id_category: "Category type is required",
+    elimination_type: "init",
+    match_type: "init",
+    name: "init",
+    numb_players: "init",
+    gender: "init",
+    price: "init",
+    id_category: "init",
   });
 
   function handleOnChange(e) {
@@ -132,13 +132,17 @@ export const FormSubTournament = (props) => {
                   name="name"
                   value={input.name}
                   className={
-                    error.name
+                    error.name === "init"
+                      ? "form-control"
+                      : error.name
                       ? "form-control is-invalid"
                       : "form-control is-valid"
                   }
                   required
                 />
-                {error.name ? (
+                {error.name === "init" ? (
+                  <br />
+                ) : error.name ? (
                   <div
                     id="validationServerUsernameFeedback"
                     className="invalid-feedback"
@@ -153,7 +157,7 @@ export const FormSubTournament = (props) => {
                     {noError}
                   </div>
                 )}
-                <label htmlFor="floatingInputName">name</label>
+                <label htmlFor="floatingInputName">Name</label>
               </div>
               <div className="form-floating col-md">
                 <input
@@ -167,13 +171,17 @@ export const FormSubTournament = (props) => {
                   name="numb_players"
                   value={input.numb_players}
                   className={
-                    error.numb_players
+                    error.numb_players === "init"
+                      ? "form-control"
+                      : error.numb_players
                       ? "form-control is-invalid"
                       : "form-control is-valid"
                   }
                   required
                 />
-                {error.numb_players ? (
+                {error.numb_players === "init" ? (
+                  <br />
+                ) : error.numb_players ? (
                   <div
                     id="validationServerUsernameFeedback"
                     className="invalid-feedback"
@@ -188,7 +196,7 @@ export const FormSubTournament = (props) => {
                     {noError}
                   </div>
                 )}
-                <label htmlFor="floatingInput">numb_players</label>
+                <label htmlFor="floatingInput">Number of players</label>
               </div>
             </div>
             <div className="row g-2 mb-3">
@@ -202,13 +210,17 @@ export const FormSubTournament = (props) => {
                   name="price"
                   value={input.price}
                   className={
-                    error.price
+                    error.price === "init"
+                      ? "form-control"
+                      : error.price
                       ? "form-control is-invalid"
                       : "form-control is-valid"
                   }
                   required
                 />
-                {error.price ? (
+                {error.price === "init" ? (
+                  <br />
+                ) : error.price ? (
                   <div
                     id="validationServerUsernameFeedback"
                     className="invalid-feedback"
@@ -223,13 +235,15 @@ export const FormSubTournament = (props) => {
                     {noError}
                   </div>
                 )}
-                <label>price</label>
+                <label>Price</label>
               </div>
             </div>
             <div className="form-floating col-md">
               <select
                 className={
-                  error.gender
+                  error.gender === "init"
+                    ? "form-control"
+                    : error.gender
                     ? "form-control is-invalid"
                     : "form-control is-valid"
                 }
@@ -242,28 +256,30 @@ export const FormSubTournament = (props) => {
                 <option value="female">Female</option>
                 <option value="male">Male</option>
               </select>
-              {error.gender ? (
-                <div
-                  id="validationServerUsernameFeedback"
-                  className="invalid-feedback"
-                >
-                  {error.gender}
-                </div>
-              ) : (
-                <div
-                  id="validationServerUsernameFeedback"
-                  className="valid-feedback"
-                >
-                  {noError}
-                </div>
-              )}
+              {error.gender === "init"?<br />:(error.gender ? (
+                    <div
+                      id="validationServerUsernameFeedback"
+                      className="invalid-feedback"
+                    >
+                      {error.gender}
+                    </div>
+                  ) : (
+                    <div
+                      id="validationServerUsernameFeedback"
+                      className="valid-feedback"
+                    >
+                      {noError}
+                    </div>
+                  ))}
               <label htmlFor="floatingSelect">Gender</label>
             </div>
 
             <div className="form-floating col-md">
               <select
                 className={
-                  error.elimination_type
+                  error.elimination_type === "init"
+                    ? "form-control"
+                    : error.elimination_type
                     ? "form-control is-invalid"
                     : "form-control is-valid"
                 }
@@ -277,27 +293,29 @@ export const FormSubTournament = (props) => {
                 <option value="Simple">Simple Elimination</option>
                 <option value="Double">Double Elimination</option>
               </select>
-              {error.elimination_type ? (
-                <div
-                  id="validationServerUsernameFeedback"
-                  className="invalid-feedback"
-                >
-                  {error.elimination_type}
-                </div>
-              ) : (
-                <div
-                  id="validationServerUsernameFeedback"
-                  className="valid-feedback"
-                >
-                  {noError}
-                </div>
-              )}
+              {error.elimination_type === "init"?<br />:(error.elimination_type ? (
+                    <div
+                      id="validationServerUsernameFeedback"
+                      className="invalid-feedback"
+                    >
+                      {error.elimination_type}
+                    </div>
+                  ) : (
+                    <div
+                      id="validationServerUsernameFeedback"
+                      className="valid-feedback"
+                    >
+                      {noError}
+                    </div>
+                  ))}
               <label htmlFor="floatingSelect">elimination_type</label>
             </div>
             <div className="form-floating col-md">
               <select
                 className={
-                  error.match_type
+                  error.match_type === "init"
+                    ? "form-control"
+                    : error.match_type
                     ? "form-control is-invalid"
                     : "form-control is-valid"
                 }
@@ -310,30 +328,32 @@ export const FormSubTournament = (props) => {
                 <option value="singles">singles</option>
                 <option value="dobles">dobles</option>
               </select>
-              {error.match_type ? (
-                <div
-                  id="validationServerUsernameFeedback"
-                  className="invalid-feedback"
-                >
-                  {error.match_type}
-                </div>
-              ) : (
-                <div
-                  id="validationServerUsernameFeedback"
-                  className="valid-feedback"
-                >
-                  {noError}
-                </div>
-              )}
+              {error.match_type === "init"?<br />:(error.match_type ? (
+                    <div
+                      id="validationServerUsernameFeedback"
+                      className="invalid-feedback"
+                    >
+                      {error.match_type}
+                    </div>
+                  ) : (
+                    <div
+                      id="validationServerUsernameFeedback"
+                      className="valid-feedback"
+                    >
+                      {noError}
+                    </div>
+                  ))}
               <label htmlFor="floatingSelect">match_type</label>
             </div>
             <div className="form-floating col-md">
               <select
-                className={
-                  error.id_category
-                    ? "form-control is-invalid"
-                    : "form-control is-valid"
-                }
+               className={
+                error.id_category === "init"
+                  ? "form-control"
+                  : error.id_category
+                  ? "form-control is-invalid"
+                  : "form-control is-valid"
+              }
                 id="floatingSelect"
                 aria-label="Floating label select example"
                 name="id_category"
@@ -345,21 +365,21 @@ export const FormSubTournament = (props) => {
                 <option value="3">C</option>
                 <option value="4">E</option>
               </select>
-              {error.id_category ? (
-                <div
-                  id="validationServerUsernameFeedback"
-                  className="invalid-feedback"
-                >
-                  {error.id_category}
-                </div>
-              ) : (
-                <div
-                  id="validationServerUsernameFeedback"
-                  className="valid-feedback"
-                >
-                  {noError}
-                </div>
-              )}
+              {error.id_category === "init"?<br />:(error.id_category ? (
+                    <div
+                      id="validationServerUsernameFeedback"
+                      className="invalid-feedback"
+                    >
+                      {error.id_category}
+                    </div>
+                  ) : (
+                    <div
+                      id="validationServerUsernameFeedback"
+                      className="valid-feedback"
+                    >
+                      {noError}
+                    </div>
+                  ))}
               <label htmlFor="floatingSelect">id_category</label>
             </div>
 
