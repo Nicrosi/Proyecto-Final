@@ -32,7 +32,7 @@ export function validate(input) {
   } else if (input.last_name.length > 255) {
     error.last_name = "Enter less than 255 characters";
   } else if (input.last_name.search("[0-9]") !== -1) {
-    error.name = "The last name must not have numbers";
+    error.last_name = "The last name must not have numbers";
   }
 
   if (!input.e_mail) {
@@ -59,12 +59,6 @@ export function validate(input) {
   } else if (!/^\d{1,10}$/.test(input.num_contact) && input.num_contact) {
     error.num_contact = "Enter a number";
   }
-
-  // if (!input.picture) {
-  //   error.picture = "Picture is required";
-  // } else if (!/.(gif|jpeg|jpg|png)$/i.test(input.picture) && input.picture) {
-  //   error.picture = "Should be a valid format (gif,jpeg,jpg,png)";
-  // }
 
   if (input.gender.length === 0 && input.gender === "") {
     error.gender = "Gender is required";
@@ -111,13 +105,16 @@ export const FormUser = ({
     e_mail: "",
     phone: "",
     num_contact: "",
+    picture: "",
     gender: "",
   });
 
   function handleInputChange(e) {
     e.preventDefault();
     if (e.target.type === "file") {
-      return setUserImage(e.target.files[0])
+      let objError = validate({ ...input, [e.target.name]: e.target.value });
+      setError(objError);
+      setUserImage(e.target.files[0])
     }
     else if (e.target.type === "tel") {
       setInput({ ...input, [e.target.name]: parseInt(e.target.value, 10) });
@@ -435,7 +432,7 @@ export const FormUser = ({
                     Profile Image
                   </h5>
                   <Form.Control 
-                    type="file" 
+                    type="file"
                     size="lg" 
                     onChange={(e) => handleInputChange(e)}
                   />
