@@ -10,7 +10,7 @@ import Form from 'react-bootstrap/Form';
 
 
 export default function ControlUserList() {
-  const users = useSelector((state) => state.rootReducer.users);
+  const users = useSelector((state) => state.rootReducer.filteredUsers);
 
   const [updateList, setUpdateList] = useState(false);
   const [UserImage, setUserImage] = useState(null);
