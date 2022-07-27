@@ -45,17 +45,15 @@ export default function NavBar() {
                 </Link>
               </li>
             ) : null}
-            {loggedIn && currentUser.is_admin === false ? (
               <li className="nav-item">
                  <a
                 className="nav-link ms-auto"
                 style={{ fontWeight: "bold", color: "#e0e6e8" }}
                 href="/#tournamentLP  "
               >
-                Tournaments
+                Tournament
               </a>
               </li>
-            ) : null}
             <li className="nav-item">
               <a
                 className="nav-link ms-auto"

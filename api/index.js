@@ -27,11 +27,12 @@ conn.sync({ force: false }).then(async () => {
     await axios.post(`http://localhost:3001/category/`, { type: "B" });
     await axios.post(`http://localhost:3001/category/`, { type: "C" });
     await axios.post(`http://localhost:3001/category/`, { type: "E" });
-    await axios.post(`http://localhost:3001/gestion/`, { "organizer_earnings": 30,
-    "tennis_courts": 50,
-    "awards": 20 });
-    // await axios.post(`http://localhost:3001/auth/register`, admin);
-   
+    await axios.post(`http://localhost:3001/gestion/`, {
+      organizer_earnings: 30,
+      tennis_courts: 50,
+      awards: 20,
+    });
+    await axios.post(`http://localhost:3001/auth/register`, admin);
   } catch (error) {
     console.log("Admin Already Exist");
   }

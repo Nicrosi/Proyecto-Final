@@ -9,8 +9,10 @@ const inscription = require("../routes/InscriptionRouter.js");
 const Team = require("../routes/TeamRouter.js");
 const Auth = require("../routes/AuthRouter.js");
 const Gallery = require("../routes/GalleryRouter.js");
-const Players = require("../routes/playersOnSubtRoute.js")
-const gestion = require("../routes/GestionRouter.js")
+const Players = require("../routes/playersOnSubtRoute.js");
+const gestion = require("../routes/GestionRouter.js");
+const Matches = require("../routes/MatchRouter.js");
+const Rounds = require("../routes/RoundRouter.js");
 const router = Router();
 
 router.use("/gestion", gestion);
@@ -25,6 +27,9 @@ router.use('/team', Team);
 router.use('/auth', Auth);
 router.use('/gallery', Gallery);
 router.use('/players', Players);
+router.use('/matches', Matches);
+router.use('/rounds', Rounds);
+
 
 
 

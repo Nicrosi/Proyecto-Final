@@ -5,7 +5,12 @@ import { Link } from "react-router-dom";
 import Stripecheckout from "react-stripe-checkout";
 import Card from "react-bootstrap/Card";
 import styles from "./SubtCard.module.css";
-import { getPLayersOnSubt, postInscription } from "../../../redux/actions";
+import {
+  getInscriptions,
+  getPLayersOnSubt,
+  postInscription,
+} from "../../../redux/actions";
+import axios from "axios";
 
 export default function SubtCard({
   id_subt,
@@ -19,15 +24,18 @@ export default function SubtCard({
   match_type,
   el_type,
   numb_players,
+  inscriptions,
+  initialized,
 }) {
   const user = id_user;
   const auth = useSelector((state) => state.auth);
-  const amount_players = useSelector(
-    (state) => state.rootReducer.playersOnSubt
+  const Allinscriptions = useSelector(
+    (state) => state.rootReducer.inscriptions
   );
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getPLayersOnSubt(id_subt));
+    dispatch(getPLayersOnSubt(Number(id_subt)));
+    dispatch(getInscriptions());
   }, [dispatch, id_subt]);
   // eslint-disable-next-line no-unused-vars
   const [product, setProduct] = useState({
@@ -47,7 +55,22 @@ export default function SubtCard({
     };
     dispatch(postInscription(body));
   };
-  console.log(amount_players.length + " " + numb_players);
+  const handleClick = async () => {
+    try {
+      await axios.post(`http://localhost:3001/rounds/firstround/${id_subt}`);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const isPayed = () => {
+    const userInscrip = Allinscriptions.find(
+      (inscrip) => inscrip.id_user === auth.currentUser.id_user
+    );
+    if (userInscrip && userInscrip.is_payed) {
+      return true;
+    } else return false;
+  };
   return (
     <React.Fragment>
       <Card className={`${styles.cardBox} bg-dark`} key={id_subt}>
@@ -57,7 +80,9 @@ export default function SubtCard({
         <Card.Body className={styles.bodyBox}>
           <div className="col">
             <div className={styles.matchType}>Match Type: {match_type}</div>
-            <div className={styles.EliminationType}>Elimination Type: {el_type}</div>
+            <div className={styles.EliminationType}>
+              Elimination Type: {el_type}
+            </div>
             <div className={styles.category_gender}>
               <div>Category: {product.category.type}</div>
               <div>Gender: {product.gender}</div>
@@ -70,26 +95,64 @@ export default function SubtCard({
         <Card.Footer>
           <div className="d-flex justify-content-end">
             {auth.loggedIn && auth.currentUser.is_admin === false ? (
-              <Stripecheckout
-                stripeKey="pk_test_51LLBogC5JnQCZsvqgXxqWC00Ui3tQXiMSljwFGFv28WhZ69g54hmBGjb9XKE1mjZTsipyzW49f7CQ8G1qS6lWL9H00MY1ocH5Z"
-                token={makePayment}
-                name={`Buy ${product.name}`}
-                amount={product.price * 100}
-                email={product.email}
-              >
-                <button className="btn" style={{ backgroundColor: "#A7D129" }}>
-                  Buy
-                </button>
-              </Stripecheckout>
-            ) : amount_players.length === numb_players ? (
-              <button style={{ backgroundColor: "#A7D129" }}>
-                <Link
-                  style={{ fontWeight: "bold", color: "#10242b" }}
-                  to={`/tournamentplayers/${id_subt}`}
-                >
-                  Create Brackets
-                </Link>
-              </button>
+              <>
+                {isPayed() ? (
+                  <Link
+                    style={{ fontWeight: "bold", color: "#10242b" }}
+                    to={`/bracket/${id_subt}`}
+                  >
+                    <button
+                      className="btn"
+                      style={{ backgroundColor: "#A7D129" }}
+                    >
+                      View
+                    </button>
+                  </Link>
+                ) : (
+                  <Stripecheckout
+                    stripeKey="pk_test_51LLBogC5JnQCZsvqgXxqWC00Ui3tQXiMSljwFGFv28WhZ69g54hmBGjb9XKE1mjZTsipyzW49f7CQ8G1qS6lWL9H00MY1ocH5Z"
+                    token={makePayment}
+                    name={`Buy ${product.name}`}
+                    amount={product.price * 100}
+                    email={product.email}
+                  >
+                    <button
+                      className="btn"
+                      style={{ backgroundColor: "#A7D129" }}
+                    >
+                      Register
+                    </button>
+                  </Stripecheckout>
+                )}
+              </>
+            ) : inscriptions.length === numb_players ? (
+              <>
+                {!initialized ? (
+                  <button
+                    style={{ backgroundColor: "#A7D129" }}
+                    onClick={handleClick}
+                  >
+                    <Link
+                      style={{ fontWeight: "bold", color: "#10242b" }}
+                      to={`/bracket/${id_subt}`}
+                    >
+                      Create Brackets
+                    </Link>
+                  </button>
+                ) : (
+                  <Link
+                    style={{ fontWeight: "bold", color: "#10242b" }}
+                    to={`/bracket/${id_subt}`}
+                  >
+                    <button
+                      className="btn"
+                      style={{ backgroundColor: "#A7D129" }}
+                    >
+                      View
+                    </button>
+                  </Link>
+                )}
+              </>
             ) : (
               <button style={{ backgroundColor: "#82a222" }} disabled>
                 Not enough players
@@ -101,4 +164,3 @@ export default function SubtCard({
     </React.Fragment>
   );
 }
-// disabled={amount_players.length === numb_players ? false : true}

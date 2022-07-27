@@ -68,9 +68,11 @@ export default function Steps() {
               you prefer.
             </p>
           </div>
-          <Link to={"/TournamentsToShow"}>
-            <button>Tournament</button>
-          </Link>
+          <button>
+            <a className="nav-link" href="/#tournamentLP  ">
+              Tournaments
+            </a>
+          </button>
         </div>
       </Col>
 

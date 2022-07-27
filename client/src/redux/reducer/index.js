@@ -18,7 +18,9 @@ import {
   CHANGE_PANEL_PAGE,
   GET_INSCRIPTIONS,
   GET_GESTION,
-  GETPUT_GESTION
+  GETPUT_GESTION,
+  GET_MATCHES,
+  PUT_SCORE,
 } from "../actions";
 import { filterUsers } from "../helpers/filters";
 import { sortByName } from "../helpers/sorts";
@@ -31,18 +33,18 @@ const initialState = {
   filteredUsers: [],
   sponsors: [],
   filteredSubt: [],
-  tournaments:[],
-  subtournaments:[],
-  FirstLine:[],
-  SecondLine:[],
-  ThirdLine:[],
+  tournaments: [],
+  subtournaments: [],
+  FirstLine: [],
+  SecondLine: [],
+  ThirdLine: [],
   ImageLoading: false,
   CurrentPanelPage: "user",
-  playersOnSubt:[],
-  gallery: [],
   playersOnSubt: [],
+  gallery: [],
   gestion: {},
   inscriptions: [],
+  matches: [],
 };
 const rootReducer = (state = initialState, action, name) => {
   switch (action.type) {
@@ -58,14 +60,12 @@ const rootReducer = (state = initialState, action, name) => {
         users: action.payload,
         filteredUsers: sortByName(action.payload),
       };
-
     case GET_ALL_USERS_NAME:
       return {
         ...state,
         users: action.payload,
         filteredUsers: sortByName(action.payload),
       };
-
     case ORDER_USERS_BY_NAME:
       const gender = action.payload.gender,
         category = action.payload.category,
@@ -77,7 +77,6 @@ const rootReducer = (state = initialState, action, name) => {
           order
         ),
       };
-
     case GET_USER_BY_ID:
       return {
         ...state,
@@ -109,62 +108,72 @@ const rootReducer = (state = initialState, action, name) => {
     case CLEAR_SUBTOURNAMENT:
       return {
         ...state,
-        subtournaments: []
+        subtournaments: [],
       };
-      case GET_TOURNAMENTS:
-        return {
-          ...state,
-          tournaments: action.payload
-        }
-      case GET_ALL_SUBTOURNAMENTS:
-        return {
-          ...state,
-          subtournaments: action.payload
-        }
-      case PUT_SUBTOURNAMENT:
-        return {
-          ...state,
-          subtournaments: action.payload
-        }
-      case GET_BY_NAME:
-        return {
-          ...state,
-          users: action.payload.name === 'user' ? action.payload.value : state.users,
-          tournaments: action.payload.name === 'tournament' ? action.payload.value : state.tournaments,
-          sponsors: action.payload.name === 'sponsor' ? action.payload.value : state.sponsors,
-          subtournaments: action.payload.name === 'subtournament' ? action.payload.value : state.subtournaments
-        }
-      case CHANGE_PANEL_PAGE:
-        return {
-          ...state,
-          CurrentPanelPage: action.payload
-        }
-      case CLEAR_GALLERY:
-        return {
-          ...state,
-          FirstLine: [],
-          SecondLine: [],
-          ThirdLine: [],
-          ImageLoading: true
-        }
-      case GET_ALL_IMAGES:
-        const images = [...action.payload];
-        let firstLine = [];
-        let secondLine = [];
-        let thirdLine = [];
-        while(images.length) {
-          images.length && firstLine.push(images.shift())
-          images.length && secondLine.push(images.shift())
-          images.length && thirdLine.push(images.shift())
-        }
-        return {
-          ...state,
-          gallery: action.payload,
-          FirstLine: firstLine,
-          SecondLine: secondLine,
-          ThirdLine: thirdLine,
-          ImageLoading: false,
-        }
+    case GET_TOURNAMENTS:
+      return {
+        ...state,
+        tournaments: action.payload,
+      };
+    case GET_ALL_SUBTOURNAMENTS:
+      return {
+        ...state,
+        subtournaments: action.payload,
+      };
+    case PUT_SUBTOURNAMENT:
+      return {
+        ...state,
+        subtournaments: action.payload,
+      };
+    case GET_BY_NAME:
+      return {
+        ...state,
+        users:
+          action.payload.name === "user" ? action.payload.value : state.users,
+        tournaments:
+          action.payload.name === "tournament"
+            ? action.payload.value
+            : state.tournaments,
+        sponsors:
+          action.payload.name === "sponsor"
+            ? action.payload.value
+            : state.sponsors,
+        subtournaments:
+          action.payload.name === "subtournament"
+            ? action.payload.value
+            : state.subtournaments,
+      };
+    case CHANGE_PANEL_PAGE:
+      return {
+        ...state,
+        CurrentPanelPage: action.payload,
+      };
+    case CLEAR_GALLERY:
+      return {
+        ...state,
+        FirstLine: [],
+        SecondLine: [],
+        ThirdLine: [],
+        ImageLoading: true,
+      };
+    case GET_ALL_IMAGES:
+      const images = [...action.payload];
+      let firstLine = [];
+      let secondLine = [];
+      let thirdLine = [];
+      while (images.length) {
+        images.length && firstLine.push(images.shift());
+        images.length && secondLine.push(images.shift());
+        images.length && thirdLine.push(images.shift());
+      }
+      return {
+        ...state,
+        gallery: action.payload,
+        FirstLine: firstLine,
+        SecondLine: secondLine,
+        ThirdLine: thirdLine,
+        ImageLoading: false,
+      };
     case GET_PLAYERS_ON_SUBT:
       return {
         ...state,
@@ -180,10 +189,27 @@ const rootReducer = (state = initialState, action, name) => {
         ...state,
         gestion: action.payload,
       };
-      case GETPUT_GESTION:
+    case GETPUT_GESTION:
       return {
         ...state,
         gestion: action.payload,
+      };
+    case GET_MATCHES:
+      return {
+        ...state,
+        matches: action.payload,
+      };
+    case PUT_SCORE:
+      const index_match = state.matches.findIndex(
+        (m) => m.id_match === action.payload.id_match
+      );
+      if (index_match >= 0) {
+        const newMatch = state.matches[index_match];
+        newMatch.score = action.payload.score;
+      }
+      return {
+        ...state,
+        matches: [...state.matches],
       };
     default:
       return { ...state };

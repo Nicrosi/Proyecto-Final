@@ -35,7 +35,7 @@ function App() {
       <Route path={"/"} component={ChatBot} />
       <Route path={"/"} component={NavBar} />
       <Switch>
-        <Route path={"/bracket"} component={Brackets} />
+        <Route path={"/bracket/:subt_id"} component={Brackets} />
         <RouteGuard exact path={"/Users"} component={Users} admin={false} />
         <RouteGuard
           exact
