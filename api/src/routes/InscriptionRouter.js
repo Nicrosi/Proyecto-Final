@@ -23,6 +23,8 @@ router.get("/", async (req, res, next) => {
 });
 
 router.post('/:id', async (req, res) => {
+  try {
+    
     const { id } = req.params;
     const {product, token} = req.body;    
     const charge = await createPayment([product, token]); 
@@ -37,22 +39,21 @@ router.post('/:id', async (req, res) => {
         const teamUser = await User.findByPk(id)
         teamUser.addTeam(newTeam)
         await Inscription.create({
-           description: product.name,
-           amount: product.price,
-           is_payed : true,
-           id_user: id,
-           id_tournament: product.id_tournament,
-           id_subt: product.id_subt
-         });
-         res.status(200).send("Inscription created!");    
-       } catch (error) {
-         console.log(error);
-       }
+          description: product.name,
+          amount: product.price,
+          is_payed : true,
+          id_user: id,
+          id_tournament: product.id_tournament,
+          id_subt: product.id_subt
+        });
+        res.status(200).send("Inscription created!");    
+      } catch (error) {
+        console.log(error);
+      }
     }
-     
-     
-  
-    
+  } catch (error) {
+    console.log(error);
+  }
 })
 
 module.exports = router;

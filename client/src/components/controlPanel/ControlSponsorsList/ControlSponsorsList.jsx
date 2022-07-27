@@ -6,6 +6,7 @@ import styles from "./ControlSponsorsList.module.css"
 import ControlCardSponsor from "../ControlCardSponsor/ControlCardSponsor";
 import Swal from "sweetalert2";
 import validate from './Validations';
+import Form from 'react-bootstrap/Form';
 
 
 
@@ -13,6 +14,7 @@ export default function ControlSponsorsList() {
   const sponsors = useSelector((state) => state.rootReducer.sponsors);
 
   const [updateList, setUpdateList] = useState(false);
+  const [UserImage, setUserImage] = useState(null);
   const [dataModal, setDataModal] = useState({});
   const [error, setError] = useState({});
 
@@ -24,13 +26,18 @@ export default function ControlSponsorsList() {
 
   function handleChange(e) {
     e.preventDefault();
-    setDataModal({ ...dataModal, [e.target.name]: e.target.value });
-    setError(
-      validate({
-        ...dataModal, 
-        [e.target.name]: e.target.value
-      })
-    )
+    if (e.target.type === "file") {
+      return setUserImage(e.target.files[0])
+    } else {
+
+      setDataModal({ ...dataModal, [e.target.name]: e.target.value });
+      setError(
+        validate({
+          ...dataModal, 
+          [e.target.name]: e.target.value
+        })
+      )
+    }
   }
   function handleSubmit(e) {
     e.preventDefault();
@@ -45,12 +52,27 @@ export default function ControlSponsorsList() {
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
-        dispatch(putSponsor(dataModal.id_sponsor, dataModal));       
+        if(UserImage) {
+          const formData = new FormData();
+          formData.append('image', UserImage);
+          
+          const Sponsor = {
+            userInfo: dataModal,
+            userImage: formData
+          }
+      
+          dispatch(putSponsor(dataModal.id_sponsor, Sponsor)); 
+        } else {
+          const Sponsor = {
+            userInfo: dataModal,
+          }
+          dispatch(putSponsor(dataModal.id_sponsor, Sponsor)); 
+        }
+       
         Swal.fire('Saved!', '', 'success');
 
         dispatch(getAllSponsors());
         setUpdateList(!updateList)
-
         // window.location.reload()
 
       } else if (result.isDenied) {
@@ -166,30 +188,6 @@ export default function ControlSponsorsList() {
                           <input
                             type="text"
                             onChange={(e) => handleChange(e)}
-                            value={dataModal.logo}
-                            placeholder=""
-                            name="logo"
-                            id="floatingInput"
-                            className={
-                              error.logo
-                                ? "form-control border-0 is-invalid"
-                                : "form-control border-0 is-valid"
-                            }
-                          />
-                          {error.logo && (
-                            <div
-                              id="validationServerUsernameFeedback"
-                              className="invalid-feedback"
-                            >
-                              {error.logo}
-                            </div>
-                          )}
-                          <label htmlFor="floatingInput">Logo</label>
-                          </div>
-                          <div className="form-floating col-md">
-                          <input
-                            type="text"
-                            onChange={(e) => handleChange(e)}
                             value={dataModal.link}
                             name="link"
                             id="floatingInput"
@@ -209,6 +207,21 @@ export default function ControlSponsorsList() {
                           )}
                           <label htmlFor="floatingInput">Link</label>
                           </div>
+                          
+                          <Form.Group controlId="formFileLg" className="mb-3">
+                            <h5
+                              className="modal-title"
+                              id="staticBackdropLabel"
+                              style={{ color: "#bebebe" }}
+                            >
+                              Sponsor Logo
+                            </h5>
+                            <Form.Control 
+                              type="file" 
+                              size="lg" 
+                              onChange={(e) => handleChange(e)}
+                            />
+                          </Form.Group>
                         </div>
                         <div className="modal-footer">
                           {Object.keys(error).length > 0 ? (

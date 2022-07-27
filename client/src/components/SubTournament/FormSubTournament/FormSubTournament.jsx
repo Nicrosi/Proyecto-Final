@@ -40,30 +40,34 @@ export function validate(input) {
   return error;
 }
 
+const initialInput = {
+  elimination_type: "",
+  match_type: "",
+  name: "",
+  numb_players: "",
+  gender: "",
+  price: "",
+  id_category: "",
+} 
+
+const initialErrors = {
+  elimination_type: "init",
+  match_type: "init",
+  name: "init",
+  numb_players: "init",
+  gender: "init",
+  price: "init",
+  id_category: "init",
+}
+
 export const FormSubTournament = (props) => {
   const params = Number(props.match.params.tournamentId);
   const noError = "Looks good";
   const dispatch = useDispatch();
 
-  const [input, setInput] = useState({
-    elimination_type: "",
-    match_type: "",
-    name: "",
-    numb_players: "",
-    gender: "",
-    price: "",
-    id_category: "",
-  });
+  const [input, setInput] = useState(initialInput);
 
-  const [error, setError] = useState({
-    elimination_type: "init",
-    match_type: "init",
-    name: "init",
-    numb_players: "init",
-    gender: "init",
-    price: "init",
-    id_category: "init",
-  });
+  const [error, setError] = useState(initialErrors);
 
   function handleOnChange(e) {
     setInput({
@@ -75,7 +79,7 @@ export const FormSubTournament = (props) => {
     setError(objError);
   }
 
-  async function handleOnSubmit(e) {
+  function handleOnSubmit(e) {
     e.preventDefault();
 
     dispatch(postSubTournament(params, input));
@@ -88,7 +92,10 @@ export const FormSubTournament = (props) => {
       price: "",
       id_category: "",
     });
-    return alert("SubTournament created successfully");
+    alert("SubTournament created successfully");
+    setError(initialErrors)
+    setInput(initialInput);
+    e.target.reset()
   }
 
   return (

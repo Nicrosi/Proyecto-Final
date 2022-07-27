@@ -28,13 +28,15 @@ export function validate(input) {
   return error;
 }
 
+const initialInput = {
+  name: "",
+  date: "",
+  location: "",
+}
+
 export const FormTournament = () => {
   const noError = "Looks good";
-  const [input, setInput] = useState({
-    name: "",
-    date: "",
-    location: "",
-  });
+  const [input, setInput] = useState(initialInput);
 
   const [error, setError] = useState({
     name: "init",
@@ -46,6 +48,7 @@ export const FormTournament = () => {
     e.preventDefault();
     await axios.post(`http://localhost:3001/tournament`, input);
     alert("Successfully created tournament");
+    setInput(initialInput)
   }
 
   function handleOnChange(e) {

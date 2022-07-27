@@ -20,12 +20,12 @@ export default function LandingPage() {
         <h1 className="mt-4 ">How to take part?</h1>
         <Steps />
       </section>
-      <Gallery />
       <section
         id="tournamentLP"
       >
         <TournamentsToShow />
       </section>
+        <Gallery />
       <section
         id="sponsorLP"
         className="d-flex align-items-center justify-content-center bg-dark"

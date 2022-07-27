@@ -35,7 +35,7 @@ try {
 }
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
-const { User, Team, Match, Round, Inscription, Tournament, Subtournament, Score, Category, Sponsor } = sequelize.models;
+const { User, Team, Match, Round, Inscription, Tournament, Subtournament, Score, Category, Sponsor, Image } = sequelize.models;
 
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
@@ -79,9 +79,13 @@ Match.belongsToMany(Team, {through: 'match_team', foreignKey: 'id_match'});
 Subtournament.hasMany(Team, {foreignKey: 'id_subt'});
 Team.belongsTo(Subtournament, {foreignKey: 'id_subt'});
 
+Image.hasMany(User, {foreignKey: 'id_image'});
+User.belongsTo(Image, {foreignKey: 'id_image'});
+
+
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
-  conn: sequelize,     // para importart la conexión { conn } = require('./db.js');
+  conn: sequelize,    // para importart la conexión { conn } = require('./db.js');
   Op
 };
