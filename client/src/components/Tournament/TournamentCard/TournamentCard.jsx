@@ -1,62 +1,85 @@
 import React from "react";
-import img1 from "../../../assets/fototenis.jpg";
 import styles from "./TournamentCard.module.css";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 export const TournamentCard = ({ id, name, date, location }) => {
-
   const auth = useSelector((state) => state.auth);
 
   return (
-    <div
-      style={{
-        textDecoration: "none",
-        color: "black",
-        height: "130%",
-        width: "400px",
-      }}
-    >
-      <div className={`card ${styles.card}`}>
-        <div
-          className="d-flex flex flex-md-row flex-lg-row"
-          style={{ height: "250px" }}
-        >
-          <div className={`${styles.pictureContainer} col-md-5 col-sm-3`}>
-            <img
-              className={`${styles.picture} rounded-start`}
-              src={img1}
-              alt="img"
-            />
-          </div>
-          <div
-            className="col-md-7 col-sm-5 mb-4"
-            style={{ display: "flex", flexDirection: "column" }}
-          >
-            <div className="card-body">
-              <h5 className="card-title">Name:{name}</h5>
-              <h5 className="card-title">Date:{date.slice(0,10)}</h5>
-              <h5 className="card-text mt-2 mb-0">Location: {location}</h5>
-            </div>
-            <div>
-              {auth.loggedIn && auth.currentUser.is_admin === false ? <button style={{ backgroundColor: "#A7D129" }}>
-                <Link
-                  style={{ fontWeight: "bold", color: "#10242b" }}
-                  to={`/inscription/${id}`}
+    <div className={styles.card}>
+      <div className={styles.textBox}>
+        <h5 className={styles.name}>"{name}"</h5>
+        <div className={styles.date_location}>
+          <h5 className={styles.date_location}>{date.slice(0, 10)}</h5>
+          <h5 className={styles.date_location}>{location.toUpperCase()}</h5>
+        </div>
+      </div>
+      <div>        
+        {
+          !auth.loggedIn ? (
+            <Link
+                style={{ fontWeight: "bold", color: "#10242b" }}
+                to={`/allSubt/${id}`}
+              >
+                <button
+                  className="btn"
+                  style={{ backgroundColor: "#A7D129" }}
+                 
                 >
-                  Inscription
+                  See All Subtournaments
+                </button>
                 </Link>
-              </button>:
-              <button style={{ backgroundColor: "#A7D129" }}>
+          ) : <>
+            {auth.loggedIn && auth.currentUser.is_admin === false ? (
+              <><Link
+                style={{ fontWeight: "bold", color: "#10242b" }}
+                to={`/inscription/${id}`}
+              >
+                <button className="btn" style={{ backgroundColor: "#A7D129" }}>
+                  Inscription
+                </button>{" "}
+              </Link>
               <Link
                 style={{ fontWeight: "bold", color: "#10242b" }}
-                to={`/CreateSubtournament/${id}`}
+                to={`/allSubt/${id}`}
               >
-                Create Subtournament
-              </Link>
-            </button>}
-            </div>
-          </div>
-        </div>
+              <button
+              className="btn"
+              style={{ backgroundColor: "#A7D129" }}
+              
+            >
+              See All Subtournaments
+            </button></Link></>
+            ) : (
+              <>
+                <Link
+                  style={{ fontWeight: "bold", color: "#10242b" }}
+                  to={`/CreateSubtournament/${id}`}
+                >
+                  <button className="btn" style={{ backgroundColor: "#A7D129", marginRight: "20px" }}>
+                    Create Subtournament
+                  </button>
+                </Link>
+             
+              <Link
+                style={{ fontWeight: "bold", color: "#10242b" }}
+                to={`/inscription/${id}`}
+              >
+                <button
+                  className="btn"
+                  style={{ backgroundColor: "#A7D129" }}
+                 
+                >
+                  See All Subtournaments
+                </button>
+                </Link>
+              </>
+            )
+            }</>
+    
+          
+        }
+        
       </div>
     </div>
   );

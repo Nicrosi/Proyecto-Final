@@ -17,6 +17,7 @@
     flex-direction: column;
     align-content: center;
 }
+
 .data {
     font-size: 1rem;
 }
@@ -29,6 +30,7 @@
     background-color: transparent;    
     filter:  opacity(0.6) drop-shadow(0 0 0 rgb(43, 43, 44))
 }
+
 .button:hover {
     background-color: rgb(151, 151, 151);
     transition: 0.5s;

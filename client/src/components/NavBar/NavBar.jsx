@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { logoutUser, urlAuth } from "../../redux/actions/authorization";
 import styles from "./NavBar.module.css";
+import logo from "../../img/SYNNET_icon.png";
+
 
 export default function NavBar() {
   const { loggedIn, currentUser } = useSelector((state) => state.auth);
@@ -16,7 +18,7 @@ export default function NavBar() {
     <nav className="navbar navbar-expand-lg bg-dark navbar-dark position-fixed nav">
       <div className="container-fluid px-4 d-flex justify-content-between">
         <Link className={`${styles.title} navbar-brand`} to="/">
-          Tennis APP
+        <img src={logo} alt="logoSynnet" style={{width: "140px"}} />
         </Link>
         <button
           className="navbar-toggler"
@@ -45,17 +47,15 @@ export default function NavBar() {
                 </Link>
               </li>
             ) : null}
-            {loggedIn && currentUser.is_admin === false ? (
               <li className="nav-item">
-                <Link
-                  className="nav-link ms-auto"
-                  style={{ fontWeight: "bold", color: "#e0e6e8" }}
-                  to={"/TournamentsToShow"}
-                >
-                  Tournaments
-                </Link>
+                 <a
+                className="nav-link ms-auto"
+                style={{ fontWeight: "bold", color: "#e0e6e8" }}
+                href="/#tournamentLP  "
+              >
+                Tournament
+              </a>
               </li>
-            ) : null}
             <li className="nav-item">
               <a
                 className="nav-link ms-auto"

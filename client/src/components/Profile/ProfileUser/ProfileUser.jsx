@@ -54,6 +54,7 @@ export default function ProfileUser(props) {
           <div className={styles.principalBox}>
             {showEdit === false ? (
               <FormUser
+                id_user={user.id_user}
                 dni={user.dni}
                 name={user.name}
                 last_name={user.last_name}
@@ -62,6 +63,7 @@ export default function ProfileUser(props) {
                 picture={user.picture}
                 gender={user.gender}
                 phone={user.phone}
+                id_image={user.id_image}
                 num_contact={user.num_contact}
                 setShowEdit={setShowEdit}
               />

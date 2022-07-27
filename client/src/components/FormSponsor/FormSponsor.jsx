@@ -3,6 +3,9 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { postSponsor } from "../../redux/actions";
 import styles from "./FormSponsor.module.css";
+import Swal from "sweetalert2";
+import { useHistory } from "react-router-dom";
+
 
 export function validate(input) {
   let error = {};
@@ -18,11 +21,11 @@ export function validate(input) {
     error.message = "Enter less than 255 characters";
   }
 
-  if (!input.logo) {
-    error.logo = "Logo is required";
-  } else if (!/.(gif|jpeg|jpg|png)$/i.test(input.logo) && input.logo) {
-    error.logo = "Enter a correct image format (gif,jpeg,jpg,png)";
-  }
+  // if (!input.logo) {
+  //   error.logo = "Logo is required";
+  // } else if (!/.(gif|jpeg|jpg|png)$/i.test(input.logo) && input.logo) {
+  //   error.logo = "Enter a correct image format (gif,jpeg,jpg,png)";
+  // }
 
   if (!input.link) {
     error.link = "Link is required";
@@ -35,7 +38,9 @@ export function validate(input) {
 export const FormSponsor = () => {
   const dispatch = useDispatch();
   const noError = "Looks good"
+  const history = useHistory();
 
+  const [UserImage, setUserImage] = useState(null);
   const [input, setInput] = useState({
     company: "",
     message: "",
@@ -46,32 +51,53 @@ export const FormSponsor = () => {
   const [error, setError] = useState({
     company: "init",
     message: "init",
-    logo: "init",
+    logo: "",
     link: "init",
   });
 
   function handleOnChange(e) {
-    setInput({
-      ...input,
-      [e.target.name]: e.target.value,
-    });
-
-    
-    let objError = validate({ ...input, [e.target.name]: e.target.value });
-    setError(objError);
+    if (e.target.type === "file") {
+      setUserImage(e.target.files[0])
+    }else{
+      setInput({
+        ...input,
+        [e.target.name]: e.target.value,
+      });
+      
+      let objError = validate({ ...input, [e.target.name]: e.target.value });
+      setError(objError);
+    }
   }
 
   async function handleOnSubmit(e) {
     e.preventDefault();
+  
+    const formData = new FormData();
+    formData.append('image', UserImage);
+    const User = {
+      userInfo: input,
+      userImage: formData
+    }
 
-    dispatch(postSponsor(input));
+    dispatch(postSponsor(User));
     setInput({
       company: "",
       message: "",
-      logo: "",
       link: "",
     });
-    return alert("Sponsor created successfully");
+    Swal.fire({
+      title: 'Success',
+      text: "Sponsor created successfully",
+      icon: 'success',
+      showCancelButton: false,
+      confirmButtonColor: '#A7D129',
+      cancelButtonColor: 'rgb(43, 43, 44);',
+      confirmButtonText: 'Greate'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        history.push("/HomeAdmin");
+      }
+    })
   }
 
   return (
@@ -106,24 +132,17 @@ export const FormSponsor = () => {
               </div>
               <div className="form-floating col-md">
                 <input
-                  key="logo"
-                  type="url"
-                  onChange={(e) => handleOnChange(e)}
-                  placeholder="http://image.com required"
+                  type="file"
+                  name="picture"
+                  placeholder="Paste an image link..."
                   id="floatingInput"
-                  name="logo"
-                  value={input.logo}
-                  className={error.logo==="init"?("form-control"):(error.logo?"form-control is-invalid":"form-control is-valid")}
-                  required
+                  onChange={(e) => handleOnChange(e)}
+                  className={
+                    !UserImage 
+                      ? "form-control"
+                      : "form-control is-valid"
+                  }
                 />
-                {error.logo==="init"?<br/>:(error.logo ?
-                  <div id="validationServerUsernameFeedback" className="invalid-feedback">
-                  {error.logo}
-                  </div>:
-                  <div id="validationServerUsernameFeedback" className="valid-feedback">
-                  {noError}
-                  </div>)
-                }
                 <label htmlFor="floatingInput">Logo</label>
               </div>
             </div>

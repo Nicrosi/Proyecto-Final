@@ -1,0 +1,32 @@
+.containerBox {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction:row;
+  background: url("../../../img/imgTournament-LP.webp") no-repeat center center;
+  background-size: cover;
+  align-items: center;
+}
+.principalBox {
+  width: 60%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction:row;
+  margin: 0 auto;
+  align-items: center;
+  /* background-color: rgba(43, 43, 44, 0.604); */
+
+}
+.title {
+  margin: 0 0 0 30px;
+  font-family: 'Bebas Neue', cursive;
+  font-size: 7rem;
+  color: #A7D129;
+  width: 35%;
+  text-align: end;
+  font-weight: bold;
+  /* color: rgba(38, 34, 34, 0.678);  */
+  line-height: 0.8;
+  
+}

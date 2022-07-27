@@ -1,0 +1,50 @@
+.cardBox {
+  color: rgb(131, 131, 131);
+}
+.headerBox {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  height: 45px;
+}
+.title {
+  font-family: 'Bebas Neue', cursive;
+  font-size: 1.7rem;
+  margin: 0;
+  color: #698129;
+}
+.matchType, .EliminationType {
+  border: solid rgb(58, 60, 65) 1px;
+  border-radius: 5px;
+  height: 40px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: start;
+  padding-left: 15px;
+  align-items: center;
+  font-size: 1.1rem;
+  color: rgb(152, 152, 152);
+}
+.category_gender {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-evenly;
+  margin-bottom: 10px;
+
+}
+.bodyBox {
+  height: 210px;
+}
+.price {
+  font-family: 'Bebas Neue', cursive;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.priceNumber {
+  margin: 0;
+  color: whitesmoke;
+}

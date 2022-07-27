@@ -10,22 +10,10 @@ module.exports = (sequelize) => {
             primaryKey: true,
             autoIncrement: true,        
         },
-        results: {
-            type: DataTypes.INTEGER,
-            allowNull: false
-        },
-        winner: {
+        score: {
             type: DataTypes.STRING,
-            allowNull: false,
-        },
-        false: {
-            type: DataTypes.STRING,
-            allowNull: false,
-        },
-        date: {
-            type: DataTypes.DATE,
             allowNull: false
-        },
+         }
     },
     {
         timestamps: false,

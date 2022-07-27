@@ -27,7 +27,7 @@ export default function ControlCardTournaments({tournament, setDataModal, setUpd
       confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
       if (result.isConfirmed) {
-        dispatch(deleteTournament(tournament.id_tournaments))
+        dispatch(deleteTournament(tournament.id_tournament))
         Swal.fire(
           'Deleted!',
           'Your file has been deleted.',
@@ -42,7 +42,7 @@ export default function ControlCardTournaments({tournament, setDataModal, setUpd
     <div className={styles.box}>
     <div className={styles.itemScore}>
       <div className={styles.subtitle}>      
-      <h5 className={styles.data}>Name: {tournament.name}</h5>
+      <h5 className={styles.data}>Tournament: {tournament.name}</h5>
       </div>
       <div className={styles.itemScore}>
       <img
