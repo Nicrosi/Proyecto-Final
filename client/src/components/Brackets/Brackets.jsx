@@ -34,8 +34,8 @@ const Brackets = () => {
   const parseMatches = brackets.map((match, index) => {
     const arrScore = JSON.parse(match.score);
     return {
-      id: Number(match.id_match),
-      match: index,
+      id: index+1,
+      match: Number(match.id_match),
       round: match.round.round_numb,
       score: [arrScore[0].join("-"), arrScore[1].join("-")],
       players: [
@@ -113,6 +113,7 @@ const Brackets = () => {
       : dispatch(addNextRound(subt_id, round + 1, winners));
   };
 
+  console.log(brackets)
   return (
     <>
       <Reacket matches={parseMatches} />

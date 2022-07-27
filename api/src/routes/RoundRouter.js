@@ -15,6 +15,9 @@ router.post("/firstround/:id_subt", async (req, res) => {
   try {
     let array_match = [];
     let subt_teams = await Team.findAll({
+      where: {
+        id_subt: id_subt,
+      },
       attributes: ["id_team"],
       include: {
         model: User,
