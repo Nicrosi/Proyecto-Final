@@ -14,7 +14,6 @@ import styles from "./Inscription.module.css";
 import arrowLeft from "../../img/left-arrow.png";
 import arrowRight from "../../img/right-arrow.png";
 
-
 SwiperCore.use([Pagination]);
 
 export const Inscription = () => {
@@ -39,7 +38,6 @@ export const Inscription = () => {
     user.id_category,
     user.name,
   ]);
-  console.log(subt);
 
   const swiperRef = useRef(null);
   const goNext = () => {
@@ -59,14 +57,13 @@ export const Inscription = () => {
         <div className={styles.textBox}>
           <h1 className={styles.title}>Welcome, {user.name}!</h1>
           <div className={styles.subtitle}>
-          <h5 className={styles.subtitle}>
-          These are the tournaments according to your category and gender.
-          </h5>
-          <h5 className={styles.subtitle}>
-            Which subtournaments do you want to register for?
-          </h5>
+            <h5 className={styles.subtitle}>
+              These are the tournaments according to your category and gender.
+            </h5>
+            <h5 className={styles.subtitle}>
+              Which subtournaments do you want to register for?
+            </h5>
           </div>
-          
         </div>
         <div className={styles.principalBox}>
           {/* <div className={styles.parent}> */}
@@ -80,7 +77,7 @@ export const Inscription = () => {
               dynamicBullets: true,
               clickable: true,
               type: "bullets",
-              color: "#A7D129"
+              color: "#A7D129",
             }}
             breakpoints={{
               1024: {
@@ -103,9 +100,8 @@ export const Inscription = () => {
                       user.id_category === p.category.id_category)
                   : (option = user);
                 return option ? (
-                  <SwiperSlide>
+                  <SwiperSlide key={p.id_subt}>
                     <SubtCard
-                      key={p.id_subt}
                       name={p.name}
                       id_tournament={tournament_id}
                       price={p.price}
@@ -117,10 +113,11 @@ export const Inscription = () => {
                       el_type={p.elimination_type}
                       match_type={p.match_type}
                       numb_players={p.numb_players}
+                      inscriptions={p.inscriptions}
+                      initialized={p.initialized}
                     />
                   </SwiperSlide>
-                ) : 
-                null;
+                ) : null;
               })
             ) : (
               <h1 style={{ textAlign: "center" }}>No subtournament found</h1>
