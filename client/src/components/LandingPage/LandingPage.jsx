@@ -1,5 +1,6 @@
 import React from "react";
 import Carousel from "../ControlledCarousel/ControlledCarousel";
+import Footer from "../Footer/Footer";
 import Gallery from "../Gallery/Gallery";
 import Sponsors from "../Sponsors/Sponsors";
 import Steps from "../Steps/Steps";
@@ -31,6 +32,9 @@ export default function LandingPage() {
         style={{ minHeight: "30vh" }}
       >
         <Sponsors />
+      </section>
+      <section>
+        <Footer />
       </section>
     </>
   );

@@ -32,7 +32,7 @@ before(() =>
     console.error("Unable to connect to the database:", err);
     })
 );
-beforeEach(() => Subtournament.sync({ force: true }));
+beforeEach(() => Subtournament.sync({ force: false }));
 describe("Create /sub tournament", () => {
     it("add sub tournaments", (done) => {
     subtournaments.forEach((subtournament) => {

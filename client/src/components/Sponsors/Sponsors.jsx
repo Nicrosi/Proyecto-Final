@@ -12,7 +12,7 @@ export default function Sponsors() {
   }, [dispatch]);
 
   return (
-    <Container fluid className="py-5">
+    <Container fluid className="py-5 d-flex align-items-center justify-content-center bg-dark">
       {sponsors.length > 0 ? (
         <Row className="justify-content-around align-content-around">
           {sponsors.map((spn, i) => (

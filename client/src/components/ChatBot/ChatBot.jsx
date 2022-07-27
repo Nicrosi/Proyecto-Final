@@ -7,9 +7,11 @@ import MessageParser from "../../chatbot/MessageParser";
 import ActionProvider from "../../chatbot/ActionProvider";
 import Chatbot from "react-chatbot-kit";
 import "react-chatbot-kit/build/main.css";
+import { useSelector } from "react-redux";
 
 export const ChatBot = () => {
   const [showBot, setShowBot] = useState(false);
+  const {is_admin} = useSelector(state => state.auth.currentUser)
 
   const saveMessages = (messages, HTMLString) => {
     console.log("save");
@@ -35,14 +37,17 @@ export const ChatBot = () => {
           saveMessages={saveMessages}
         />
       )}
-      <button className={styles.btnBot}>
+      {!is_admin ?  
+      (<button className={styles.btnBot}>
         <img
           className={styles.img}
           onClick={handleShow}
           src={img}
           alt="botImg"
         />
-      </button>
+      </button>) : null
+      }
+      
     </>
   );
 };

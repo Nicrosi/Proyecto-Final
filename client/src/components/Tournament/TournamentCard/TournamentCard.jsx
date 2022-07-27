@@ -17,16 +17,21 @@ export const TournamentCard = ({ id, name, date, location }) => {
       <div>        
         {
           !auth.loggedIn ? (
-            <button
-            className="btn"
-            style={{ backgroundColor: "#A7D129" }}
-            disabled
-          >
-            See All Subtournaments
-          </button>
+            <Link
+                style={{ fontWeight: "bold", color: "#10242b" }}
+                to={`/allSubt/${id}`}
+              >
+                <button
+                  className="btn"
+                  style={{ backgroundColor: "#A7D129" }}
+                 
+                >
+                  See All Subtournaments
+                </button>
+                </Link>
           ) : <>
             {auth.loggedIn && auth.currentUser.is_admin === false ? (
-              <Link
+              <><Link
                 style={{ fontWeight: "bold", color: "#10242b" }}
                 to={`/inscription/${id}`}
               >
@@ -34,6 +39,17 @@ export const TournamentCard = ({ id, name, date, location }) => {
                   Inscription
                 </button>{" "}
               </Link>
+              <Link
+                style={{ fontWeight: "bold", color: "#10242b" }}
+                to={`/allSubt/${id}`}
+              >
+              <button
+              className="btn"
+              style={{ backgroundColor: "#A7D129" }}
+              
+            >
+              See All Subtournaments
+            </button></Link></>
             ) : (
               <>
                 <Link
@@ -44,14 +60,19 @@ export const TournamentCard = ({ id, name, date, location }) => {
                     Create Subtournament
                   </button>
                 </Link>
-    
+             
+              <Link
+                style={{ fontWeight: "bold", color: "#10242b" }}
+                to={`/inscription/${id}`}
+              >
                 <button
                   className="btn"
                   style={{ backgroundColor: "#A7D129" }}
-                  disabled
+                 
                 >
                   See All Subtournaments
                 </button>
+                </Link>
               </>
             )
             }</>
