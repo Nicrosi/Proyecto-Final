@@ -3,8 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getTournament } from "../../../redux/actions/index";
 import styles from "./TournamentsToShow.module.css";
-
-import { Row, Col } from "react-bootstrap";
 import { TournamentCard } from "../TournamentCard/TournamentCard";
 
 function TournamentsToShow() {
