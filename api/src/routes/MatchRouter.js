@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const router = Router();
-const { Match, Inscription, User, Team, Round } = require("../db");
+const { Match, Inscription, User, Team, Round , Subtournament} = require("../db");
 
 router.get("/:id_subt", async (req, res) => {
   const { id_subt } = req.params;
@@ -28,10 +28,14 @@ router.get("/:id_subt", async (req, res) => {
         {
           model: Round,
           attributes: ["round_numb"],
+          include: {
+            model: Subtournament,
+            attributes: ["id_subt"],
+          }
         },
       ],
     });
-    let filteredMatches = matches.filter((s) => s.dataValues.teams.length > 0);
+    let filteredMatches = matches.filter((s) => s.dataValues.teams.length > 0 && s.dataValues.round.subtournament.id_subt === id_subt);
     res.send(filteredMatches);
   } catch (error) {
     console.log(error);

@@ -76,6 +76,9 @@ Match.belongsTo(Round, {foreignKey: 'id_round'});
 Team.belongsToMany(Match, {through: 'match_team', foreignKey: 'id_team'});
 Match.belongsToMany(Team, {through: 'match_team', foreignKey: 'id_match'});
 
+Subtournament.hasMany(Team, {foreignKey: 'id_subt'});
+Team.belongsTo(Subtournament, {foreignKey: 'id_subt'});
+
 Image.hasMany(User, {foreignKey: 'id_image'});
 User.belongsTo(Image, {foreignKey: 'id_image'});
 
