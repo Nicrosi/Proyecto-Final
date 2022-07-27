@@ -170,26 +170,35 @@ export function postSponsor(currentValue) {
 }
 
 export const putUsers = (id_user, valuesChange) => {
-  return async () => {
+  return async (dispatch) => {
     try {
       
       if(valuesChange.userImage) {
         try {
+          if(valuesChange?.userInfo?.picture?.split('/')[2] === "res.cloudinary.com") {
+            const public_id = valuesChange?.userInfo?.picture?.split('/')[7].split('.')[0]
+            axios.delete(`http://localhost:3001/gallery/logo?public_id=${public_id}`)
+          }
           const response = await axios.post(`http://localhost:3001/gallery/UserImage`,valuesChange.userImage)
-          Promise.all([response]).then((value) => {
-            const input = {
-              dni: valuesChange.userInfo.dni,
-              name: valuesChange.userInfo.name,
-              last_name: valuesChange.userInfo.last_name,
-              is_admin: valuesChange.userInfo.is_admin,
-              e_mail: valuesChange.userInfo.e_mail,
-              phone: valuesChange.userInfo.phone,
-              num_contact: valuesChange.userInfo.num_contact,
-              picture: value[0].data,
-              gender: valuesChange.userInfo.gender,
-            };
-            axios.put(`${urlUser}/${id_user}`, input);
-          });
+          const input = {
+            dni: valuesChange.userInfo.dni,
+            name: valuesChange.userInfo.name,
+            last_name: valuesChange.userInfo.last_name,
+            is_admin: valuesChange.userInfo.is_admin,
+            e_mail: valuesChange.userInfo.e_mail,
+            phone: valuesChange.userInfo.phone,
+            num_contact: valuesChange.userInfo.num_contact,
+            picture: response.data,
+            gender: valuesChange.userInfo.gender,
+          };
+          await axios.put(`${urlUser}/${id_user}`, input);
+          const res = await axios.get(`${urlUser}/${valuesChange.userInfo.dni}`)
+            console.log(res);
+            return dispatch({
+              type: GET_USER_BY_ID,
+              payload: res.data,
+            })
+
         } catch (error) {
           console.log(error);
         }
@@ -306,7 +315,7 @@ export const putSponsor = (id_sponsor, currentValue) => {
         try {
           if(currentValue?.userInfo?.logo?.split('/')[2] === "res.cloudinary.com") {
             const public_id = currentValue?.userInfo?.logo?.split('/')[7].split('.')[0]
-            await axios.delete(`http://localhost:3001/gallery/logo?public_id=${public_id}`)
+            axios.delete(`http://localhost:3001/gallery/logo?public_id=${public_id}`)
           }
           const response = await axios.post(`http://localhost:3001/gallery/logo`,currentValue.userImage)
 

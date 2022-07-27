@@ -162,7 +162,6 @@ export const FormUser = ({
           }
           
           dispatch(putUsers(id_user, User));
-          // dispatch(getUserById(dni));
           Swal.fire("Changes saved!", '', 'success');
           history.push(`/Profile/${dni}`);
           setShowEdit(true);
