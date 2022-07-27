@@ -1,0 +1,28 @@
+.aside{
+  display: flex;
+  flex-direction: column;
+  color: white;
+  height: inherit;
+  width: 15vw;
+  padding: 15px 36px 20px 36px;
+}
+
+@media only screen and (max-width: 767px) {
+  .aside {
+    width: 100%;
+    height: auto;
+  }
+}
+
+.aside hr {
+  border-color: #9AD129;
+  border-width: 2px;
+}
+
+.btnRefresh{
+  margin-top: 20px;
+  background-color: transparent;
+  color:#9AD129;
+  border-color: #9AD129;
+  align-self: end;
+}
