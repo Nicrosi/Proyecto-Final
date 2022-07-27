@@ -4,6 +4,7 @@ import { Redirect, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { postNewUser } from "../../redux/actions/authorization";
 import img1 from "../../img/imgForm1.webp";
+import Form from 'react-bootstrap/Form';
 import Swal from "sweetalert2";
 
 export function validate(input) {
@@ -144,7 +145,6 @@ export const FormUserRegister = () => {
       userImage: formData
     }
 
-    console.log(User);
     dispatch(postNewUser(User)); //auth register
     setInput({
       dni: "",
@@ -221,6 +221,20 @@ font-family: 'Gruppo', cursive; */}
           >
             <form style={{ width: "100%" }} onSubmit={(e) => handleSubmit(e)}>
               <div className="row g-2 mb-3">
+                <Form.Group controlId="formFileLg" className="mb-3">
+                  <h5
+                    className="modal-title"
+                    id="staticBackdropLabel"
+                    style={{ color: "#bebebe" }}
+                  >
+                    Profile Image
+                  </h5>
+                  <Form.Control 
+                    type="file" 
+                    size="lg" 
+                    onChange={(e) => handleInputChange(e)}
+                  />
+                </Form.Group>
                 <div className="form-floating col-md">
                   <input
                     type="text"
@@ -405,7 +419,7 @@ font-family: 'Gruppo', cursive; */}
                 </div>
               </div>
               <div className="form-floating col-md">
-                <input
+                {/* <input
                   type="file"
                   name="picture"
                   placeholder="Paste an image link..."
@@ -416,7 +430,8 @@ font-family: 'Gruppo', cursive; */}
                       ? "form-control"
                       : "form-control is-valid"
                   }
-                />
+                /> */}
+                
               </div>
               <div className="row g-2 mb-3">
                 <div className="form-floating col-md">

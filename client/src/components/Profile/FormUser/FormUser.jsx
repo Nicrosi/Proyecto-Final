@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import styles from "./FormUser.module.css";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
-
+import Swal from "sweetalert2";
 import { getUserById, putUsers } from "../../../redux/actions/index";
 import back from "../../../img/back.png";
+import Form from 'react-bootstrap/Form';
+
 
 export function validate(input) {
   let error = {};
@@ -58,11 +60,11 @@ export function validate(input) {
     error.num_contact = "Enter a number";
   }
 
-  if (!input.picture) {
-    error.picture = "Picture is required";
-  } else if (!/.(gif|jpeg|jpg|png)$/i.test(input.picture) && input.picture) {
-    error.picture = "Should be a valid format (gif,jpeg,jpg,png)";
-  }
+  // if (!input.picture) {
+  //   error.picture = "Picture is required";
+  // } else if (!/.(gif|jpeg|jpg|png)$/i.test(input.picture) && input.picture) {
+  //   error.picture = "Should be a valid format (gif,jpeg,jpg,png)";
+  // }
 
   if (input.gender.length === 0 && input.gender === "") {
     error.gender = "Gender is required";
@@ -71,6 +73,7 @@ export function validate(input) {
 }
 
 export const FormUser = ({
+  id_user,
   dni,
   name,
   last_name,
@@ -79,6 +82,7 @@ export const FormUser = ({
   picture,
   gender,
   phone,
+  id_image,
   num_contact,
   setShowEdit,
 }) => {
@@ -86,6 +90,7 @@ export const FormUser = ({
   const history = useHistory();
   const noError = "Looks good";
 
+  const [UserImage, setUserImage] = useState(null);
   const [input, setInput] = useState({
     dni: dni,
     name: name,
@@ -93,6 +98,7 @@ export const FormUser = ({
     is_admin: is_admin,
     e_mail: e_mail,
     phone: phone,
+    id_image: id_image,
     num_contact: num_contact,
     picture: picture,
     gender: gender,
@@ -105,34 +111,79 @@ export const FormUser = ({
     e_mail: "",
     phone: "",
     num_contact: "",
-    picture: "",
     gender: "",
   });
 
   function handleInputChange(e) {
     e.preventDefault();
-    if (e.target.type === "tel") {
-      setInput({ ...input, [e.target.name]: parseInt(e.target.value, 10) });
+    if (e.target.type === "file") {
+      return setUserImage(e.target.files[0])
     }
-    if (e.target.type === "text" || e.target.type === "email") {
+    else if (e.target.type === "tel") {
+      setInput({ ...input, [e.target.name]: parseInt(e.target.value, 10) });
+      let objError = validate({ ...input, [e.target.name]: parseInt(e.target.value, 10) });
+      setError(objError);
+    }
+    else if (e.target.type === "text" || e.target.type === "email") {
       setInput((prev) => ({
         ...prev,
         [e.target.name]: e.target.value.toLowerCase(),
       }));
+      let objError = validate({ ...input, [e.target.name]: e.target.value.toLowerCase() });
+      setError(objError);
+    } else {
+      setInput({ ...input, [e.target.name]: e.target.value });
+  
+      let objError = validate({ ...input, [e.target.name]: e.target.value });
+      setError(objError);
     }
-    setInput({ ...input, [e.target.name]: e.target.value });
-
-    let objError = validate({ ...input, [e.target.name]: e.target.value });
-    setError(objError);
-  }
+    }
 
   function handleSubmit(e) {
     e.preventDefault();
-    dispatch(putUsers(dni, input));
-    dispatch(getUserById(dni));
-    alert("Changes saved!");
-    history.push(`/Profile/${dni}`);
-    setShowEdit(true);
+    Swal.fire({
+      title: 'Do you want to save the changes?',
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonColor: '#A7D129',
+      denyButtonColor: 'rgb(43, 43, 44)',
+      confirmButtonText: 'Save',
+      denyButtonText: `Don't save`,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        if(UserImage) {
+          const formData = new FormData();
+          formData.append('image', UserImage);
+          
+          const User = {
+            userInfo: input,
+            userImage: formData
+          }
+          
+          dispatch(putUsers(id_user, User));
+          // dispatch(getUserById(dni));
+          Swal.fire("Changes saved!", '', 'success');
+          history.push(`/Profile/${dni}`);
+          setShowEdit(true);
+
+        } else {
+          const User = {
+            userInfo: input,
+          }
+          
+          dispatch(putUsers(id_user, User));
+          dispatch(getUserById(dni));
+          Swal.fire("Changes saved!", '', 'success');
+          history.push(`/Profile/${dni}`);
+          setShowEdit(true);
+        }
+
+      } else if (result.isDenied) {
+        Swal.fire('Changes are not saved', '', 'info')
+      }
+    })
+    
   }
 
   function handleClick(e) {
@@ -365,54 +416,32 @@ export const FormUser = ({
                       : "form-control is-valid"
                   }
                 />
-                {error.num_contact ? (
+                {error.num_contact && (
                   <div
                     id="validationServerUsernameFeedback"
                     className="invalid-feedback"
                   >
                     {error.num_contact}
                   </div>
-                ) : (
-                  <div
-                    id="validationServerUsernameFeedback"
-                    className="valid-feedback"
-                  >
-                    {noError}
-                  </div>
                 )}
                 <label htmlFor="floatingInput">Emergency contact number</label>
               </div>
-              <div className="form-floating col-md">
-                <input
-                  type="text"
-                  value={input.picture}
-                  name="picture"
-                  placeholder="Paste an image link..."
-                  id="floatingInput"
-                  onChange={(e) => handleInputChange(e)}
-                  className={
-                    error.picture
-                      ? "form-control is-invalid"
-                      : "form-control is-valid"
-                  }
-                />
-                {error.picture ? (
-                  <div
-                    id="validationServerUsernameFeedback"
-                    className="invalid-feedback"
+                
+                <Form.Group controlId="formFileLg" className="mb-3">
+                  <h5
+                    className="modal-title"
+                    id="staticBackdropLabel"
+                    style={{ color: "#bebebe" }}
                   >
-                    {error.picture}
-                  </div>
-                ) : (
-                  <div
-                    id="validationServerUsernameFeedback"
-                    className="valid-feedback"
-                  >
-                    {noError}
-                  </div>
-                )}
-                <label htmlFor="floatingInput">Paste an image link...</label>
-              </div>
+                    Profile Image
+                  </h5>
+                  <Form.Control 
+                    type="file" 
+                    size="lg" 
+                    onChange={(e) => handleInputChange(e)}
+                  />
+                </Form.Group>
+                
             </div>
             <div className="d-grid gap-2">
               {Object.keys(error).length > 0 ? (

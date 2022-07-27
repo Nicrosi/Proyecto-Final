@@ -6,6 +6,7 @@ import styles from "./ControlUserList.module.css";
 import ControlCardUsers from "../ControlCardUsers/ControlCardUsers";
 import Swal from "sweetalert2";
 import validate from './Validations';
+import Form from 'react-bootstrap/Form';
 
 
 export default function ControlUserList() {
@@ -64,14 +65,22 @@ export default function ControlUserList() {
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
-        const formData = new FormData();
-        formData.append('image', UserImage);
-        const User = {
-          userInfo: dataModal,
-          userImage: formData
+        if(UserImage) {
+          const formData = new FormData();
+          formData.append('image', UserImage);
+          
+          const User = {
+            userInfo: dataModal,
+            userImage: formData
+          }
+      
+          dispatch(putUsers(dataModal.id_user, User));
+        } else {
+          const User = {
+            userInfo: dataModal,
+          }
+          dispatch(putUsers(dataModal.id_user, User));
         }
-    
-        dispatch(putUsers(dataModal.id_user, User));
        
         Swal.fire('Saved!', '', 'success');
         dispatch(clearUser());
@@ -266,22 +275,6 @@ export default function ControlUserList() {
                             </div>
                             <div className="row g-2 mb-3">
                               <div className="form-floating col-md">
-                                <input
-                                  type="file"
-                                  onChange={(e) => handleChange(e)}
-                                  name="picture"
-                                  id="floatingInput"
-                                  className={
-                                    !UserImage
-                                      ? "form-control border-0"
-                                      : "form-control border-0 is-valid"
-                                  }
-                                />
-                                <label htmlFor="floatingInput">Picture</label>
-                              </div>
-                            </div>
-                            <div className="row g-2 mb-3">
-                              <div className="form-floating col-md">
                                 <select
                                   onChange={(e) => handleChange(e)}
                                   className="form-select border-0 is-valid"
@@ -363,6 +356,20 @@ export default function ControlUserList() {
                                   Emergency Number
                                 </label>
                               </div>
+                              <Form.Group controlId="formFileLg" className="mb-3">
+                                <h5
+                                  className="modal-title"
+                                  id="staticBackdropLabel"
+                                  style={{ color: "#bebebe" }}
+                                >
+                                  Profile Image
+                                </h5>
+                                <Form.Control 
+                                  type="file" 
+                                  size="lg" 
+                                  onChange={(e) => handleChange(e)}
+                                />
+                              </Form.Group>
                             </div>
                             <div className="modal-footer">
                               {Object.keys(error).length > 0 ? (

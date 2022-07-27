@@ -59,21 +59,31 @@ router.post('/post', fileUpload, async (req, res) => {
 
 
 
-router.post('/UserImage', fileUpload, async (req, res) => {
+router.post('/logo', fileUpload, async (req, res) => {
   try {
-    const { title } = req.query;
     const result = await cloudinary.v2.uploader.upload(req.file.path)
   
-    const imageFromDb = await Image.create({
-      public_id: result.public_id,
-      title,
-      user_image: true,
-      imageURL: result.secure_url
-    })
+    const image =  result.secure_url
 
     fs.unlinkSync(req.file.path)
   
-    res.send(imageFromDb)
+    res.send(image)
+  } catch (error) {
+    console.log(error);
+  }
+})
+
+
+
+router.post('/UserImage', fileUpload, async (req, res) => {
+  try {
+    const result = await cloudinary.v2.uploader.upload(req.file.path)
+  
+    const UserImage = result.secure_url
+
+    fs.unlinkSync(req.file.path)
+  
+    res.send(UserImage)
   } catch (error) {
     console.log(error);
   }
@@ -103,6 +113,19 @@ router.delete('/delete', async (req, res) => {
     const imageDeleted = await Image.destroy({ where: { id_image: parseInt(image_id) } })
 
     imageDeleted === 1 ? res.status(200).send({msg: 'Image deleted successfully'}) : res.status(400).send({msg: 'Image does not exist'})
+  } catch (error) {
+    res.status(400).send(error)
+  }
+})
+
+
+router.delete('/Logo', async (req, res) => {
+  try {
+    
+    const { public_id } = req.query;
+    const result = await cloudinary.v2.uploader.destroy(public_id);
+
+    res.status(200).send(result)
   } catch (error) {
     res.status(400).send(error)
   }

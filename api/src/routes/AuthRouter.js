@@ -1,10 +1,12 @@
 const { Router } = require("express");
 const router = Router();
-const { User, Inscription, Score, Category, Image } = require("../db");
+const { User, Inscription, Tournament, Subtournament, Score, Category } = require("../db");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const verifyToken = require("../middlewares/authjwt");
 const passport = require("passport");
+const Users = require('../ArrayUserEjemplo.js');
+const { category } = require("../utils/Category_Controllers.js");
 
 
 
@@ -22,7 +24,6 @@ router.post("/register", async (req, res, next) => {
       picture,
       gender
     } = req.body;
-    const image = await Image.findByPk(parseInt(req.body.id_image));
 
     const user = await User.findOne({
       where: {
@@ -50,7 +51,6 @@ router.post("/register", async (req, res, next) => {
       num_contact,
       picture,
       gender,
-      id_image: image && image.id_image 
     });
 
     return res.status(201).json({ ok: "User created!" });
@@ -143,5 +143,148 @@ router.get("/login/google/logout", (req, res) => {
     res.redirect("http://localhost:3000/login");
   });
 });
+
+////////////////////////
+
+
+router.post('/test', async (req, res) => {
+  try {
+    const tournament = await Tournament.create({
+      name: "Tournament Prueba",
+      date: "2022-08-23",
+      location: "Argentino",
+      earnings: 0
+    })
+
+    for (let i = 0; i < Users.subTournament.length; i++) {
+      await Subtournament.create({
+        elimination_type: Users.subTournament[i].elimination_type,
+        match_type: Users.subTournament[i].match_type,
+        name: Users.subTournament[i].name,
+        numb_players: Users.subTournament[i].numb_players,
+        gender: Users.subTournament[i].gender,
+        price: Users.subTournament[i].price,
+        id_category: Users.subTournament[i].id_category,
+        id_tournament: tournament.id_tournament
+      })      
+    }
+
+    
+    for (let i = 0; i < Users.score.length; i++) {
+      await Score.create({
+        previous_tournaments: Users.score[i].previous_tournaments,
+        hit_knowledge: Users.score[i].hit_knowledge,
+        other_strokes: Users.score[i].other_strokes,
+        special_hits: Users.score[i].special_hits,
+        kick_serve_control: Users.score[i].kick_serve_control,
+        game_strategy: Users.score[i].game_strategy
+      })
+    }
+
+    let array1 = Users.users.slice(0, 10);
+    let array2 = Users.users.slice(10, 20);
+    let array3 = Users.users.slice(20, 30);
+    let array4 = Users.users.slice(30, 40);
+    let array5 = Users.users.slice(40, 50);
+
+    const score = await Score.findAll();
+    
+    for (let i = 0; i < array1.length; i++) {
+      const hashedPassword = await bcrypt.hash(array1[i].password, Number(process.env.SALT_ROUNDS));
+      await User.create({
+        dni: array1[i].dni,
+        name: array1[i].name,
+        last_name: array1[i].last_name,
+        is_admin: array1[i].is_admin,
+        e_mail: array1[i].e_mail,
+        password: hashedPassword,
+        phone: array1[i].phone,
+        num_contact: array1[i].num_contact,
+        picture: array1[i].picture,
+        gender: array1[i].gender,
+        id_score: score[0].id_score,
+        id_category: 1
+      });
+    }
+
+    for (let i = 0; i < array2.length; i++) {
+      const hashedPassword = await bcrypt.hash(array2[i].password, Number(process.env.SALT_ROUNDS));
+      await User.create({
+        dni: array2[i].dni,
+        name: array2[i].name,
+        last_name: array2[i].last_name,
+        is_admin: array2[i].is_admin,
+        e_mail: array2[i].e_mail,
+        password: hashedPassword,
+        phone: array2[i].phone,
+        num_contact: array2[i].num_contact,
+        picture: array2[i].picture,
+        gender: array2[i].gender,
+        id_score: score[1].id_score,
+        id_category: 2
+      });
+    }
+
+
+    for (let i = 0; i < array3.length; i++) {
+      const hashedPassword = await bcrypt.hash(array3[i].password, Number(process.env.SALT_ROUNDS));
+      await User.create({
+        dni: array3[i].dni,
+        name: array3[i].name,
+        last_name: array3[i].last_name,
+        is_admin: array3[i].is_admin,
+        e_mail: array3[i].e_mail,
+        password: hashedPassword,
+        phone: array3[i].phone,
+        num_contact: array3[i].num_contact,
+        picture: array3[i].picture,
+        gender: array3[i].gender,
+        id_score: score[2].id_score,
+        id_category: 3
+      });
+    }
+
+    for (let i = 0; i < array4.length; i++) {
+      const hashedPassword = await bcrypt.hash(array4[i].password, Number(process.env.SALT_ROUNDS));
+      await User.create({
+        dni: array4[i].dni,
+        name: array4[i].name,
+        last_name: array4[i].last_name,
+        is_admin: array4[i].is_admin,
+        e_mail: array4[i].e_mail,
+        password: hashedPassword,
+        phone: array4[i].phone,
+        num_contact: array4[i].num_contact,
+        picture: array4[i].picture,
+        gender: array4[i].gender,
+        id_score: score[3].id_score,
+        id_category: 4
+      });
+    }
+
+    for (let i = 0; i < array5.length; i++) {
+      const hashedPassword = await bcrypt.hash(array5[i].password, Number(process.env.SALT_ROUNDS));
+      await User.create({
+        dni: array5[i].dni,
+        name: array5[i].name,
+        last_name: array5[i].last_name,
+        is_admin: array5[i].is_admin,
+        e_mail: array5[i].e_mail,
+        password: hashedPassword,
+        phone: array5[i].phone,
+        num_contact: array5[i].num_contact,
+        picture: array5[i].picture,
+        gender: array5[i].gender,
+      });
+    }
+
+
+    const users = await User.findAll({include: [Score, Category]});
+
+    res.json(users)
+  } catch (error) {
+    console.log(error);
+  }
+})
 
 module.exports = router;

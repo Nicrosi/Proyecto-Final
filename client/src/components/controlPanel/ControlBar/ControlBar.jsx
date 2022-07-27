@@ -10,7 +10,9 @@ export default function ControlBar({setShow}) {
 
   function handleClic(e){
     setShow(e.target.name);
-    dispatch(changePanelPage(e.target.name.slice(0,-1)))
+    if(e.target.name !== "dashboard") {
+      dispatch(changePanelPage(e.target.name.slice(0,-1)))
+    }
   };
 
   function handleReload(e){

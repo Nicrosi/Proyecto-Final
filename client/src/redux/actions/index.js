@@ -138,9 +138,17 @@ export const getUserById = (dni) => (dispatch) => {
     .catch((err) => console.log(err));
 };
 
-export function postSponsor(input) {
+export function postSponsor(currentValue) {
   return async (dispatch) => {
     try {
+      const { data } = await axios.post(`http://localhost:3001/gallery/logo`,currentValue.userImage)
+
+      const input = {
+        company: currentValue.userInfo.company,
+        link: currentValue.userInfo.link,
+        logo: data,
+        message: currentValue.userInfo.message,
+      };
       await axios.post(urlSponsors, input);
 
       return dispatch({
@@ -163,29 +171,46 @@ export function postSponsor(input) {
 
 export const putUsers = (id_user, valuesChange) => {
   return async () => {
-    const public_id = valuesChange?.userInfo?.picture?.split('/')[7].split('.')[0]
-    const title = valuesChange.userInfo.name + ' ' + valuesChange.userInfo.last_name
-    console.log(public_id);
-
-    // const response = await axios.delete(`http://localhost:3001/gallery/delete?image_id=${valuesChange.userInfo.id_image}&public_id=${public_id}`)
-    // console.log(response);
-    const { data } = await axios.post(`http://localhost:3001/gallery/UserImage?title=${title}`,valuesChange.userImage)
-    console.log(data.imageURL);
+    try {
+      
+      if(valuesChange.userImage) {
+        try {
+          const response = await axios.post(`http://localhost:3001/gallery/UserImage`,valuesChange.userImage)
+          Promise.all([response]).then((value) => {
+            const input = {
+              dni: valuesChange.userInfo.dni,
+              name: valuesChange.userInfo.name,
+              last_name: valuesChange.userInfo.last_name,
+              is_admin: valuesChange.userInfo.is_admin,
+              e_mail: valuesChange.userInfo.e_mail,
+              phone: valuesChange.userInfo.phone,
+              num_contact: valuesChange.userInfo.num_contact,
+              picture: value[0].data,
+              gender: valuesChange.userInfo.gender,
+            };
+            axios.put(`${urlUser}/${id_user}`, input);
+          });
+        } catch (error) {
+          console.log(error);
+        }
+      }else{
+        const input = {
+          dni: valuesChange.userInfo.dni,
+          name: valuesChange.userInfo.name,
+          last_name: valuesChange.userInfo.last_name,
+          is_admin: valuesChange.userInfo.is_admin,
+          e_mail: valuesChange.userInfo.e_mail,
+          phone: valuesChange.userInfo.phone,
+          num_contact: valuesChange.userInfo.num_contact,
+          picture: valuesChange.userInfo.picture,
+          gender: valuesChange.userInfo.gender,
+        };
+        axios.put(`${urlUser}/${id_user}`, input);
+      }
+    } catch (error) {
+      console.log(error);
+    }
     
-    const input = {
-      dni: valuesChange.userInfo.dni,
-      name: valuesChange.userInfo.name,
-      last_name: valuesChange.userInfo.last_name,
-      is_admin: valuesChange.userInfo.is_admin,
-      e_mail: valuesChange.userInfo.e_mail,
-      phone: valuesChange.userInfo.phone,
-      num_contact: valuesChange.userInfo.num_contact,
-      picture: data.imageURL,
-      gender: valuesChange.userInfo.gender,
-      id_image: data && data.id_image
-    };
-
-    return await axios.put(`${urlUser}/${id_user}`, input);
   };
 };
 
@@ -272,15 +297,46 @@ export const postSubTournament = (id_tournament, input) => {
   };
 };
 
-export const putSponsor = (id_sponsor, val) => {
+export const putSponsor = (id_sponsor, currentValue) => {
   return async () => {
-    const putval = {
-      company: val.company,
-      message: val.message,
-      logo: val.logo,
-      link: val.link,
-    };
-    return await axios.put(`${urlSponsor}/${id_sponsor}`, putval);
+    try {
+      console.log(id_sponsor);
+      const title = currentValue.userInfo.company 
+      if(currentValue.userImage) {
+        try {
+          if(currentValue?.userInfo?.logo?.split('/')[2] === "res.cloudinary.com") {
+            const public_id = currentValue?.userInfo?.logo?.split('/')[7].split('.')[0]
+            await axios.delete(`http://localhost:3001/gallery/logo?public_id=${public_id}`)
+          }
+          const response = await axios.post(`http://localhost:3001/gallery/logo`,currentValue.userImage)
+
+          Promise.all([response]).then((value) => {
+            const input = {
+              company: currentValue.userInfo.company,
+              message: currentValue.userInfo.message,
+              logo: value[0].data,
+              link: currentValue.userInfo.link,
+            };
+
+            axios.put(`${urlSponsor}/${id_sponsor}`, input);
+          })
+        } catch (error) {
+          
+        }
+
+      } else {
+        const input = {
+          company: currentValue.userInfo.company,
+          message: currentValue.userInfo.message,
+          logo: currentValue.userInfo.logo,
+          link: currentValue.userInfo.link,
+        };
+        await axios.put(`${urlSponsor}/${id_sponsor}`, input);
+      }
+
+    } catch (error) {
+      console.log(error);
+    }
   };
 };
 
