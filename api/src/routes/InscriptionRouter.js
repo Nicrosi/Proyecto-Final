@@ -33,7 +33,8 @@ router.post('/:id', async (req, res) => {
     }else{
       try {
         const newTeam = await Team.create({
-          points: 0
+          points: 0,
+          id_subt: product.id_subt
         })
         const teamUser = await User.findByPk(id)
         teamUser.addTeam(newTeam)
