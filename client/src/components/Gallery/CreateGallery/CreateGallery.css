@@ -9,16 +9,21 @@
 .prueba{
   display: none;
 }
-
+.img_button_container:hover  .prueba{
+  display: block;
+}
 ul{
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
+  list-style: none;
 }
 
-li:hover > ul {
-  display: flex;
+.btn-trash{
+color: rgb(255, 17, 0);
 }
+
+/*Esto fue lo que comente para que el drop menu no haga hover */
+/* li:hover > ul {
+  display: flex;
+} */
 
 .container_loading {
   min-height: 10px;
