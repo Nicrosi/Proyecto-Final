@@ -1,5 +1,6 @@
 import React from "react";
 import Carousel from "../ControlledCarousel/ControlledCarousel";
+import Footer from "../Footer/Footer";
 import Gallery from "../Gallery/Gallery";
 import Sponsors from "../Sponsors/Sponsors";
 import Steps from "../Steps/Steps";
@@ -19,18 +20,21 @@ export default function LandingPage() {
         <h1 className="mt-4 ">How to take part?</h1>
         <Steps />
       </section>
-      <Gallery />
       <section
         id="tournamentLP"
       >
         <TournamentsToShow />
       </section>
+        <Gallery />
       <section
         id="sponsorLP"
         className="d-flex align-items-center justify-content-center bg-dark"
         style={{ minHeight: "30vh" }}
       >
         <Sponsors />
+      </section>
+      <section>
+        <Footer />
       </section>
     </>
   );

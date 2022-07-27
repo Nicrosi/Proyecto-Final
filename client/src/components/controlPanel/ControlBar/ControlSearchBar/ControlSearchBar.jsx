@@ -34,6 +34,7 @@ export default function ControlSearchBar() {
         <input
           className={`${styles.inputSearch} inputSearch`}
           type="text"
+          placeholder="Search by name"
           value={input}
           onChange={(e) => handleOnChange(e)}
         />

@@ -30,44 +30,9 @@ router.get("/", async (req, res) => {
 });
 
 
-// router.get("/:id_tournament", async (req, res) => {
-//   try {
-//     const { id_tournament } = req.params;
-//     const tournament = await Tournament.findOne({
-//       where: {
-//         id_tournament: parseInt(id_tournament),
-//       },
-//       // include: Sponsor,
-//     });
-  
-//     if (tournament) {
-//       const Sponsors = [];
-  
-//       tournament.sponsors.map((sponsor) => {
-//         const Sponsor = {
-//           id_sponsor: sponsor.id_sponsor,
-//           company: sponsor.company,
-//           message: sponsor.message,
-//           logo: sponsor.logo,
-//           link: sponsor.link,
-//         };
-//         Sponsors.push(Sponsor);
-//       });
-  
-//       return res.status(200).json(Sponsors); 
-      
-//     } else {
-//       res.status(400).json({ msg: "No sponsors found" });
-//     }
-//   } catch (error) {
-//     console.log(error);
-//   }
-// })
-
-
 router.post("/", async (req, res, next) => {
-  const { company, message, logo, link } = req.body;
   try {
+    const { company, message, logo, link } = req.body;
     const findSponsor = await Sponsor.findAll({
       where: {
         company: company,

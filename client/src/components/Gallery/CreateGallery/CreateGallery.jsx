@@ -56,7 +56,7 @@ export default function CreateGallery() {
     }).then((result) => {
       if (result.isConfirmed) {
         dispatch(ClearGallery())
-        const imagedeleted = axios.delete(`http://localhost:3001/gallery/delete?image_id=${image.id}&public_id=${image.public_id}`)
+        const imagedeleted = axios.delete(`http://localhost:3001/gallery/delete?image_id=${image.id_image}&public_id=${image.public_id}`)
         Promise.all([imagedeleted]).then(() => {
           dispatch(getAllImages())
           Swal.fire(
@@ -279,7 +279,6 @@ export default function CreateGallery() {
               <br/>
               <input
                 type='file'
-                name="password"
                 placeholder="Select an Image"
                 id="floatingInput2"
                 onChange={ HandlerSelect} 

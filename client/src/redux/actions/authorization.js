@@ -9,19 +9,28 @@ export const urlAuth = "http://localhost:3001/auth";
 export const postNewUser = (valuesInput) => {
   return async () => {
     try {
-      const input = {
-        dni: valuesInput.dni,
-        name: valuesInput.name,
-        last_name: valuesInput.last_name,
-        is_admin: valuesInput.is_admin,
-        e_mail: valuesInput.e_mail,
-        password: valuesInput.password,
-        phone: valuesInput.phone,
-        num_contact: valuesInput.num_contact,
-        picture: valuesInput.picture,
-        gender: valuesInput.gender,
-      };
-      return await axios.post(`${urlAuth}/register`, input);
+      if(valuesInput.userImage) {
+        
+        const title = valuesInput.userInfo.name + ' ' + valuesInput.userInfo.last_name
+        const { data } = await axios.post(`http://localhost:3001/gallery/UserImage?title=${title}`,valuesInput.userImage)
+  
+        console.log(data);
+        console.log(title);
+        const input = {
+          dni: valuesInput.userInfo.dni,
+          name: valuesInput.userInfo.name,
+          last_name: valuesInput.userInfo.last_name,
+          is_admin: valuesInput.userInfo.is_admin,
+          e_mail: valuesInput.userInfo.e_mail,
+          password: valuesInput.userInfo.password,
+          phone: valuesInput.userInfo.phone,
+          num_contact: valuesInput.userInfo.num_contact,
+          picture: data,
+          gender: valuesInput.userInfo.gender,
+        };
+        return await axios.post(`${urlAuth}/register`, input);
+      }
+      
     } catch (err) {
       alert("Add user error, try again later");
     }

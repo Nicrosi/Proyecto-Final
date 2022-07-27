@@ -6,7 +6,7 @@ module.exports = (sequelize) => {
   sequelize.define(
     'image', 
     {
-      id: {
+      id_image: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true,
@@ -21,6 +21,10 @@ module.exports = (sequelize) => {
       likes: {
         type: DataTypes.INTEGER,
         defaultValue: 0
+      },
+      user_image: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false
       },
       Image_LP: {
         type: DataTypes.BOOLEAN,

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
-import { getSubtournament } from "../../redux/actions/index.js";
+import { getSubtournament } from "../../../redux/actions/index.js";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper-bundle.min.css";
 import "swiper/swiper.min.css";
@@ -9,14 +9,14 @@ import "swiper/components/pagination/pagination.min.css";
 import SwiperCore, { Pagination } from "swiper/core";
 
 // import { Row, Col } from "react-bootstrap";
-import SubtCard from "./SubtCard/SubtCard.jsx";
-import styles from "./Inscription.module.css";
-import arrowLeft from "../../img/left-arrow.png";
-import arrowRight from "../../img/right-arrow.png";
+import styles from "../Inscription.module.css";
+import arrowLeft from "../../../img/left-arrow.png";
+import arrowRight from "../../../img/right-arrow.png";
+import AllSubtCard from "./AllSubtCards.jsx";
 
 SwiperCore.use([Pagination]);
 
-export const Inscription = () => {
+export const AllSubt = () => {
   const subt = useSelector((state) => state.rootReducer.filteredSubt);
   const user = useSelector((state) => state.auth.currentUser);
   const dispatch = useDispatch();
@@ -54,17 +54,6 @@ export const Inscription = () => {
   return (
     <>
       <div className={styles.containerBox}>
-        <div className={styles.textBox}>
-          <h1 className={styles.title}>Welcome, {user.name}!</h1>
-          <div className={styles.subtitle}>
-            <h5 className={styles.subtitle}>
-              These are the tournaments according to your category and gender.
-            </h5>
-            <h5 className={styles.subtitle}>
-              Which subtournaments do you want to register for?
-            </h5>
-          </div>
-        </div>
         <div className={styles.principalBox}>
           {/* <div className={styles.parent}> */}
           <Swiper
@@ -93,15 +82,10 @@ export const Inscription = () => {
           >
             {subt.length > 0 ? (
               subt.map((p) => {
-                let option;
-                auth.loggedIn && auth.currentUser.is_admin === false
-                  ? (option =
-                      user.gender === p.gender &&
-                      user.id_category === p.category.id_category)
-                  : (option = user);
-                return option ? (
+                
+                return (
                   <SwiperSlide key={p.id_subt}>
-                    <SubtCard
+                    <AllSubtCard
                       name={p.name}
                       id_tournament={tournament_id}
                       price={p.price}
@@ -117,7 +101,7 @@ export const Inscription = () => {
                       initialized={p.initialized}
                     />
                   </SwiperSlide>
-                ) : null;
+                ) 
               })
             ) : (
               <h1 style={{ textAlign: "center" }}>No subtournament found</h1>
@@ -138,37 +122,6 @@ export const Inscription = () => {
             onClick={goNext}
           />
         </div>
-        {/* <div className={{ width: "100%" }}>
-    <Row className="g-3 mx-3 mt-2">
-     {subt.length > 0 ? (
-            subt.map((p) => {
-              let option;
-              auth.loggedIn && auth.currentUser.is_admin === false ? option = user.gender === p.gender && user.id_category === p.category.id_category : option = user
-              return (
-               option ?
-                <Col lg={3} key={p.id_subt}>
-                  <SubtCard
-                    key={p.id_subt}
-                    name={p.name}
-                    id_tournament={tournament_id}
-                    price={p.price}
-                    subt_gender = {p.gender}
-                    subt_category = {p.category}
-                    id_user={user.id_user}
-                    email={user.e_mail}
-                    id_subt={p.id_subt}
-                    el_type={p.elimination_type}
-                    match_type={p.match_type}
-                    numb_players={p.numb_players}
-                  />
-                </Col>:null
-              );
-            })
-          ) : (
-            <h1 style={{ textAlign: "center" }}>No sub tournament found</h1>
-          )}
-          </Row>
-          </div> */}
       </div>
     </>
   );

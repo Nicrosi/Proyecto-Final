@@ -4,25 +4,30 @@ import { getUserById } from "../../redux/actions";
 import { RadarChart } from "../Charts/RadarChart/RadarChart";
 import styles from "./DetailsUser.module.css";
 
-const DetailsUser = (props) => {
-  const params = Number(props.match.params.userId);
-  const dispatch = useDispatch();
+// const DetailsUser = (props) => {
+//   const params = Number(props.match.params.userId);
+//   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(getUserById(params));
-  }, [dispatch, params]);
+//   useEffect(() => {
+//     dispatch(getUserById(params));
+//   }, [dispatch, params]);
 
-  let user = useSelector((state) => state.rootReducer.user);
+//   let user = useSelector((state) => state.rootReducer.user);
 
+const DetailsUser = ({ dataModal }) => {
+  const auth = useSelector((state) => state.auth);
 
   return (
     <React.Fragment>
-      {user && (
+      {dataModal && (
         <div className={styles.containerBox}>
           <div className={styles.PanelBox}>
-            <img src={user.picture} className={styles.pictureUser} alt="..." />
-            <h1 className={styles.nameUser}>{user.name}</h1>
-            <h1 className={styles.nameUser}>{user.last_name}</h1>
+            <img src={dataModal.picture} className={styles.pictureUser} alt="..." />
+
+            <div>
+              <h1 className={styles.nameUser}>{dataModal.name}</h1>
+              <h1 className={styles.nameUser}>{dataModal.last_name}</h1>
+            </div>
           </div>
           <div className={styles.principalBox}>
             <div className="accordion" id="accordionExample">
@@ -49,20 +54,24 @@ const DetailsUser = (props) => {
                     <div>
                       <ul className="list-group">
                         <li className="list-group-item">
-                          <h5 className="card-text">E-mail: {user.e_mail}</h5>
+                          <h5 className="card-text">Full Name: {dataModal.name} {dataModal.last_name}</h5>
                         </li>
                         <li className="list-group-item">
-                          <h5 className="card-text">Gender: {user.gender}</h5>
+                          <h5 className="card-text">Gender: {dataModal.gender}</h5>
                         </li>
                         <li className="list-group-item">
-                          <h5 className="card-text">Phone: {user.phone}</h5>
+                          <h5 className="card-text">E-mail: {dataModal.e_mail}</h5>
+                        </li>
+                        {auth.loggedIn && auth.currentUser.is_admin === true ? (
+                          <>
+                          <li className="list-group-item">
+                          <h5 className="card-text">Phone: {dataModal.phone}</h5>
                         </li>
                         <li className="list-group-item">
-                          {" "}
-                          <h5 className="card-text">
-                            Emergency contact: {user.num_contact}
-                          </h5>
+                          <h5 className="card-text">Emergency contact: {dataModal.num_contact}</h5>
                         </li>
+                          </>) : null
+                        }
                       </ul>
                     </div>
                   </div>
@@ -91,19 +100,19 @@ const DetailsUser = (props) => {
                     <div className="mx-auto" style={{ width: "100%" }}>
                       <div className="card mx-auto" style={{ width: "100%" }}>
                         <div className="card-body text-center">
-                          {user.category ? (
+                          {dataModal.category ? (
                             <div>
                               <h1 className="card-title">
-                                {user.category.type.toUpperCase()}
+                                {dataModal.category.type.toUpperCase()}
                               </h1>
-                              
+
                             </div>
                           ) : (
                             <div>
                               <h3 className="card-title">
-                                {`${user.name} doesn't have a Category. Creation of a score is needed to define the category`}
+                                {`${dataModal.name} doesn't have a Category. Creation of a score is needed to define the category`}
                               </h3>
-                              
+
                             </div>
                           )}
                         </div>
@@ -135,44 +144,87 @@ const DetailsUser = (props) => {
                     <div className="mx-auto" style={{ width: "100%" }}>
                       <div className="card mx-auto" style={{ width: "100%" }}>
                         <div className="card-body text-center">
-                          {user.score ? (<div>
-                            <div><RadarChart dataUser={user.score}/></div>
-                            <div><ul className="list-group">
+
+
+                          {dataModal.score ? (<div className={styles.secondBox}>
+                            <div className={styles.scoreBox}>
+                              <div>
+                              <ul className="list-group">
                               <li className="list-group-item">
-                                <h5>
+                                <h5 className={styles.scoreItem}>
                                   Previous Tournaments:{" "}
-                                  {user.score.previous_tournaments}
+                                  {dataModal.score.previous_tournaments}
                                 </h5>
-                              </li>
-                              <li className="list-group-item">
-                                <h5>
-                                  Hit knowledge: {user.score.hit_knowledge}
+                                </li>
+                                <li className="list-group-item">
+                                <h5 className={styles.scoreItem}>
+                                  Hit knowledge: {dataModal.score.hit_knowledge}
                                 </h5>
-                              </li>
-                              <li className="list-group-item">
-                                <h5>
-                                  Other strokes: {user.score.other_strokes}
+                                </li>
+                                <li className="list-group-item">
+                                <h5 className={styles.scoreItem}>
+                                  Other strokes: {dataModal.score.other_strokes}
                                 </h5>
-                              </li>
-                              <li className="list-group-item">
-                                <h5>Special hits: {user.score.special_hits}</h5>
-                              </li>
-                              <li className="list-group-item">
-                                <h5>
+                                </li>
+                                <li className="list-group-item"> 
+                                <h5 className={styles.scoreItem}>
+                                  Special hits: {dataModal.score.special_hits}
+                                </h5>
+                                </li>
+                                <li className="list-group-item">
+                                <h5 className={styles.scoreItem}>
                                   Kick serve control:{" "}
-                                  {user.score.kick_serve_control}
+                                  {dataModal.score.kick_serve_control}
                                 </h5>
-                              </li>
-                              <li className="list-group-item">
-                                <h5>
-                                  Game strategy: {user.score.game_strategy}
+                                </li>
+                                <li className="list-group-item">
+                                <h5 className={styles.scoreItem}>
+                                  Game strategy: {dataModal.score.game_strategy}
                                 </h5>
-                              </li>
-                            </ul></div>
-                            
+                                </li>
+                                </ul>
+                              </div>
+                             
                             </div>
+                            <div className={styles.RadarBox}><RadarChart dataUser={dataModal.score} /></div>
+
+                            {/* <ul className="list-group">
+                                <li className="list-group-item">
+                                  <h5 className={styles.scoreItem}>
+                                    Previous Tournaments:{" "}
+                                    {dataModal.score.previous_tournaments}
+                                  </h5>
+                                </li>
+                                <li className="list-group-item">
+                                  <h5 className={styles.scoreItem}>
+                                    Hit knowledge: {dataModal.score.hit_knowledge}
+                                  </h5>
+                                </li>
+                                <li className="list-group-item">
+                                  <h5 className={styles.scoreItem}>
+                                    Other strokes: {dataModal.score.other_strokes}
+                                  </h5>
+                                </li>
+                                <li className="list-group-item">
+                                  <h5 className={styles.scoreItem}>Special hits: {dataModal.score.special_hits}</h5>
+                                </li>
+                                <li className="list-group-item">
+                                  <h5 className={styles.scoreItem}>
+                                    Kick serve control:{" "}
+                                    {dataModal.score.kick_serve_control}
+                                  </h5>
+                                </li>
+                                <li className="list-group-item">
+                                  <h5 className={styles.scoreItem}>
+                                    Game strategy: {dataModal.score.game_strategy}
+                                  </h5>
+                                </li>
+                              </ul>*/}
+
+
+                          </div>
                           ) : (
-                            <h3>{`${user.name} has no score`}</h3>
+                            <h3>{`${dataModal.name} has no score`}</h3>
                           )}
                         </div>
                       </div>

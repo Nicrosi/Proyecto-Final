@@ -4,6 +4,8 @@ import { Redirect, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { postNewUser } from "../../redux/actions/authorization";
 import img1 from "../../img/imgForm1.webp";
+import Form from 'react-bootstrap/Form';
+import Swal from "sweetalert2";
 
 export function validate(input) {
   let error = {};
@@ -53,11 +55,11 @@ export function validate(input) {
     error.num_contact = "Enter a number";
   }
 
-  if (!input.picture) {
-    error.picture = "Picture is required";
-  } else if (!/.(gif|jpeg|jpg|png)$/i.test(input.picture) && input.picture) {
-    error.picture = "Should be a valid format (gif,jpeg,jpg,png)";
-  }
+  // if (!input.picture) {
+  //   error.picture = "Picture is required";
+  // } else if (!/.(gif|jpeg|jpg|png)$/i.test(input.picture) && input.picture) {
+  //   error.picture = "Should be a valid format (gif,jpeg,jpg,png)";
+  // }
 
   if (input.gender.length === 0 && input.gender === "") {
     error.gender = "Gender is required";
@@ -87,13 +89,13 @@ export const FormUserRegister = () => {
   const history = useHistory();
   const noError = "Looks good";
   const auth = useSelector((state) => state.auth);
+  const [UserImage, setUserImage] = useState(null);
   const [input, setInput] = useState({
     dni: "",
     name: "",
     last_name: "",
     is_admin: false,
     num_contact: "",
-    picture: "",
     gender: "",
     phone: "",
     e_mail: "",
@@ -108,7 +110,6 @@ export const FormUserRegister = () => {
     e_mail: "init",
     phone: "init",
     num_contact: "init",
-    picture: "init",
     gender: "init",
     password: "init",
     password2: "init",
@@ -116,6 +117,9 @@ export const FormUserRegister = () => {
 
   function handleInputChange(e) {
     e.preventDefault();
+    if (e.target.type === "file") {
+      setUserImage(e.target.files[0])
+    }
     if (e.target.type === "tel") {
       setInput({ ...input, [e.target.name]: parseInt(e.target.value, 10) });
     }
@@ -134,7 +138,14 @@ export const FormUserRegister = () => {
   function handleSubmit(e) {
     e.preventDefault();
 
-    dispatch(postNewUser(input)); //auth register
+    const formData = new FormData();
+    formData.append('image', UserImage);
+    const User = {
+      userInfo: input,
+      userImage: formData
+    }
+
+    dispatch(postNewUser(User)); //auth register
     setInput({
       dni: "",
       name: "",
@@ -148,8 +159,19 @@ export const FormUserRegister = () => {
       password: "",
       password2: "",
     });
-    alert("Created user");
-    history.push("/HomeAdmin");
+    Swal.fire({
+      title: 'Success',
+      text: "User Created",
+      icon: 'succces',
+      showCancelButton: false,
+      confirmButtonColor: '#A7D129',
+      cancelButtonColor: 'rgb(43, 43, 44);',
+      confirmButtonText: 'Greate'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        history.push("/HomeAdmin");
+      }
+    })
   }
 
   return (
@@ -199,6 +221,20 @@ font-family: 'Gruppo', cursive; */}
           >
             <form style={{ width: "100%" }} onSubmit={(e) => handleSubmit(e)}>
               <div className="row g-2 mb-3">
+                <Form.Group controlId="formFileLg" className="mb-3">
+                  <h5
+                    className="modal-title"
+                    id="staticBackdropLabel"
+                    style={{ color: "#bebebe" }}
+                  >
+                    Profile Image
+                  </h5>
+                  <Form.Control 
+                    type="file" 
+                    size="lg" 
+                    onChange={(e) => handleInputChange(e)}
+                  />
+                </Form.Group>
                 <div className="form-floating col-md">
                   <input
                     type="text"
@@ -379,45 +415,23 @@ font-family: 'Gruppo', cursive; */}
                     {noError}
                   </div>
                 )}
-                  <label htmlFor="floatingInput">
-                    Emergency contact number
-                  </label>
+                <label htmlFor="floatingInput">Emergency contact number</label>
                 </div>
-                <div className="form-floating col-md">
-                  <input
-                    type="text"
-                    value={input.picture}
-                    name="picture"
-                    placeholder="Paste an image link..."
-                    id="floatingInput"
-                    onChange={(e) => handleInputChange(e)}
-                    className={
-                      error.picture === "init"
-                        ? "form-control"
-                        : error.picture
-                        ? "form-control is-invalid"
-                        : "form-control is-valid"
-                    }
-                  />
-                  {error.picture === "init" ? (
-                  <br />
-                ) : error.picture ? (
-                  <div
-                    id="validationServerUsernameFeedback"
-                    className="invalid-feedback"
-                  >
-                    {error.picture}
-                  </div>
-                ) : (
-                  <div
-                    id="validationServerUsernameFeedback"
-                    className="valid-feedback"
-                  >
-                    {noError}
-                  </div>
-                )}
-                  <label htmlFor="floatingInput">Paste an image link...</label>
-                </div>
+              </div>
+              <div className="form-floating col-md">
+                {/* <input
+                  type="file"
+                  name="picture"
+                  placeholder="Paste an image link..."
+                  id="floatingInput"
+                  onChange={(e) => handleInputChange(e)}
+                  className={
+                    !UserImage 
+                      ? "form-control"
+                      : "form-control is-valid"
+                  }
+                /> */}
+                
               </div>
               <div className="row g-2 mb-3">
                 <div className="form-floating col-md">

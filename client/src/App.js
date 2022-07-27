@@ -22,7 +22,8 @@ import TournamentsToShow from "./components/Tournament/TournamentsToShow/Tournam
 import ControlCardUsers from "./components/controlPanel/ControlCardUsers/ControlCardUsers.jsx";
 import { TournamentSimpleElimination } from "./components/SubTournament/TournamentSimpleElimination/TournamentSimpleElimination.jsx";
 import { ChatBot } from "./components/ChatBot/ChatBot.jsx";
-import Brackets from "./components/Brackets/Brackets.js";
+import Brackets from "./components/Brackets/Brackets.jsx";
+import { AllSubt } from "./components/Inscription/AllSubt/AllSubt.jsx";
 
 function App() {
   const dispatch = useDispatch();
@@ -35,7 +36,7 @@ function App() {
       <Route path={"/"} component={ChatBot} />
       <Route path={"/"} component={NavBar} />
       <Switch>
-        <Route path={"/bracket"} component={Brackets} />
+        <Route path={"/bracket/:subt_id"} component={Brackets} />
         <RouteGuard exact path={"/Users"} component={Users} admin={false} />
         <RouteGuard
           exact
@@ -74,6 +75,11 @@ function App() {
           exact
           path={"/inscription/:tournament_id"}
           component={Inscription}
+        />
+        <Route
+          exact
+          path={"/allSubt/:tournament_id"}
+          component={AllSubt}
         />
         <Route
           exact
