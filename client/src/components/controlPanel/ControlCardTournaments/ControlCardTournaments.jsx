@@ -27,7 +27,7 @@ export default function ControlCardTournaments({tournament, setDataModal, setUpd
       confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
       if (result.isConfirmed) {
-        dispatch(deleteTournament(tournament.id_tournaments))
+        dispatch(deleteTournament(tournament.id_tournament))
         Swal.fire(
           'Deleted!',
           'Your file has been deleted.',
