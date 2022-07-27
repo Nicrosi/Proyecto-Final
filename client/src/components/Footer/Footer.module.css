@@ -3,12 +3,18 @@
   flex-wrap:wrap;
   flex-direction: row;
   align-items: center;
-  justify-content:space-evenly;
+  justify-content:space-between;
   height: 100px;
   background-color: #93a267;
 }
 .title {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   font-family: 'Bebas Neue', cursive;
   margin: 0;
+}
+.subtitlesBox {
+  margin-left: 30px;
+  display: flex;
+  flex-wrap:wrap;
+  flex-direction: column;
 }
