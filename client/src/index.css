@@ -82,3 +82,7 @@ code {
 .react-chatbot-kit-user-chat-message-arrow{
   border-left-color: rgb(104,104,104)!important;
 }
+
+.swal2-backdrop-show{
+  z-index: 6 !important; 
+}

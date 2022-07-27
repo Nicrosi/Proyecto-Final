@@ -289,9 +289,9 @@ export const FormSubTournament = (props) => {
                 onChange={(e) => handleOnChange(e)}
               >
                 <option value="">Choose a elimination type</option>
-                <option value="All">All vs All</option>
+                <option value="All" disabled>All vs All</option>
                 <option value="Simple">Simple Elimination</option>
-                <option value="Double">Double Elimination</option>
+                <option value="Double" disabled>Double Elimination</option>
               </select>
               {error.elimination_type === "init"?<br />:(error.elimination_type ? (
                     <div
@@ -326,7 +326,7 @@ export const FormSubTournament = (props) => {
               >
                 <option value="">Choose a match type</option>
                 <option value="singles">singles</option>
-                <option value="dobles">dobles</option>
+                <option value="dobles" disabled>dobles</option>
               </select>
               {error.match_type === "init"?<br />:(error.match_type ? (
                     <div
