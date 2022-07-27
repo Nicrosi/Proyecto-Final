@@ -3,6 +3,7 @@ import Carousel from "react-bootstrap/Carousel";
 import Image from "react-bootstrap/Image";
 import img1 from "../../img/imgCarousel1.webp";
 import img2 from "../../img/imgCarousel2.webp";
+import logo from "../../img/SYNNET_icon.png";
 
 export default function ControlledCarousel() {
   return (
@@ -19,10 +20,9 @@ export default function ControlledCarousel() {
           style={{ height: "100%", paddingTop: "70px", display: "flex",   flexDirection: "column"
         }}
         >
-          <h1 style={{fontSize: "3rem"}}>WELCOME</h1>
-
-          <h1>to the</h1>
-          <h1>SINNET-TENNIS</h1>
+          <h1 style={{fontSize: "2rem",   fontFamily: "'Bebas Neue', cursive"}}>WELCOME</h1>
+          <h1 style={{fontSize: "1.5rem",   lineHeight: "0.5", fontFamily: "'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif"}}>to the</h1>
+          <img src={logo} alt="logoSynnet" style={{width: "300px"}} />
         </Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item interval={4000} className="carouselItem">

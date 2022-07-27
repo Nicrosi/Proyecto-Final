@@ -1,0 +1,14 @@
+.footerBox{
+  display: flex;
+  flex-wrap:wrap;
+  flex-direction: row;
+  align-items: center;
+  justify-content:space-evenly;
+  height: 100px;
+  background-color: #93a267;
+}
+.title {
+  font-size: 1.5rem;
+  font-family: 'Bebas Neue', cursive;
+  margin: 0;
+}
