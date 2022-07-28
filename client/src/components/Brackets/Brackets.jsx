@@ -160,6 +160,7 @@ const Brackets = () => {
     const round = brackets[brackets.length - 1].round.round_numb;
     const filterBracket = parseMatches.filter((match) => match.round === round);
     const winners = [];
+    const winner_name = [];
     console.log(filterBracket);
     for (let j = 0; j < filterBracket.length; j++) {
       let team1 = 0;
@@ -173,13 +174,15 @@ const Brackets = () => {
       }
       if (team1 > team2) {
         winners.push(filterBracket[j].teams[0].id_team);
+        winner_name.push(filterBracket[j].teams[0].users[0].name);
       } else {
         winners.push(filterBracket[j].teams[1].id_team);
+        winner_name.push(filterBracket[j].teams[1].users[0].name);
       }
     }
     finalRound(brackets)
       ? Swal.fire({
-        title: `THE WINNER IS ${winners[0]}!!`,
+        title: `THE WINNER IS ${winner_name[0]}!!`,
         width: 600,
         padding: "3em",
         color: "#716add",
