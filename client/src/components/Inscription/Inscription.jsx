@@ -66,15 +66,26 @@ export const Inscription = () => {
   return (
     <>
       <div className={styles.containerBox}>
-        <div className={styles.textBox}>
-          <h1 className={styles.title}>Welcome, {user.name}!</h1>
+        <div className={styles.textBox}>        
+          <h1 className={styles.title}>Hello, {user.name}!</h1>
           <div className={styles.subtitle}>
-            <h5 className={styles.subtitle}>
-              These are the tournaments according to your category and gender.
-            </h5>
-            <h5 className={styles.subtitle}>
-              Which subtournaments do you want to register for?
-            </h5>
+            {auth.loggedIn && auth.currentUser.is_admin === false ? (
+              <>
+                <h5 className={styles.subtitle}>
+                  These are the tournaments according to your category and gender.
+                </h5>
+                <h5 className={styles.subtitle}>
+                  Which subtournaments do you want to register for?
+                </h5>
+              </>
+            ) : (
+              <>
+                <h5 className={styles.subtitleAdmin}>
+                  These are all the subtournaments created.
+                </h5>
+              </>
+            )}
+
           </div>
         </div>
         <div className={styles.principalBox}>
@@ -94,12 +105,15 @@ export const Inscription = () => {
             breakpoints={{
               1024: {
                 slidesPerView: 3,
+                width: 950,
               },
               768: {
                 slidesPerView: 2,
+                width: 950,
               },
               640: {
                 slidesPerView: 1,
+                width: 950,
               },
             }}
           >
@@ -108,9 +122,10 @@ export const Inscription = () => {
                 let option;
                 auth.loggedIn && auth.currentUser.is_admin === false
                   ? (option =
-                      user.gender === p.gender &&
-                      user.id_category === p.category.id_category)
+                    user.gender === p.gender &&
+                    user.id_category === p.category.id_category)
                   : (option = user);
+                  console.log(option)
                 return option ? (
                   <SwiperSlide key={p.id_subt}>
                     <SubtCard
@@ -135,20 +150,27 @@ export const Inscription = () => {
               <h1 style={{ textAlign: "center" }}>No subtournament found</h1>
             )}
           </Swiper>
-          <img
-            src={arrowLeft}
-            alt="buttonLeft"
-            className={styles.buttonLeft}
-            type="button"
-            onClick={goPrev}
-          />
-          <img
-            src={arrowRight}
-            alt="buttonRight"
-            className={styles.buttonRight}
-            type="button"
-            onClick={goNext}
-          />
+          {
+            subt.length !== 1 && (
+              <>
+              <img
+                src={arrowLeft}
+                alt="buttonLeft"
+                className={styles.buttonLeft}
+                type="button"
+                onClick={goPrev}
+              />
+              <img
+                src={arrowRight}
+                alt="buttonRight"
+                className={styles.buttonRight}
+                type="button"
+                onClick={goNext}
+              />
+            </>
+            )
+          }
+
         </div>
         {/* <div className={{ width: "100%" }}>
     <Row className="g-3 mx-3 mt-2">
