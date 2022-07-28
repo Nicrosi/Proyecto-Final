@@ -1,4 +1,3 @@
-const { getRounds } = require("bcrypt");
 const { Router } = require("express");
 const router = Router();
 const {
