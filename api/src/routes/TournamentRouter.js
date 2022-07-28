@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const router = Router();
-const { Tournament, Op } = require('../db');
+const { Tournament, Subtournament, Op } = require('../db');
 
 router.get('/', async (req, res) => {
   const { name } = req.query;  //http://localhost:3001/${tournament}?name=${name}
@@ -86,6 +86,12 @@ router.put('/:id_tournament', async (req, res) => {
 
 router.delete('/:id_tournament', async (req, res) => {
   const { id_tournament } = req.params;
+  const tour = await Tournament.findOne({where: {id_tournament: id_tournament}, include: Subtournament})
+  if( tour && tour.subtournaments.length) {
+    for (let i = 0; i < tour.subtournaments.length; i++) {
+      await Subtournament.destroy({where: {id_subt: tour.subtournaments[i].id_subt}})
+    }
+  }
   const tournament = await Tournament.destroy({where: {id_tournament: id_tournament}})
   tournament === 1 ? res.status(200).send({msg: 'tournament deleted successfully'}) : res.status(400).send({msg: 'tournament does not exist'})
 })
