@@ -44,7 +44,12 @@
     "extends": [
       "react-app",
       "react-app/jest"
-    ]
+    ],
+    "rules":{
+      "no-unused-vars": "off",
+      "no-dupe-keys": "off",
+      "array-callback-return": "off"
+    }
   },
   "browserslist": {
     "production": [
