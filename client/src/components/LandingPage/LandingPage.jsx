@@ -7,7 +7,6 @@ import Steps from "../Steps/Steps";
 import TournamentsToShow from "../Tournament/TournamentsToShow/TournamentsToShow";
 import { useRef } from "react";
 import styles from "./Landing.module.css";
-import { chevronDoubleDown } from "@heroicons/react/solid"
 
 export default function LandingPage() {
   const divRef = useRef();
@@ -22,7 +21,6 @@ export default function LandingPage() {
           divRef.current.scrollIntoView({ behavior: "smooth" });
         }}
       >
-       < chevronDoubleDown/>
       </button>
      
      
