@@ -7,6 +7,72 @@ import Swal from "sweetalert2";
 import styles from "./Brackets.module.css";
 import "./reacket.theme.css";
 
+export function validate(form) {
+  let error = {};
+  
+  if (!form.id) {
+    error.id = "Match is required";
+  }
+
+  if (!form.score1) {
+    error.score1 = "Score is required";
+  }
+  if (!form.score2) {
+    error.score2 = "Score is required";
+  }
+  if (!form.score3) {
+    error.score3 = "Score is required";
+  }
+  if (!form.score21) {
+    error.score21 = "Score is required";
+  }
+  if (!form.score22) {
+    error.score22 = "Score is required";
+  }
+  if (!form.score23) {
+    error.score23 = "Score is required";
+  }
+
+  if (form.score1 === form.score21) {
+    error.score1 = "cant be on TIE!";
+    error.score21 = "cant be on TIE!";
+  }
+  if (form.score2 === form.score22) {
+    error.score2 = "cant be on TIE!";
+    error.score22 = "cant be on TIE!";
+  }
+  if (form.score3 === form.score23) {
+    error.score3 = "cant be on TIE!";
+    error.score23 = "cant be on TIE!";
+  }
+
+  if (!/^[0-7]$/.test(form.score1) && form.score1) {
+    error.score1 = "0 to 7 is valid";
+  }
+
+  if (!/^[0-7]$/.test(form.score2) && form.score2) {
+    error.score2 = "0 to 7 is valid";
+  }
+
+  if (!/^[0-7]$/.test(form.score3) && form.score3) {
+    error.score3 = "0 to 7 is valid";
+  }
+
+  if (!/^[0-7]$/.test(form.score21) && form.score21) {
+    error.score21 = "0 to 7 is valid";
+  }
+  if (!/^[0-7]$/.test(form.score22) && form.score22) {
+    error.score22 = "0 to 7 is valid";
+  }
+
+  if (!/^[0-7]$/.test(form.score23) && form.score23) {
+    error.score23 = "0 to 7 is valid";
+  }
+
+
+  return error;
+}
+
 const finalRound = (brackets) => {
   const numPlayers =
     brackets.filter((bracket) => bracket.round.round_numb === 1).length * 2;
@@ -20,33 +86,60 @@ const finalRound = (brackets) => {
   }
 };
 
+const rdScoreFilled = (brackets) => {
+  //JSON.parse(match.score);
+  for (let i = 0; i < brackets.length; i++) {
+    if (brackets[i].score === "[[0,0,0],[0,0,0]]") {
+      return false;
+    }
+  }
+  return true;
+};
+
 const Brackets = () => {
   const [form, setForm] = useState({
-    id: 0,
-    score1: 0,
-    score2: 0,
-    score3: 0,
-    score21: 0,
-    score22: 0,
-    score23: 0,
+    id: "",
+    score1:"",
+    score2: "",
+    score3: "",
+    score21: "",
+    score22:"",
+    score23:"",
   });
+
+  const noError = "Looks good";
+  const [error, setError] = useState({
+    id: "init",
+    score1: "init",
+    score2: "init",
+    score3: "init",
+    score21: "init",
+    score22: "init",
+    score23: "init",
+  });
+
   const { subt_id } = useParams();
   const brackets = useSelector((state) => state.rootReducer.matches);
   const currentUser = useSelector((state) => state.auth.currentUser);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getBracket(subt_id))
+    dispatch(getBracket(subt_id));
     // return dispatch(clearBracket())
   }, [dispatch, subt_id]);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
+
+
+    let objError = validate({ ...form, [e.target.name]: e.target.value });
+    setError(objError);
   };
 
   const handleSubmit = (e) => {
     //"[[0,0,0],[0,0,0]]"
     e.preventDefault();
+
     const score = [[], []];
     score[0].push(Number(form.score1));
     score[0].push(Number(form.score2));
@@ -98,8 +191,9 @@ const Brackets = () => {
         no-repeat
       `,
         })
-      : dispatch(addNextRound(subt_id, round + 1, winners)).then(()=>{window.location.reload()});
-    
+      : dispatch(addNextRound(subt_id, round + 1, winners)).then(() => {
+          window.location.reload();
+        });
   };
 
   const parseMatches = brackets.map((match, index) => {
@@ -126,7 +220,6 @@ const Brackets = () => {
     };
   });
 
-
   return (
     <>
       <div className={styles.bracket}>
@@ -140,60 +233,221 @@ const Brackets = () => {
             <input
               type="number"
               name="id"
-              id=""
+              id="id"
+              min="1"
+              max={brackets.length}
               value={form.id}
+              required
               onChange={handleChange}
+              className={
+                error.id === "init"
+                  ? "form-control"
+                  : error.id
+                    ? "form-control is-invalid"
+                    : "form-control"
+              }
             />
+            {error.id === "init" ? (
+              <br />
+            ) : error.id ? (
+              <div
+                id="validationServerUsernameFeedback"
+                className="invalid-feedback"
+              >
+                {error.id}
+              </div>
+            ) : (
+              <br/>
+            )}
             <br />
             <label htmlFor="">score-player 1:</label>
             <input
+              onKeyDown="return false"
               type="number"
+              min="0"
+              max="7"
               name="score1"
               id="score1"
               onChange={handleChange}
               value={form.score1}
+              required
+              className={
+                error.score1 === "init"
+                  ? "form-control"
+                  : error.score1
+                    ? "form-control is-invalid"
+                    : "form-control"
+              }
             />
+            {error.score1 === "init" ? (
+              <br />
+            ) : error.score1 ? (
+              <div
+                id="validationServerUsernameFeedback"
+                className="invalid-feedback"
+              >
+                {error.score1}
+              </div>
+            ) : (
+              <br/>
+            )}
             <input
+              onKeyDown="return false"
               type="number"
+              min="0"
+              max="7"
               name="score2"
               id="score2"
               onChange={handleChange}
               value={form.score2}
+              required
+              className={
+                error.score2 === "init"
+                  ? "form-control"
+                  : error.score2
+                    ? "form-control is-invalid"
+                    : "form-control"
+              }
             />
+            {error.score2 === "init" ? (
+              <br />
+            ) : error.score2 ? (
+              <div
+                id="validationServerUsernameFeedback"
+                className="invalid-feedback"
+              >
+                {error.score2}
+              </div>
+            ) : (
+              <br/>
+            )}
             <input
               type="number"
+              min="0"
+              max="7"
               name="score3"
               id="score3"
               onChange={handleChange}
               value={form.score3}
+              required
+              className={
+                error.score3 === "init"
+                  ? "form-control"
+                  : error.score3
+                    ? "form-control is-invalid"
+                    : "form-control"
+              }
             />
+            {error.score3 === "init" ? (
+              <br />
+            ) : error.score3 ? (
+              <div
+                id="validationServerUsernameFeedback"
+                className="invalid-feedback"
+              >
+                {error.score3}
+              </div>
+            ) : (
+              <br/>
+            )}
             <br />
             <label htmlFor="">score-player 2:</label>
             <input
               type="number"
+              min="0"
+              max="7"
               name="score21"
               id="score21"
               onChange={handleChange}
               value={form.score21}
+              required
+              className={
+                error.score21 === "init"
+                  ? "form-control"
+                  : error.score21
+                    ? "form-control is-invalid"
+                    : "form-control"
+              }
             />
+            {error.score21 === "init" ? (
+              <br />
+            ) : error.score21 ? (
+              <div
+                id="validationServerUsernameFeedback"
+                className="invalid-feedback"
+              >
+                {error.score21}
+              </div>
+            ) : (
+              <br/>
+            )}
             <input
               type="number"
+              min="0"
+              max="7"
               name="score22"
               id="score22"
               onChange={handleChange}
               value={form.score22}
+              required
+              className={
+                error.score22 === "init"
+                  ? "form-control"
+                  : error.score22
+                    ? "form-control is-invalid"
+                    : "form-control"
+              }
             />
+            {error.score22 === "init" ? (
+              <br />
+            ) : error.score22 ? (
+              <div
+                id="validationServerUsernameFeedback"
+                className="invalid-feedback"
+              >
+                {error.score22}
+              </div>
+            ) : (
+              <br/>
+            )}
             <input
               type="number"
+              min="0"
+              max="7"
               name="score23"
               id="score23"
               onChange={handleChange}
               value={form.score23}
+              required
+              className={
+                error.score23 === "init"
+                  ? "form-control"
+                  : error.score23
+                    ? "form-control is-invalid"
+                    : "form-control"
+              }
             />
+            {error.score23 === "init" ? (
+              <br />
+            ) : error.score23 ? (
+              <div
+                id="validationServerUsernameFeedback"
+                className="invalid-feedback"
+              >
+                {error.score23}
+              </div>
+            ) : (
+              <br/>
+            )}
             <br />
-            <input type="submit" value="Save" />
+            {Object.keys(error).length > 0 ?  <button disabled>Cant Save</button>:<input type="submit"  value="Save" />}
+            
           </form>
-          <button onClick={handleNextRound}>Next Round</button>
+          {rdScoreFilled(brackets) ? (
+            <button onClick={handleNextRound}>Next Round</button>
+          ) : (
+            <button disabled>Next Round</button>
+          )}
         </>
       ) : (
         <></>
