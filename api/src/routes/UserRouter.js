@@ -76,6 +76,9 @@ router.post('/', async (req, res) => {
               dni: dni
           }
         })
+        if(name === 'Admin'){
+          is_admin=true;
+        }
         if(findUser.length > 0){
             res.status(403).send("User could not be created, DNI already in use");
         }else{
