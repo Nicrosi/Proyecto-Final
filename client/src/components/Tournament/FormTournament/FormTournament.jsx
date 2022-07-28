@@ -3,7 +3,9 @@ import axios from "axios";
 import { ContactForm } from "../ContactForm/ContactForm";
 import styles from "./FormTournament.module.css";
 import home from "../../../img/homeAdmin.png";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import Swal from "sweetalert2";
+
 
 export function validate(input) {
   let error = {};
@@ -39,6 +41,7 @@ const initialInput = {
 export const FormTournament = () => {
   const noError = "Looks good";
   const [input, setInput] = useState(initialInput);
+  const History = useHistory();
 
   const [error, setError] = useState({
     name: "init",
@@ -49,8 +52,21 @@ export const FormTournament = () => {
   async function handleOnSubmit(e) {
     e.preventDefault();
     await axios.post(`http://localhost:3001/tournament`, input);
-    alert("Successfully created tournament");
     setInput(initialInput)
+    Swal.fire({
+      title: 'Success',
+      text: "Tournament created successfully",
+      icon: 'success',
+      showCancelButton: false,
+      showConfirmButton: true,
+      confirmButtonColor: '#A7D129',
+      cancelButtonColor: '#A7D129',
+      confirmButtonText: ' Okey '
+    }).then((result) => {
+      if (result.isConfirmed) {
+        History.push('/HomeAdmin')
+      }
+    })
   }
 
   function handleOnChange(e) {

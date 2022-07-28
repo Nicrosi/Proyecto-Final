@@ -76,13 +76,8 @@ router.post("/:id_tournament", async (req, res) => {
       id_tournament: tournament.id_tournament,
       id_category,
     });
-    let category = await Category.findByPk(id_category);
-    if (category) {
-      await newSubtournament.addCategory(category);
-      res.status(200).send(`Sub tournament created!`);
-    } else {
-      res.status(400).send(`Tournament id does not exist`);
-    }
+    newSubtournament ? res.status(200).send(`Subtournament created!`) : res.status(400).send(`Subtournament not created!`)
+    
   } catch (err) {
     console.log(err);
   }

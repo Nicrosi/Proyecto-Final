@@ -14,6 +14,8 @@ import {
 import { BarChart } from "../../Charts/BarChart/BarChart";
 import { DoughnutChart } from "../../Charts/DonutChart/DoughnutChart";
 import banner from "../../../img/GestionBanner.PNG"
+import Swal from "sweetalert2";
+
 
 
 export const DashBoard = () => {
@@ -58,7 +60,16 @@ export const DashBoard = () => {
 
   function handleOnClick(e) {
     dispatch(putGestion(1, doughnutData));
-    alert("Gestion Saved");
+    Swal.fire({
+      title: 'Success',
+      text: "Gestion Saved",
+      icon: 'success',
+      showCancelButton: false,
+      showConfirmButton: true,
+      confirmButtonColor: '#A7D129',
+      cancelButtonColor: '#A7D129',
+      confirmButtonText: ' Okey '
+    })
   }
 
   function handleOnClickRefresh(e) {
