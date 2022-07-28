@@ -30,3 +30,13 @@
   line-height: 0.8;
   
 }
+.message {
+  margin: 0 0 3vh 18vw;
+  font-family: 'Bebas Neue', cursive;
+  font-size: 5rem;
+  color: #A7D129;
+  width: 60vw;
+  text-align: end;
+  font-weight: bold;
+  line-height: 0.8;
+}

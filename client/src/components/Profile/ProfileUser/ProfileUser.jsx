@@ -77,13 +77,17 @@ export default function ProfileUser(props) {
                     className={styles.navBarItems}
                     value="Personal Information"
                   />
-                  <input
-                    type="submit"
-                    name="category"
-                    onClick={(e) => handleClic(e)}
-                    className={styles.navBarItems}
-                    value="Category"
-                  />
+                  {
+                    !auth.currentUser.is_admin ?
+                    <input
+                      type="submit"
+                      name="category"
+                      onClick={(e) => handleClic(e)}
+                      className={styles.navBarItems}
+                      value="Category"
+                    />
+                    : (<div></div>)
+                  }
                 </div>
                 <div className={styles.secondaryBox}>
                   {show === "personalInformation" && (
