@@ -31,7 +31,7 @@ export const Inscription = () => {
     if (!user.id_category && auth.currentUser.is_admin === false) {
       Swal.fire({
         title: 'Success',
-        text: "The user ${user.name} has no score to categorize",
+        text: `The user ${user.name} has no score to categorize`,
         icon: 'success',
         showCancelButton: false,
         showConfirmButton: true,
