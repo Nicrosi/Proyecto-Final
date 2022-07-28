@@ -17,7 +17,7 @@ const ButtonContact = () => {
           <img src={phoneIcon} alt="phone" />
         </button>
       </a>
-      <a href="https://api.whatsapp.com/send?phone=0123456789" target="_blank">
+      <a href="https://api.whatsapp.com/send?phone=0123456789" target="_blank" rel="noreferrer">
         <button className={styles.btnTel}>
           <img src={wppIcon} alt="wpp" style={{ width: "23px" }} />
         </button>
