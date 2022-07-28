@@ -17,7 +17,7 @@
 
 }
 .textBox {
-  width: auto;
+  width: 100%;
   margin: 100px 0 0 60px;
   display: flex;
   background-size: cover;
