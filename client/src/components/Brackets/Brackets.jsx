@@ -9,7 +9,7 @@ import "./reacket.theme.css";
 
 export function validate(form) {
   let error = {};
-  
+
   if (!form.id) {
     error.id = "Match is required";
   }
@@ -99,12 +99,12 @@ const rdScoreFilled = (brackets) => {
 const Brackets = () => {
   const [form, setForm] = useState({
     id: "",
-    score1:"",
+    score1: "",
     score2: "",
     score3: "",
     score21: "",
-    score22:"",
-    score23:"",
+    score22: "",
+    score23: "",
   });
 
   const noError = "Looks good";
@@ -179,21 +179,21 @@ const Brackets = () => {
     }
     finalRound(brackets)
       ? Swal.fire({
-          title: `THE WINNER IS ${winners[0]}!!`,
-          width: 600,
-          padding: "3em",
-          color: "#716add",
-          background: "#fff url(/images/trees.png)",
-          backdrop: `
+        title: `THE WINNER IS ${winners[0]}!!`,
+        width: 600,
+        padding: "3em",
+        color: "#716add",
+        background: "#fff url(/images/trees.png)",
+        backdrop: `
         rgba(0,0,123,0.4)
         url("https://media0.giphy.com/media/o9KykZbrhepqKjqXxe/giphy.gif")
         center top
         no-repeat
       `,
-        })
+      })
       : dispatch(addNextRound(subt_id, round + 1, winners)).then(() => {
-          window.location.reload();
-        });
+        window.location.reload();
+      });
   };
 
   const parseMatches = brackets.map((match, index) => {
@@ -221,15 +221,20 @@ const Brackets = () => {
   });
 
   return (
-    <>
+    <div className={styles.containerBox}>
       <div className={styles.bracket}>
         <Reacket matches={parseMatches} />
       </div>
       {currentUser.is_admin ? (
-        <>
+        <div className={styles.formBox}>
           {" "}
           <form onSubmit={handleSubmit}>
-            <label htmlFor="">id_match:</label>
+     
+           
+            <div className={styles.playersBox}>
+              
+              <div>
+              <h5 htmlFor="">Match N°</h5>
             <input
               type="number"
               name="id"
@@ -239,6 +244,8 @@ const Brackets = () => {
               value={form.id}
               required
               onChange={handleChange}
+              style={{ width: "90px", height: "45px"}}
+
               className={
                 error.id === "init"
                   ? "form-control"
@@ -253,206 +260,246 @@ const Brackets = () => {
               <div
                 id="validationServerUsernameFeedback"
                 className="invalid-feedback"
+                style={{fontSize: "0.7rem"}}
               >
                 {error.id}
               </div>
             ) : (
-              <br/>
+              <br />
             )}
+              </div>
+
+
+              <div className={styles.player1Box}>
+                <h5 htmlFor="">Score player 1</h5>
+                <ul class="list-group list-group-horizontal">
+                <li class="list-group-item" style={{ width: "90px", height: "45px", padding: "0" }} >
+                    <input
+                      onKeyDown="return false"
+                      type="number"
+                      min="0"
+                      max="7"
+                      name="score1"
+                      id="score1"
+                      onChange={handleChange}
+                      style={{ width: "90px", height: "45px", borderRadius: "8px 0 0 8px" }}
+                      value={form.score1}
+                      required
+                      className={
+                        error.score1 === "init"
+                          ? "form-control"
+                          : error.score1
+                            ? "form-control is-invalid"
+                            : "form-control"
+                      }
+                    />
+                    {error.score1 === "init" ? (
+                      <br />
+                    ) : error.score1 ? (
+                      <h5
+                        id="validationServerUsernameFeedback"
+                        className="invalid-feedback"
+                        style={{fontSize: "0.7rem"}}
+                      >
+                        {error.score1}
+                      </h5>
+                    ) : (
+                      <br />
+                    )}
+                  </li>
+                  <li class="list-group-item" style={{ width: "90px", height: "45px", padding: "0" }} >
+                    <input
+                      onKeyDown="return false"
+                      type="number"
+                      min="0"
+                      max="7"
+                      name="score2"
+                      id="score2"
+                      onChange={handleChange}
+                      style={{ width: "90px", height: "45px", borderRadius: "0" }}
+                      value={form.score2}
+                      required
+                      className={
+                        error.score2 === "init"
+                          ? "form-control"
+                          : error.score2
+                            ? "form-control is-invalid"
+                            : "form-control"
+                      }
+                    />
+                    {error.score2 === "init" ? (
+                      <br />
+                    ) : error.score2 ? (
+                      <div
+                        id="validationServerUsernameFeedback"
+                        className="invalid-feedback"
+                        style={{fontSize: "0.7rem"}}
+                      >
+                        {error.score2}
+                      </div>
+                    ) : (
+                      <br />
+                    )}
+                  </li>
+                  <li class="list-group-item" style={{ width: "90px", height: "45px", padding: "0" }} >
+                    <input
+                      type="number"
+                      min="0"
+                      max="7"
+                      name="score3"
+                      id="score3"
+                      onChange={handleChange}
+                      style={{ width: "90px", height: "45px", borderRadius: "0 8px 8px 0" }}
+                      value={form.score3}
+                      required
+                      className={
+                        error.score3 === "init"
+                          ? "form-control"
+                          : error.score3
+                            ? "form-control is-invalid"
+                            : "form-control"
+                      }
+                    />
+                    {error.score3 === "init" ? (
+                      <br />
+                    ) : error.score3 ? (
+                      <div
+                        id="validationServerUsernameFeedback"
+                        className="invalid-feedback"
+                        style={{fontSize: "0.7rem"}}
+                      >
+                        {error.score3}
+                      </div>
+                    ) : (
+                      <br />
+                    )}
+                  </li>
+                </ul>
+              </div>
+              <div className={styles.player1Box}>
+                <h5 htmlFor="">Score player 2</h5>
+                <ul class="list-group list-group-horizontal">
+                <li class="list-group-item" style={{ width: "90px", height: "45px", padding: "0" }} >
+                  <input
+                    type="number"
+                    min="0"
+                    max="7"
+                    name="score21"
+                    id="score21"
+                    onChange={handleChange}
+                    style={{ width: "90px", height: "45px", borderRadius: "8px 0 0 8px" }}
+                    value={form.score21}
+                    required
+                    className={
+                      error.score21 === "init"
+                        ? "form-control"
+                        : error.score21
+                          ? "form-control is-invalid"
+                          : "form-control"
+                    }
+                  />
+                  {error.score21 === "init" ? (
+                    <br />
+                  ) : error.score21 ? (
+                    <div
+                      id="validationServerUsernameFeedback"
+                      className="invalid-feedback"
+                      style={{fontSize: "0.7rem"}}
+                    >
+                      {error.score21}
+                    </div>
+                  ) : (
+                    <br />
+                  )}
+                  </li>
+                  <li class="list-group-item" style={{ width: "90px", height: "45px", padding: "0" }} >
+                  <input
+                    type="number"
+                    min="0"
+                    max="7"
+                    name="score22"
+                    id="score22"
+                    onChange={handleChange}
+                    style={{ width: "90px", height: "45px", borderRadius: "0" }}
+                    value={form.score22}
+                    required
+                    className={
+                      error.score22 === "init"
+                        ? "form-control"
+                        : error.score22
+                          ? "form-control is-invalid"
+                          : "form-control"
+                    }
+                  />
+                  {error.score22 === "init" ? (
+                    <br />
+                  ) : error.score22 ? (
+                    <div
+                      id="validationServerUsernameFeedback"
+                      className="invalid-feedback"
+                      style={{fontSize: "0.7rem"}}
+                    >
+                      {error.score22}
+                    </div>
+                  ) : (
+                    <br />
+                  )}
+                  </li>
+                  <li class="list-group-item" style={{ width: "90px", height: "45px", padding: "0" }} >
+                  <input
+                    type="number"
+                    min="0"
+                    max="7"
+                    name="score23"
+                    id="score23"
+                    onChange={handleChange}
+                    style={{ width: "90px", height: "45px", borderRadius: "0 8px 8px 0" }}
+                    value={form.score23}
+                    required
+                    className={
+                      error.score23 === "init"
+                        ? "form-control"
+                        : error.score23
+                          ? "form-control is-invalid"
+                          : "form-control"
+                    }
+                  />
+                  {error.score23 === "init" ? (
+                    <br />
+                  ) : error.score23 ? (
+                    <div
+                      id="validationServerUsernameFeedback"
+                      className="invalid-feedback"
+                      style={{fontSize: "0.7rem"}}
+                    >
+                      {error.score23}
+                    </div>
+                  ) : (
+                    <br />
+                  )}
+                  </li>
+                  </ul>
+              </div>
+            </div>
             <br />
-            <label htmlFor="">score-player 1:</label>
-            <input
-              onKeyDown="return false"
-              type="number"
-              min="0"
-              max="7"
-              name="score1"
-              id="score1"
-              onChange={handleChange}
-              value={form.score1}
-              required
-              className={
-                error.score1 === "init"
-                  ? "form-control"
-                  : error.score1
-                    ? "form-control is-invalid"
-                    : "form-control"
-              }
-            />
-            {error.score1 === "init" ? (
-              <br />
-            ) : error.score1 ? (
-              <div
-                id="validationServerUsernameFeedback"
-                className="invalid-feedback"
-              >
-                {error.score1}
-              </div>
-            ) : (
-              <br/>
-            )}
-            <input
-              onKeyDown="return false"
-              type="number"
-              min="0"
-              max="7"
-              name="score2"
-              id="score2"
-              onChange={handleChange}
-              value={form.score2}
-              required
-              className={
-                error.score2 === "init"
-                  ? "form-control"
-                  : error.score2
-                    ? "form-control is-invalid"
-                    : "form-control"
-              }
-            />
-            {error.score2 === "init" ? (
-              <br />
-            ) : error.score2 ? (
-              <div
-                id="validationServerUsernameFeedback"
-                className="invalid-feedback"
-              >
-                {error.score2}
-              </div>
-            ) : (
-              <br/>
-            )}
-            <input
-              type="number"
-              min="0"
-              max="7"
-              name="score3"
-              id="score3"
-              onChange={handleChange}
-              value={form.score3}
-              required
-              className={
-                error.score3 === "init"
-                  ? "form-control"
-                  : error.score3
-                    ? "form-control is-invalid"
-                    : "form-control"
-              }
-            />
-            {error.score3 === "init" ? (
-              <br />
-            ) : error.score3 ? (
-              <div
-                id="validationServerUsernameFeedback"
-                className="invalid-feedback"
-              >
-                {error.score3}
-              </div>
-            ) : (
-              <br/>
-            )}
-            <br />
-            <label htmlFor="">score-player 2:</label>
-            <input
-              type="number"
-              min="0"
-              max="7"
-              name="score21"
-              id="score21"
-              onChange={handleChange}
-              value={form.score21}
-              required
-              className={
-                error.score21 === "init"
-                  ? "form-control"
-                  : error.score21
-                    ? "form-control is-invalid"
-                    : "form-control"
-              }
-            />
-            {error.score21 === "init" ? (
-              <br />
-            ) : error.score21 ? (
-              <div
-                id="validationServerUsernameFeedback"
-                className="invalid-feedback"
-              >
-                {error.score21}
-              </div>
-            ) : (
-              <br/>
-            )}
-            <input
-              type="number"
-              min="0"
-              max="7"
-              name="score22"
-              id="score22"
-              onChange={handleChange}
-              value={form.score22}
-              required
-              className={
-                error.score22 === "init"
-                  ? "form-control"
-                  : error.score22
-                    ? "form-control is-invalid"
-                    : "form-control"
-              }
-            />
-            {error.score22 === "init" ? (
-              <br />
-            ) : error.score22 ? (
-              <div
-                id="validationServerUsernameFeedback"
-                className="invalid-feedback"
-              >
-                {error.score22}
-              </div>
-            ) : (
-              <br/>
-            )}
-            <input
-              type="number"
-              min="0"
-              max="7"
-              name="score23"
-              id="score23"
-              onChange={handleChange}
-              value={form.score23}
-              required
-              className={
-                error.score23 === "init"
-                  ? "form-control"
-                  : error.score23
-                    ? "form-control is-invalid"
-                    : "form-control"
-              }
-            />
-            {error.score23 === "init" ? (
-              <br />
-            ) : error.score23 ? (
-              <div
-                id="validationServerUsernameFeedback"
-                className="invalid-feedback"
-              >
-                {error.score23}
-              </div>
-            ) : (
-              <br/>
-            )}
-            <br />
-            {Object.keys(error).length > 0 ?  <button disabled>Cant Save</button>:<input type="submit"  value="Save" />}
-            
+
+           <div className={styles.buttonBox}>
+            {Object.keys(error).length > 0 ? <button disabled style={{width: "90%", height: "40px", borderRadius: "8px", backgroundColor: "#A7D129", border: "none" }}>Cant Save</button> : <input type="submit" value="Save"  style={{width: "90%", height: "40px", borderRadius: "8px", backgroundColor: "#A7D129", border: "none"}} />}
+            </div>
           </form>
+          <div className={styles.button2Box}>
           {rdScoreFilled(brackets) ? (
-            <button onClick={handleNextRound}>Next Round</button>
+            <button onClick={handleNextRound} style={{width: "90%", height: "40px", borderRadius: "8px", backgroundColor: "#A7D129", border: "none"}}>Next Round</button>
           ) : (
-            <button disabled>Next Round</button>
+            <button disabled style={{width: "90%", height: "40px", borderRadius: "8px", backgroundColor: "#A7D129", border: "none"}}>Next Round</button>
           )}
-        </>
+          </div>
+          </div>
+        
       ) : (
         <></>
       )}
-    </>
+    </div>
   );
 };
 
