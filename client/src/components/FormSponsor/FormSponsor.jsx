@@ -4,7 +4,9 @@ import { useDispatch } from "react-redux";
 import { postSponsor } from "../../redux/actions";
 import styles from "./FormSponsor.module.css";
 import Swal from "sweetalert2";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import home from "../../img/homeAdmin.png";
+
 
 
 export function validate(input) {
@@ -101,10 +103,18 @@ export const FormSponsor = () => {
   }
 
   return (
-    <>
       <div className={styles.containerBox}>
-        <div className={styles.imageBox}></div>
+        <div className={styles.titleBox}>
+        <Link to="/HomeAdmin">
+          <img
+            src={home}
+            alt="homeAdmin"
+            className={styles.buttonHome}
+          />
+        </Link>
         <h1 className={styles.title}>Sponsor Creation</h1>
+      </div>
+
         <div className={styles.formBox}>
           <form style={{ width: "100%" }} onSubmit={(e) => handleOnSubmit(e)}>
             <div className="row g-2 mb-3">
@@ -210,6 +220,5 @@ export const FormSponsor = () => {
         </div>
 
       </div>
-    </>
   );
 };

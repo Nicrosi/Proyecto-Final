@@ -20,7 +20,6 @@ import { useDispatch } from "react-redux";
 import { FormSubTournament } from "./components/SubTournament/FormSubTournament/FormSubTournament.jsx";
 import TournamentsToShow from "./components/Tournament/TournamentsToShow/TournamentsToShow.jsx";
 import ControlCardUsers from "./components/controlPanel/ControlCardUsers/ControlCardUsers.jsx";
-import { TournamentSimpleElimination } from "./components/SubTournament/TournamentSimpleElimination/TournamentSimpleElimination.jsx";
 import { ChatBot } from "./components/ChatBot/ChatBot.jsx";
 import Brackets from "./components/Brackets/Brackets.jsx";
 import { AllSubt } from "./components/Inscription/AllSubt/AllSubt.jsx";
@@ -80,11 +79,6 @@ function App() {
           exact
           path={"/allSubt/:tournament_id"}
           component={AllSubt}
-        />
-        <Route
-          exact
-          path={"/tournamentplayers/:subt_id"}
-          component={TournamentSimpleElimination}
         />
         <Route exact path={"/login"} component={LogIn} />
         <RouteGuard

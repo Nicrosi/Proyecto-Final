@@ -236,19 +236,34 @@ export default function CreateGallery() {
             }
               {
                 !FirstLine.length && !ImageLoading ?
-                ( 
-                  <h1
-                    style={{
-                      fontFamily: "'Bebas Neue', cursive",
-                      fontSize: "3rem",
-                      position: "absolute",
-                      top: "100px",
-                      color: "#A7D129",
-                    }}
-                  >
-                    Add images from your gallery
-                  </h1>
-                ) : (<div></div>)
+                  auth.loggedIn && auth.currentUser.is_admin ?
+                  ( 
+                    <h1
+                      style={{
+                        fontFamily: "'Bebas Neue', cursive",
+                        fontSize: "3rem",
+                        position: "absolute",
+                        top: "100px",
+                        color: "#A7D129",
+                      }}
+                    >
+                      Add images from your gallery
+                    </h1>
+                  ) : 
+                  ( 
+                    <h1
+                      style={{
+                        fontFamily: "'Bebas Neue', cursive",
+                        fontSize: "3rem",
+                        position: "absolute",
+                        top: "100px",
+                        color: "#A7D129",
+                      }}
+                    >
+                      No images loaded
+                    </h1>
+                  )
+                : (<div></div>)
               }
                 
               

@@ -72,9 +72,9 @@ router.post('/', async (req, res) => {
 
     try{
         let findUser = await User.findAll({
-            where:{
-                dni: dni
-            }
+          where:{
+              dni: dni
+          }
         })
         if(findUser.length > 0){
             res.status(403).send("User could not be created, DNI already in use");
@@ -93,7 +93,7 @@ router.post('/', async (req, res) => {
             res.send('Created!');
         }
     }catch(err){
-        console.log(err)
+      console.log(err)
     }
 })
 
@@ -105,7 +105,6 @@ router.put('/:id_user', async (req, res) => {
       const { id_user } = req.params;
 
       // const image = await Image.findByPk(parseInt(req.body.id_image));
-
   
       const find_user_by_pk = await User.findOne({where: { id_user: parseInt(id_user) }});
 
