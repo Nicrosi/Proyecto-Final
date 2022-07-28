@@ -66,6 +66,18 @@ export const AllSubt = () => {
   return (
     <>
       <div className={styles.containerBox}>
+        <div className={styles.textBox}>
+          {!auth.loggedIn ?
+            <h1 className={styles.title}>Hello!</h1>
+            :
+            <h1 className={styles.title}>Hello, {user.name}!</h1>
+          }
+          <div className={styles.subtitle}>
+            <h5 className={styles.subtitleAdmin}>
+              These are all the subtournaments.
+            </h5>
+          </div>
+        </div>
         <div className={styles.principalBox}>
           {/* <div className={styles.parent}> */}
           <Swiper
@@ -83,18 +95,21 @@ export const AllSubt = () => {
             breakpoints={{
               1024: {
                 slidesPerView: 3,
+                width: 950,
               },
               768: {
                 slidesPerView: 2,
+                width: 950,
               },
               640: {
                 slidesPerView: 1,
+                width: 950,
               },
             }}
           >
             {subt.length > 0 ? (
               subt.map((p) => {
-                
+
                 return (
                   <SwiperSlide key={p.id_subt}>
                     <AllSubtCard
@@ -113,7 +128,7 @@ export const AllSubt = () => {
                       initialized={p.initialized}
                     />
                   </SwiperSlide>
-                ) 
+                )
               })
             ) : (
               <h1 style={{ textAlign: "center" }}>No subtournament found</h1>
