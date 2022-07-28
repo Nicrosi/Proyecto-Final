@@ -7,7 +7,7 @@ import "./Navigator.css";
 export default function Navigator({ currentPage, setCurrentPage }) {
   const users = useSelector((state) => state.rootReducer.filteredUsers);
 
-  const cantPages = Math.ceil(users.length / 11),
+  const cantPages = Math.ceil(users.length / 12),
     arrPages = arrPageCreator(currentPage, cantPages);
 
   const handlePage = (page) => {
