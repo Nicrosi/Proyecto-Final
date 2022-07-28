@@ -10,7 +10,7 @@ import Swal from "sweetalert2";
 export function validate(input) {
   let error = {};
   if (!input.date) {
-    error.date = "Name is required";
+    error.date = "Date is required";
   } else if (
     !/^\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$/.test(input.date) &&
     input.date
