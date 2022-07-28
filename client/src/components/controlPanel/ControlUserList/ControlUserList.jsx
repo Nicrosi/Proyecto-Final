@@ -53,6 +53,8 @@ export default function ControlUserList() {
 
   function handleSubmit(e) {
     e.preventDefault();
+
+    
     Swal.fire({
       title: 'Do you want to save the changes?',
       showDenyButton: true,

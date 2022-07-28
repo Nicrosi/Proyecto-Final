@@ -20,11 +20,14 @@ export default function Gallery() {
     {
       ImagesList.length ?
       (
-        <section
-          id="multimediaLP"
-          className="d-flex flex-column align-items-center pt-4 bg-dark"
-          style={{ minHeight: "100vh" }}
-        >
+        // <section
+        //   id="multimediaLP"
+        //   className="d-flex flex-column align-items-center pt-4 bg-dark"
+        //   style={{ minHeight: "100vh" }}
+        // >
+        <div className='container_background_img' >
+        <div className='container_background_color' >
+
           <Container fluid>
             <div className="container_galery_images" >
               <>
@@ -74,8 +77,9 @@ export default function Gallery() {
               </button>
             </Link>
           </Container>
-
-        </section>
+        </div>
+        </div>
+        // </section>
       )
       :
       (<div></div>)
