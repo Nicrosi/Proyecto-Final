@@ -99,31 +99,14 @@ router.post('/', async (req, res) => {
 
 
 router.put('/:id_user', async (req, res) => {
-  ///////////////////////////////////////////////////////////
-  try {
-      const { dni, name, last_name, is_admin, e_mail, phone, num_contact, picture, gender, category } = req.body; 
+    try {
+      const { dni, name, last_name, is_admin, e_mail, phone, num_contact, picture, gender } = req.body; 
       const { id_user } = req.params;
 
-      // const image = await Image.findByPk(parseInt(req.body.id_image));
-  
       const find_user_by_pk = await User.findOne({where: { id_user: parseInt(id_user) }});
 
       if(find_user_by_pk) {
   
-
-          let CategoryToUpdate = find_user_by_pk.id_category;
-
-          if( category && category === "A" || category && category === "B" || category && category === "C" || category && category === "E" ) {
-          
-            const categoryFromDb = category && await Category.findOne({
-              where: {
-                type: category
-              }
-            })
-
-            CategoryToUpdate = categoryFromDb.id_category;
-            
-          }
 
           await User.update(
             { 
@@ -136,7 +119,6 @@ router.put('/:id_user', async (req, res) => {
               num_contact: num_contact && num_contact , 
               picture: picture && picture , 
               gender: gender && gender , 
-              id_category: CategoryToUpdate 
             },
             {
               where :{
@@ -154,7 +136,7 @@ router.put('/:id_user', async (req, res) => {
       console.log("error",error);
     }
   
-  })
+})
 
 
   router.delete('/:dni', async (req, res) => {

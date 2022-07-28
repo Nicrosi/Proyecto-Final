@@ -167,7 +167,7 @@ export default function CreateGallery() {
                                 {
                                   auth.loggedIn && auth.currentUser.is_admin ? 
                                   <div onClick={()=>HandleDelte(img)} className='btn_delete_image' >
-                                    <BiTrash className='tarea-icono danger' />
+                                    <BiTrash className='btn-trash tarea-icono danger' />
                                   </div>
                                    : null
                                 }
@@ -189,7 +189,7 @@ export default function CreateGallery() {
                                 {
                                   auth.loggedIn && auth.currentUser.is_admin ? 
                                   <div onClick={()=>HandleDelte(img)} className='btn_delete_image' >
-                                    <BiTrash className='tarea-icono' />
+                                    <BiTrash className='btn-trash tarea-icono' />
                                   </div>
                                    : null
                                 }
@@ -211,7 +211,7 @@ export default function CreateGallery() {
                                 {
                                   auth.loggedIn && auth.currentUser.is_admin ? 
                                   <div onClick={()=>HandleDelte(img)} className='btn_delete_image' >
-                                    <BiTrash className='tarea-icono' />
+                                    <BiTrash className=' btn-trash tarea-icono' />
                                   </div>
                                    : null
                                 }

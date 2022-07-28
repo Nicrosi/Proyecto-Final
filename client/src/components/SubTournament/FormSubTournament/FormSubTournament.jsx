@@ -2,6 +2,9 @@ import React from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { postSubTournament } from "../../../redux/actions/index";
+import Swal from "sweetalert2";
+import { useHistory } from "react-router-dom";
+
 
 export function validate(input) {
   let error = {};
@@ -64,6 +67,7 @@ export const FormSubTournament = (props) => {
   const params = Number(props.match.params.tournamentId);
   const noError = "Looks good";
   const dispatch = useDispatch();
+  const History = useHistory();
 
   const [input, setInput] = useState(initialInput);
 
@@ -92,7 +96,20 @@ export const FormSubTournament = (props) => {
       price: "",
       id_category: "",
     });
-    alert("SubTournament created successfully");
+    Swal.fire({
+      title: 'Success',
+      text: "Subtournament created successfully",
+      icon: 'success',
+      showCancelButton: false,
+      showConfirmButton: true,
+      confirmButtonColor: '#A7D129',
+      cancelButtonColor: '#A7D129',
+      confirmButtonText: ' Okey '
+    }).then((result) => {
+      if (result.isConfirmed) {
+        History.push('/HomeAdmin')
+      }
+    })
     setError(initialErrors)
     setInput(initialInput);
     e.target.reset()

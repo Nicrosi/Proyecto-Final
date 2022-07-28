@@ -10,14 +10,16 @@
   display: none;
 }
 
-ul{
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
+.img_button_container:hover  .prueba{
+  display: block;
 }
 
-li:hover > ul {
-  display: flex;
+ul{
+  list-style: none;
+}
+
+.btn-trash{
+  color: rgb(255, 17, 0);
 }
 
 .container_loading {
