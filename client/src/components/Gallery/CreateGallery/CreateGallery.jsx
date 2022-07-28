@@ -56,7 +56,7 @@ export default function CreateGallery() {
     }).then((result) => {
       if (result.isConfirmed) {
         dispatch(ClearGallery())
-        const imagedeleted = axios.delete(`/gallery/delete?image_id=${image.id_image}&public_id=${image.public_id}`)
+        const imagedeleted = axios.delete(`http://localhost:3001/gallery/delete?image_id=${image.id_image}&public_id=${image.public_id}`)
         Promise.all([imagedeleted]).then(() => {
           dispatch(getAllImages())
           Swal.fire(
@@ -96,7 +96,7 @@ export default function CreateGallery() {
       setGallery(true)
       setTitle({title: ''})
   
-      await axios.post(`/gallery/post?title=${title.title}`,formData)
+      await axios.post(`http://localhost:3001/gallery/post?title=${title.title}`,formData)
       dispatch(getAllImages())
       setFile(null)
       Swal.fire({

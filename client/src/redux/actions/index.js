@@ -41,20 +41,20 @@ export const PUT_SCORE = "GET_SCORE";
 //   };
 // };
 
-const Url = "";
-const urlUser = "/user";
-const urlSponsors = "/sponsor";
-const urlSubtByT = "/subtournament/ByTournament";
-const urlInscription = "/inscription";
-const urlTournament = "/tournament";
-const urlSubTournament = "/subtournament";
-const urlSponsor = "/sponsor";
-const urlTournaments = "/tournament";
-const urlPlayersOnSubt = "/players";
-const urlGestion = "/gestion";
-const urlInscriptions = "/inscription";
-const urlMatches = "/matches/";
-const urlScore = "/matches/putscore/";
+const Url = "http://localhost:3001";
+const urlUser = "http://localhost:3001/user";
+const urlSponsors = "http://localhost:3001/sponsor";
+const urlSubtByT = "http://localhost:3001/subtournament/ByTournament";
+const urlInscription = "http://localhost:3001/inscription";
+const urlTournament = "http://localhost:3001/tournament";
+const urlSubTournament = "http://localhost:3001/subtournament";
+const urlSponsor = "http://localhost:3001/sponsor";
+const urlTournaments = "http://localhost:3001/tournament";
+const urlPlayersOnSubt = "http://localhost:3001/players";
+const urlGestion = "http://localhost:3001/gestion";
+const urlInscriptions = "http://localhost:3001/inscription";
+const urlMatches = "http://localhost:3001/matches/";
+const urlScore = "http://localhost:3001/matches/putscore/";
 toast.configure();
 
 export const getAllUsers = () => (dispatch) => {
@@ -141,7 +141,7 @@ export const getUserById = (dni) => (dispatch) => {
 export function postSponsor(currentValue) {
   return async (dispatch) => {
     try {
-      const { data } = await axios.post(`/gallery/logo`,currentValue.userImage)
+      const { data } = await axios.post(`http://localhost:3001/gallery/logo`,currentValue.userImage)
 
       const input = {
         company: currentValue.userInfo.company,
@@ -177,9 +177,9 @@ export const putUsers = (id_user, valuesChange) => {
         try {
           if(valuesChange?.userInfo?.picture?.split('/')[2] === "res.cloudinary.com") {
             const public_id = valuesChange?.userInfo?.picture?.split('/')[7].split('.')[0]
-            axios.delete(`/gallery/logo?public_id=${public_id}`)
+            axios.delete(`http://localhost:3001/gallery/logo?public_id=${public_id}`)
           }
-          const response = await axios.post(`/gallery/UserImage`,valuesChange.userImage)
+          const response = await axios.post(`http://localhost:3001/gallery/UserImage`,valuesChange.userImage)
           const input = {
             dni: valuesChange.userInfo.dni,
             name: valuesChange.userInfo.name,
@@ -315,9 +315,9 @@ export const putSponsor = (id_sponsor, currentValue) => {
         try {
           if(currentValue?.userInfo?.logo?.split('/')[2] === "res.cloudinary.com") {
             const public_id = currentValue?.userInfo?.logo?.split('/')[7].split('.')[0]
-            axios.delete(`/gallery/logo?public_id=${public_id}`)
+            axios.delete(`http://localhost:3001/gallery/logo?public_id=${public_id}`)
           }
-          const response = await axios.post(`/gallery/logo`,currentValue.userImage)
+          const response = await axios.post(`http://localhost:3001/gallery/logo`,currentValue.userImage)
 
           Promise.all([response]).then((value) => {
             const input = {
@@ -423,7 +423,7 @@ export const getPLayersOnSubt = (id_subt) => {
 
 export const getAllImages = () => async (dispatch) => {
   try {
-    const { data } = await axios.get("/gallery/get");
+    const { data } = await axios.get("http://localhost:3001/gallery/get");
     return dispatch({
       type: GET_ALL_IMAGES,
       payload: data,
@@ -563,7 +563,7 @@ export const addNextRound = (subt_id, round, winners) => {
   return async () => {
     try {
       const response = await axios.post(
-        `/rounds/nextround/${subt_id}`,
+        `http://localhost:3001/rounds/nextround/${subt_id}`,
         {
           round_numb: round,
           winners,

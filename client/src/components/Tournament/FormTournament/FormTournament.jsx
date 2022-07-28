@@ -51,7 +51,7 @@ export const FormTournament = () => {
 
   async function handleOnSubmit(e) {
     e.preventDefault();
-    await axios.post(`/tournament`, input);
+    await axios.post(`http://localhost:3001/tournament`, input);
     setInput(initialInput)
     Swal.fire({
       title: 'Success',

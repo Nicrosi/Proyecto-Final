@@ -19,7 +19,7 @@ export const FormScore = ({params, setShowEditScore}) => {
 
 
   const handleSubmit = async function (e) {
-    await axios.post(`/score/${params}`, 
+    await axios.post(`http://localhost:3001/score/${params}`,
       score,
     );
     Swal.fire({

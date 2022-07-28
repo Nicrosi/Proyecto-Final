@@ -58,8 +58,8 @@ export default function SubtCard({
   };
   const handleClick = async () => {
     try {
-      await axios.post(`/rounds/firstround/${id_subt}`);
-      window.open(`/bracket/${id_subt}`, "_self")
+      await axios.post(`http://localhost:3001/rounds/firstround/${id_subt}`);
+      window.open(`http://localhost:3000/bracket/${id_subt}`, "_self")
     } catch (error) {
       console.log(error);
     }
