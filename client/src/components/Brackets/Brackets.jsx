@@ -4,6 +4,8 @@ import { addNextRound, getBracket, putScore } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import Swal from "sweetalert2";
+import styles from "./Brackets.module.css";
+import "./reacket.theme.css";
 
 const finalRound = (brackets) => {
   const numPlayers =
@@ -20,7 +22,7 @@ const finalRound = (brackets) => {
 
 const Brackets = () => {
   const [form, setForm] = useState({
-    id_match: 0,
+    id: 0,
     score1: 0,
     score2: 0,
     score3: 0,
@@ -31,10 +33,81 @@ const Brackets = () => {
   const { subt_id } = useParams();
   const brackets = useSelector((state) => state.rootReducer.matches);
   const currentUser = useSelector((state) => state.auth.currentUser);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getBracket(subt_id))
+    // return dispatch(clearBracket())
+  }, [dispatch, subt_id]);
+
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
+    //"[[0,0,0],[0,0,0]]"
+    e.preventDefault();
+    const score = [[], []];
+    score[0].push(Number(form.score1));
+    score[0].push(Number(form.score2));
+    score[0].push(Number(form.score3));
+    score[1].push(Number(form.score21));
+    score[1].push(Number(form.score22));
+    score[1].push(Number(form.score23));
+
+    const findMatch = parseMatches.find(
+      (match) => match.id === Number(form.id)
+    );
+    const id_match = findMatch.id_match;
+    dispatch(putScore(id_match, JSON.stringify(score)));
+  };
+
+  const handleNextRound = async (e) => {
+    //Ganadores
+    const round = brackets[brackets.length - 1].round.round_numb;
+    const filterBracket = parseMatches.filter((match) => match.round === round);
+    const winners = [];
+    console.log(filterBracket);
+    for (let j = 0; j < filterBracket.length; j++) {
+      let team1 = 0;
+      let team2 = 0;
+      for (let i = 0; i < 3; i++) {
+        if (filterBracket[j].score[0][i] > filterBracket[j].score[1][i]) {
+          team1++;
+        } else {
+          team2++;
+        }
+      }
+      if (team1 > team2) {
+        winners.push(filterBracket[j].teams[0].id_team);
+      } else {
+        winners.push(filterBracket[j].teams[1].id_team);
+      }
+    }
+    finalRound(brackets)
+      ? Swal.fire({
+          title: `THE WINNER IS ${winners[0]}!!`,
+          width: 600,
+          padding: "3em",
+          color: "#716add",
+          background: "#fff url(/images/trees.png)",
+          backdrop: `
+        rgba(0,0,123,0.4)
+        url("https://media0.giphy.com/media/o9KykZbrhepqKjqXxe/giphy.gif")
+        center top
+        no-repeat
+      `,
+        })
+      : dispatch(addNextRound(subt_id, round + 1, winners)).then(()=>{window.location.reload()});
+    
+  };
+
   const parseMatches = brackets.map((match, index) => {
     const arrScore = JSON.parse(match.score);
     return {
-      id: index+1,
+      teams: match.teams,
+      id_match: match.id_match,
+      id: index + 1,
       match: Number(match.id_match),
       round: match.round.round_numb,
       score: [arrScore[0].join("-"), arrScore[1].join("-")],
@@ -53,70 +126,12 @@ const Brackets = () => {
     };
   });
 
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getBracket(subt_id));
-    // return dispatch(clearBracket())
-  }, [dispatch]);
 
-  const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = (e) => {
-    //"[[0,0,0],[0,0,0]]"
-    e.preventDefault();
-    const score = [[], []];
-    score[0].push(Number(form.score1));
-    score[0].push(Number(form.score2));
-    score[0].push(Number(form.score3));
-    score[1].push(Number(form.score21));
-    score[1].push(Number(form.score22));
-    score[1].push(Number(form.score23));
-    dispatch(putScore(form.id_match, JSON.stringify(score)));
-  };
-
-  const handleNextRound = async (e) => {
-    //Ganadores
-    const round = brackets[brackets.length - 1].round.round_numb;
-    const winners = [];
-    for (let j = 0; j < brackets.length; j++) {
-      let team1 = 0;
-      let team2 = 0;
-      for (let i = 0; i < 3; i++) {
-        if (parseMatches[j].score[0][i] > parseMatches[j].score[1][i]) {
-          team1++;
-        } else {
-          team2++;
-        }
-      }
-      if (team1 > team2) {
-        winners.push(brackets[j].teams[0].id_team);
-      } else {
-        winners.push(brackets[j].teams[1].id_team);
-      }
-    }
-    finalRound(brackets)
-      ? Swal.fire({
-          title: `THE WINNER IS ${winners[0]}!!`,
-          width: 600,
-          padding: "3em",
-          color: "#716add",
-          background: "#fff url(/images/trees.png)",
-          backdrop: `
-        rgba(0,0,123,0.4)
-        url("https://media0.giphy.com/media/o9KykZbrhepqKjqXxe/giphy.gif")
-        center top
-        no-repeat
-      `,
-        })
-      : dispatch(addNextRound(subt_id, round + 1, winners));
-  };
-
-  console.log(brackets)
   return (
     <>
-      <Reacket matches={parseMatches} />
+      <div className={styles.bracket}>
+        <Reacket matches={parseMatches} />
+      </div>
       {currentUser.is_admin ? (
         <>
           {" "}
@@ -124,9 +139,9 @@ const Brackets = () => {
             <label htmlFor="">id_match:</label>
             <input
               type="number"
-              name="id_match"
+              name="id"
               id=""
-              value={form.id_match}
+              value={form.id}
               onChange={handleChange}
             />
             <br />
@@ -177,10 +192,8 @@ const Brackets = () => {
             />
             <br />
             <input type="submit" value="Save" />
-            
-              <button onClick={handleNextRound}>Next Round</button>
-           
           </form>
+          <button onClick={handleNextRound}>Next Round</button>
         </>
       ) : (
         <></>

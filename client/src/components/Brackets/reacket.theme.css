@@ -1,0 +1,43 @@
+.reacket-player {
+  background-color: #212529;
+  border-left: none;
+  border-radius: 4px;
+  color: #f6f6f6 !important;
+}
+
+.reacket-player.reacket-highlighted {
+  background-color: #9ad129;
+  border-left: none;
+}
+
+.reacket-player:first-child {
+  border-bottom: solid 1px white;
+}
+
+.reacket-winner {}
+
+.reacket-winner .reacket-player-name {
+  color: #f6f6f6;
+}
+
+.reacket-round-header {
+  display: none;
+}
+
+.reacket-player-name {
+  color: #f6f6f6 !important;
+}
+
+.reacket-winner .reacket-player-score {
+  color: #f6f6f6;
+  font-weight: bold;
+}
+
+.reacket-player-score {
+  font-weight: bold;
+  color: #f6f6f6 !important;
+}
+
+.reacket-highlighted.reacket-winner .reacket-player-score {
+  color: #5e28cd;
+}

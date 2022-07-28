@@ -6,6 +6,7 @@ import Stripecheckout from "react-stripe-checkout";
 import Card from "react-bootstrap/Card";
 import styles from "./SubtCard.module.css";
 import {
+  getBracket,
   getInscriptions,
   getPLayersOnSubt,
   postInscription,
@@ -58,6 +59,7 @@ export default function SubtCard({
   const handleClick = async () => {
     try {
       await axios.post(`http://localhost:3001/rounds/firstround/${id_subt}`);
+      window.open(`http://localhost:3000/bracket/${id_subt}`, "_self")
     } catch (error) {
       console.log(error);
     }
@@ -140,12 +142,12 @@ export default function SubtCard({
                     style={{ backgroundColor: "#A7D129" }}
                     onClick={handleClick}
                   >
-                    <Link
+                    {/* <Link
                       style={{ fontWeight: "bold", color: "#10242b" }}
                       to={`/bracket/${id_subt}`}
-                    >
+                    > */}
                       Create Brackets
-                    </Link>
+                    {/* </Link> */}
                   </button>
                 ) : (
                   <Link
