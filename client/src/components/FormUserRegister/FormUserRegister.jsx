@@ -536,7 +536,7 @@ export const FormUserRegister = () => {
              
                
                 <div className="form-floating col-md">         
-                {Object.keys(error).length > 0 ? (
+                {Object.keys(error).length > 0 || !UserImage ? (
                   <button
                     className="btn btn-secondary"
                     style={{ backgroundColor: "#A7D129", width: "100%", }}
@@ -548,7 +548,7 @@ export const FormUserRegister = () => {
                 ) : (
                   <button
                     className="btn btn-success"
-                    style={{ backgroundColor: "#A7D129" }}
+                    style={{ backgroundColor: "#A7D129", width: "100%" }}
                     type="submit"
                   >
                     Create
