@@ -1,6 +1,47 @@
+.containerBox {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+    flex-wrap: wrap;
+    flex-direction:row;
+    align-items: center;
+}
 .bracket{
   margin-top: 80px;
   width: 100%;
   display: flex;
+  justify-content: center;
+}
+.formBox {
+  width: 800px;
+  background-color: rgb(43, 43, 44);
+  color: aliceblue;
+  padding: 20px 10px;
+  border-radius: 10px;
+  margin: 0 auto;
+}
+.playersBox {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction:row;
+  justify-content: space-evenly;
+}
+.inputsPlayer1, .inputsPlayer2 {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction:row;
+  width: 270px;
+}
+.buttonBox {
+ display: flex;
+ flex-wrap: wrap;
+ flex-direction: row;
+ justify-content: center;
+}
+.button2Box{
+  margin: 10px 0 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
   justify-content: center;
 }

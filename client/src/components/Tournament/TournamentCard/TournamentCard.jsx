@@ -24,7 +24,6 @@ export const TournamentCard = ({ id, name, date, location }) => {
                 <button
                   className="btn"
                   style={{ backgroundColor: "#A7D129" }}
-                 
                 >
                   See All Subtournaments
                 </button>

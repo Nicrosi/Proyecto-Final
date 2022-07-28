@@ -22,7 +22,7 @@ export default function Sponsors() {
               lg={1}
               key={i}
               className="d-flex justify-content-center"
-              style={{ width: "fit-content" }}
+              style={{justifyContent: "space-between", margin: "0 2vw", width: "fit-content" }}
             >
               <a href={spn.link} target="_blank" rel="noreferrer">
                 <img
