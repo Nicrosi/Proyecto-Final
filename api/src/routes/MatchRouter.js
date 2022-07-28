@@ -36,6 +36,7 @@ router.get("/:id_subt", async (req, res) => {
       ],
     });
     let filteredMatches = matches.filter((s) => s.dataValues.teams.length > 0 && s.dataValues.round.subtournament.id_subt === id_subt);
+    filteredMatches.sort((a, b) => a.round.round_numb > b.round.round_numb ? 1 : -1);
     res.send(filteredMatches);
   } catch (error) {
     console.log(error);

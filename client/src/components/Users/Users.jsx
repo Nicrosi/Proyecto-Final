@@ -26,7 +26,7 @@ export const Users = () => {
       <div style={{ width: "100%" }}>
         <Row className="g-3 mx-3 mt-2">
           {users.length > 0 ? (
-            users.slice(11 * currentPage, 11 * currentPage + 11).map((user) => {
+            users.slice(12 * currentPage, 12 * currentPage + 12).map((user) => {
               return (
                 <Col lg={4} md={6} sm={12} key={user.dni}>
                   <UserCard
