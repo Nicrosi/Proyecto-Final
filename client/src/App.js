@@ -80,11 +80,6 @@ function App() {
           path={"/allSubt/:tournament_id"}
           component={AllSubt}
         />
-        <Route
-          exact
-          path={"/tournamentplayers/:subt_id"}
-          component={Brackets}
-        />
         <Route exact path={"/login"} component={LogIn} />
         <RouteGuard
           Route
