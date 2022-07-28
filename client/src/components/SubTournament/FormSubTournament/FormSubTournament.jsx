@@ -3,7 +3,10 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { postSubTournament } from "../../../redux/actions/index";
 import Swal from "sweetalert2";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import styles from "./FormSubTournament.module.css";
+import home from "../../../img/homeAdmin.png";
+
 
 
 export function validate(input) {
@@ -51,7 +54,7 @@ const initialInput = {
   gender: "",
   price: "",
   id_category: "",
-} 
+}
 
 const initialErrors = {
   elimination_type: "init",
@@ -117,170 +120,157 @@ export const FormSubTournament = (props) => {
 
   return (
     <>
-    <div style={{ minHeight: "100vh", width: "100%" }}>
-        <div style={{ position: "absolute", top: "0", width: "100%" }}>
-          <p>prueba</p>
+      <div className={styles.containerBox}>
+        <div className={styles.titleBox}>
+          <Link to="/HomeAdmin">
+            <img
+              src={home}
+              alt="homeAdmin"
+              className={styles.buttonHome}
+            />
+          </Link>
+          <h1 className={styles.title}>SUBTOURNAMENT CREATION</h1>
         </div>
-        <h1
-          style={{
-            fontFamily: "'Bebas Neue', cursive",
-            fontSize: "7rem",
-            position: "absolute",
-            top: "150px",
-            marginLeft: "10%",
-            color: "#A7D129",
-          }}
-        >
-          Create Subtournament
-        </h1>
-        <div
-          className="mx-auto"
-          style={{
-            position: "relative",
-            marginTop: "300px",
-            width: "60%",
-            backgroundColor: "rgb(43, 43, 44)",
-            borderRadius: "10px",
-            padding: "20px",
-          }}
-        >
-          <form style={{ width: "100%" }} onSubmit={(e) => handleOnSubmit(e)}>
-            <div className="row g-2 mb-3">
-              <div className="form-floating col-md">
-                <input
-                  key="name"
-                  type="text"
-                  onChange={(e) => handleOnChange(e)}
-                  placeholder="Name is required"
-                  id="floatingInputName"
-                  name="name"
-                  value={input.name}
-                  className={
-                    error.name === "init"
-                      ? "form-control"
-                      : error.name
-                      ? "form-control is-invalid"
-                      : "form-control is-valid"
-                  }
-                  required
-                />
-                {error.name === "init" ? (
-                  <br />
-                ) : error.name ? (
-                  <div
-                    id="validationServerUsernameFeedback"
-                    className="invalid-feedback"
-                  >
-                    {error.name}
+          <div className={styles.formBox}>
+
+              <form style={{ width: "100%" }} onSubmit={(e) => handleOnSubmit(e)}>
+                <div className="row g-2 mb-3">
+                  <div className="form-floating col-md">
+                    <input
+                      key="name"
+                      type="text"
+                      onChange={(e) => handleOnChange(e)}
+                      placeholder="Name is required"
+                      id="floatingInputName"
+                      name="name"
+                      value={input.name}
+                      className={
+                        error.name === "init"
+                          ? "form-control"
+                          : error.name
+                            ? "form-control is-invalid"
+                            : "form-control is-valid"
+                      }
+                      required
+                    />
+                    {error.name === "init" ? (
+                      <br />
+                    ) : error.name ? (
+                      <div
+                        id="validationServerUsernameFeedback"
+                        className="invalid-feedback"
+                      >
+                        {error.name}
+                      </div>
+                    ) : (
+                      <div
+                        id="validationServerUsernameFeedback"
+                        className="valid-feedback"
+                      >
+                        {noError}
+                      </div>
+                    )}
+                    <label htmlFor="floatingInputName">Name</label>
                   </div>
-                ) : (
-                  <div
-                    id="validationServerUsernameFeedback"
-                    className="valid-feedback"
-                  >
-                    {noError}
+                  <div className="form-floating col-md">
+                    <input
+                      key="numb_players"
+                      type="number"
+                      min="4"
+                      max="16"
+                      onChange={(e) => handleOnChange(e)}
+                      placeholder="Number players required"
+                      id="floatingInput"
+                      name="numb_players"
+                      value={input.numb_players}
+                      className={
+                        error.numb_players === "init"
+                          ? "form-control"
+                          : error.numb_players
+                            ? "form-control is-invalid"
+                            : "form-control is-valid"
+                      }
+                      required
+                    />
+                    {error.numb_players === "init" ? (
+                      <br />
+                    ) : error.numb_players ? (
+                      <div
+                        id="validationServerUsernameFeedback"
+                        className="invalid-feedback"
+                      >
+                        {error.numb_players}
+                      </div>
+                    ) : (
+                      <div
+                        id="validationServerUsernameFeedback"
+                        className="valid-feedback"
+                      >
+                        {noError}
+                      </div>
+                    )}
+                    <label htmlFor="floatingInput">Number of players</label>
                   </div>
-                )}
-                <label htmlFor="floatingInputName">Name</label>
-              </div>
-              <div className="form-floating col-md">
-                <input
-                  key="numb_players"
-                  type="number"
-                  min="4"
-                  max="16"
-                  onChange={(e) => handleOnChange(e)}
-                  placeholder="Number players required"
-                  id="floatingInput"
-                  name="numb_players"
-                  value={input.numb_players}
-                  className={
-                    error.numb_players === "init"
-                      ? "form-control"
-                      : error.numb_players
-                      ? "form-control is-invalid"
-                      : "form-control is-valid"
-                  }
-                  required
-                />
-                {error.numb_players === "init" ? (
-                  <br />
-                ) : error.numb_players ? (
-                  <div
-                    id="validationServerUsernameFeedback"
-                    className="invalid-feedback"
-                  >
-                    {error.numb_players}
+                  <div className="form-floating col-md">
+                    <input
+                      key="price"
+                      type="number"
+                      onChange={(e) => handleOnChange(e)}
+                      placeholder="Price is required"
+                      id="floatingInput"
+                      name="price"
+                      value={input.price}
+                      className={
+                        error.price === "init"
+                          ? "form-control"
+                          : error.price
+                            ? "form-control is-invalid"
+                            : "form-control is-valid"
+                      }
+                      required
+                    />
+                    {error.price === "init" ? (
+                      <br />
+                    ) : error.price ? (
+                      <div
+                        id="validationServerUsernameFeedback"
+                        className="invalid-feedback"
+                      >
+                        {error.price}
+                      </div>
+                    ) : (
+                      <div
+                        id="validationServerUsernameFeedback"
+                        className="valid-feedback"
+                      >
+                        {noError}
+                      </div>
+                    )}
+                    <label>Price</label>
                   </div>
-                ) : (
-                  <div
-                    id="validationServerUsernameFeedback"
-                    className="valid-feedback"
+                </div>
+
+                <div className="row g-2 mb-2">
+
+                <div className="form-floating col-md">
+                  <select
+                    className={
+                      error.gender === "init"
+                        ? "form-control"
+                        : error.gender
+                          ? "form-control is-invalid"
+                          : "form-control is-valid"
+                    }
+                    id="floatingSelect"
+                    aria-label="Floating label select example"
+                    name="gender"
+                    onChange={(e) => handleOnChange(e)}
                   >
-                    {noError}
-                  </div>
-                )}
-                <label htmlFor="floatingInput">Number of players</label>
-              </div>
-            </div>
-            <div className="row g-2 mb-3">
-              <div className="form-floating col-md">
-                <input
-                  key="price"
-                  type="number"
-                  onChange={(e) => handleOnChange(e)}
-                  placeholder="Price is required"
-                  id="floatingInput"
-                  name="price"
-                  value={input.price}
-                  className={
-                    error.price === "init"
-                      ? "form-control"
-                      : error.price
-                      ? "form-control is-invalid"
-                      : "form-control is-valid"
-                  }
-                  required
-                />
-                {error.price === "init" ? (
-                  <br />
-                ) : error.price ? (
-                  <div
-                    id="validationServerUsernameFeedback"
-                    className="invalid-feedback"
-                  >
-                    {error.price}
-                  </div>
-                ) : (
-                  <div
-                    id="validationServerUsernameFeedback"
-                    className="valid-feedback"
-                  >
-                    {noError}
-                  </div>
-                )}
-                <label>Price</label>
-              </div>
-            </div>
-            <div className="form-floating col-md">
-              <select
-                className={
-                  error.gender === "init"
-                    ? "form-control"
-                    : error.gender
-                    ? "form-control is-invalid"
-                    : "form-control is-valid"
-                }
-                id="floatingSelect"
-                aria-label="Floating label select example"
-                name="gender"
-                onChange={(e) => handleOnChange(e)}
-              >
-                <option value="">Choose a gender</option>
-                <option value="female">Female</option>
-                <option value="male">Male</option>
-              </select>
-              {error.gender === "init"?<br />:(error.gender ? (
+                    <option value="">Choose a gender</option>
+                    <option value="female">Female</option>
+                    <option value="male">Male</option>
+                  </select>
+                  {error.gender === "init" ? <br /> : (error.gender ? (
                     <div
                       id="validationServerUsernameFeedback"
                       className="invalid-feedback"
@@ -295,101 +285,29 @@ export const FormSubTournament = (props) => {
                       {noError}
                     </div>
                   ))}
-              <label htmlFor="floatingSelect">Gender</label>
-            </div>
-
-            <div className="form-floating col-md">
-              <select
-                className={
-                  error.elimination_type === "init"
-                    ? "form-control"
-                    : error.elimination_type
-                    ? "form-control is-invalid"
-                    : "form-control is-valid"
-                }
-                id="floatingSelect"
-                aria-label="Floating label select example"
-                name="elimination_type"
-                onChange={(e) => handleOnChange(e)}
-              >
-                <option value="">Choose a elimination type</option>
-                <option value="All" disabled>All vs All</option>
-                <option value="Simple">Simple Elimination</option>
-                <option value="Double" disabled>Double Elimination</option>
-              </select>
-              {error.elimination_type === "init"?<br />:(error.elimination_type ? (
-                    <div
-                      id="validationServerUsernameFeedback"
-                      className="invalid-feedback"
-                    >
-                      {error.elimination_type}
-                    </div>
-                  ) : (
-                    <div
-                      id="validationServerUsernameFeedback"
-                      className="valid-feedback"
-                    >
-                      {noError}
-                    </div>
-                  ))}
-              <label htmlFor="floatingSelect">elimination_type</label>
-            </div>
-            <div className="form-floating col-md">
-              <select
-                className={
-                  error.match_type === "init"
-                    ? "form-control"
-                    : error.match_type
-                    ? "form-control is-invalid"
-                    : "form-control is-valid"
-                }
-                id="floatingSelect"
-                aria-label="Floating label select example"
-                name="match_type"
-                onChange={(e) => handleOnChange(e)}
-              >
-                <option value="">Choose a match type</option>
-                <option value="singles">singles</option>
-                <option value="dobles" disabled>dobles</option>
-              </select>
-              {error.match_type === "init"?<br />:(error.match_type ? (
-                    <div
-                      id="validationServerUsernameFeedback"
-                      className="invalid-feedback"
-                    >
-                      {error.match_type}
-                    </div>
-                  ) : (
-                    <div
-                      id="validationServerUsernameFeedback"
-                      className="valid-feedback"
-                    >
-                      {noError}
-                    </div>
-                  ))}
-              <label htmlFor="floatingSelect">match_type</label>
-            </div>
-            <div className="form-floating col-md">
-              <select
-               className={
-                error.id_category === "init"
-                  ? "form-control"
-                  : error.id_category
-                  ? "form-control is-invalid"
-                  : "form-control is-valid"
-              }
-                id="floatingSelect"
-                aria-label="Floating label select example"
-                name="id_category"
-                onChange={(e) => handleOnChange(e)}
-              >
-                <option value="">Choose a Category</option>
-                <option value="1">A</option>
-                <option value="2">B</option>
-                <option value="3">C</option>
-                <option value="4">E</option>
-              </select>
-              {error.id_category === "init"?<br />:(error.id_category ? (
+                  <label htmlFor="floatingSelect">Gender</label>
+                </div>
+                <div className="form-floating col-md">
+                  <select
+                    className={
+                      error.id_category === "init"
+                        ? "form-control"
+                        : error.id_category
+                          ? "form-control is-invalid"
+                          : "form-control is-valid"
+                    }
+                    id="floatingSelect"
+                    aria-label="Floating label select example"
+                    name="id_category"
+                    onChange={(e) => handleOnChange(e)}
+                  >
+                    <option value="">Choose a Category</option>
+                    <option value="1">A</option>
+                    <option value="2">B</option>
+                    <option value="3">C</option>
+                    <option value="4">E</option>
+                  </select>
+                  {error.id_category === "init" ? <br /> : (error.id_category ? (
                     <div
                       id="validationServerUsernameFeedback"
                       className="invalid-feedback"
@@ -404,33 +322,109 @@ export const FormSubTournament = (props) => {
                       {noError}
                     </div>
                   ))}
-              <label htmlFor="floatingSelect">id_category</label>
-            </div>
+                  <label htmlFor="floatingSelect">id_category</label>
+                </div>
+                </div>
+                <div className="row g-2 mb-2">
 
-            <div className="row g-2 mb-3">
-              <div>
-                {Object.keys(error).length > 0 ? (
-                  <button
-                    className="btn btn-secondary"
-                    style={{ backgroundColor: "#A7D129", width: "100%" }}
-                    type="submit"
-                    disabled
+                <div className="form-floating col-md">
+                  <select
+                    className={
+                      error.elimination_type === "init"
+                        ? "form-control"
+                        : error.elimination_type
+                          ? "form-control is-invalid"
+                          : "form-control is-valid"
+                    }
+                    id="floatingSelect"
+                    aria-label="Floating label select example"
+                    name="elimination_type"
+                    onChange={(e) => handleOnChange(e)}
                   >
-                    Create
-                  </button>
-                ) : (
-                  <button
-                    className="btn btn-success"
-                    style={{ backgroundColor: "#A7D129", width: "100%" }}
-                    type="submit"
+                    <option value="">Choose a elimination type</option>
+                    <option value="All" disabled>All vs All</option>
+                    <option value="Simple">Simple Elimination</option>
+                    <option value="Double" disabled>Double Elimination</option>
+                  </select>
+                  {error.elimination_type === "init" ? <br /> : (error.elimination_type ? (
+                    <div
+                      id="validationServerUsernameFeedback"
+                      className="invalid-feedback"
+                    >
+                      {error.elimination_type}
+                    </div>
+                  ) : (
+                    <div
+                      id="validationServerUsernameFeedback"
+                      className="valid-feedback"
+                    >
+                      {noError}
+                    </div>
+                  ))}
+                  <label htmlFor="floatingSelect">elimination_type</label>
+                </div>
+                <div className="form-floating col-md">
+                  <select
+                    className={
+                      error.match_type === "init"
+                        ? "form-control"
+                        : error.match_type
+                          ? "form-control is-invalid"
+                          : "form-control is-valid"
+                    }
+                    id="floatingSelect"
+                    aria-label="Floating label select example"
+                    name="match_type"
+                    onChange={(e) => handleOnChange(e)}
                   >
-                    Create
-                  </button>
-                )}
+                    <option value="">Choose a match type</option>
+                    <option value="singles">singles</option>
+                    <option value="dobles" disabled>dobles</option>
+                  </select>
+                  {error.match_type === "init" ? <br /> : (error.match_type ? (
+                    <div
+                      id="validationServerUsernameFeedback"
+                      className="invalid-feedback"
+                    >
+                      {error.match_type}
+                    </div>
+                  ) : (
+                    <div
+                      id="validationServerUsernameFeedback"
+                      className="valid-feedback"
+                    >
+                      {noError}
+                    </div>
+                  ))}
+                  <label htmlFor="floatingSelect">match_type</label>
+                </div>
               </div>
-            </div>
-          </form>
-        </div>
+
+                <div className="row g-2 mb-2">
+                  <div>
+                    {Object.keys(error).length > 0 ? (
+                      <button
+                        className="btn btn-secondary"
+                        style={{ backgroundColor: "#A7D129", width: "100%" }}
+                        type="submit"
+                        disabled
+                      >
+                        Create
+                      </button>
+                    ) : (
+                      <button
+                        className="btn btn-success"
+                        style={{ backgroundColor: "#A7D129", width: "100%" }}
+                        type="submit"
+                      >
+                        Create
+                      </button>
+                    )}
+                  </div>
+                </div>
+              </form>
+   
+          </div>
       </div>
     </>
   );
