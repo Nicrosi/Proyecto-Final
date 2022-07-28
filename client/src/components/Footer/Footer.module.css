@@ -3,7 +3,7 @@
   flex-wrap:wrap;
   flex-direction: row;
   align-items: center;
-  justify-content:space-between;
+  justify-content:flex-start;
   height: 100px;
   background-color: #93a267;
 }
