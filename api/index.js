@@ -2,10 +2,12 @@ const server = require("./src/app.js");
 const { conn } = require("./src/db.js");
 const axios = require("axios");
 
+axios.defaults.baseURL = process.env.REACT_APP_API || "";
+
 // Syncing all the models at once.
 
 conn.sync({ force: false }).then(async () => {
-  server.listen(3001, () => {
+  server.listen(process.env.PORT, () => {
     console.log("%s listening at 3001"); // eslint-disable-line no-console
   });
   ////////recarga de un admin
@@ -23,16 +25,16 @@ conn.sync({ force: false }).then(async () => {
     gender: "NoGender",
   };
   try {
-    await axios.post(`http://localhost:3001/category/`, { type: "A" });
-    await axios.post(`http://localhost:3001/category/`, { type: "B" });
-    await axios.post(`http://localhost:3001/category/`, { type: "C" });
-    await axios.post(`http://localhost:3001/category/`, { type: "E" });
-    await axios.post(`http://localhost:3001/gestion/`, {
+    await axios.post(`/category/`, { type: "A" });
+    await axios.post(`/category/`, { type: "B" });
+    await axios.post(`/category/`, { type: "C" });
+    await axios.post(`/category/`, { type: "E" });
+    await axios.post(`/gestion/`, {
       organizer_earnings: 30,
       tennis_courts: 50,
       awards: 20,
     });
-    await axios.post(`http://localhost:3001/auth/register`, admin);
+    await axios.post(`/auth/register`, admin);
   } catch (error) {
     console.log("Admin Already Exist");
   }

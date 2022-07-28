@@ -134,13 +134,13 @@ router.get("/login/google/success", function (req, res) {
 router.get(
   "/google/callback",
   passport.authenticate("google", {
-    failureRedirect: "http://localhost:3000/SignIn",
-    successRedirect: "http://localhost:3000/login",
+    failureRedirect: "/SignIn",
+    successRedirect: "/login",
   })
 );
 router.get("/login/google/logout", (req, res) => {
   req.session.destroy(function (err) {
-    res.redirect("http://localhost:3000/login");
+    res.redirect("/login");
   });
 });
 

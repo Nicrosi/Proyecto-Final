@@ -4,7 +4,7 @@ import { getToken, setToken, deleteToken } from "../helpers/token";
 
 export const AUTHENTICATED = "AUTHENTICATED";
 export const NOT_AUTHENTICATED = "NOT_AUTHENTICATED";
-export const urlAuth = "http://localhost:3001/auth";
+export const urlAuth = "/auth";
 
 export const postNewUser = (valuesInput) => {
   return async () => {
@@ -12,7 +12,7 @@ export const postNewUser = (valuesInput) => {
       if(valuesInput.userImage) {
         
         const title = valuesInput.userInfo.name + ' ' + valuesInput.userInfo.last_name
-        const { data } = await axios.post(`http://localhost:3001/gallery/UserImage?title=${title}`,valuesInput.userImage)
+        const { data } = await axios.post(`/gallery/UserImage?title=${title}`,valuesInput.userImage)
   
         const input = {
           dni: valuesInput.userInfo.dni,
