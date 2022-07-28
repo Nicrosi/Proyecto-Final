@@ -31,8 +31,7 @@
     "passport-google-oauth20": "^2.0.0",
     "pg": "^8.5.1",
     "sequelize": "^6.3.5",
-    "stripe": "^9.13.0",
-    "tournament-generator": "^1.2.0"
+    "stripe": "^9.13.0"
   },
   "devDependencies": {
     "@faker-js/faker": "^7.3.0",

@@ -15,3 +15,11 @@
     margin-top: 80px;
     color: #bebebe;
 }
+
+.Filter_btn_admin {
+    display: flex;
+    justify-content: center;
+    min-height: 10px;
+    width: 18vw;
+    padding: 10px;
+}

@@ -25,7 +25,7 @@ const subTournament = [
     elimination_type: "simple",
     match_type: "singles",
     name: "Prueba2",
-    numb_players: 4,
+    numb_players: 16,
     gender: "female",
     price: 200,
     id_category: 2
@@ -34,7 +34,7 @@ const subTournament = [
     elimination_type: "simple",
     match_type: "singles",
     name: "Prueba3",
-    numb_players: 6,
+    numb_players: 8,
     gender: "female",
     price: 300,
     id_category: 3
@@ -43,7 +43,7 @@ const subTournament = [
     elimination_type: "simple",
     match_type: "singles",
     name: "Prueba4",
-    numb_players: 6,
+    numb_players: 4,
     gender: "male",
     price: 150,
     id_category: 4
@@ -86,22 +86,20 @@ const Score = [
 ]
 
 
-for(i=1; i <= cantUser; i++){
+for (i = 0; i <= cantUser; i++) {
   users.push({
-    name: faker.name.firstName(i % 2===0? "male":"female"),
-    dni: i,
-    last_name: faker.name.lastName(),
+    name: "Name" + i,
+    dni: i+1, ///para que no choque con el del admin id
+    last_name: "Lastname" + i,
     is_admin: false,
     e_mail: `example${i}@gmail.com`,
-    password: "example"+i,
-    phone: 8888+i,
-    num_contact: 8889+i,
-    picture:
-    faker.image.image(640,480,true),
-    gender: i % 2===0? "male":"female",
-  })
+    password: "example" + i,
+    phone: 8888 + i,
+    num_contact: 8889 + i,
+    picture: faker.image.image(640, 480, true),
+    gender: i % 2 === 0 ? "male" : "female",
+  });
 }
-
 
 const Users = {
   users: users,

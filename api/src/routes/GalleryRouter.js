@@ -78,9 +78,7 @@ router.post('/logo', fileUpload, async (req, res) => {
 router.post('/UserImage', fileUpload, async (req, res) => {
   try {
     const result = await cloudinary.v2.uploader.upload(req.file.path)
-  
     const UserImage = result.secure_url
-
     fs.unlinkSync(req.file.path)
   
     res.send(UserImage)

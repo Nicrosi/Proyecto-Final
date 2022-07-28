@@ -93,7 +93,7 @@ export const ContactForm = () => {
                 placeholder="Write a message..."
                 value={input.message}
                 className="form-control"
-                style={{ height: "200px" }}
+                style={{ height: "100px" }}
               />
               <label htmlFor="floatingInput">Message</label>
             </div>

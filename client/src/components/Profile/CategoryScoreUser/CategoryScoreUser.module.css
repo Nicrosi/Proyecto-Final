@@ -1,4 +1,33 @@
 .box {
-    width: 80%;
+    display: flex;
+    flex-wrap: wrap;
+    width: 95%;
     margin: 20px auto;
+}
+.category {
+    text-align: center;
+}
+.secondBox {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction:row;
+    justify-content: space-evenly;
+    width: 100%;
+}
+.RadarBox {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+.scoreBox {
+    margin-top: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction:column;
+    justify-content: flex-start;
+}
+.scoreItem {
+    font-size: 1rem;
+    text-align: start;
+    width: 200px;
 }

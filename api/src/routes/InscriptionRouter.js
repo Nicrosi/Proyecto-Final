@@ -33,7 +33,8 @@ router.post('/:id', async (req, res) => {
     }else{
       try {
         const newTeam = await Team.create({
-          points: 0
+          points: 0,
+          id_subt: product.id_subt
         })
         const teamUser = await User.findByPk(id)
         teamUser.addTeam(newTeam)
@@ -50,6 +51,38 @@ router.post('/:id', async (req, res) => {
         console.log(error);
       }
     }
+  } catch (error) {
+    console.log(error);
+  }
+})
+
+router.post('/test/:id', async (req, res) => {
+  const { id } = req.params;
+  const {
+    description,
+    is_payed,
+    amount,
+    id_user,
+    id_subt,
+    id_tournament
+  } = req.body;
+  console.log("asdasdas")
+  try {
+    const newTeam = await Team.create({
+      points: 0,
+      id_subt: id_subt
+    })
+    const teamUser = await User.findByPk(id)
+    teamUser.addTeam(newTeam)
+    await Inscription.create({
+      description: description,
+      amount: amount,
+      is_payed : is_payed,
+      id_user: id_user,
+      id_tournament: id_tournament,
+      id_subt: id_subt
+    });
+    res.status(200).send("Inscription created!");
   } catch (error) {
     console.log(error);
   }
