@@ -128,7 +128,7 @@ const rootReducer = (state = initialState, action, name) => {
     case GET_BY_NAME:
       return {
         ...state,
-        users:
+        filteredUsers:
           action.payload.name === "user" ? action.payload.value : state.users,
         tournaments:
           action.payload.name === "tournament"

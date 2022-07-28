@@ -51,9 +51,6 @@ export default function validate(input) {
   if (!input.picture) {
     error.picture = "Picture is required";
   } 
-  // else if (!/.(gif|jpeg|jpg|png)$/i.test(input.picture) && input.picture) {
-  //   error.picture = "Should be a valid format (gif,jpeg,jpg,png)";
-  // }
 
   return error;
 }

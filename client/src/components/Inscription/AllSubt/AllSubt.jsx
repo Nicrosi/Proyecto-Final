@@ -13,6 +13,8 @@ import styles from "../Inscription.module.css";
 import arrowLeft from "../../../img/left-arrow.png";
 import arrowRight from "../../../img/right-arrow.png";
 import AllSubtCard from "./AllSubtCards.jsx";
+import Swal from "sweetalert2";
+
 
 SwiperCore.use([Pagination]);
 
@@ -27,8 +29,18 @@ export const AllSubt = () => {
   useEffect(() => {
     dispatch(getSubtournament(tournament_id));
     if (!user.id_category && auth.currentUser.is_admin === false) {
-      alert(`The user ${user.name} has no score to categorize`);
-      history.push("/HomeAdmin");
+      Swal.fire({
+        title: 'Success',
+        text: `The user ${user.name} has no score to categorize`,
+        icon: 'success',
+        showCancelButton: false,
+        showConfirmButton: true,
+        confirmButtonColor: '#A7D129',
+        cancelButtonColor: '#A7D129',
+        confirmButtonText: ' Okey '
+      }).then(() => {
+        history.push("/HomeAdmin");
+      })
     }
   }, [
     auth.currentUser.is_admin,

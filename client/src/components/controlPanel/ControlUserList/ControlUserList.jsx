@@ -16,7 +16,6 @@ export default function ControlUserList() {
   const [UserImage, setUserImage] = useState(null);
   const [dataModal, setDataModal] = useState({});
   const [error, setError] = useState({});
-  // const [prueba, setPrueba] = useState({dni: ''});
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -274,22 +273,6 @@ export default function ControlUserList() {
                               </div>
                             </div>
                             <div className="row g-2 mb-3">
-                              <div className="form-floating col-md">
-                                <select
-                                  onChange={(e) => handleChange(e)}
-                                  className="form-select border-0 is-valid"
-                                  id="floatingSelect"
-                                  aria-label="Floating label select example"
-                                  name="is_category"
-                                >
-                                  <option value={dataModal?.category ? dataModal.category.type : ""}>{dataModal?.category ? `Current Category ${dataModal.category.type}` : null}</option>
-                                  <option value="A">A</option>
-                                  <option value="B">B</option>
-                                  <option value="C">C</option>
-                                  <option value="E">E</option>
-                                </select>
-                                <label htmlFor="floatingInput">Category</label>
-                              </div>
                               <div className="form-floating col-md">
                                 <select
                                   onChange={(e) => handleChange(e)}

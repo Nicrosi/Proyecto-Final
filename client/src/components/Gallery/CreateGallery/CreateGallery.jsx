@@ -166,8 +166,13 @@ export default function CreateGallery() {
                               <ul className='prueba' ><li>
                                 {
                                   auth.loggedIn && auth.currentUser.is_admin ? 
+<<<<<<< HEAD
                                   <div onClick={()=>HandleDelte(img)} className='btn_delete_image ' >
                                     <BiTrash className='btn-trash  tarea-icono danger' />
+=======
+                                  <div onClick={()=>HandleDelte(img)} className='btn_delete_image' >
+                                    <BiTrash className='btn-trash tarea-icono danger' />
+>>>>>>> d1269b1b20b94fad5cefc2afb3cf88c799aeef69
                                   </div>
                                    : null
                                 }
@@ -189,7 +194,11 @@ export default function CreateGallery() {
                                 {
                                   auth.loggedIn && auth.currentUser.is_admin ? 
                                   <div onClick={()=>HandleDelte(img)} className='btn_delete_image' >
+<<<<<<< HEAD
                                     <BiTrash className='btn-trash  tarea-icono' />
+=======
+                                    <BiTrash className='btn-trash tarea-icono' />
+>>>>>>> d1269b1b20b94fad5cefc2afb3cf88c799aeef69
                                   </div>
                                    : null
                                 }

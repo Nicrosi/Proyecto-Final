@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { StarsRating } from "../StarsRating/StarsRating";
 import axios from "axios";
 import styles from "./FormScore.module.css"
+import Swal from "sweetalert2";
+
+
 
 export const FormScore = ({params, setShowEditScore}) => {
   // const userId = props.match.params.userId;
@@ -16,11 +19,19 @@ export const FormScore = ({params, setShowEditScore}) => {
 
 
   const handleSubmit = async function (e) {
-    console.log("intentando hacer post");
     await axios.post(`http://localhost:3001/score/${params}`, 
       score,
     );
-    alert("successfully created user");
+    Swal.fire({
+      title: 'Success',
+      text: "User created successfully",
+      icon: 'success',
+      showCancelButton: false,
+      showConfirmButton: true,
+      confirmButtonColor: '#A7D129',
+      cancelButtonColor: '#A7D129',
+      confirmButtonText: ' Okey '
+    })
     setShowEditScore(true);
   };
 

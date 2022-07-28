@@ -1,5 +1,5 @@
 import axios from "axios";
-
+import Swal from "sweetalert2";
 import { getToken, setToken, deleteToken } from "../helpers/token";
 
 export const AUTHENTICATED = "AUTHENTICATED";
@@ -14,8 +14,6 @@ export const postNewUser = (valuesInput) => {
         const title = valuesInput.userInfo.name + ' ' + valuesInput.userInfo.last_name
         const { data } = await axios.post(`http://localhost:3001/gallery/UserImage?title=${title}`,valuesInput.userImage)
   
-        console.log(data);
-        console.log(title);
         const input = {
           dni: valuesInput.userInfo.dni,
           name: valuesInput.userInfo.name,
@@ -32,7 +30,15 @@ export const postNewUser = (valuesInput) => {
       }
       
     } catch (err) {
-      alert("Add user error, try again later");
+      Swal.fire({
+        title: "Error",
+        text: "Add user error, try again later",
+        icon: "error",
+        showCancelButton: false,
+        confirmButtonColor: "#A7D129",
+        cancelButtonColor: "rgb(43, 43, 44);",
+        confirmButtonText: "Okey",
+      });
     }
   };
 };
@@ -49,7 +55,15 @@ export const postLogin = (valuesInput) => {
       setToken(token);
       dispatch({ type: AUTHENTICATED, payload: response.data.user });
     } catch (err) {
-      alert("Login error");
+      Swal.fire({
+        title: "Error",
+        text: "Login error",
+        icon: "error",
+        showCancelButton: false,
+        confirmButtonColor: "#A7D129",
+        cancelButtonColor: "rgb(43, 43, 44);",
+        confirmButtonText: "Okey",
+      });
     }
   };
 };
