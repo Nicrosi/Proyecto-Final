@@ -7,44 +7,37 @@ import Steps from "../Steps/Steps";
 import TournamentsToShow from "../Tournament/TournamentsToShow/TournamentsToShow";
 import { useRef } from "react";
 import styles from "./Landing.module.css";
-import { chevronDoubleDown } from "@heroicons/react/solid"
+import { chevronDoubleDown } from "@heroicons/react/solid";
 
 export default function LandingPage() {
   const divRef = useRef();
   return (
     <>
-     
       <section>
         <Carousel />
         <button
-        className={styles.scrolldown}
-        onClick={() => {
-          divRef.current.scrollIntoView({ behavior: "smooth" });
-        }}
-      >
-       < chevronDoubleDown/>
-      </button>
-     
-     
-        
-      
+          className={styles.scrolldown}
+          onClick={() => {
+            divRef.current.scrollIntoView({ behavior: "smooth" });
+          }}
+        >
+          <chevronDoubleDown />
+        </button>
       </section>
-       <div  ref={divRef}>
-      <section
-        id="instruction"
-        className="d-flex flex-column align-items-center"
-        style={{ minHeight: "60vh" }}
-      >
-        <h1 style={{ marginTop: "100px" }}>How to take part?</h1>
-        <Steps />
-      </section>
+      <div ref={divRef}>
+        <section
+          id="instruction"
+          className="d-flex flex-column align-items-center"
+          style={{ minHeight: "60vh" }}
+        >
+          <h1 style={{ marginTop: "100px" }}>How to take part?</h1>
+          <Steps />
+        </section>
       </div>
-      <section
-        id="tournamentLP"
-      >
+      <section id="tournamentLP">
         <TournamentsToShow />
       </section>
-        <Gallery />
+      <Gallery />
       <section
         id="sponsorLP"
         className="d-flex align-items-center justify-content-center bg-dark"
