@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const router = Router();
-const { User, Inscription, Tournament, Subtournament, Score, Category } = require("../db");
+const { User, Inscription, Tournament, Subtournament, Score, Category,Team } = require("../db");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const verifyToken = require("../middlewares/authjwt");
@@ -181,17 +181,17 @@ router.post('/test', async (req, res) => {
       })
     }
 
-    let array1 = Users.users.slice(0, 10);
-    let array2 = Users.users.slice(10, 20);
-    let array3 = Users.users.slice(20, 30);
-    let array4 = Users.users.slice(30, 40);
+    let array1 = Users.users.slice(0, 4);
+    let array2 = Users.users.slice(4, 20);
+    let array3 = Users.users.slice(20, 36);
+    let array4 = Users.users.slice(36, 40);
     let array5 = Users.users.slice(40, 50);
 
     const score = await Score.findAll();
-    
+    let  subtA = Users.subTournament[0]
     for (let i = 0; i < array1.length; i++) {
       const hashedPassword = await bcrypt.hash(array1[i].password, Number(process.env.SALT_ROUNDS));
-      await User.create({
+      const currentUser =  await User.create({
         dni: array1[i].dni,
         name: array1[i].name,
         last_name: array1[i].last_name,
@@ -205,11 +205,30 @@ router.post('/test', async (req, res) => {
         id_score: score[0].id_score,
         id_category: 1
       });
+
+        const newTeam = await Team.create({
+          points: 0,
+          id_subt: 1
+        })
+        
+        const teamUser = await User.findByPk(currentUser.id_user)
+        await teamUser.addTeam(newTeam)
+        await Inscription.create({
+          description: "test description",
+          amount: subtA.price,
+          is_payed : true,
+          id_user: currentUser.id_user,
+          id_tournament: 1,
+          id_subt: 1
+        });
+      
     }
 
+
+    let  subtB = Users.subTournament[1]
     for (let i = 0; i < array2.length; i++) {
       const hashedPassword = await bcrypt.hash(array2[i].password, Number(process.env.SALT_ROUNDS));
-      await User.create({
+      const currentUser = await User.create({
         dni: array2[i].dni,
         name: array2[i].name,
         last_name: array2[i].last_name,
@@ -223,12 +242,28 @@ router.post('/test', async (req, res) => {
         id_score: score[1].id_score,
         id_category: 2
       });
+
+      
+      const newTeam = await Team.create({
+        points: 0,
+        id_subt: 2
+      })
+      const teamUser = await User.findByPk(currentUser.id_user)
+      await teamUser.addTeam(newTeam)
+      await Inscription.create({
+        description: "test description",
+        amount: subtB.price,
+        is_payed : true,
+        id_user: currentUser.id_user,
+        id_tournament: 1,
+        id_subt: 2
+      });
     }
 
-
+    let  subtC = Users.subTournament[2]
     for (let i = 0; i < array3.length; i++) {
       const hashedPassword = await bcrypt.hash(array3[i].password, Number(process.env.SALT_ROUNDS));
-      await User.create({
+      const currentUser =  await User.create({
         dni: array3[i].dni,
         name: array3[i].name,
         last_name: array3[i].last_name,
@@ -242,11 +277,26 @@ router.post('/test', async (req, res) => {
         id_score: score[2].id_score,
         id_category: 3
       });
-    }
 
+      const newTeam = await Team.create({
+        points: 0,
+        id_subt: 3
+      })
+      const teamUser = await User.findByPk(currentUser.id_user)
+      await teamUser.addTeam(newTeam)
+      await Inscription.create({
+        description: "test description",
+        amount: subtC.price,
+        is_payed : true,
+        id_user: currentUser.id_user,
+        id_tournament: 1,
+        id_subt: 3
+      });
+    }
+    let  subtE = Users.subTournament[3]
     for (let i = 0; i < array4.length; i++) {
       const hashedPassword = await bcrypt.hash(array4[i].password, Number(process.env.SALT_ROUNDS));
-      await User.create({
+      const currentUser = await User.create({
         dni: array4[i].dni,
         name: array4[i].name,
         last_name: array4[i].last_name,
@@ -259,6 +309,20 @@ router.post('/test', async (req, res) => {
         gender: array4[i].gender,
         id_score: score[3].id_score,
         id_category: 4
+      });
+      const newTeam = await Team.create({
+        points: 0,
+        id_subt: 4
+      })
+      const teamUser = await User.findByPk(currentUser.id_user)
+      await teamUser.addTeam(newTeam)
+      await Inscription.create({
+        description: "test description",
+        amount: subtE.price,
+        is_payed : true,
+        id_user: currentUser.id_user,
+        id_tournament: 1,
+        id_subt: 4
       });
     }
 
@@ -277,6 +341,7 @@ router.post('/test', async (req, res) => {
         gender: array5[i].gender,
       });
     }
+
 
 
     const users = await User.findAll({include: [Score, Category]});
