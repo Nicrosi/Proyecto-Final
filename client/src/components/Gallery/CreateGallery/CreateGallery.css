@@ -9,17 +9,6 @@
 .prueba{
   display: none;
 }
-<<<<<<< HEAD
-.img_button_container:hover  .prueba{
-  display: block;
-}
-ul{
-  list-style: none;
-}
-
-.btn-trash{
-color: rgb(255, 17, 0);
-=======
 
 .img_button_container:hover  .prueba{
   display: block;
@@ -31,7 +20,6 @@ ul{
 
 .btn-trash{
   color: rgb(255, 17, 0);
->>>>>>> d1269b1b20b94fad5cefc2afb3cf88c799aeef69
 }
 
 /*Esto fue lo que comente para que el drop menu no haga hover */

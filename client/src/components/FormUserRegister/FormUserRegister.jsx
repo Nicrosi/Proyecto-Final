@@ -4,32 +4,45 @@ import { Redirect, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { postNewUser } from "../../redux/actions/authorization";
 import img1 from "../../img/imgForm1.webp";
-import Form from 'react-bootstrap/Form';
+import Form from "react-bootstrap/Form";
 import Swal from "sweetalert2";
 
-export function validate(input) {
-  let error = {};
+export function validate(input, input_name) {
+  let error = {
+    verify: "no",
+  };
+
+  if(input_name === "dni"){
 
   if (!input.dni) {
     error.dni = "DNI is required";
+    error.verify = "no"
   } else if (input.dni.length > 10) {
     error.dni = "Enter less than 10 numbers";
   } else if (!/^\d{1,10}$/.test(input.dni) && input.dni) {
     error.dni = "Enter a number";
   }
+}
+ if(input_name === "name"){
 
   if (!input.name) {
     error.name = "Name is required";
-  } else if (input.name.length > 255) {
+    error.verify = "no"
+  } if (input.name.length > 255) {
     error.name = "Enter less than 255 characters";
   }
+ }
 
+ if(input_name === "last_name"){
   if (!input.last_name) {
     error.last_name = "Last name is required";
+    error.verify = "no"
   } else if (input.last_name.length > 255) {
     error.last_name = "Enter less than 255 characters";
   }
+}
 
+if(input_name === "e_mail"){
   if (!input.e_mail) {
     error.e_mail = "E-mail is required";
   } else if (
@@ -38,7 +51,9 @@ export function validate(input) {
   ) {
     error.e_mail = "Invalid e-mail format";
   }
+}
 
+if(input_name === "phone"){
   if (!input.phone) {
     error.phone = "Phone is required";
   } else if (input.phone.length > 10) {
@@ -46,7 +61,10 @@ export function validate(input) {
   } else if (!/^\d{1,10}$/.test(input.phone) && input.phone) {
     error.phone = "Enter a number";
   }
+}
 
+
+if(input_name === "contact_number"){
   if (!input.num_contact) {
     error.num_contact = "Emergency contact is required";
   } else if (input.num_contact.length > 10) {
@@ -54,17 +72,19 @@ export function validate(input) {
   } else if (!/^\d{1,10}$/.test(input.num_contact) && input.num_contact) {
     error.num_contact = "Enter a number";
   }
+}
 
   // if (!input.picture) {
   //   error.picture = "Picture is required";
   // } else if (!/.(gif|jpeg|jpg|png)$/i.test(input.picture) && input.picture) {
   //   error.picture = "Should be a valid format (gif,jpeg,jpg,png)";
   // }
-
+  if(input_name === "gender"){
   if (input.gender.length === 0 && input.gender === "") {
     error.gender = "Gender is required";
   }
-
+  }
+  if(input_name === "password"){
   if (!input.password) {
     error.password = "Password is required";
   } else if (
@@ -74,11 +94,23 @@ export function validate(input) {
     error.password =
       "Minimum eight characters, at least one letter and one number";
   }
+}
 
+if(input_name === "password2"){
   if (!input.password2) {
     error.password2 = "Repeat password is required";
   } else if (input.password2 !== input.password) {
     error.password2 = "Passwords doesnt match";
+  }
+}
+
+  if(Object.keys(error).length === 1 && error.verify === "no"){
+    error.verify = "yes"
+    console.log("entro al if,", error)
+  }
+  if(Object.keys(error).length > 1 && error.verify === "yes"){
+    error.verify = "no"
+    console.log("entro al else,", error)
   }
 
   return error;
@@ -118,7 +150,7 @@ export const FormUserRegister = () => {
   function handleInputChange(e) {
     e.preventDefault();
     if (e.target.type === "file") {
-      setUserImage(e.target.files[0])
+      setUserImage(e.target.files[0]);
     }
     if (e.target.type === "tel") {
       setInput({ ...input, [e.target.name]: parseInt(e.target.value, 10) });
@@ -130,8 +162,11 @@ export const FormUserRegister = () => {
       }));
     }
     setInput({ ...input, [e.target.name]: e.target.value });
-
-    let objError = validate({ ...input, [e.target.name]: e.target.value });
+    let input_name = e.target.name;
+    let objError = validate(
+      { ...input, [e.target.name]: e.target.value },
+      input_name
+    );
     setError(objError);
   }
 
@@ -139,11 +174,11 @@ export const FormUserRegister = () => {
     e.preventDefault();
 
     const formData = new FormData();
-    formData.append('image', UserImage);
+    formData.append("image", UserImage);
     const User = {
       userInfo: input,
-      userImage: formData
-    }
+      userImage: formData,
+    };
 
     dispatch(postNewUser(User)); //auth register
     setInput({
@@ -160,18 +195,18 @@ export const FormUserRegister = () => {
       password2: "",
     });
     Swal.fire({
-      title: 'Success',
+      title: "Success",
       text: "User Created",
-      icon: 'succces',
+      icon: "succces",
       showCancelButton: false,
-      confirmButtonColor: '#A7D129',
-      cancelButtonColor: 'rgb(43, 43, 44);',
-      confirmButtonText: 'Greate'
+      confirmButtonColor: "#A7D129",
+      cancelButtonColor: "rgb(43, 43, 44);",
+      confirmButtonText: "Greate",
     }).then((result) => {
       if (result.isConfirmed) {
         history.push("/HomeAdmin");
       }
-    })
+    });
   }
 
   return (
@@ -187,7 +222,6 @@ export const FormUserRegister = () => {
           <div className={styles.formBox}>
             <form style={{ width: "100%" }} onSubmit={(e) => handleSubmit(e)}>
               <div className="row g-2 mb-2">
-             
                 <div className="form-floating col-md">
                   <input
                     type="text"
@@ -199,26 +233,33 @@ export const FormUserRegister = () => {
                     className={
                       error.name === "init"
                         ? "form-control"
-                        : error.name
-                          ? "form-control is-invalid"
-                          : "form-control is-valid"
+                        : error.name && error.verify === "no"
+                        ? "form-control is-invalid"
+                        : error.verify === "yes"? "form-control is-valid" : "form-control"
                     }
                   />
                   {error.name === "init" ? (
                     <br />
-                  ) : error.name ? (
+                  ) : error.name  ? (
                     <div
                       id="validationServerUsernameFeedback"
                       className="invalid-feedback"
                     >
                       {error.name}
                     </div>
-                  ) : (
+                  ) : error.verify === "yes" ? (
                     <div
                       id="validationServerUsernameFeedback"
                       className="valid-feedback"
                     >
                       {noError}
+                    </div>
+                  ) : (
+                    <div
+                      id="validationServerUsernameFeedback"
+                      className="valid-feedback"
+                    >
+                      <br/>
                     </div>
                   )}
                   <label htmlFor="floatingInput">Write a name...</label>
@@ -234,26 +275,33 @@ export const FormUserRegister = () => {
                     className={
                       error.last_name === "init"
                         ? "form-control"
-                        : error.last_name
-                          ? "form-control is-invalid"
-                          : "form-control is-valid"
+                        : error.last_name && error.verify === "no"
+                        ? "form-control is-invalid"
+                        : error.verify === "yes"? "form-control is-valid" : "form-control"
                     }
                   />
-                  {error.last_name === "init" ? (
+                   {error.last_name === "init" ? (
                     <br />
-                  ) : error.last_name ? (
+                  ) : error.last_name  ? (
                     <div
                       id="validationServerUsernameFeedback"
                       className="invalid-feedback"
                     >
                       {error.last_name}
                     </div>
-                  ) : (
+                  ) : error.verify === "yes" ? (
                     <div
                       id="validationServerUsernameFeedback"
                       className="valid-feedback"
                     >
                       {noError}
+                    </div>
+                  ) : (
+                    <div
+                      id="validationServerUsernameFeedback"
+                      className="valid-feedback"
+                    >
+                      <br/>
                     </div>
                   )}
                   <label htmlFor="floatingInput">Write a last name...</label>
@@ -272,8 +320,8 @@ export const FormUserRegister = () => {
                       error.dni === "init"
                         ? "form-control"
                         : error.dni
-                          ? "form-control is-invalid"
-                          : "form-control is-valid"
+                        ? "form-control is-invalid"
+                        : "form-control is-valid"
                     }
                   />
                   {error.dni === "init" ? (
@@ -297,15 +345,14 @@ export const FormUserRegister = () => {
                 </div>
               </div>
               <div className="row g-2 mb-2">
-               
                 <div className="form-floating col-md">
                   <select
                     className={
                       error.gender === "init"
                         ? "form-control"
                         : error.gender
-                          ? "form-control is-invalid"
-                          : "form-control is-valid"
+                        ? "form-control is-invalid"
+                        : "form-control is-valid"
                     }
                     id="floatingSelect"
                     aria-label="Floating label select example"
@@ -316,7 +363,9 @@ export const FormUserRegister = () => {
                     <option value="female">Female</option>
                     <option value="male">Male</option>
                   </select>
-                  {error.gender === "init" ? <br /> : (error.gender ? (
+                  {error.gender === "init" ? (
+                    <br />
+                  ) : error.gender ? (
                     <div
                       id="validationServerUsernameFeedback"
                       className="invalid-feedback"
@@ -330,7 +379,7 @@ export const FormUserRegister = () => {
                     >
                       {noError}
                     </div>
-                  ))}
+                  )}
                   <label htmlFor="floatingSelect">Gender</label>
                 </div>
                 <div className="form-floating col-md">
@@ -345,8 +394,8 @@ export const FormUserRegister = () => {
                       error.phone === "init"
                         ? "form-control"
                         : error.phone
-                          ? "form-control is-invalid"
-                          : "form-control is-valid"
+                        ? "form-control is-invalid"
+                        : "form-control is-valid"
                     }
                   />
                   {error.phone === "init" ? (
@@ -380,8 +429,8 @@ export const FormUserRegister = () => {
                       error.num_contact === "init"
                         ? "form-control"
                         : error.num_contact
-                          ? "form-control is-invalid"
-                          : "form-control is-valid"
+                        ? "form-control is-invalid"
+                        : "form-control is-valid"
                     }
                   />
                   {error.num_contact === "init" ? (
@@ -401,26 +450,27 @@ export const FormUserRegister = () => {
                       {noError}
                     </div>
                   )}
-                  <label htmlFor="floatingInput">Emergency contact number</label>
+                  <label htmlFor="floatingInput">
+                    Emergency contact number
+                  </label>
                 </div>
-              
               </div>
               <div className="row g-2 mb-2">
-                <div className="form-floating col-md" >             
-                 <Form.Group controlId="formFileLg">
-                  <h5
-                    className="modal-title"
-                    id="staticBackdropLabel"
-                    style={{ color: "#bebebe", fontSize: "1rem" }}
-                  >
-                    Profile Image
-                  </h5>
-                  <Form.Control
-                    type="file"
-                    size="1g"
-                    onChange={(e) => handleInputChange(e)}
-                  />
-                </Form.Group>
+                <div className="form-floating col-md">
+                  <Form.Group controlId="formFileLg">
+                    <h5
+                      className="modal-title"
+                      id="staticBackdropLabel"
+                      style={{ color: "#bebebe", fontSize: "1rem" }}
+                    >
+                      Profile Image
+                    </h5>
+                    <Form.Control
+                      type="file"
+                      size="1g"
+                      onChange={(e) => handleInputChange(e)}
+                    />
+                  </Form.Group>
                 </div>
                 <div className="form-floating col-md">
                   <input
@@ -434,8 +484,8 @@ export const FormUserRegister = () => {
                       error.e_mail === "init"
                         ? "form-control"
                         : error.e_mail
-                          ? "form-control is-invalid"
-                          : "form-control is-valid"
+                        ? "form-control is-invalid"
+                        : "form-control is-valid"
                     }
                   />
                   {error.e_mail === "init" ? (
@@ -459,7 +509,6 @@ export const FormUserRegister = () => {
                 </div>
               </div>
               <div className="row g-2 mb-2">
-             
                 <div className="form-floating col-md">
                   <input
                     type="password"
@@ -472,8 +521,8 @@ export const FormUserRegister = () => {
                       error.password === "init"
                         ? "form-control"
                         : error.password
-                          ? "form-control is-invalid"
-                          : "form-control is-valid"
+                        ? "form-control is-invalid"
+                        : "form-control is-valid"
                     }
                   />
                   {error.password === "init" ? (
@@ -507,8 +556,8 @@ export const FormUserRegister = () => {
                       error.password2 === "init"
                         ? "form-control"
                         : error.password2
-                          ? "form-control is-invalid"
-                          : "form-control is-valid"
+                        ? "form-control is-invalid"
+                        : "form-control is-valid"
                     }
                   />
                   {error.password2 === "init" ? (
@@ -530,33 +579,29 @@ export const FormUserRegister = () => {
                   )}
                   <label htmlFor="floatingInput">Repeat your password</label>
                 </div>
-
               </div>
               <div className="row g-2 mb-2">
-             
-               
-                <div className="form-floating col-md">         
-                {Object.keys(error).length > 0 ? (
-                  <button
-                    className="btn btn-secondary"
-                    style={{ backgroundColor: "#A7D129", width: "100%", }}
-                    type="submit"
-                    disabled
-                  >
-                    Create
-                  </button>
-                ) : (
-                  <button
-                    className="btn btn-success"
-                    style={{ backgroundColor: "#A7D129" }}
-                    type="submit"
-                  >
-                    Create
-                  </button>
-                )}
+                <div className="form-floating col-md">
+                  {Object.keys(error).length > 0 ? (
+                    <button
+                      className="btn btn-secondary"
+                      style={{ backgroundColor: "#A7D129", width: "100%" }}
+                      type="submit"
+                      disabled
+                    >
+                      Create
+                    </button>
+                  ) : (
+                    <button
+                      className="btn btn-success"
+                      style={{ backgroundColor: "#A7D129" }}
+                      type="submit"
+                    >
+                      Create
+                    </button>
+                  )}
                 </div>
               </div>
-              
             </form>
           </div>
         </div>
