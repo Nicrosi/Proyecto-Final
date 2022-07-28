@@ -2,7 +2,7 @@ const server = require("./src/app.js");
 const { conn } = require("./src/db.js");
 const axios = require("axios");
 
-axios.defaults.baseURL = process.env.REACT_APP_API || "";
+axios.defaults.baseURL = process.env.REACT_APP_API || "http://localhost:3001";
 
 // Syncing all the models at once.
 
