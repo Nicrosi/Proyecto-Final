@@ -19,6 +19,7 @@ export const FormScore = ({params, setShowEditScore}) => {
 
 
   const handleSubmit = async function (e) {
+    e.preventDefault()
     await axios.post(`/score/${params}`, 
       score,
     );
@@ -33,6 +34,7 @@ export const FormScore = ({params, setShowEditScore}) => {
       confirmButtonText: ' Okey '
     })
     setShowEditScore(true);
+     window.location.reload();
   };
 
   const [error, setError] = useState({
