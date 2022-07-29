@@ -20,7 +20,6 @@ export const ContactForm = () => {
 
   useEffect(() => {
     dispatch(getAllUsers()).then(() => setInput({ ...input, email: emails }));
-    console.log("efef");
   }, [dispatch, emails, input]);
 
   useEffect(() => {
