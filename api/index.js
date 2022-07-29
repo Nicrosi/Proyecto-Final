@@ -25,17 +25,18 @@ conn.sync({ force: true }).then(async () => {
       "https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png",
     gender: "NoGender",
   };
+  
   try {
-    await axios.post(`/category/`, { type: "A" });
-    await axios.post(`/category/`, { type: "B" });
-    await axios.post(`/category/`, { type: "C" });
-    await axios.post(`/category/`, { type: "E" });
-    await axios.post(`/gestion/`, {
+    await axios.post(`https://proyectofinal25b.herokuapp.com/category/`, { type: "A" });
+    await axios.post(`https://proyectofinal25b.herokuapp.com/category/`, { type: "B" });
+    await axios.post(`https://proyectofinal25b.herokuapp.com/category/`, { type: "C" });
+    await axios.post(`https://proyectofinal25b.herokuapp.com/category/`, { type: "E" });
+    await axios.post(`https://proyectofinal25b.herokuapp.com/gestion/`, {
       organizer_earnings: 30,
       tennis_courts: 50,
       awards: 20,
     });
-    await axios.post(`/auth/register`, admin);
+    await axios.post(`https://proyectofinal25b.herokuapp.com/auth/register`, admin);
   } catch (error) {
     console.log("Admin Already Exist");
   }
