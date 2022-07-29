@@ -7,7 +7,7 @@ axios.defaults.baseURL = process.env.REACT_APP_API || "http://localhost:3001";
 
 // Syncing all the models at once.
 
-conn.sync({ force: true }).then(async () => {
+conn.sync({ force: false }).then(async () => {
   server.listen(process.env.PORT, () => {
     console.log("%s listening at 3001"); // eslint-disable-line no-console
   });
