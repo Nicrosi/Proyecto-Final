@@ -24,9 +24,7 @@ router.post("/register", async (req, res, next) => {
       picture,
       gender
     } = req.body;
-    
-    if(name === "Admin") is_admin = true
-    
+       
     const user = await User.findOne({
       where: {
         e_mail: e_mail,
@@ -149,7 +147,7 @@ router.get("/login/google/logout", (req, res) => {
 ////////////////////////
 
 
-router.post('/test', async (req, res) => {
+router.get('/test', async (req, res) => {
   try {
     const tournament = await Tournament.create({
       name: "Tournament Prueba",
