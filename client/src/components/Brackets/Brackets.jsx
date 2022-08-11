@@ -275,8 +275,8 @@ const Brackets = () => {
 
               <div className={styles.player1Box}>
                 <h5 htmlFor="">Score player 1</h5>
-                <ul class="list-group list-group-horizontal">
-                <li class="list-group-item" style={{ width: "90px", height: "45px", padding: "0" }} >
+                <ul className="list-group list-group-horizontal">
+                <li className="list-group-item" style={{ width: "90px", height: "45px", padding: "0" }} >
                     <input
                       onKeyDown="return false"
                       type="number"
