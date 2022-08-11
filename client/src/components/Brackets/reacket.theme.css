@@ -6,7 +6,7 @@
 }
 
 .reacket-player.reacket-highlighted {
-  background-color: #9ad129;
+  background-color: #9ad129 !important;
   border-left: none;
 }
 

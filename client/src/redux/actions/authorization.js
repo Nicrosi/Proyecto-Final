@@ -4,7 +4,10 @@ import { getToken, setToken, deleteToken } from "../helpers/token";
 
 export const AUTHENTICATED = "AUTHENTICATED";
 export const NOT_AUTHENTICATED = "NOT_AUTHENTICATED";
-export const urlAuth = "/auth";
+
+export let urlAuth = process.env.REACT_APP_API || "http://localhost:3001";
+urlAuth+="/auth"
+
 
 export const postNewUser = (valuesInput) => {
   return async () => {
