@@ -27,11 +27,11 @@ conn.sync({ force: true }).then(async () => {
   };
   
   try {
-    await axios.post(`https://proyectofinal25b.herokuapp.com/category/`, { type: "A" });
-    await axios.post(`https://proyectofinal25b.herokuapp.com/category/`, { type: "B" });
-    await axios.post(`https://proyectofinal25b.herokuapp.com/category/`, { type: "C" });
-    await axios.post(`https://proyectofinal25b.herokuapp.com/category/`, { type: "E" });
-    await axios.post(`https://proyectofinal25b.herokuapp.com/gestion/`, {
+    await axios.post(`https://proyecto-final-production-2fb1.up.railway.app/category/`, { type: "A" });
+    await axios.post(`https://proyecto-final-production-2fb1.up.railway.app/category/`, { type: "B" });
+    await axios.post(`https://proyecto-final-production-2fb1.up.railway.app/category/`, { type: "C" });
+    await axios.post(`https://proyecto-final-production-2fb1.up.railway.app/category/`, { type: "E" });
+    await axios.post(`https://proyecto-final-production-2fb1.up.railway.app/category/, {
       organizer_earnings: 30,
       tennis_courts: 50,
       awards: 20,
