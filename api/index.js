@@ -31,12 +31,12 @@ conn.sync({ force: true }).then(async () => {
     await axios.post(`https://proyecto-final-production-2fb1.up.railway.app/category/`, { type: "B" });
     await axios.post(`https://proyecto-final-production-2fb1.up.railway.app/category/`, { type: "C" });
     await axios.post(`https://proyecto-final-production-2fb1.up.railway.app/category/`, { type: "E" });
-    await axios.post(`https://proyecto-final-production-2fb1.up.railway.app/category/, {
+    await axios.post(`https://proyecto-final-production-2fb1.up.railway.app/category/`, {
       organizer_earnings: 30,
       tennis_courts: 50,
       awards: 20,
     });
-    await axios.post(`https://proyectofinal25b.herokuapp.com/auth/register`, admin);
+    await axios.post(`https://proyecto-final-production-2fb1.up.railway.app/auth/register`, admin);
   } catch (error) {
     console.log("Admin Already Exist");
   }
